@@ -1,0 +1,91 @@
+
+.handsontable .htCommentCell:after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: unset !important;
+    border-left: 20px solid transparent !important;
+    border-right: none !important;
+    border-top: 14px solid red !important;
+  }
+
+  .htCommentsContainer .htCommentTextArea {
+    width: 320px !important;
+    height: 60px !important;
+  }
+
+  
+ .handsontable .htAutocompleteArrow {
+          float: right !important;
+          font-size: 10px !important;
+          color: black !important;
+          cursor: default !important;
+          width: 16px !important;            
+          text-align: center !important;
+        }
+
+        .text-right {
+      text-align: right !important;
+  }
+
+
+div#example1 {
+  margin-top: 12px !important;
+}
+
+  .handsontable table thead th{
+ color: black !important;
+ font-size: 12px !important;
+ font-family: sans-serif !important;
+ }
+
+ .handsontable{
+   font-size: 12px !important;
+   font-family: Roboto !important;
+ }
+
+ td.custom-titlecell {
+   background-color: rgb(204,204,204) !important;
+   font-weight: bold !important;
+   border-left: 1px solid black !important;
+   border-right: 0px solid black !important;
+   border-top: 1px solid black !important;
+   border-bottom: 1px solid black !important;
+   color: black !important;
+
+ }
+
+ td.custom-titlecell2 {
+   background-color: rgb(204, 204, 204) !important; 
+   font-weight: bold !important;
+   border-left: 1px solid black !important;
+   border-right: 0px solid black !important;
+   border-top: 1px solid black !important;
+   border-bottom: 1px solid black !important;
+   color: black !important;
+ }
+
+
+ 
+ td.custom-normalcell {
+   border-left: 1px solid black !important;
+   border-right: 0px solid black !important;
+   border-top: 0px solid black !important;
+   border-bottom: 1px solid black !important;
+   color: black !important;
+
+ }
+
+ /* td.htCenter.htMiddle.custom-normalcell {
+  border-left: 1px solid black;
+  border-right: 0px solid black;
+  border-top: 0px solid black;
+  border-bottom: 1px solid black;
+  color: black;
+ } */
+
+
+.handsontable .htDimmed {
+color: black !important;
+}

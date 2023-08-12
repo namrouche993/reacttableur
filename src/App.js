@@ -1,5 +1,7 @@
 import './App.css';
 import Navbar from './Navbar/Navbar';
+import Hottable from './Hottable';
+
 function App() {
   return (
     <>
@@ -7,7 +9,7 @@ function App() {
     <br></br>
     Hi world
     <br></br>
-
+    <Hottable/>
     </>
   );
 }

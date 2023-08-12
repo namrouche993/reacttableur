@@ -16,6 +16,9 @@ import { Modal } from '@mui/base';
 import ModalFormat from './ModalFormat';
 import ModalEdit from './ModalEdit';
 
+import { useSelector, useDispatch } from 'react-redux'; 
+import { downloadfile } from '../Download/downloadfile';
+
 const appTheme = createTheme({
     components: {
       MuiToolbar: {
@@ -58,6 +61,8 @@ const appTheme = createTheme({
 
 function Navbar() {
   
+  const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
+
   const [modalOpenformat, setModalOpenformat] = useState(false);
   const handleOpenModalformat = () => {
     setModalOpenformat(true);
@@ -74,6 +79,12 @@ function Navbar() {
   const handleCloseModaledit = () => {
     setModalOpenedit(false);
   };
+
+  const submitdata = () => {
+    alert('submitdata triggered')
+    console.log('submitting data ')
+    downloadfile(hotInstance_redux)
+  }
 
 
   const isSmallScreen = useMediaQuery(appTheme.breakpoints.down('sm')); // Adjust the breakpoint as needed
@@ -104,7 +115,7 @@ function Navbar() {
                 Términer <br></br>et Envoyer les données
               </div>
               </span>} >
-                <Button variant="contained" sx={{marginRight: isSmallScreen?'0':'40px'}} endIcon={<SendIcon sx={{fontSize:32}}/> }> Send </Button>
+                <Button onClick={submitdata} variant="contained" sx={{marginRight: isSmallScreen?'0':'40px'}} endIcon={<SendIcon sx={{fontSize:32}}/> }> Send </Button>
             </Tooltip>
 
 
