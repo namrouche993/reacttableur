@@ -25,7 +25,9 @@ const initialState = {
   ds_haschanged: ds_haschanged,
   use_english_date_by_user_himeself_in_modal: use_english_date_by_user_himeself_in_modal,
   use_english_date_by_user_himeself_in_modal_withoutfct:use_english_date_by_user_himeself_in_modal_withoutfct,
-  hot_undone2: hot_undone2
+  hot_undone2: hot_undone2,
+
+  unmerged_cells_to_unmerge: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -89,6 +91,13 @@ const reducer = (state = initialState, action) => {
                   ...state,
                   hot_undone2: action.payload
                 };
+                
+              case 'SET_UNMERGEDCELLS':
+                return {
+                  ...state,
+                  unmerged_cells_to_unmerge: action.payload
+                };
+                
                 
               
     default:

@@ -16,6 +16,7 @@ import {
   Typography
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { useSelector, useDispatch } from 'react-redux'; 
 
 const my_array = ['val1', 'val2', 'val3', 'val4'];
 
@@ -23,6 +24,8 @@ function ModalFormat(props) {
   const [selectedNumericFormat, setSelectedNumericFormat] = useState('eu_numeric_format');
   const [selectedDateFormat, setSelectedDateFormat] = useState('us_date_format');
   const [selectedVal, setSelectedVal] = useState('val1');
+  const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
+
 
   const handleFormatChange = (event) => {
     setSelectedNumericFormat(event.target.value);

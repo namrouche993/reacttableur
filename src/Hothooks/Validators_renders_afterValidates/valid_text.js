@@ -70,7 +70,7 @@ import{
   export function validator_text(value, callback,text_length_txt){
     console.log('validator_text')
     console.log(text_length_txt)
-    console.log(value.toString().length)
+    //alert('value in validator_text is : '  + value)
     if( value==null || 
         value.toString().length<text_length_txt    
     ) {

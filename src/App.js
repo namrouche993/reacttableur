@@ -6,8 +6,7 @@ function App() {
   return (
     <>
     <Navbar/>
-    <br></br>
-    Hi world
+    {/* Hi world */}
     <br></br>
     <Hottable/>
     </>

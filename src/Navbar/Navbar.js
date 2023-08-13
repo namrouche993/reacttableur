@@ -86,6 +86,14 @@ function Navbar() {
     downloadfile(hotInstance_redux)
   }
 
+  const undoclickfct = () =>{
+    hotInstance_redux.undo(true)
+  }
+
+  
+  const redoclickfct = () =>{
+    hotInstance_redux.redo(true)
+  }
 
   const isSmallScreen = useMediaQuery(appTheme.breakpoints.down('sm')); // Adjust the breakpoint as needed
 
@@ -95,11 +103,11 @@ function Navbar() {
          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
             <div id='idfor2buttons'>
             <Tooltip title={<span style={{fontSize:16}}>Undo (Ctrl+Z)</span>} >
-              <Button color="inherit" sx={{...buttonStyles,marginRight:0.6}} > <UndoIcon sx={{ fontSize: 30 }} />  </Button>
+              <Button onClick={undoclickfct} color="inherit" sx={{...buttonStyles,marginRight:0.6}} > <UndoIcon sx={{ fontSize: 30 }} />  </Button>
             </Tooltip>
 
             <Tooltip title={<span style={{fontSize:16}}>Redo (Ctrl+Y)</span>} >
-              <Button color="inherit" sx={{...buttonStyles}} > <RedoIcon sx={{ fontSize: 30 }} />  </Button>
+              <Button onClick={redoclickfct} color="inherit" sx={{...buttonStyles}} > <RedoIcon sx={{ fontSize: 30 }} />  </Button>
             </Tooltip>
 
             </div>

@@ -9,8 +9,6 @@ export function beforeKeyDownfct(event,hot,
   navigator_language2,
   //condition_split2
   ) {  // editable the 2 indexx later inside 
-    console.log('hot :')
-    console.log(hot)
     var selected = hot.getSelected();
     var currentColIndex = selected ? selected[0][1] : null;
     var currentRowIndex = selected ? selected[0][0] : null;

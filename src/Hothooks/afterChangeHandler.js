@@ -1,14 +1,39 @@
     import _ from 'lodash';
+    import { mergecellsarray,mycellmergedfct } from '../Tools/mergecells';
 
     let lastelement_supthan1=0;    
-    export function afterChangeHandler(changes,src,hot,data22,hot_undone2){
+    export function afterChangeHandler(changes,src,hot,data22,hot_undone2,array_of_notmerged_cells_2){
         //const hot = otherArgs[otherArgs.length - 1];
-    
-    
+        console.log('AFTER CHANGE ::::::::::::::::::')
+        console.log(src)    
         if(hot.undoRedo.isUndoAvailable()){
            hot.undoRedo.doneActions[hot.undoRedo.doneActions.length-1].src=src;
          }
      if(src=='Autofill.fill' && changes.length>1){
+      console.log('we will use hotupdatesetting : ')
+      console.log('afterchange src autofill && changes.length sup 1 : ')
+      console.log(changes)
+
+      //hot.getPlugin('MergeCells').unmerge(6,4,7,4)
+/*
+      console.log(array_of_notmerged_cells_2)
+
+      let minRow = Infinity;
+      let maxRow = -Infinity;
+      let minCol = Infinity;
+      let maxCol = -Infinity;
+
+for (const cell of array_of_notmerged_cells_2) {
+  minRow = Math.min(minRow, cell.row);
+  maxRow = Math.max(maxRow, cell.row);
+  minCol = Math.min(minCol, cell.col);
+  maxCol = Math.max(maxCol, cell.col);
+}
+console.log('unmerge plugin : ')
+console.log(hot.getPlugin('MergeCells'))
+hot.getPlugin('MergeCells').unmerge(minRow ,minCol,maxRow,maxCol)
+*/
+
       lastelement_supthan1=hot.undoRedo.doneActions.length
      } else if (src=='edit' && changes.length>1 && changes.every(row => row[3] === null) ){
       //console.log('we are incase afterchange where src==edit and changes.length>1')
