@@ -100,9 +100,14 @@
         if(src!=='loadData'){
         changes.forEach((x,y)=>{
           ////console.log(y)
+          console.log('cellgetcell : ')
           var cellgetcell = hot.getCell(x[0],x[1]);
+          console.log(cellgetcell)
+          //console.log(cellgetcell.childNodes)
+          //console.log(cellgetcell.childNodes[cellgetcell.children.length])
+          //alert('cellget')
           ////console.log(cellgetcell.innerHTML) 
-          if(cellgetcell.childNodes[cellgetcell.children.length]!==undefined){
+          if(cellgetcell!==null && cellgetcell.childNodes[cellgetcell.children.length]!==undefined){
             data22[x[0]][x[1]]=cellgetcell.childNodes[cellgetcell.children.length].textContent.trim()
           } else {
             data22[x[0]][x[1]]=''
