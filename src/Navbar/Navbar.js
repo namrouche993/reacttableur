@@ -82,7 +82,7 @@ function Navbar() {
 
   const submitdata = () => {
     alert('submitdata triggered')
-    console.log('submitting data ')
+    //console.log('submitting data ')
     downloadfile(hotInstance_redux)
   }
 

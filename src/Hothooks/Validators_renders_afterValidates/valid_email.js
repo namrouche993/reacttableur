@@ -36,7 +36,7 @@ import{
                   }
   
   export function validator_email(value, callback){
-    console.log(value)
+    //console.log(value)
     if(value==null || /^[\w.-]+@[a-zA-Z0-9.,-]+\.[a-zA-Z]{2,}$/.test(value.trim()) ) {
          callback(true)
      } else {
@@ -46,40 +46,48 @@ import{
 
 
   export function afterValidatefct_email(isValid, oldvalue, row, prop, source,hot,commentsPlugin,emails_length_em){        
-    console.log('prop==6')
-    console.log(isValid)
+    //console.log('prop==6')
+    //console.log(isValid)
 
     if (isValid && oldvalue == null ) {
-       console.log('condition email  1')
-       console.log('we are inside afterValidate email value==null')
-       console.log('COULD END HERE')
-       commentsPlugin.removeCommentAtCell(row, prop);
+       //console.log('condition email  1')
+       //console.log('we are inside afterValidate email value==null')
+       //console.log('COULD END HERE')
+      
+       /*
+       setTimeout(() => {
+        commentsPlugin.removeCommentAtCell(row,prop);
+      }, 100);
+      */
+
      } else if (isValid && oldvalue !== undefined && typeof oldvalue === 'string'){
          if(/^\s+|\s+$/g.test(oldvalue)){
-           console.log('if there is a trainling whitespace between ')
-           console.log('we will call my_source_removewhitespacesign_email')
+           //console.log('if there is a trainling whitespace between ')
+           //console.log('we will call my_source_removewhitespacesign_email')
            hot.setDataAtCell(row, prop, oldvalue.trim(), 'my_source_removewhitespacesign');
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>emails_length_em){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'email_invalid','fr-FR'))
            hot.setDataAtCell(row, prop,'','my_source_empty_email');
          } else {
-           console.log('COULD END HERE')
-           console.log('do nothing')
+           //console.log('COULD END HERE')
+           //console.log('do nothing')
            commentsPlugin.removeCommentAtCell(row,prop);
          }
        }
        else if ( oldvalue =='') {
-       console.log('condition email 3')
-       console.log('do nothing could end here')
+       //console.log('condition email 3')
+       //console.log('do nothing could end here')
        } else {
-         console.log('condition email 4')
+         //console.log('condition email 4')
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
+       if(source!=='Autofill.fill'){
        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'email_invalid','fr-FR'))
+       }
        hot.setDataAtCell(row, prop,'','my_source_empty_email')
 
-       console.log('do nothing could end here')
-       console.log('removes')
+       //console.log('do nothing could end here')
+       //console.log('removes')
      }
 
   }

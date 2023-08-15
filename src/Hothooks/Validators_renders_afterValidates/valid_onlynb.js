@@ -33,11 +33,11 @@ import{
     cellProperties.className = 'htRight'; 
     td.style.textAlign = 'right';
     td.className = 'htLeft htMiddle custom-normalcell';
-
+    //alert('cellproprities')
                   }
   
   export function validator_onlynb(value, callback,onlynumbers_length_on){
-    console.log(value)
+    //console.log(value)
     if(value==null || /^\d+(\s*\d+)*$/.test(value.trim()) ) {
          callback(true)
      } else {
@@ -47,41 +47,56 @@ import{
 
 
   export function afterValidatefct_onlynb(isValid, oldvalue, row, prop, source,hot,commentsPlugin,onlynumbers_length_on){        
-    console.log('prop==8')
-    console.log(isValid)
+    //console.log('prop==8')
+    //console.log(isValid)
+    console.log('source in aftervalidate onlynb :')
+    console.log(source)
 
     if (isValid && oldvalue == null ) {
-       console.log('condition onlynumbers  1')
-       console.log('we are inside afterValidate onlynumbers value==null')
-       console.log('COULD END HERE')
-       commentsPlugin.removeCommentAtCell(row, prop);
+       //console.log('condition onlynumbers  1')
+       //console.log('we are inside afterValidate onlynumbers value==null')
+       //console.log('COULD END HERE')
+
+
+       /*
+       setTimeout(() => {
+        commentsPlugin.removeCommentAtCell(row,prop);
+      }, 100);
+
+      */
+
+
      } else if (isValid && oldvalue !== undefined && typeof oldvalue === 'string'){
          if(/^\s+|\s+$/g.test(oldvalue)){
-           console.log('if there is a trainling whitespace between ')
-           console.log('we will call my_source_removewhitespacesign')
+           //console.log('if there is a trainling whitespace between ')
+           //console.log('we will call my_source_removewhitespacesign')
            hot.setDataAtCell(row, prop, oldvalue.trim(), 'my_source_removewhitespacesign');
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>onlynumbers_length_on){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'onlynumbers_depass_length','fr-FR'))
            hot.setDataAtCell(row, prop,'','my_source_empty_onlynumbers');
          } else {
-           console.log('COULD END HERE')
-           console.log('do nothing')
+           //console.log('COULD END HERE')
+           //console.log('do nothing')
            commentsPlugin.removeCommentAtCell(row,prop);
+
+           
          }
        }
        else if ( oldvalue =='') {
-       console.log('condition onlynumbers 3')
-       console.log('do nothing could end here')
+       //console.log('condition onlynumbers 3')
+       //console.log('do nothing could end here')
        } else {
-         console.log('condition onlynumbers 4')
+         //console.log('condition onlynumbers 4')
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
-       commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'onlynumbers_invalid','fr-FR'))
-
+       if(source!=='Autofill.fill'){
+        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'onlynumbers_invalid','fr-FR'))
+       }
+       console.log('three space instead of empty ')
        hot.setDataAtCell(row, prop,'','my_source_empty_onlynumbers')
 
-       console.log('do nothing could end here')
-       console.log('removes')
+       //console.log('do nothing could end here')
+       //console.log('removes')
      }
 
   }

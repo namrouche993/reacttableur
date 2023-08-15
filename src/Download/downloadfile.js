@@ -5,12 +5,12 @@ import { pdf_return_table_to_downloading_Fct } from './pdf_return_table_to_downl
 import { pdf_edit_size_table_to_downloading_sadeg_Fct } from './pdf_edit_size_table_to_downloading_sadeg';
 
 export function downloadfile(hot) {
-    console.log('hot just in starting downloadfile : ')
-    console.log(hot)
+    //console.log('hot just in starting downloadfile : ')
+    //console.log(hot)
     var doc = new jsPDF({orientation:'landscape'});
     const table=pdf_return_table_to_downloading_Fct(hot)
-    console.log('table in downloadfile after declaring :')
-    console.log(table)
+    //console.log('table in downloadfile after declaring :')
+    //console.log(table)
 
     const { columnStyles, font_size } = pdf_edit_size_table_to_downloading_sadeg_Fct(table);
   

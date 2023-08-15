@@ -40,13 +40,17 @@ import{
 
 
   
-export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLocale,decimalSeparator,navigator_language,use_english_date_by_user_himeself_in_modal_withoutfct){
+export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLocale,decimalSeparator,navigator_language,use_english_date_by_user_himeself_in_modal_withoutfct,commentsPlugin){
   
-
-            // const hot = otherArgs[otherArgs.length - 1];
-         
-            const commentsPlugin = hot.getPlugin('comments');
-            //console.log(commentsPlugin)
+  console.log('aftervalidate Function triggered')
+    // const hot = otherArgs[otherArgs.length - 1];
+  
+    
+  /* if(isValid && oldvalue==null){
+    console.log('do nothing')
+//    commentsPlugin.removeCommentAtCell(row, prop);
+  } else {
+    */
         if (prop == 10) {  //  props==2 afterValidate of integers
                 afterValidatefct_integers(isValid, oldvalue, row, prop, source,hot,commentsPlugin,
   
@@ -109,7 +113,8 @@ is_negativenb_accepted_percperc,is_float_accepted_percperc
   else if (prop==9) {
     afterValidatefct_text(isValid, oldvalue, row, prop, source,hot,commentsPlugin,text_length_txt)
   }
-  
+
+//}
           /*
      
                         

@@ -11,7 +11,9 @@ import { Columns_data_for_Validator_renders } from './Hothooks/Columns_data_for_
 import { cellscells,normalcellloop } from './Tools/normalcellloop';
 import { mergecellsarray,mycellmergedfct,getCellsBetweenRanges,myoldmergedcells_fct,hasCommonPair } from './Tools/mergecells';
 
-import {afterValidatefct} from './Hothooks/afterValidatefct'
+import { afterValidatefct} from './Hothooks/afterValidatefct'
+import { beforeValidatefct } from './Hothooks/beforeValidate';
+
 import { beforeChangeFct } from './Hothooks/beforeChange';
 
 function Hottable() {
@@ -30,6 +32,10 @@ function Hottable() {
   const unmerged_cells_to_unmerge_redux  = useSelector(state => state.unmerged_cells_to_unmerge);
 
 
+  const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
+
+  
+
   const dispatch = useDispatch();
 
   var data = ddatafct();
@@ -38,8 +44,10 @@ function Hottable() {
 
   const hotTableComponent = React.useRef(null);
   // const [hotInstance, setHotInstance] = useState(null);  WITHOUT REDUX
-  
+  //const [skipAfterValidate,setSkipAfterValidate]=useState(false)
+
   React.useEffect(() => {
+
     const hot  = new Handsontable(hotTableComponent.current, {
       data,
       rowHeaders: true,
@@ -88,24 +96,6 @@ function Hottable() {
       
           if (commonPairExists) {
             hot.updateSettings({mergeCells:mycellmergedfct(mergecellsarray)})
-            /*
-            const unmerged_cells_to_unmerge = cellsToAutofill.filter(newPair => {
-              return !myoldmergedcells.some(oldPair => oldPair.row === newPair.row && oldPair.col === newPair.col);
-            });
-            console.log('unmerged in beforeautofill : ')
-            console.log(unmerged_cells_to_unmerge)            
-            array_of_notmerged_cells.push(unmerged_cells_to_unmerge)
-
-            dispatch({ type: 'SET_UNMERGEDCELLS', payload: unmerged_cells_to_unmerge });  // WITH REDUX
-
-            unmerged_cells_to_unmerge.map((x,index)=>{
-              //hot.getPlugin('MergeCells').unmerge(6,4,7,4)
-              hot.getPlugin('MergeCells').unmerge(x.row ,x.col,x.row,x.col)
-           })
-           */
-
-            //hot.updateSettings({ mergeCells: mycellmergedfct(mergecellsarray) });
-            //alert("Common pair exists in both ar rays.");
           } else {
             //alert("No common pair exists in both arrays.");
           }
@@ -119,20 +109,23 @@ function Hottable() {
         copyPaste: true,
 
         afterValidate: (isValid, value, row, prop, source) => {
-          afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_redux,decimalSeparator2_redux,navigator_language2_redux,use_english_date_by_user_himeself_in_modal_withoutfct_redux);
+          afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_redux,decimalSeparator2_redux,navigator_language2_redux,use_english_date_by_user_himeself_in_modal_withoutfct_redux,commentsPlugin);
         },
-
         beforeKeyDown: (event) => {
+
           beforeKeyDownfct(event,hot,
-            userLocale2_redux,decimalSeparator2_redux,navigator_language2_redux
+            userLocale2_redux,decimalSeparator2_redux,navigator_language2_redux,commentsPlugin
             //,condition_split2_redux
             );
         },
         afterCreateRow: function(index, amount) {
           data22.push(['','','','','','',''])
         },
+
+      
         
        afterSelection: (r1, c1, r2, c2) => {
+        if(r1>0 & c1>0 & r2>0 & c2>0){
         var comment = hot.getCellMeta(r1, c1).comment;
         if (comment !== undefined) {
            var commentsPlugin = hot.getPlugin('comments');
@@ -142,27 +135,32 @@ function Hottable() {
            var commentsPlugin = hot.getPlugin('comments');
           commentsPlugin.hide();
         }
-      },
+      }
+    },
 
-    });
+    
+  });
 
     hot.addHook('beforeChange', function(changes, source) {
       //const hotInstance = hot; // Store the hot instance
       //beforeChangeFct(changes,source, ...otherArgs, hotInstance)
-    
-      beforeChangeFct(changes,source,hot)
+      console.log('beforeChange triggered')
+      beforeChangeFct(changes,source,hot,commentsPlugin)
     });
 
       hot.addHook('afterChange', (changes, source) => {
+        console.log('afterChange triggered')
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
-        afterChangeHandler(changes, source, hot,data22,hot_undone2_redux,array_of_notmerged_cells_2); // Now hotInstance is available
+        afterChangeHandler(changes, source, hot,data22,hot_undone2_redux,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
       });
     
       //setHotInstance(hot);  WITHOUT REDUX
       dispatch({ type: 'SET_HOT', payload: hot });  // WITH REDUX
 
+      const commentsPlugin = hot.getPlugin('comments');
+
     return () => {
-      console.log('unmount handsontable ')
+      //console.log('unmount handsontable ')
       hot.destroy();
     };
   }, []);
@@ -172,6 +170,11 @@ function Hottable() {
   const onchangeinputfct1 = (e) => {
     setInputtext1(e.target.value)
   }
+
+
+
+
+
 
   return (
     <>

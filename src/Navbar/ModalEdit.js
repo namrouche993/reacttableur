@@ -171,18 +171,18 @@ function ModalEdit(props) {
 
     if (isValidEmail(email)) {
       // Do something with the valid email
-      console.log('Valid email:', email);
+      //console.log('Valid email:', email);
     } else {
       // Display error or handle invalid email
-      console.log('Invalid email:', email);
+      //console.log('Invalid email:', email);
     }
 
     if (isValidPhoneNumber(phoneNumber)) {
       // Do something with the valid phone number
-      console.log('Valid phone number:', phoneNumber);
+      //console.log('Valid phone number:', phoneNumber);
     } else {
       // Display error or handle invalid phone number
-      console.log('Invalid phone number:', phoneNumber);
+      //console.log('Invalid phone number:', phoneNumber);
     }
 
 

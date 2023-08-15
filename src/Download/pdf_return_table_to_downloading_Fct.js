@@ -2,7 +2,7 @@ import {existsInArray} from '../Tools/existsInArray.js'
 
 export function pdf_return_table_to_downloading_Fct(hot){
     //const hot = otherArgs[otherArgs.length - 1];
-    console.log('******************************************************************')
+    //console.log('******************************************************************')
   //doc.setFontSize(16)
   var hotInstance = hot;
   var table = [];
@@ -26,13 +26,13 @@ export function pdf_return_table_to_downloading_Fct(hot){
       var colspan = cellProperties.colspan || 1;
       var rowspan = cellProperties.rowspan || 1;
       //var styles = cellProperties.style || {};
-      console.log('cellcontent.className : ')
-      console.log(cellcontent.className)
+      //console.log('cellcontent.className : ')
+      //console.log(cellcontent.className)
       if(cellcontent.className!=''){
   
-      console.log('stylleeee : ')
+      //console.log('stylleeee : ')
       var strcontent = "."+cellcontent.className.replace(/ /g, '.');
-      console.log(strcontent)
+      //console.log(strcontent)
       var element = document.querySelector(strcontent)
       
   
@@ -40,7 +40,7 @@ export function pdf_return_table_to_downloading_Fct(hot){
       
       if(i==4 || i==5){
         var style = window.getComputedStyle(element) || '';
-      //console.log(style)
+      ////console.log(style)
       var bgcolor = style.getPropertyValue('background-color') || '';
       var txtalign = style.getPropertyValue('text-align') || '';
   
@@ -51,7 +51,7 @@ export function pdf_return_table_to_downloading_Fct(hot){
   
         } else {
           var style = window.getComputedStyle(element) || '';
-          //console.log(style)
+          ////console.log(style)
          var bgcolor = style.getPropertyValue('background-color') || '';
          var txtalign = style.getPropertyValue('text-align') || '';
   
@@ -65,10 +65,10 @@ export function pdf_return_table_to_downloading_Fct(hot){
              
   
       if(rowspan > 1 || colspan > 1 ) {
-          console.log('content in rowspan>1 and colspan>1 : ')
-          console.log(content)
-          console.log(i)
-          console.log(j)
+          //console.log('content in rowspan>1 and colspan>1 : ')
+          //console.log(content)
+          //console.log(i)
+          //console.log(j)
           for(var is=0; is<rowspan ; is++){
               for(var js=0; js<colspan ; js++){
                   if(is==0 & js==0) {
@@ -76,7 +76,7 @@ export function pdf_return_table_to_downloading_Fct(hot){
                      styles['valign']='middle' || '' 
   
                   /*if(i==4 && j==3) {
-                    console.log('i===4 and i==3')
+                    //console.log('i===4 and i==3')
                      styles['halign']=txtalign || '' 
                      styles['valign']='top' || '' 
                    } else {
@@ -102,7 +102,7 @@ export function pdf_return_table_to_downloading_Fct(hot){
   }
   
 return table
-console.log('tableeeeeeeeeeeeee :')
-console.log(table)
+//console.log('tableeeeeeeeeeeeee :')
+//console.log(table)
 
 }
