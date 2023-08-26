@@ -28,8 +28,15 @@ import{
   
   export function renderer_email(instance, td, row, col, prop, oldvalue, cellProperties,data22){
     //const data22 = otherArgs[otherArgs.length - 1];
-    td.innerHTML=oldvalue;
-    data22[row][col] = td.innerHTML;      
+    
+    if(oldvalue==null){
+      td.innerHTML=''
+    } else {
+      td.innerHTML=oldvalue;
+      //data02[row][col]=td.innerHTML
+    }
+    //data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
+  
     cellProperties.className = 'htRight'; 
     td.style.textAlign = 'right';
     td.className = 'htLeft htMiddle custom-normalcell';

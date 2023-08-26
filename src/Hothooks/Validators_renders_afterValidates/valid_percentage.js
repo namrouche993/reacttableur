@@ -42,10 +42,11 @@ import{
                       ////console.log('renderer percentage start')
                      // if(row>5){  // editable
       
+                     
                         if (oldvalue==null){
                         //////console.log('renderer percentage 0 part')
                         td.innerHTML='';
-                        data22[row][col] = td.innerHTML;      
+                        //data22[row][col] = td.innerHTML;      
                         cellProperties.className = 'htRight'; 
                         td.style.textAlign = 'right';
                         }
@@ -69,8 +70,9 @@ import{
                               const formattedNumber88_percentage = formatter88_percentage.format(value_percentage_renderer);
                               ////Handsontable.renderers.TextRenderer.apply(this, arguments);
                               td.innerHTML = formattedNumber88_percentage+'%';
-                              data22[row][col] = td.innerHTML+'%'
+                              //data22[row][col] = td.innerHTML+'%'
             
+                              
                              } else {
                              const formatter_percentage = new Intl.NumberFormat(userLocale, {
                                 style: 'decimal',
@@ -87,7 +89,7 @@ import{
                               ////Handsontable.renderers.TextRenderer.apply(this, arguments);
                               td.innerHTML = formattedNumber_percentage+'%';
                             //  //////console.log(td.innerHTML)
-                              data22[row][col] = td.innerHTML+'%';      
+                              //data22[row][col] = td.innerHTML+'%';      
                              //td.innerHTML=oldvalue;
                              cellProperties.className = 'htRight'; 
                              td.style.textAlign = 'right';
@@ -96,12 +98,13 @@ import{
                       else {
                         ////////console.log('renderer percentage 02 part')
                         td.innerHTML='';
-                        data22[row][col] = td.innerHTML;      
+                        //data22[row][col] = td.innerHTML;      
                         td.className = 'htRight'; 
                         td.style.textAlign = 'right';
                       }
                       td.className = 'htLeft htMiddle custom-normalcell'
-            
+                      td.style.fontFamily = 'Roboto Mono, monospace'; // Set the desired font family
+
                       ////////console.log('renderer percentage end')
             
                       //} else if ( row>3 ) {

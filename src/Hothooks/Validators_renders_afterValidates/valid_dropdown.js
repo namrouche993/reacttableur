@@ -26,7 +26,7 @@ import{
   import {data22fct} from '../../data.js'
   import {isValidDate} from  '../../Tools/isValidDate.js';
 
-// REMEMBER , NOTE : dont change source and to include it (obviously)
+  // REMEMBER , NOTE : dont change source and to include it (obviously)
 
 
 /*
@@ -62,6 +62,9 @@ var data22 = data22fct();
     //cellProperties.className = 'htRight'; 
     //td.style.textAlign = 'right';
     //td.className = 'htLeft htMiddle custom-normalcell'
+
+
+
                   }
   
   export function validator_dropdown(value, callback,my_source){
@@ -93,7 +96,7 @@ var data22 = data22fct();
         ////console.log(data22)
 
       }else if(!isValid){
-        //alert('invalid dropdown')
+        ////alert('invalid dropdown')
         //console.log('first cond')
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
         if(source!=='Autofill.fill'){

@@ -1,5 +1,5 @@
 import { startsWithElement } from './Tools/startsWithElement.js'
-
+import { ddatafct,data22fct } from './data.js';
   //#region initials inputs nb
   export const last_row_after_header = 15;
 
@@ -126,7 +126,7 @@ import { startsWithElement } from './Tools/startsWithElement.js'
       //export var condition_split2=true;
       export var ds_haschanged=false;
       export var use_english_date_by_user_himeself_in_modal = false;
-      export var hot_undone2={};
+      //export var hot_undone2={};
       export var use_english_date_by_user_himeself_in_modal_withoutfct=false;
 
       //****************** REDUX ******************************/
@@ -143,6 +143,25 @@ import { startsWithElement } from './Tools/startsWithElement.js'
      }
   // end *********** condition_split2
 
+
+  let last_row_to_use_for_dropdown_issue = ddatafct().length;
+  
+  export function setLast_row_to_use_for_dropdown_issue(value) {
+    last_row_to_use_for_dropdown_issue=value;
+  }
+
+  export function getLast_row_to_use_for_dropdown_issue(value) {
+    return last_row_to_use_for_dropdown_issue;
+  }
+
+
+  let hot_undone2={};
+  export function setInputValue_hot_undone2(value){
+   hot_undone2=value
+  }
+  export function getInputValue_hot_undone2() {
+   return hot_undone2;
+ };
 
 
 

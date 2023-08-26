@@ -1,16 +1,22 @@
     import _ from 'lodash';
     import { mergecellsarray,mycellmergedfct } from '../Tools/mergecells';
+    import { getInputValue_hot_undone2 } from '../initials_inputs';
 
     let lastelement_supthan1=0;    
-    export function afterChangeHandler(changes,src,hot,data22,hot_undone2,array_of_notmerged_cells_2,commentsPlugin){
+    export function afterChangeHandler(changes,src,hot,data22,array_of_notmerged_cells_2,commentsPlugin){
 
       console.log('afterChangeHandler')
 
+      //console.log(src)
+      //console.log(changes)
+      //alert('start of afterChangeHandler')
+      
       // var allValuesEqualtonull = changes.every(function(row) {
       //   return row[3] === null;
       // });
 
       //if (allValuesEqualtonull) {
+
         
         // setTimeout(() => {
         //   changes.map((x,index)=>{
@@ -59,8 +65,7 @@
                   ////console.log('lastelement_supthan1 is ' + lastelement_supthan1)
                   hot.undoRedo.doneActions.pop()
                   shouldBreak = true;
-                  return;
-    
+                  return;    
               }
           })
         }
@@ -70,8 +75,9 @@
     ////console.log('shouldbreak is : ' + shouldBreak )
     ////console.log(shouldBreak==false)
     //////console.log('index after the end of loop part : ' + typeof index==undefined ? 'a' : index)
-        if ( (src == 'my_source' || src=='my_source_removewhitespacesign' || src=='my_source_removewhitespacesign_percentage' || src=='my_source_removegreaterdecimalnumbers_percentage' || src=='my_source_convertitto_0' || src=='my_source_removewhitespacesign_date' || src=='my_source_date') && !shouldBreak) {
+        if ( ( src == 'my_source' || src=='my_source_removewhitespacesign' || src=='my_source_removewhitespacesign_percentage' || src=='my_source_removegreaterdecimalnumbers_percentage' || src=='my_source_convertitto_0' || src=='my_source_removewhitespacesign_date' || src=='my_source_date') && !shouldBreak) {
           ////console.log('afterchange mysource62 and we will pop it')
+
           hot.undoRedo.doneActions[hot.undoRedo.doneActions.length - 2].changes.forEach((x, y) => {
                     ////console.log('we are inside foreach in renderer')
                      if (x[0] == changes[0][0] && x[1] == changes[0][1]) {
@@ -113,6 +119,7 @@
             data22[x[0]][x[1]]=''
           }
         })
+        
         ////console.log(' ----------------------------- ---------------------------- ------')
       }
       if(src=='dataatrowprop_convert_to_en'){
@@ -123,36 +130,58 @@
           ////console.log('we are inside index dataatrowprop_convert_to_en')
           ////console.log(index)
             hot.undoRedo.doneActions[index].changes.forEach((x,y)=>{
-              if( // editable
-                x[1] == 2 || x[1] == 3 || x[1] == 4  || x[1] == 5  || x[1] == 6  ||
+              if( // editable index
+              x[1] == 7 || x[1] == 8
+
+              /*  x[1] == 2 || x[1] == 3 || x[1] == 4  || x[1] == 5  || x[1] == 6  ||
                 x[1] == 7 || x[1] == 8 || x[1] == 10 || x[1] == 11 || x[1] == 12 || 
                 x[1] == 13
+              */
                 ){
-                  x[2]=x[2].replace(/,/g, '.');
-                  x[3]=x[3].replace(/,/g, '.');
+                  if(x[2]!==null && x[2]!=='' && x[2]!==' '){
+                    x[2]=x[2].replace(/,/g, '.');
+                  }
+                  if(x[3]!==null && x[3]!=='' && x[3]!==' '){
+                     x[3]=x[3].replace(/,/g, '.');
+                  }
                     }
             })      
         }
-        hot.undoRedo.undoneActions=_.cloneDeep(hot_undone2)  
+        //hot.undoRedo.undoneActions=_.cloneDeep(hot_undone2.current)
+        hot.undoRedo.undoneActions=_.cloneDeep(getInputValue_hot_undone2())  
+
     } else if (src=='dataatrowprop_convert_to_fr'){
     
       hot.undoRedo.doneActions.pop();
     //  ////console.log(hot.undoRedo.doneActions)
       for (let index = 0; index<hot.undoRedo.doneActions.length; index++) {
           hot.undoRedo.doneActions[index].changes.forEach((x,y)=>{
-            if( // editable
-              x[1] == 2 || x[1] == 3 || x[1] == 4  || x[1] == 5  || x[1] == 6  ||
-              x[1] == 7 || x[1] == 8 || x[1] == 10 || x[1] == 11 || x[1] == 12 || 
-              x[1] == 13
+            if( // editable index
+            x[1] == 7 || x[1] == 8
+            /*  x[1] == 2 || x[1] == 3 || x[1] == 4  || x[1] == 5  || x[1] == 6  ||
+                x[1] == 7 || x[1] == 8 || x[1] == 10 || x[1] == 11 || x[1] == 12 || 
+                x[1] == 13
+            */
               ){
-                x[2]=x[2].replace(/\./g, ',');
-                x[3]=x[3].replace(/\./g, ',');
+                if(x[2]!==null && x[2]!=='' && x[2]!==' '){
+                   x[2]=x[2].replace(/\./g, ',');
+                }
+                if(x[3]!==null && x[3]!=='' && x[3]!==' '){
+                   x[3]=x[3].replace(/\./g, ',');
+                }
                   }
           })      
       }
-      hot.undoRedo.undoneActions=_.cloneDeep(hot_undone2)
-      
-    } 
+      //hot.undoRedo.undoneActions=_.cloneDeep(hot_undone2.current)
+      hot.undoRedo.undoneActions=_.cloneDeep(getInputValue_hot_undone2())
+
+    }
+
+    
+    else if (src == 'dataatrowprop_convert_date'){
+      hot.undoRedo.doneActions.pop();
+      hot.undoRedo.undoneActions=_.cloneDeep(getInputValue_hot_undone2())
+    }
     // place of else datepart
     
        // }

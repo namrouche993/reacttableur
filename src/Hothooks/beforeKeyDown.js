@@ -20,48 +20,32 @@ export function beforeKeyDownfct(event,hot,
     var currentRowIndex = selected ? selected[0][0] : null;
     
     /*
-    if (event.key === 'Delete') {
-      console.log('eventkey is delete : ')
-      var selectedRange = hot.getSelectedRange();
-        var startRow = selectedRange[0].from.row
-        var startCol = selectedRange[0].from.col
-        var endRow   = selectedRange[0].to.row
-        var endCol   = selectedRange[0].to.col
-        
-        if(startRow+3>endRow && startCol+3>endCol){
-          console.log('small cell')
-          commentsPlugin.removeCommentAtCell(startRow, startCol);
-        } else { 
-         // setTimeout( hot.getPlugin('comments').removeCommentAtCell(cell.row, cell.col), delay);
-          console.log('not removing ')
-        }       
-    }
-    */
-
-   /*
-   
   ################################################################################"
   ################################################################################
   ####################### beforeKeyDown_Dates_fct : ##############################
   ################################################################################"
   ################################################################################"
+*/
 
 
-   if(currentColIndex==14 && currentRowIndex>5) {  //  //is_date_exist==false editable (about dates)  //is_date_exist==false edit it later changeable , modify it later , change it later
-      beforeKeyDown_Dates_fct(event, hot,
-         userLocale2,
-         decimalSeparator2,
-         navigator_language2,
+
+   //if(currentColIndex==14 && currentRowIndex>5) {  //  //is_date_exist==false editable index (about dates)  //is_date_exist==false edit it later changeable , modify it later , change it later
+   if(currentColIndex==6 && currentRowIndex>5) {  //  //is_date_exist==false editable index (about dates)  //is_date_exist==false edit it later changeable , modify it later , change it later
+    beforeKeyDown_Dates_fct(event, hot,
+         userLocale2.current,
+         decimalSeparator2.current,
+         navigator_language2.current,
          //condition_split2
          ) // about dates
       }
-  */
 
-    if(currentColIndex!=1 && currentColIndex!=9 &&  currentColIndex!=14  ) { // editable and adding other text columns || dont equal to  
+
+    //if(currentColIndex!=1 && currentColIndex!=9 &&  currentColIndex!=14  ) { // editable index and adding other text columns || dont equal to  
+    if(currentColIndex==7 || currentColIndex==8) { // editable index and adding other text columns || dont equal to  
       beforeKeyDown_Nb_fct(event, hot,
-        userLocale2,
-        decimalSeparator2,
-        navigator_language2,
+        userLocale2.current,
+        decimalSeparator2.current,
+        navigator_language2.current,
  //       condition_split2     
         ) // about Amounts and Nb
   }

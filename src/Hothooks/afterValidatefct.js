@@ -44,7 +44,7 @@ export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLo
   
   console.log('aftervalidate Function triggered')
     // const hot = otherArgs[otherArgs.length - 1];
-  
+    //alert('we are in afterValidatefct , and userLocale.current is : ' + userLocale.current + ' and decimalSeparator.current : ' + decimalSeparator.current)
     
   /* if(isValid && oldvalue==null){
     console.log('do nothing')
@@ -54,7 +54,7 @@ export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLo
         if (prop == 10) {  //  props==2 afterValidate of integers
                 afterValidatefct_integers(isValid, oldvalue, row, prop, source,hot,commentsPlugin,
   
-                  decimalSeparator,userLocale,
+                  decimalSeparator.current,userLocale.current,
                   //navigator_language,userTimeZone,usTimeZones,
       currencyht_intint,currencyht_toshow_intint,afterdigit_intint,smallafterdigit_intint,afterdigitsmallnb_intint,
       bignb_intint,smallnb_intint,decimalnumbers_toshow_withoutrenderer_innumbers_intint,usegrouping_intint_if_true,
@@ -65,7 +65,7 @@ export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLo
           //else if (prop==6  || prop==7  || prop==8  ||     prop==11  || prop==12  || prop==13 ) {  // afterValidate of numbers and amounts
           else if (prop == 8) {  // afterValidate of numbers and amounts
             afterValidatefct_amounts(isValid, oldvalue, row, prop, source,hot,commentsPlugin,
-              decimalSeparator,userLocale,
+              decimalSeparator.current,userLocale.current,
               //navigator_language,userTimeZone,usTimeZones,
 
               last_row_after_header,
@@ -80,7 +80,7 @@ export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLo
       else if(prop == 7){ // afterValidate of percentage,  editable the index later 
         afterValidatefct_percentage(isValid, oldvalue, row, prop, source,hot,commentsPlugin,
           
-decimalSeparator,userLocale,
+decimalSeparator.current,userLocale.current,
 //navigator_language,userTimeZone,usTimeZones,
 afterdigit_percentage_percperc,smallafterdigit_percentage_percperc,afterdigitsmallnb_percentage_percperc,
 bignbpercent_percperc,smallnbpercent_percperc,decimalnumbers_toshow_withoutrenderer_inpercentage_percperc,
@@ -90,8 +90,8 @@ is_negativenb_accepted_percperc,is_float_accepted_percperc
   }
   else if (prop == 6 ) {
     afterValidatefct_date(isValid, oldvalue, row, prop, source,hot,commentsPlugin,
-      decimalSeparator,userLocale,navigator_language,userTimeZone,usTimeZones,use_en_time,
-      use_english_date_by_user_himeself_in_modal_withoutfct
+      decimalSeparator.current,userLocale.current,navigator_language.current,userTimeZone,usTimeZones,use_en_time,
+      use_english_date_by_user_himeself_in_modal_withoutfct.current
       )        
   }
   

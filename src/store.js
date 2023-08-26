@@ -9,7 +9,8 @@ import {
   ds_haschanged,
   use_english_date_by_user_himeself_in_modal,
   use_english_date_by_user_himeself_in_modal_withoutfct,
-  hot_undone2
+  hot_undone2,
+
   
  }
    from './initials_inputs';
@@ -17,15 +18,15 @@ import {
 const initialState = {
   hotInstance_redux:null,
   value1: 5,
-  navigator_language2: navigator_language2,
+  navigator_language2: 'fr-FR',//navigator_language2,
   navigator_language2_avant_modify: navigator_language2_avant_modify,
-  userLocale2: userLocale2,
-  decimalSeparator2: decimalSeparator2,
+  userLocale2: 'fr', //userLocale2,
+  decimalSeparator2: ',',//decimalSeparator2,
   //condition_split2: condition_split2,
   ds_haschanged: ds_haschanged,
   use_english_date_by_user_himeself_in_modal: use_english_date_by_user_himeself_in_modal,
   use_english_date_by_user_himeself_in_modal_withoutfct:use_english_date_by_user_himeself_in_modal_withoutfct,
-  hot_undone2: hot_undone2,
+  //hot_undone2: hot_undone2,
 
   unmerged_cells_to_unmerge: []
 };
@@ -86,11 +87,11 @@ const reducer = (state = initialState, action) => {
                   ...state,
                   use_english_date_by_user_himeself_in_modal_withoutfct: action.payload
                 };
-              case 'SET_hot_undone2':
-                return {
-                  ...state,
-                  hot_undone2: action.payload
-                };
+              // case 'SET_hot_undone2':
+              //   return {
+              //     ...state,
+              //     hot_undone2: action.payload
+              //   };
                 
               case 'SET_UNMERGEDCELLS':
                 return {

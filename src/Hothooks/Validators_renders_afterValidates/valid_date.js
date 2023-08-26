@@ -44,11 +44,20 @@ import{
     ////console.log('data22 in renderer_date : ')
     //const data22 = otherArgs[otherArgs.length - 1];
     ////console.log(data22)
-    td.innerHTML=oldvalue;
-    data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
+   
+    if(oldvalue==null){
+      td.innerHTML=''
+    } else {
+      td.innerHTML=oldvalue;
+      //data02[row][col]=td.innerHTML
+    }
+    //data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
+    
     cellProperties.className = 'htRight'; 
     td.style.textAlign = 'right';
     td.className = 'htLeft htMiddle custom-normalcell'
+    td.style.fontFamily = 'Roboto Mono, monospace'; // Set the desired font family
+
                   }
   
   export function validator_date(value, callback,
@@ -100,6 +109,7 @@ import{
     decimalSeparator,userLocale,navigator_language,userTimeZone,usTimeZones,use_en_time,
     use_english_date_by_user_himeself_in_modal_withoutfct
     ){
+      //alert('navigator_language now  in valid_data is : ' + navigator_language)
       setInputValue_condition_split2(true)        
         if (isValid && oldvalue == null ) {
           ////console.log('condition date 1')

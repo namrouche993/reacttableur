@@ -28,12 +28,23 @@ import{
 
   export function renderer_phonenumber(instance, td, row, col, prop, oldvalue, cellProperties,phonenumbers_length_pn,data22){
     //const data22 = otherArgs[otherArgs.length - 1];
-    td.innerHTML=oldvalue;
+    
+    if(oldvalue==null){
+      td.innerHTML=''
+    } else {
+      td.innerHTML=oldvalue;
+      //data02[row][col]=td.innerHTML
+    }
+    //data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
+    
+
+    //td.innerHTML=oldvalue;
     td.style.whiteSpace = 'normal' // wrap text
-    data22[row][col] = td.innerHTML;      
+    //data22[row][col] = td.innerHTML;      
     cellProperties.className = 'htRight'; 
     td.style.textAlign = 'right';
     td.className = 'htLeft htMiddle custom-normalcell';
+    td.style.fontFamily = 'Roboto Mono, monospace'; // Set the desired font family
 
                   }
   

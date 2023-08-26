@@ -60,8 +60,8 @@ export function Columns_data_for_Validator_renders(imin,imax,
   use_english_date_by_user_himeself_in_modal_withoutfct,
   hot_undone2,
   ) {
+    //alert('userLocale2  in Columns_data_for.. will be : '  + userLocale2.current + ' and decimalSeparator2 : ' + decimalSeparator2.current)
   //console.log('before using it')
-  
 
         //////console.log('columnsdata')
         console.log('COLUMNS DATA FOR VALIDATOR')
@@ -81,7 +81,7 @@ export function Columns_data_for_Validator_renders(imin,imax,
                 if(thisrow>5){ // editable
                   validator_integers(oldvalue, callback,thisrow,thiscol,
 
-                    decimalSeparator2,userLocale2,
+                    decimalSeparator2.current,userLocale2.current,
                     //navigator_language,userTimeZone,usTimeZones,
     currencyht_intint,currencyht_toshow_intint,afterdigit_intint,smallafterdigit_intint,afterdigitsmallnb_intint,
     bignb_intint,smallnb_intint,decimalnumbers_toshow_withoutrenderer_innumbers_intint,usegrouping_intint_if_true,
@@ -96,7 +96,7 @@ export function Columns_data_for_Validator_renders(imin,imax,
                
                   renderer_integers(instance, td, row, col, prop, oldvalue, cellProperties,
 
-                    decimalSeparator2,userLocale2,
+                    decimalSeparator2.current,userLocale2.current,
                     //navigator_language,userTimeZone,usTimeZones,
     currencyht_intint,currencyht_toshow_intint,afterdigit_intint,smallafterdigit_intint,afterdigitsmallnb_intint,
     bignb_intint,smallnb_intint,decimalnumbers_toshow_withoutrenderer_innumbers_intint,usegrouping_intint_if_true,
@@ -124,7 +124,7 @@ export function Columns_data_for_Validator_renders(imin,imax,
             
               if(thisrow>5){ // editable
                 validator_amounts(oldvalue, callback,thisrow,thiscol,
-                  decimalSeparator2,userLocale2,
+                  decimalSeparator2.current,userLocale2.current,
                   //navigator_language,userTimeZone,usTimeZones,
 
                   last_row_after_header,
@@ -139,8 +139,9 @@ export function Columns_data_for_Validator_renders(imin,imax,
           renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of numbers or amounts
             
              if(row>5){ // editable
+            
               renderer_amounts(instance, td, row, col, prop, oldvalue, cellProperties,
-                decimalSeparator2,userLocale2,
+                decimalSeparator2.current,userLocale2.current,
                 //navigator_language,userTimeZone,usTimeZones,
 
                 last_row_after_header,
@@ -170,7 +171,7 @@ export function Columns_data_for_Validator_renders(imin,imax,
             if(thisrow>5){ // editable
               validator_percentage(value, callback,
                 
-decimalSeparator2,userLocale2,
+decimalSeparator2.current,userLocale2,
 //navigator_language,userTimeZone,usTimeZones,
 afterdigit_percentage_percperc,smallafterdigit_percentage_percperc,afterdigitsmallnb_percentage_percperc,
 bignbpercent_percperc,smallnbpercent_percperc,decimalnumbers_toshow_withoutrenderer_inpercentage_percperc,
@@ -185,7 +186,7 @@ is_negativenb_accepted_percperc,is_float_accepted_percperc
             if(row>5){ // editable
               renderer_percentage(instance, td, row, col, prop, oldvalue, cellProperties,
                 
-decimalSeparator2,userLocale2,
+decimalSeparator2.current,userLocale2.current,
 //navigator_language,userTimeZone,usTimeZones,
 afterdigit_percentage_percperc,smallafterdigit_percentage_percperc,afterdigitsmallnb_percentage_percperc,
 bignbpercent_percperc,smallnbpercent_percperc,decimalnumbers_toshow_withoutrenderer_inpercentage_percperc,
@@ -210,7 +211,7 @@ else if(i == 6){
             
         if(thisrow>5){ // editable
           validator_date(oldvalue, callback,
-                decimalSeparator2,userLocale2,navigator_language2,userTimeZone,usTimeZones,use_en_time,
+                decimalSeparator2.current,userLocale2.current,navigator_language2,userTimeZone,usTimeZones,use_en_time,
                 use_english_date_by_user_himeself_in_modal_withoutfct
             )
       }
@@ -219,7 +220,7 @@ else if(i == 6){
           
        if(row>5){ // editable
         renderer_date(instance, td, row, col, prop, oldvalue, cellProperties,
-              decimalSeparator2,userLocale2,navigator_language2,userTimeZone,usTimeZones,use_en_time
+              decimalSeparator2.current,userLocale2.current,navigator_language2,userTimeZone,usTimeZones,use_en_time
           ,data22)
       } else if ( row>3 ) { // editable
            td.innerHTML=oldvalue;
@@ -315,10 +316,10 @@ else if( i == 2 ) {
         }
       }
 
-      else if( i == 9 ) {
+      else if( i == 9 || i == 1) {
         var dd={
           className: "htRight htMiddle" ,
-          validator: function (oldvalue, callback) { // validator of numbers or amounts
+          validator: function (oldvalue, callback) { // validator of text
               const thisrow = this.row;
               const thiscol = this.col;
               if(thisrow>5){ // editable

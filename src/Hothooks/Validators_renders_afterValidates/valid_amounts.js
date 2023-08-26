@@ -39,6 +39,7 @@ import{
     is_negativenb_accepted_nbnb,
     
     data22){
+      //alert('we are in renderer_amounts and userLocale is : ' + userLocale + ' and decimalSeparator is : ' + decimalSeparator)
     //const data22 = otherArgs[otherArgs.length - 1];
     if (oldvalue !== null) {
       var value = oldvalue.toString().replace(currencyht_nbnb, '');
@@ -48,7 +49,8 @@ import{
 
     if (value == null || value == '') {
       td.innerHTML = ''
-      data22[row][col] = td.innerHTML;
+      //data22[row][col] = td.innerHTML;
+      
     } else if (decimalSeparator == "." && /^\s*[-+]?(\s*\d+)\s*$/.test(value)) {
       ////console.log('we are inside renderer . whole number')
       ////console.log(value)
@@ -62,7 +64,7 @@ import{
       const formattedNumber = formatter.format(Number(value_without_whitespace));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      data22[row][col] = td.innerHTML;
+      //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == "," && /^\s*[-+]?(\s*\d+)\s*$/.test(value)) {
       ////console.log('we are inside renderer , whole number')
@@ -77,7 +79,7 @@ import{
       const formattedNumber = formatter.format(Number(value_without_whitespace));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      data22[row][col] = td.innerHTML;
+      //data22[row][col] = td.innerHTML;
 
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?(\s*\d+(\.\d*)?|\.\d+)\s*$/.test(value)) {
@@ -103,14 +105,14 @@ import{
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
         td.innerHTML = formattedNumber22 + currencyht_toshow_nbnb
         ////console.log('we are inside td.innerhtml < 0.01')
-        data22[row][col] = td.innerHTML;
+        //data22[row][col] = td.innerHTML;
 
       } else {
         ////console.log('we are inside . and default and else (number value>0.01)')
         const formattedNumber = formatter.format(Number(value_without_whitespace2));
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
         td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-        data22[row][col] = td.innerHTML;
+        //data22[row][col] = td.innerHTML;
 
       }
 
@@ -146,7 +148,7 @@ import{
         const formattedNumber33 = formatter33.format(value_without_whitespace32);
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
         td.innerHTML = formattedNumber33 + currencyht_toshow_nbnb;
-        data22[row][col] = td.innerHTML;
+        //data22[row][col] = td.innerHTML;
 
       } else {
         const formattedNumber = formatter.format(value_without_whitespace32);
@@ -154,7 +156,7 @@ import{
 
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
         td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-        data22[row][col] = td.innerHTML;
+        //data22[row][col] = td.innerHTML;
 
       }
 
@@ -173,7 +175,7 @@ import{
       const formattedNumber = formatter.format(Number(value3).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      data22[row][col] = td.innerHTML;
+      //data22[row][col] = td.innerHTML;
 
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?(\s*\d{1,3}(,\d{3})*(\.\d+)?|\.\d+)\s*$/.test(value)) {
@@ -196,7 +198,7 @@ import{
       const formattedNumber = formatter.format(Number(value4).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      data22[row][col] = td.innerHTML;
+      //data22[row][col] = td.innerHTML;
 
 
     } else if (decimalSeparator == ',' && /^\s*[-+]?(\s*\d{1,3}(?:\.\d{3})+(?:,\d+)?)\s*(?=\s|$)/.test(value)) {
@@ -217,7 +219,7 @@ import{
       const formattedNumber = formatter.format(Number(value_without_whitespace45).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      data22[row][col] = td.innerHTML;
+      //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?(\s*\d{1,3}( \d{3})*(\.\d*)?|\.\d+)\s*$/.test(value)) {
       ////console.log('we are inside rendere 6')
@@ -234,7 +236,7 @@ import{
       const formattedNumber = formatter.format(Number(value6).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      data22[row][col] = td.innerHTML;
+      //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?[\s]*[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
       ////console.log('we are inside rendere 7')
@@ -250,7 +252,7 @@ import{
       const formattedNumber = formatter.format(Number(value7));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      data22[row][col] = td.innerHTML;
+      //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == ',' && /^\s*[-+]?[\s]*[0-9]*,?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
       //////console.log('----------------------------------------rendere 8 ---------------------------------------- rendere 8 ------------------------')
@@ -273,7 +275,7 @@ import{
         const formattedNumber88 = formatter88.format(value8);
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
         td.innerHTML = formattedNumber88 + currencyht_toshow_nbnb;
-        data22[row][col] = td.innerHTML;
+        //data22[row][col] = td.innerHTML;
 
       } else {
         const formatter = new Intl.NumberFormat(userLocale, {
@@ -286,7 +288,7 @@ import{
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
         td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
         ////console.log(td.innerHTML)
-        data22[row][col] = td.innerHTML;
+        //data22[row][col] = td.innerHTML;
 
       }
     } else {
@@ -294,8 +296,8 @@ import{
     }
   
   td.className = 'htRight htMiddle custom-normalcell';
+  td.style.fontFamily = 'Roboto Mono, monospace'; // Set the desired font family
   ////////console.log('renderer percentage end')
-
                   
   }
 
@@ -364,6 +366,7 @@ import{
 
     ){      
 
+      //alert('aftervalidate amount and the value is : ' + oldvalue )
     ////console.log('value : aftervalidate')
     ////console.log(oldvalue)
     ////console.log(typeof oldvalue)
@@ -399,6 +402,7 @@ import{
       */
 
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d+)\s*$/.test(value)) {
+      //alert('aftervalidate amounts 1 elseif')
       ////console.log('integer number')
       if (/^[-+](?=\s)\s*\d+\s*$/.test(value.trim())) {
         ////console.log('if there is a whitespace between sign +/- and the value so remove this whitespace')
@@ -441,6 +445,7 @@ import{
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d+(\.\d*)?|\.\d+)\s*$/.test(value)) {
       //1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR
       //const value_without_whitespace2= value.replace(/^\s*([-+])\s*(\d+)/, '$1$2');
+      //alert('aftervalidate amounts 2 elseif')
 
       if (/^\s*[-+]\s+\d/.test(value.trim())) {
         ////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 123456.89  ')
@@ -494,7 +499,7 @@ import{
             
             } else {
             ////console.log('condition 4.2')
-            //alert('voulez vous dire que 3.16 egale a 3,14 ? si oui changer svp ')
+            ////alert('voulez vous dire que 3.16 egale a 3,14 ? si oui changer svp ')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value).toLocaleString(userLocale) + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_4','fr-FR',userLocale,decimalSeparator))
             commentsPlugin.showAtCell(row, prop);
@@ -505,6 +510,8 @@ import{
       }
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d+(,\d*)?|,\d+)\s*$/.test(value)) {
       //1234567,89 EUROPEAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR
+      //alert('aftervalidate amounts 3 elseif')
+
       if (/^\s*[-+]\s+\d/.test(value.trim())) {
         ////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 123456.89  ')
         ////console.log('we will call my_source_removewhitespacesign')
@@ -516,7 +523,7 @@ import{
           // MAY CAUSE PROBLEM WITH NUMBERS
           // we have to do something
           ////console.log('may cause problem 1')
-          //alert('may cause problem')
+          ////alert('may cause problem')
           ////console.log('condition 1 ')
           if (/^\s*[-+]?(\s*\d{1,3}(,\d{3})*(\.\d+)?|\.\d+)\s*$/.test(value)) {
             ////console.log('condition 1.1')
@@ -529,7 +536,7 @@ import{
           } else {
             ////console.log('condition 1.2')
             ////console.log('may cause problem')
-            //alert('do you want to mean that ' + value + ' = ' + value.trim().replace(',', '.') + ' ?' )
+            ////alert('do you want to mean that ' + value + ' = ' + value.trim().replace(',', '.') + ' ?' )
             //hot.setDataAtCell(row, prop, value.trim().replace(',', '.'));
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().replace(',', '.') + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_5','fr-FR',userLocale,decimalSeparator))
@@ -539,6 +546,7 @@ import{
           //hot.setDataAtCell(row, prop, value.replace(/,/g, '') );
 
         } else if (decimalSeparator == ',') {
+          //alert('aftervalidate amounts 3 elseif and decimalseparator == , ')
           // do nothing
           ////console.log('condition 2 ta3 do nothing')
           //hot.setDataAtCell(row, prop, value.trim());
@@ -563,7 +571,7 @@ import{
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               ////console.log('COULD END HERE')
-              
+              //alert('i think it will end here')
                 commentsPlugin.removeCommentAtCell(row,prop);
                
                           }
@@ -579,6 +587,8 @@ import{
         }
       }
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d{1,3}( \d{3})*(,\d*)?|,\d+)\s*$/.test(value)) {
+      //alert('aftervalidate amounts 4 elseif')
+
       // 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR
       ////console.log('condition out 5')
       ////console.log('// 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR')
@@ -590,13 +600,14 @@ import{
 
 
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d{1,3}(,\d{3})*(\.\d+)?|\.\d+)\s*$/.test(value)) {
+      //alert('aftervalidate amounts 5 elseif')
 
       ////console.log('// 1,234,567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
       ////console.log('condition out 6 ')
       if (decimalSeparator == ',') {
         // may cause problem
         ////console.log('condition out 6.1')
-        //alert('veuillez corriger l'ecriture selon la format de vos parametres)
+        ////alert('veuillez corriger l'ecriture selon la format de vos parametres)
         //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value.replace(/,/g, '')).toLocaleString(userLocale) + " est correct");
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_6','fr-FR',userLocale,decimalSeparator))
         hot.setDataAtCell(row, prop, '', 'my_source_empty');
@@ -615,6 +626,8 @@ import{
       // 1,234,567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR
 
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d{1,3}(?:\.\d{3})+(?:,\d+)?)\s*(?=\s|$)/.test(value)) {
+      //alert('aftervalidate amounts 6 elseif')
+
       // 1.234.567,89 EUROPEAN NUMERIC FORMAT WITH THOUSAND SEPARATOR as dot
       if (/^\s*[-+]\s+\d/.test(value.trim())) {
         ////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 1.234.567,89  ')
@@ -648,6 +661,8 @@ import{
         }
       }
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d{1,3}( \d{3})*(\.\d*)?|\.\d+)\s*$/.test(value)) {
+      //alert('aftervalidate amounts 7 elseif')
+
       // 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR
       ////console.log('condition out 8')
       ////console.log('// 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
@@ -657,6 +672,8 @@ import{
         commentsPlugin.removeCommentAtCell(row,prop);
        
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?[\s]*[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
+      //alert('aftervalidate amounts 8 elseif')
+
       ////console.log('condition out 12 ')
       // we a re inside scientific notation when mantissa is integer
       if (/^[+-]?[\s]+\d+(\.\d+)?([eE][+-]?\d+)?$/.test(value.trim())) {
@@ -709,6 +726,7 @@ import{
         }
       }
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?[\s]*[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
+      //alert('aftervalidate amounts 9 elseif')
       // we are inside scientific notation :
       // 1.6e6 1.60E+04  -13.65E4  - 12.3E+03  scientific notation with E sign
       ////console.log('condition out 9')
@@ -760,6 +778,8 @@ import{
         }
       }
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?[\s]*[0-9]*,?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
+      //alert('aftervalidate amounts 10 elseif')
+
       // we are inside scientific notation with comma :
       // 1,6e6 1.60E+04  -13,65E4  - 12,3E+03  scientific notation with E sign
       ////console.log('condition out 10')

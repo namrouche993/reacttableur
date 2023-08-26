@@ -60,8 +60,19 @@ import{
     ////console.log(data22)
     ////console.log('text_length_txt :::')
     ////console.log(text_length_txt)
-    td.innerHTML=oldvalue;
-    data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
+    
+    //td.innerHTML=oldvalue;
+    //data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
+    
+    if(oldvalue==null){
+      td.innerHTML=''
+    } else {
+      td.innerHTML=oldvalue;
+      //data02[row][col]=td.innerHTML
+    }
+    //data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
+    
+    
     cellProperties.className = 'htLeft'; 
     td.style.textAlign = 'left';
     td.className = 'htLeft htMiddle custom-normalcell'
@@ -70,7 +81,7 @@ import{
   export function validator_text(value, callback,text_length_txt){
     //console.log('validator_text')
     //console.log(text_length_txt)
-    //alert('value in validator_text is : '  + value)
+    ////alert('value in validator_text is : '  + value)
     if( value==null || 
         value.toString().length<text_length_txt    
     ) {

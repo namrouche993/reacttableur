@@ -71,6 +71,10 @@ function Navbar() {
     setModalOpenformat(false);
   };
 
+  const handlesending = (input) => {
+    setModalOpenformat(input)
+  }
+
 
   const [modalOpenedit, setModalOpenedit] = useState(false);
   const handleOpenModaledit = () => {
@@ -134,7 +138,7 @@ function Navbar() {
             </div>
            </Toolbar>
          </AppBar>
-         <ModalFormat open={modalOpenformat} onClose={handleCloseModalformat} />
+         <ModalFormat open={modalOpenformat} onClose={handleCloseModalformat} senddata={handlesending}/>
          <ModalEdit open={modalOpenedit} onClose={handleCloseModaledit} />
 
         </ThemeProvider>

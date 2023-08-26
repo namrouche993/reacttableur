@@ -26,7 +26,9 @@
             ////console.log(selectedCol)
     
             ////console.log('selectedCol : '  + selectedCol)
-            if(selectedCol==3 ||  selectedCol==4        || selectedCol==5 ||        selectedCol==10 ){   // editable modify editable , it's about percentage and make comma instead of dot in european format
+            //if(selectedCol==3 ||  selectedCol==4        || selectedCol==5 ||        selectedCol==10 ){   // editable index modify editable , it's about percentage and make comma instead of dot in european format
+            if(selectedCol==7 ){   // editable index modify editable , it's about percentage and make comma instead of dot in european format
+
               //console.log('we are inside selectedCol == 3')
               var cellpercent = hot.getActiveEditor().TEXTAREA; // Get the DOM element representing the cell editor
               hot.getActiveEditor().setValue(hot.getActiveEditor().getValue() + ',');
