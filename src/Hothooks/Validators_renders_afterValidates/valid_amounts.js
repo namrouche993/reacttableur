@@ -259,7 +259,7 @@ import{
       ////console.log('we are inside rendere 3')
       ////console.log('we are inside else if 300 000,00')
       ////console.log('// 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR')
-
+      //alert('we are here')
       const formatter = new Intl.NumberFormat(userLocale, {
         style: 'decimal',
         useGrouping: usegrouping_nbnb_if_true,
@@ -397,14 +397,14 @@ import{
       const value7 = parseFloat(value.replace(/\s/g, ''));
       const formattedNumber = formatter.format(Number(value7));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
-      if(Number(value7.trim())>0 && display_plus_sign_in_the_start==true){
-        if(value7.trim().includes("+")){
+      if(Number(value7.toString().trim())>0 && display_plus_sign_in_the_start==true){
+        if(value7.toString().trim().includes("+")){
           td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
         }
       } else {
-        if(value7.trim().includes("+")){
+        if(value7.toString().trim().includes("+")){
           td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
@@ -432,14 +432,14 @@ import{
         });
         const formattedNumber88 = formatter88.format(value8);
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
-        if(Number(value8.trim())>0 && display_plus_sign_in_the_start==true){
-          if(value8.trim().includes("+")){
+        if(Number(value8.toString().trim())>0 && display_plus_sign_in_the_start==true){
+          if(value8.toString().trim().includes("+")){
             td.innerHTML = "+" + formattedNumber88 + currencyht_toshow_nbnb;
           } else {
             td.innerHTML = "+" + formattedNumber88 + currencyht_toshow_nbnb;
           }
         } else {
-          if(value8.trim().includes("+")){
+          if(value8.toString().trim().includes("+")){
             td.innerHTML = formattedNumber88.replace("+",'') + currencyht_toshow_nbnb;
           } else {
             td.innerHTML = formattedNumber88 + currencyht_toshow_nbnb;
@@ -456,14 +456,14 @@ import{
         });
         const formattedNumber = formatter.format(Number(value8));
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
-        if(Number(value8.trim())>0 && display_plus_sign_in_the_start==true){
-          if(value8.trim().includes("+")){
+        if(Number(value8.toString().trim())>0 && display_plus_sign_in_the_start==true){
+          if(value8.toString().trim().includes("+")){
             td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
           } else {
             td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
           }
         } else {
-          if(value8.trim().includes("+")){
+          if(value8.toString().trim().includes("+")){
             td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
           } else {
             td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
