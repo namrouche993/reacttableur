@@ -201,9 +201,13 @@ import{
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
+                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
+                      hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    } else {
                 ////console.log('condition percentage 1,5.2');
                 ////console.log('could end here');
                 commentsPlugin.removeCommentAtCell(row, prop);
+                    }
               }    
               }
               }
@@ -223,10 +227,14 @@ import{
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
+                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
+                      hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    } else {
                 ////console.log('condition percentage 1,7.2');
                 ////console.log('could end here');
                 commentsPlugin.removeCommentAtCell(row, prop);
                   }
+                }
                 }
               }
 
@@ -293,10 +301,14 @@ import{
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
-                  ////console.log('condition percentage 2.3.1.2')
+                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
+                      hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    } else {
+                    ////console.log('condition percentage 2.3.1.2')
                   ////console.log('could end here')
                   commentsPlugin.removeCommentAtCell(row, prop);
                   }
+                }
                 }
                 }
                 }
@@ -351,10 +363,14 @@ import{
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
+                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
+                      hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    } else {
                             ////console.log('condition percentage 2.4.2.2')
                             ////console.log('could end here')
                             commentsPlugin.removeCommentAtCell(row, prop);
                        }
+                      }
                       }
                       }
 

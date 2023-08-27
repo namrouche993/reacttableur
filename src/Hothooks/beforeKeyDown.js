@@ -41,7 +41,7 @@ export function beforeKeyDownfct(event,hot,
 
 
     //if(currentColIndex!=1 && currentColIndex!=9 &&  currentColIndex!=14  ) { // editable index and adding other text columns || dont equal to  
-    if(currentColIndex==7 || currentColIndex==8) { // editable index and adding other text columns || dont equal to  
+    if(currentColIndex==7 || currentColIndex==8 || currentColIndex==10 ) { // editable index and adding other text columns || dont equal to  
       beforeKeyDown_Nb_fct(event, hot,
         userLocale2.current,
         decimalSeparator2.current,

@@ -22,7 +22,9 @@ import{
 
     userTimeZone,
     usTimeZones,
-    use_en_time
+    use_en_time,
+
+    display_plus_sign_in_the_start
   } from '../initials_inputs.js';
 
 
@@ -73,6 +75,8 @@ export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLo
               currencyht_nbnb,currencyht_toshow_nbnb,afterdigit_nbnb, smallafterdigit_nbnb, afterdigitsmallnb_nbnb,
               bignb_nbnb,smallnb_nbnb,decimalnumbers_toshow_withoutrenderer_innumbers_nbnb,usegrouping_nbnb_if_true,
               is_negativenb_accepted_nbnb,
+
+              display_plus_sign_in_the_start
 
               )
 

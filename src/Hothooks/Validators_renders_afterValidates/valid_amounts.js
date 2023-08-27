@@ -37,8 +37,8 @@ import{
     currencyht_nbnb,currencyht_toshow_nbnb,afterdigit_nbnb, smallafterdigit_nbnb, afterdigitsmallnb_nbnb,
     bignb_nbnb,smallnb_nbnb,decimalnumbers_toshow_withoutrenderer_innumbers_nbnb,usegrouping_nbnb_if_true,
     is_negativenb_accepted_nbnb,
-    
-    data22){
+    display_plus_sign_in_the_start
+    ,data22){
       //alert('we are in renderer_amounts and userLocale is : ' + userLocale + ' and decimalSeparator is : ' + decimalSeparator)
     //const data22 = otherArgs[otherArgs.length - 1];
     if (oldvalue !== null) {
@@ -63,7 +63,20 @@ import{
       const value_without_whitespace = value.replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2');
       const formattedNumber = formatter.format(Number(value_without_whitespace));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
-      td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+
+      if(Number(value_without_whitespace.trim())>0 && display_plus_sign_in_the_start==true){
+        if(value_without_whitespace.trim().includes("+")){
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        }
+      } else {
+        if(value_without_whitespace.trim().includes("+")){
+          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+        }
+      }
       //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == "," && /^\s*[-+]?(\s*\d+)\s*$/.test(value)) {
@@ -78,7 +91,24 @@ import{
       const value_without_whitespace = value.replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2');
       const formattedNumber = formatter.format(Number(value_without_whitespace));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
-      td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+
+
+
+
+      if(Number(value_without_whitespace.trim())>0 && display_plus_sign_in_the_start==true){
+        if(value_without_whitespace.trim().includes("+")){
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        }
+      } else {
+        if(value_without_whitespace.trim().includes("+")){
+          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+        }
+      }
+
       //data22[row][col] = td.innerHTML;
 
 
@@ -103,7 +133,20 @@ import{
         });
         const formattedNumber22 = formatter22.format(value_without_whitespace2);
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
-        td.innerHTML = formattedNumber22 + currencyht_toshow_nbnb
+
+        if(Number(value_without_whitespace2.trim())>0 && display_plus_sign_in_the_start==true){
+          if(value_without_whitespace2.trim().includes("+")){
+            td.innerHTML = "+" + formattedNumber22 + currencyht_toshow_nbnb;
+          } else {
+            td.innerHTML = "+" + formattedNumber22 + currencyht_toshow_nbnb;
+          }
+        } else {
+          if(value_without_whitespace2.trim().includes("+")){
+            td.innerHTML = formattedNumber22.replace("+",'') + currencyht_toshow_nbnb;
+          } else {
+            td.innerHTML = formattedNumber22 + currencyht_toshow_nbnb;
+          }
+        }
         ////console.log('we are inside td.innerhtml < 0.01')
         //data22[row][col] = td.innerHTML;
 
@@ -111,8 +154,21 @@ import{
         ////console.log('we are inside . and default and else (number value>0.01)')
         const formattedNumber = formatter.format(Number(value_without_whitespace2));
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
-        td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-        //data22[row][col] = td.innerHTML;
+        if(Number(value_without_whitespace2.trim())>0 && display_plus_sign_in_the_start==true){
+          if(value_without_whitespace2.trim().includes("+")){
+            td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+          } else {
+            td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+          }
+        } else {
+          if(value_without_whitespace2.trim().includes("+")){
+            td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          } else {
+            td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+          }
+        }
+
+      //data22[row][col] = td.innerHTML;
 
       }
 
@@ -122,6 +178,7 @@ import{
       ////console.log('we are inside decimalseparator == , and ezaoeza ')
       ////console.log('//1234567,89 EUROPEAN FORMAT NUMERIC FORMAT WITHOUT THOUSAND')
       //const userLocale = Intl.NumberFormat().resolvedOptions().locale || 'fr' || 'en'
+      //alert('maybe we are here')
       const formatter = new Intl.NumberFormat(userLocale, {
         useGrouping: usegrouping_nbnb_if_true,
         style: 'decimal',
@@ -147,7 +204,27 @@ import{
         });
         const formattedNumber33 = formatter33.format(value_without_whitespace32);
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
-        td.innerHTML = formattedNumber33 + currencyht_toshow_nbnb;
+        
+        if(Number(value_without_whitespace32.trim())>0 && display_plus_sign_in_the_start==true){
+          if(value_without_whitespace32.trim().includes("+")){
+            td.innerHTML = "+" + formattedNumber33 + currencyht_toshow_nbnb;
+            //alert('in final i think it ends here 1 ')
+
+          } else {
+            td.innerHTML = "+" + formattedNumber33 + currencyht_toshow_nbnb;
+            //alert('in final i think it ends here 2 ')
+
+          }
+        } else {
+          if(value_without_whitespace32.trim().includes("+")){
+            td.innerHTML = formattedNumber33.replace("+",'') + currencyht_toshow_nbnb;
+            //alert('in final i think it ends here 3 ')
+          } else {
+            td.innerHTML = formattedNumber33 + currencyht_toshow_nbnb;
+            //alert('in final i think it ends here 4 ')
+          }
+        }
+        
         //data22[row][col] = td.innerHTML;
 
       } else {
@@ -155,7 +232,25 @@ import{
         ////console.log(formattedNumber)
 
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
-        td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+        if(Number(value_without_whitespace32.trim())>0 && display_plus_sign_in_the_start==true){
+          if(value_without_whitespace32.trim().includes("+")){
+            td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+            //alert('in final i think it ends here 1 ')
+          } else {
+            //alert('i think we are here then')
+            td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+            //alert('in final i think it ends here 2 ')
+          }
+        } else {
+          if(value_without_whitespace32.trim().includes("+")){
+            td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+            //alert('in final i think it ends here 3 ')
+          } else {
+            td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+            //alert('in final i think it ends here 4 ')
+          }
+        }
+        
         //data22[row][col] = td.innerHTML;
 
       }
@@ -174,7 +269,21 @@ import{
       const value3 = value.replace(/\s/g, '').replace(',', '.');
       const formattedNumber = formatter.format(Number(value3).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
-      td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+
+      if(Number(value3.trim())>0 && display_plus_sign_in_the_start==true){
+        if(value3.trim().includes("+")){
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        }
+      } else {
+        if(value3.trim().includes("+")){
+          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+        }
+      }
+
       //data22[row][col] = td.innerHTML;
 
 
@@ -197,8 +306,21 @@ import{
      ////console.log(value4)
       const formattedNumber = formatter.format(Number(value4).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
-      td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      //data22[row][col] = td.innerHTML;
+
+      if(Number(value4.trim())>0 && display_plus_sign_in_the_start==true){
+        if(value4.trim().includes("+")){
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        }
+      } else {
+        if(value4.trim().includes("+")){
+          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+        }
+      }
+            //data22[row][col] = td.innerHTML;
 
 
     } else if (decimalSeparator == ',' && /^\s*[-+]?(\s*\d{1,3}(?:\.\d{3})+(?:,\d+)?)\s*(?=\s|$)/.test(value)) {
@@ -218,8 +340,20 @@ import{
 
       const formattedNumber = formatter.format(Number(value_without_whitespace45).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
-      td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      //data22[row][col] = td.innerHTML;
+      if(Number(value_without_whitespace45.trim())>0 && display_plus_sign_in_the_start==true){
+        if(value_without_whitespace45.trim().includes("+")){
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        }
+      } else {
+        if(value_without_whitespace45.trim().includes("+")){
+          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+        }
+      }
+            //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?(\s*\d{1,3}( \d{3})*(\.\d*)?|\.\d+)\s*$/.test(value)) {
       ////console.log('we are inside rendere 6')
@@ -235,8 +369,20 @@ import{
       const value6 = value.replace(/\s/g, '');
       const formattedNumber = formatter.format(Number(value6).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
-      td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      //data22[row][col] = td.innerHTML;
+      if(Number(value6.trim())>0 && display_plus_sign_in_the_start==true){
+        if(value6.trim().includes("+")){
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        }
+      } else {
+        if(value6.trim().includes("+")){
+          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+        }
+      }
+            //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?[\s]*[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
       ////console.log('we are inside rendere 7')
@@ -251,8 +397,20 @@ import{
       const value7 = parseFloat(value.replace(/\s/g, ''));
       const formattedNumber = formatter.format(Number(value7));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
-      td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-      //data22[row][col] = td.innerHTML;
+      if(Number(value7.trim())>0 && display_plus_sign_in_the_start==true){
+        if(value7.trim().includes("+")){
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+        }
+      } else {
+        if(value7.trim().includes("+")){
+          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+        } else {
+          td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+        }
+      }
+            //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == ',' && /^\s*[-+]?[\s]*[0-9]*,?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
       //////console.log('----------------------------------------rendere 8 ---------------------------------------- rendere 8 ------------------------')
@@ -274,8 +432,20 @@ import{
         });
         const formattedNumber88 = formatter88.format(value8);
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
-        td.innerHTML = formattedNumber88 + currencyht_toshow_nbnb;
-        //data22[row][col] = td.innerHTML;
+        if(Number(value8.trim())>0 && display_plus_sign_in_the_start==true){
+          if(value8.trim().includes("+")){
+            td.innerHTML = "+" + formattedNumber88 + currencyht_toshow_nbnb;
+          } else {
+            td.innerHTML = "+" + formattedNumber88 + currencyht_toshow_nbnb;
+          }
+        } else {
+          if(value8.trim().includes("+")){
+            td.innerHTML = formattedNumber88.replace("+",'') + currencyht_toshow_nbnb;
+          } else {
+            td.innerHTML = formattedNumber88 + currencyht_toshow_nbnb;
+          }
+        }
+                //data22[row][col] = td.innerHTML;
 
       } else {
         const formatter = new Intl.NumberFormat(userLocale, {
@@ -286,8 +456,20 @@ import{
         });
         const formattedNumber = formatter.format(Number(value8));
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
-        td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
-        ////console.log(td.innerHTML)
+        if(Number(value8.trim())>0 && display_plus_sign_in_the_start==true){
+          if(value8.trim().includes("+")){
+            td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+          } else {
+            td.innerHTML = "+" + formattedNumber + currencyht_toshow_nbnb;
+          }
+        } else {
+          if(value8.trim().includes("+")){
+            td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          } else {
+            td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
+          }
+        }
+                ////console.log(td.innerHTML)
         //data22[row][col] = td.innerHTML;
 
       }
@@ -364,6 +546,7 @@ import{
     bignb_nbnb,smallnb_nbnb,decimalnumbers_toshow_withoutrenderer_innumbers_nbnb,usegrouping_nbnb_if_true,
     is_negativenb_accepted_nbnb,
 
+    display_plus_sign_in_the_start
     ){      
 
       //alert('aftervalidate amount and the value is : ' + oldvalue )
@@ -416,10 +599,27 @@ import{
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
-            ////console.log('do nothing')
-            ////console.log('COULD END HERE')
-            
-              commentsPlugin.removeCommentAtCell(row,prop);
+              if(/^([+-]?)0+(?=\d)/.test(value.trim())){
+                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+              } else {
+                if(Number(value.trim())>0 && display_plus_sign_in_the_start==true){
+                  if(value.trim().includes("+")){
+                     ////console.log('COULD END HERE')
+                     commentsPlugin.removeCommentAtCell(row,prop);
+                  } else {
+                    hot.setDataAtCell(row, prop, '+' + value.trim(), 'my_source_removewhitespacesign');
+                  }
+                //alert('we set must + sign')
+                } else {
+                  if(value.trim().includes("+") && display_plus_sign_in_the_start==false){
+                    hot.setDataAtCell(row, prop, value.trim().replace("+",''), 'my_source_removewhitespacesign');
+                  } else {
+                ////console.log('do nothing')
+                ////console.log('COULD END HERE')
+                commentsPlugin.removeCommentAtCell(row,prop);
+              }
+            }
+              }
              
                         }
 
@@ -428,11 +628,27 @@ import{
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
-            ////console.log('do nothing')
-            ////console.log('COULD END HERE')
-            
-              commentsPlugin.removeCommentAtCell(row,prop);
-               
+              if(/^([+-]?)0+(?=\d)/.test(value.trim())){
+                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+              } else {
+                if(Number(value.trim().replace(',','.'))>0 && display_plus_sign_in_the_start==true){
+                  if(value.trim().includes("+")){
+                     ////console.log('COULD END HERE')
+                     commentsPlugin.removeCommentAtCell(row,prop);
+                  } else {
+                    hot.setDataAtCell(row, prop, '+' + value.trim(), 'my_source_removewhitespacesign');
+                  }
+                //alert('we set must + sign')
+                } else {
+                  if(value.trim().includes("+") && display_plus_sign_in_the_start==false){
+                    hot.setDataAtCell(row, prop, value.trim().replace("+",''), 'my_source_removewhitespacesign');
+                  } else {
+                ////console.log('do nothing')
+                ////console.log('COULD END HERE')
+                commentsPlugin.removeCommentAtCell(row,prop);
+              }
+            }
+              }
                       }
           }
         } else {
@@ -456,9 +672,7 @@ import{
           ////console.log('condition 3 ta3 do nothing')
           ////console.log('//1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR')
           if (Math.abs(Number(value.trim())) < bignb_nbnb) {
-            //commentsPlugin.removeCommentAtCell(row, prop);
-            //////console.log('COULD END HERE')
-
+            
             if((value.trim().toString().split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_innumbers_nbnb) {
               hot.setDataAtCell(row, prop,Number(value.trim()).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).replace(/\.?0+$/, "") , 'my_source');
               
@@ -469,10 +683,27 @@ import{
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
-              ////console.log('COULD END HERE')
-              
+              if(/^([+-]?)0+(?=\d)/.test(value.trim())){
+                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+              } else {
+                if(Number(value.trim())>0 && display_plus_sign_in_the_start==true){
+                  if(value.trim().includes("+")){
+                     ////console.log('COULD END HERE')
+                     commentsPlugin.removeCommentAtCell(row,prop);
+                  } else {
+                    hot.setDataAtCell(row, prop, '+' + value.trim(), 'my_source_removewhitespacesign');
+                  }
+                //alert('we set must + sign')
+                } else {
+                  if(value.trim().includes("+") && display_plus_sign_in_the_start==false){
+                    hot.setDataAtCell(row, prop, value.trim().replace("+",''), 'my_source_removewhitespacesign');
+                  } else {
+                ////console.log('do nothing')
+                ////console.log('COULD END HERE')
                 commentsPlugin.removeCommentAtCell(row,prop);
-               
+              }
+            }
+              }
                 }
             }
 
@@ -570,10 +801,27 @@ import{
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
-              ////console.log('COULD END HERE')
-              //alert('i think it will end here')
+              if(/^([+-]?)0+(?=\d)/.test(value.trim())){
+                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+              } else {
+                if(Number(value.trim().replace(',','.'))>0 && display_plus_sign_in_the_start==true){
+                  if(value.trim().includes("+")){
+                     ////console.log('COULD END HERE')
+                     commentsPlugin.removeCommentAtCell(row,prop);
+                  } else {
+                    hot.setDataAtCell(row, prop, '+' + value.trim(), 'my_source_removewhitespacesign');
+                  }
+                //alert('we set must + sign')
+                } else {
+                  if(value.trim().includes("+") && display_plus_sign_in_the_start==false){
+                    hot.setDataAtCell(row, prop, value.trim().replace("+",''), 'my_source_removewhitespacesign');
+                  } else {
+                ////console.log('do nothing')
+                ////console.log('COULD END HERE')
                 commentsPlugin.removeCommentAtCell(row,prop);
-               
+              }
+            }
+              }
                           }
             }
 
@@ -646,10 +894,7 @@ import{
           //hot.setDataAtCell(row, prop, value.trim().replace(/\./g, '').replace(',', '.') );
           if (decimalSeparator == ',') {
             hot.setDataAtCell(row, prop, value.trim().replace(/\./g, ''), 'my_source');
-
-          
-            commentsPlugin.removeCommentAtCell(row,prop);
-           
+            commentsPlugin.removeCommentAtCell(row,prop);           
           } else {
             ////console.log('condition out 7.3')
             ////console.log('1.234.567 whole number')
@@ -683,7 +928,6 @@ import{
         
           commentsPlugin.removeCommentAtCell(row,prop);
          
-
       } else {
         if (Math.abs(Number(value)) > Number(bignb_nbnb) || Math.abs(Number(value)) < Number(smallnb_nbnb)) {
           //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");

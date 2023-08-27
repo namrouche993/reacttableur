@@ -459,9 +459,13 @@ import { comments_messages } from '../../Tools/comments_messages.js'
                    commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_float','fr-FR',userLocale,decimalSeparator))
                    hot.setDataAtCell(row, prop, '', 'my_source_empty');
               }else {
+               if(/^([+-]?)0+(?=\d)/.test(value.trim())){
+                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+              } else {
                //console.log('do nothing')
                //console.log('COULD END HERE')
                commentsPlugin.removeCommentAtCell(row, prop);
+              }
               }
           }
           } else if (decimalSeparator == ",") {
@@ -473,9 +477,13 @@ import { comments_messages } from '../../Tools/comments_messages.js'
                    commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_float','fr-FR',userLocale,decimalSeparator))
                    hot.setDataAtCell(row, prop, '', 'my_source_empty');
               } else {
+                if(/^([+-]?)0+(?=\d)/.test(value.trim())){
+                  hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                } else {
             //console.log('do nothing')
             //console.log('COULD END HERE')
             commentsPlugin.removeCommentAtCell(row, prop);
+                }
             }}
           }
         } else {
@@ -497,8 +505,6 @@ import { comments_messages } from '../../Tools/comments_messages.js'
           //console.log('condition 3 ta3 do nothing')
           //console.log('//1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR')
           if (Math.abs(Number(value.trim())) < bignb_intint) {
-            //commentsPlugin.removeCommentAtCell(row, prop);
-            ////console.log('COULD END HERE')
 
             if((value.trim().toString().split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_innumbers_intint) {
               hot.setDataAtCell(row, prop,Number(value.trim()).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_intint).replace(/\.?0+$/, "") , 'my_source');
@@ -513,8 +519,12 @@ import { comments_messages } from '../../Tools/comments_messages.js'
                    commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_float','fr-FR',userLocale,decimalSeparator))
                    hot.setDataAtCell(row, prop, '', 'my_source_empty');
               }else {
+                if(/^([+-]?)0+(?=\d)/.test(value.trim())){
+                  hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                } else {  
               //console.log('COULD END HERE')
               commentsPlugin.removeCommentAtCell(row, prop);
+                }
             }
           }
             }
@@ -541,9 +551,11 @@ import { comments_messages } from '../../Tools/comments_messages.js'
             //console.log('condition 4.2')
             ////alert('voulez vous dire que 3.16 egale a 3,14 ? si oui changer svp ')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value).toLocaleString(userLocale) + " est correct");
-            commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_4','fr-FR',userLocale,decimalSeparator))
+            commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_float','fr-FR',userLocale,decimalSeparator))
             commentsPlugin.showAtCell(row, prop);
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
+            //alert('here i think')
+
           }
 
         }
@@ -582,10 +594,7 @@ import { comments_messages } from '../../Tools/comments_messages.js'
           //hot.setDataAtCell(row, prop, value.replace(/,/g, '') );
 
         } else if (decimalSeparator == ',') {
-          // do nothing
-          //console.log('condition 2 ta3 do nothing')
           //hot.setDataAtCell(row, prop, value.trim());
-          ////console.log('COULD END HERE')
 
           if (Math.abs(Number(value.trim().replace(',', '.'))) < bignb_intint) {
             //console.log('less than bignb_intint')
@@ -606,8 +615,12 @@ import { comments_messages } from '../../Tools/comments_messages.js'
                    commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_float','fr-FR',userLocale,decimalSeparator))
                    hot.setDataAtCell(row, prop, '', 'my_source_empty');
               }else {
+                if(/^([+-]?)0+(?=\d)/.test(value.trim())){
+                  hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                } else {  
               //console.log('COULD END HERE')
               commentsPlugin.removeCommentAtCell(row, prop);
+                }
             }
           }
             }

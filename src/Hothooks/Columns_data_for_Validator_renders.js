@@ -36,7 +36,9 @@ import{
 
   userTimeZone,
   usTimeZones,
-  use_en_time
+  use_en_time,
+
+  display_plus_sign_in_the_start
 
 } from '../initials_inputs.js';
 
@@ -70,7 +72,7 @@ export function Columns_data_for_Validator_renders(imin,imax,
           for(let i=imin+1;i<imax-1;i++){
           // couting start from 1 (normal way ta3 normal way)  i==3 means the third column of THE SPREADSHEET without counting the first negeglible column (A)   
         
-        if(i == 10){  // i == 2 editable of course
+        if(i == 10){  // validator and renderers of integers i == 2 editable of course
           ////console.log('************** before validator i === 2 ')
             var dd={ data:i,
               className: "htRight htMiddle" ,
@@ -113,8 +115,9 @@ export function Columns_data_for_Validator_renders(imin,imax,
         
       
       }
+      
       //else if(i == 6 || i == 7 || i == 8      || i == 11 || i == 12 || i == 13 ){ //editable of course
-      else if(i == 8 ){ //editable of course
+      else if(i == 8 ){ // validator and renderers of amounts editable of course
 
         var dd={
           className: "htRight htMiddle" ,
@@ -148,8 +151,9 @@ export function Columns_data_for_Validator_renders(imin,imax,
               
                 currencyht_nbnb,currencyht_toshow_nbnb,afterdigit_nbnb, smallafterdigit_nbnb, afterdigitsmallnb_nbnb,
                 bignb_nbnb,smallnb_nbnb,decimalnumbers_toshow_withoutrenderer_innumbers_nbnb,usegrouping_nbnb_if_true,
-                is_negativenb_accepted_nbnb
-            
+                is_negativenb_accepted_nbnb,
+
+                display_plus_sign_in_the_start
                 ,data22)
             } else if ( row>3 ) { // editable
                  td.innerHTML=oldvalue;
@@ -160,7 +164,7 @@ export function Columns_data_for_Validator_renders(imin,imax,
          
         }
     }
-    else if(i == 7){  //editable of course
+    else if(i == 7){  // validator and renderers of percentage 
       var dd={ data:i,
         className: "htRight htMiddle" ,
           editor: PercentageEditor,
@@ -181,7 +185,7 @@ is_negativenb_accepted_percperc,is_float_accepted_percperc
                 )
           }
           },
-          renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of integers
+          renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of percentage
           
             if(row>5){ // editable
               renderer_percentage(instance, td, row, col, prop, oldvalue, cellProperties,
@@ -202,7 +206,7 @@ is_negativenb_accepted_percperc,is_float_accepted_percperc
 }
 }
 
-else if(i == 6){
+else if(i == 6){ // validator and renderers of dates
   var dd={
     className: "htRight htMiddle" ,
     validator: function (oldvalue, callback) { // validator of dates
@@ -210,13 +214,13 @@ else if(i == 6){
         const thiscol = this.col;
             
         if(thisrow>5){ // editable
-          validator_date(oldvalue, callback,
+          validator_date(oldvalue, callback, // validator of dates
                 decimalSeparator2.current,userLocale2.current,navigator_language2,userTimeZone,usTimeZones,use_en_time,
                 use_english_date_by_user_himeself_in_modal_withoutfct
             )
       }
       },
-    renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of numbers or amounts
+    renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of dates
           
        if(row>5){ // editable
         renderer_date(instance, td, row, col, prop, oldvalue, cellProperties,
@@ -232,7 +236,7 @@ else if(i == 6){
   }
 }
 
-else if( i == 2 ) {
+else if( i == 2 ) { // validator of dropdown-  editable : source
   var dd={
       type: 'dropdown',
       source: ['','yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white'], // editable
@@ -242,10 +246,10 @@ else if( i == 2 ) {
      }
   }
 
-  else if( i == 3 ) {
+  else if( i == 3 ) {  // validator and renderer of emails
     var dd={
        className: "htLeft htMiddle" ,
-       validator: function (oldvalue, callback) { // validator of numbers or amounts
+       validator: function (oldvalue, callback) { // validator of emails
           const thisrow = this.row;
           const thiscol = this.col;
         if(thisrow>5){ // editable
@@ -253,7 +257,7 @@ else if( i == 2 ) {
         }
         },
         
-      renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of numbers or amounts
+      renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of email
         if(row>5){ // editable
           renderer_email(instance, td, row, col, prop, oldvalue, cellProperties,data22)
         } 
@@ -266,10 +270,10 @@ else if( i == 2 ) {
     }
     }
 
-  else if( i == 4 ) {
+  else if( i == 4 ) {  // validator and renderer of onlynb
       var dd={
         className: "htLeft htMiddle" ,
-        validator: function (oldvalue, callback) { // validator of numbers or amounts
+        validator: function (oldvalue, callback) { // validator of onlynb
             const thisrow = this.row;
             const thiscol = this.col;
             if(thisrow>5){ // editable
@@ -277,7 +281,7 @@ else if( i == 2 ) {
           }
           },
           
-        renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of numbers or amounts
+        renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of onlynb
           if(row>5){ // editable
             renderer_onlynb(instance, td, row, col, prop, oldvalue, cellProperties,onlynumbers_length_on,data22)
           } 
@@ -291,10 +295,10 @@ else if( i == 2 ) {
        
       }
       }
-  else if( i == 5 ) {
+  else if( i == 5 ) { // validator and renderers of phonenumber
         var dd={
           className: "htLeft htMiddle" ,
-          validator: function (oldvalue, callback) { // validator of numbers or amounts
+          validator: function (oldvalue, callback) { // validator of phonenumber
               const thisrow = this.row;
               const thiscol = this.col;
               if(thisrow>5){ // editable
@@ -302,7 +306,7 @@ else if( i == 2 ) {
             }
             },
             
-            renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of numbers or amounts
+            renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of phonenumber
               if(row>5){ // editable
                 renderer_phonenumber(instance, td, row, col, prop, oldvalue, cellProperties,phonenumbers_length_pn,data22)
                } 
@@ -316,7 +320,7 @@ else if( i == 2 ) {
         }
       }
 
-      else if( i == 9 || i == 1) {
+  else if( i == 9 || i == 1) { // validator and renderers of text
         var dd={
           className: "htRight htMiddle" ,
           validator: function (oldvalue, callback) { // validator of text
