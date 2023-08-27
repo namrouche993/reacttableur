@@ -35,8 +35,9 @@ import{
     //navigator_language,userTimeZone,usTimeZones,
     afterdigit_percentage_percperc,smallafterdigit_percentage_percperc,afterdigitsmallnb_percentage_percperc,
     bignbpercent_percperc,smallnbpercent_percperc,decimalnumbers_toshow_withoutrenderer_inpercentage_percperc,
-    is_negativenb_accepted_percperc,is_float_accepted_percperc
+    is_negativenb_accepted_percperc,is_float_accepted_percperc,
 
+    display_plus_sign_in_the_start
     ,data22){
     //const data22 = otherArgs[otherArgs.length - 1];
                       ////console.log('renderer percentage start')
@@ -149,7 +150,9 @@ import{
     //navigator_language,userTimeZone,usTimeZones,
     afterdigit_percentage_percperc,smallafterdigit_percentage_percperc,afterdigitsmallnb_percentage_percperc,
     bignbpercent_percperc,smallnbpercent_percperc,decimalnumbers_toshow_withoutrenderer_inpercentage_percperc,
-    is_negativenb_accepted_percperc,is_float_accepted_percperc
+    is_negativenb_accepted_percperc,is_float_accepted_percperc,
+
+    display_plus_sign_in_the_start
 
     
     ){      

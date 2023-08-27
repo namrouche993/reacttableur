@@ -33,7 +33,9 @@ import { comments_messages } from '../../Tools/comments_messages.js'
     //navigator_language,userTimeZone,usTimeZones,
     currencyht_intint,currencyht_toshow_intint,afterdigit_intint,smallafterdigit_intint,afterdigitsmallnb_intint,
     bignb_intint,smallnb_intint,decimalnumbers_toshow_withoutrenderer_innumbers_intint,usegrouping_intint_if_true,
-    is_negativenb_accepted_intint, is_float_accepted_intint
+    is_negativenb_accepted_intint, is_float_accepted_intint,
+
+    display_plus_sign_in_the_start
 
     ,data22){
     //const data22 = otherArgs[otherArgs.length - 1];
@@ -397,8 +399,9 @@ import { comments_messages } from '../../Tools/comments_messages.js'
     //navigator_language,userTimeZone,usTimeZones,
     currencyht_intint,currencyht_toshow_intint,afterdigit_intint,smallafterdigit_intint,afterdigitsmallnb_intint,
     bignb_intint,smallnb_intint,decimalnumbers_toshow_withoutrenderer_innumbers_intint,usegrouping_intint_if_true,
-    is_negativenb_accepted_intint,is_float_accepted_intint
-    
+    is_negativenb_accepted_intint,is_float_accepted_intint,
+
+    display_plus_sign_in_the_start
     ){      
     //console.log('//////////////////// ************** prop2 ////////////////// ****')
     //console.log('//////////////////// ************** prop2 ////////////////// ****')

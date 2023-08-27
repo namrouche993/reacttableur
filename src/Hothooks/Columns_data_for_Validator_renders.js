@@ -102,7 +102,9 @@ export function Columns_data_for_Validator_renders(imin,imax,
                     //navigator_language,userTimeZone,usTimeZones,
     currencyht_intint,currencyht_toshow_intint,afterdigit_intint,smallafterdigit_intint,afterdigitsmallnb_intint,
     bignb_intint,smallnb_intint,decimalnumbers_toshow_withoutrenderer_innumbers_intint,usegrouping_intint_if_true,
-    is_negativenb_accepted_intint,is_float_accepted_intint
+    is_negativenb_accepted_intint,is_float_accepted_intint,
+
+    display_plus_sign_in_the_start
 
                     ,data22)
                 } else if (row>3){ // editable about headers
@@ -194,7 +196,9 @@ decimalSeparator2.current,userLocale2.current,
 //navigator_language,userTimeZone,usTimeZones,
 afterdigit_percentage_percperc,smallafterdigit_percentage_percperc,afterdigitsmallnb_percentage_percperc,
 bignbpercent_percperc,smallnbpercent_percperc,decimalnumbers_toshow_withoutrenderer_inpercentage_percperc,
-is_negativenb_accepted_percperc,is_float_accepted_percperc
+is_negativenb_accepted_percperc,is_float_accepted_percperc,
+
+display_plus_sign_in_the_start
 
                 ,data22)
             } else if (row>3){ // editable

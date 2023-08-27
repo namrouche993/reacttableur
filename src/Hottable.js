@@ -186,7 +186,8 @@ function Hottable() {
         console.log('afterChange triggered')
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
-        
+        console.log('undo')
+        console.log(hot.undoRedo.doneActions)
         console.log('data22 in afterChange end : ')
         console.log(data22)
       });

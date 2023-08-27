@@ -929,7 +929,10 @@ import{
           commentsPlugin.removeCommentAtCell(row,prop);
          
       } else {
-        if (Math.abs(Number(value)) > Number(bignb_nbnb) || Math.abs(Number(value)) < Number(smallnb_nbnb)) {
+        if(Number(value)==0){
+            hot.setDataAtCell(row, prop, '0', 'my_source');
+            //alert('we are here')
+        } else if (Math.abs(Number(value)) > Number(bignb_nbnb) || Math.abs(Number(value)) < Number(smallnb_nbnb)) {
           //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
           hot.setDataAtCell(row, prop, '', 'my_source_empty');
@@ -975,11 +978,19 @@ import{
       // 1.6e6 1.60E+04  -13.65E4  - 12.3E+03  scientific notation with E sign
       ////console.log('condition out 9')
       ////console.log(value)
-      if (Math.abs(Number(value)) > Number(bignb_nbnb) || Math.abs(Number(value)) < Number(smallnb_nbnb)) {
+      
+      // if(Number(value)==0){
+      //  hot.setDataAtCell(row, prop, 0, 'my_source');
+      //  commentsPlugin.removeCommentAtCell(row,prop);
+      //} else 
+      if(Number(value)==0){
+        //        alert('we are here ')
+        hot.setDataAtCell(row, prop, '0', 'my_source');
+      } 
+      else if (Math.abs(Number(value)) > Number(bignb_nbnb) || Math.abs(Number(value)) < Number(smallnb_nbnb)) {
         //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
         hot.setDataAtCell(row, prop, '', 'my_source_empty');
-
       } else {
         if (Math.abs(Number(value)) < smallafterdigit_nbnb) {
           if (decimalSeparator == '.') {
@@ -1025,13 +1036,22 @@ import{
       //alert('aftervalidate amounts 10 elseif')
 
       // we are inside scientific notation with comma :
-      // 1,6e6 1.60E+04  -13,65E4  - 12,3E+03  scientific notation with E sign
+      // 1,6e6 1,60E+04  -13,65E4  - 12,3E+03  scientific notation with E sign
       ////console.log('condition out 10')
       ////console.log(value)
       const value1010 = value.replace(',', '.').replace(/\s/g, '')
+      //alert('value1010 is : ' + value1010 + ' and value is : ' + value)
       ////console.log('value1010 : ')
       ////console.log(value1010)
-      if (Math.abs(Number(value1010)) > Number(bignb_nbnb) || Math.abs(Number(value1010)) < Number(smallnb_nbnb)) {
+
+      // if(Number(value)==0){
+      //  hot.setDataAtCell(row, prop, 0, 'my_source');
+      //  commentsPlugin.removeCommentAtCell(row,prop);
+      //} else
+      if(Number(value1010)==0){
+//        alert('we are here ')
+        hot.setDataAtCell(row, prop, '0', 'my_source');
+      } else if (Math.abs(Number(value1010)) > Number(bignb_nbnb) || Math.abs(Number(value1010)) < Number(smallnb_nbnb)) {
         //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
         hot.setDataAtCell(row, prop, '', 'my_source_empty');
