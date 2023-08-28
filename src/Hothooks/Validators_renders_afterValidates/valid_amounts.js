@@ -479,6 +479,7 @@ import{
   
   td.className = 'htRight htMiddle custom-normalcell';
   td.style.fontFamily = 'Roboto Mono, monospace'; // Set the desired font family
+  td.style.fontSize = '11px';
   ////////console.log('renderer percentage end')
                   
   }

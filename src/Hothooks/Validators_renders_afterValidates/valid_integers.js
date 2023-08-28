@@ -471,6 +471,8 @@ import { comments_messages } from '../../Tools/comments_messages.js'
                   
                   td.className = 'htRight htMiddle custom-normalcell'
                   td.style.fontFamily = 'Roboto Mono, monospace'; // Set the desired font family
+                  td.style.fontSize = '11px'
+
 
                   //td.innerHTML=''
                     //} else if(row>3){ // editable

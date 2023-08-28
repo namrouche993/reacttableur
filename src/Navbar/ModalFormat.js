@@ -196,7 +196,7 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
             if (rowIndex > startRowIndex) {
                 NumColumnsToConvert.forEach(columnIndex => {
                      const cellValue = row[columnIndex];
-                     const convertedNumber = cellValue.replace(/\./g, ',');
+                     const convertedNumber = cellValue.toString().replace(/\./g, ',');
                      if(convertedNumber!=cellValue){
                        ////console.log('convert dontequal to cellvalue : ')
                        ////console.log(convertedNumber)
@@ -247,7 +247,7 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
                      console.log(cellValue=='')
                      console.log(cellValue==undefined)
                    if(cellValue!==null & cellValue!==undefined){
-                     const convertedNumber = cellValue.replace(/,/g, '.');
+                     const convertedNumber = cellValue.toString().replace(/,/g, '.');
                      if(convertedNumber!=cellValue){
                        //console.log('convert dontequal to cellvalue : ')
                        //console.log(convertedNumber)

@@ -70,10 +70,26 @@ import{
                               });
                               const formattedNumber88_percentage = formatter88_percentage.format(value_percentage_renderer);
                               ////Handsontable.renderers.TextRenderer.apply(this, arguments);
-                              td.innerHTML = formattedNumber88_percentage+'%';
+                              
+                              if(Number(value_percentage_renderer.toString().trim())>0 && display_plus_sign_in_the_start==true){
+                                if(value_percentage_renderer.toString().trim().includes("+")){
+                                  td.innerHTML = "+" + formattedNumber88_percentage + '%';
+                                } else {
+                                  td.innerHTML = "+" + formattedNumber88_percentage + '%';
+                                }
+                              } else {
+                                if(value_percentage_renderer.toString().trim().includes("+")){
+                                  td.innerHTML = formattedNumber88_percentage.replace("+",'') + '%';
+                                } else {
+                                  td.innerHTML = formattedNumber88_percentage + '%';
+                                }
+                              }
+                              
                               //data22[row][col] = td.innerHTML+'%'
             
-                              
+                              cellProperties.className = 'htRight'; 
+                              td.style.textAlign = 'right';
+                               
                              } else {
                              const formatter_percentage = new Intl.NumberFormat(userLocale, {
                                 style: 'decimal',
@@ -88,8 +104,21 @@ import{
                               //////console.log(formattedNumber_percentage)
             
                               ////Handsontable.renderers.TextRenderer.apply(this, arguments);
-                              td.innerHTML = formattedNumber_percentage+'%';
-                            //  //////console.log(td.innerHTML)
+                              if(Number(value_percentage_renderer.toString().trim())>0 && display_plus_sign_in_the_start==true){
+                                if(value_percentage_renderer.toString().trim().includes("+")){
+                                  td.innerHTML = "+" + formattedNumber_percentage + '%';
+                                } else {
+                                  td.innerHTML = "+" + formattedNumber_percentage + '%';
+                                }
+                              } else {
+                                if(value_percentage_renderer.toString().trim().includes("+")){
+                                  td.innerHTML = formattedNumber_percentage.replace("+",'') + '%';
+                                } else {
+                                  td.innerHTML = formattedNumber_percentage + '%';
+                                }
+                              }
+                              
+                              //  //////console.log(td.innerHTML)
                               //data22[row][col] = td.innerHTML+'%';      
                              //td.innerHTML=oldvalue;
                              cellProperties.className = 'htRight'; 
@@ -104,7 +133,10 @@ import{
                         td.style.textAlign = 'right';
                       }
                       td.className = 'htLeft htMiddle custom-normalcell'
+                      
                       td.style.fontFamily = 'Roboto Mono, monospace'; // Set the desired font family
+                      td.style.fontSize = '11px'
+
 
                       ////////console.log('renderer percentage end')
             
@@ -206,10 +238,25 @@ import{
                   } else {
                     if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
                       hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    
                     } else {
-                ////console.log('condition percentage 1,5.2');
-                ////console.log('could end here');
-                commentsPlugin.removeCommentAtCell(row, prop);
+                      if(Number(oldvalue.toString().replace('%','').trim())>0 && display_plus_sign_in_the_start==true){
+                        if(oldvalue.toString().trim().includes("+")){
+                           ////console.log('COULD END HERE')
+                           commentsPlugin.removeCommentAtCell(row,prop);
+                        } else {
+                          hot.setDataAtCell(row, prop, '+' + oldvalue.trim(), 'my_source_removewhitespacesign');
+                        }
+                      //alert('we set must + sign')
+                      } else {
+                        if(oldvalue.trim().includes("+") && display_plus_sign_in_the_start==false){
+                          hot.setDataAtCell(row, prop, oldvalue.trim().replace("+",''), 'my_source_removewhitespacesign');
+                        } else {               
+                       ////console.log('do nothing')
+                      ////console.log('COULD END HERE')
+                      commentsPlugin.removeCommentAtCell(row,prop);
+                  }
+                  }
                     }
               }    
               }
@@ -307,10 +354,24 @@ import{
                     if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
                       hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
                     } else {
-                    ////console.log('condition percentage 2.3.1.2')
-                  ////console.log('could end here')
-                  commentsPlugin.removeCommentAtCell(row, prop);
+                      if(Number(oldvalue.toString().replace('%','').trim())>0 && display_plus_sign_in_the_start==true){
+                        if(oldvalue.toString().trim().includes("+")){
+                           ////console.log('COULD END HERE')
+                           commentsPlugin.removeCommentAtCell(row,prop);
+                        } else {
+                          hot.setDataAtCell(row, prop, '+' + oldvalue.trim(), 'my_source_removewhitespacesign');
+                        }
+                      //alert('we set must + sign')
+                      } else {
+                        if(oldvalue.trim().includes("+") && display_plus_sign_in_the_start==false){
+                          hot.setDataAtCell(row, prop, oldvalue.trim().replace("+",''), 'my_source_removewhitespacesign');
+                        } else {               
+                       ////console.log('do nothing')
+                      ////console.log('COULD END HERE')
+                      commentsPlugin.removeCommentAtCell(row,prop);
                   }
+                  }
+                    }
                 }
                 }
                 }
@@ -369,10 +430,24 @@ import{
                     if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
                       hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
                     } else {
-                            ////console.log('condition percentage 2.4.2.2')
-                            ////console.log('could end here')
-                            commentsPlugin.removeCommentAtCell(row, prop);
-                       }
+                      if(Number(oldvalue.toString().replace('%','').replace(',','.').trim())>0 && display_plus_sign_in_the_start==true){
+                        if(oldvalue.toString().trim().includes("+")){
+                           ////console.log('COULD END HERE')
+                           commentsPlugin.removeCommentAtCell(row,prop);
+                        } else {
+                          hot.setDataAtCell(row, prop, '+' + oldvalue.trim(), 'my_source_removewhitespacesign');
+                        }
+                      //alert('we set must + sign')
+                      } else {
+                        if(oldvalue.trim().includes("+") && display_plus_sign_in_the_start==false){
+                          hot.setDataAtCell(row, prop, oldvalue.trim().replace("+",''), 'my_source_removewhitespacesign');
+                        } else {               
+                       ////console.log('do nothing')
+                      ////console.log('COULD END HERE')
+                      commentsPlugin.removeCommentAtCell(row,prop);
+                  }
+                  }
+                    }
                       }
                       }
                       }

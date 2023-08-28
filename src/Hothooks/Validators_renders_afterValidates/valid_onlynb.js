@@ -43,6 +43,8 @@ import{
     td.style.textAlign = 'right';
     td.className = 'htLeft htMiddle custom-normalcell';
     td.style.fontFamily = 'Roboto Mono, monospace'; // Set the desired font family
+    td.style.fontSize = '11px'
+
 
     ////alert('cellproprities')
                   }
