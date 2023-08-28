@@ -29,21 +29,21 @@ export function comments_messages(value,msg,language,
     }
     else if (msg=='val_try_to_fix_comma_instead_dot'){
       if(language=='fr-FR'){
-        var mm = "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.replace(/\s+/g, '').trim().replace('.', ',') + " est correct (virguale à la place du point).";
+        var mm = "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.toString().replace(/\s+/g, '').trim().toString().replace('.', ',') + " est correct (virguale à la place du point).";
         return mm;
 
       } else if (language=='en-US'){
-        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + value.replace(/\s+/g, '').trim().replace('.', ',') + " is correct (comma instead of a dot).";
+        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + value.toString().replace(/\s+/g, '').trim().toString().replace('.', ',') + " is correct (comma instead of a dot).";
         return mm;
 
       }
     } 
     else if (msg=='val_try_to_fix_dot_instead_comma'){
       if(language=='fr-FR'){
-      var mm = "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.replace(/\s+/g, '').trim().replace(',', '.') + " est correct (point à la place de la virgule)";
+      var mm = "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.toString().replace(/\s+/g, '').trim().toString().replace(',', '.') + " est correct (point à la place de la virgule)";
       return mm;
       } else if (language=='en-US'){
-        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + value.replace(/\s+/g, '').trim().replace(',', '.') + " is correct (dot instead of a comma).";
+        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + value.toString().replace(/\s+/g, '').trim().toString().replace(',', '.') + " is correct (dot instead of a comma).";
         return mm;
       }
     }
@@ -58,19 +58,19 @@ export function comments_messages(value,msg,language,
     }
     else if (msg=='val_try_to_fix_5'){
       if(language=='fr-FR'){
-        var mm = "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().replace(',', '.') + " est correct";
+        var mm = "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().toString().replace(',', '.') + " est correct";
         return mm;
       } else if (language=='en-US'){
-        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + value.trim().replace(',', '.') + " is correct.";
+        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + value.trim().toString().replace(',', '.') + " is correct.";
         return mm;
       }
     }
     else if (msg=='val_try_to_fix_6'){
       if(language=='fr-FR'){
-        var mm =  "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value.replace(/,/g, '')).toLocaleString(userLocale2_redux) + " est correct";
+        var mm =  "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value.toString().replace(/,/g, '')).toLocaleString(userLocale2_redux) + " est correct";
         return mm;
       } else if (language=='en-US'){
-        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + Number(value.replace(/,/g, '')).toLocaleString(userLocale2_redux) + " is correct.";
+        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + Number(value.toString().replace(/,/g, '')).toLocaleString(userLocale2_redux) + " is correct.";
         return mm;
       }
     }
@@ -85,10 +85,10 @@ export function comments_messages(value,msg,language,
     }
     else if (msg=='val_try_to_fix_8'){
       if(language=='fr-FR'){
-        var mm = "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().replace(/\./g, '').replace(',', '.') + " est correct";
+        var mm = "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().toString().replace(/\./g, '').toString().replace(',', '.') + " est correct";
         return mm;
       } else if (language=='en-US'){
-        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + value.trim().replace(/./g, '').replace(',', '.') + " is correct.";
+        var mm = "The value '" + value + "' is not valid. Try correcting the formatting according to your parameters. | " + value.trim().toString().replace(/./g, '').toString().replace(',', '.') + " is correct.";
         return mm;
       }
     }

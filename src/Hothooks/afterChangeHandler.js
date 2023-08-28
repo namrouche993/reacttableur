@@ -139,10 +139,10 @@
               */
                 ){
                   if(x[2]!==null && x[2]!=='' && x[2]!==' '){
-                    x[2]=x[2].replace(/,/g, '.');
+                    x[2]=x[2].toString().replace(/,/g, '.');
                   }
                   if(x[3]!==null && x[3]!=='' && x[3]!==' '){
-                     x[3]=x[3].replace(/,/g, '.');
+                     x[3]=x[3].toString().replace(/,/g, '.');
                   }
                     }
             })      
@@ -164,10 +164,10 @@
             */
               ){
                 if(x[2]!==null && x[2]!=='' && x[2]!==' '){
-                   x[2]=x[2].replace(/\./g, ',');
+                   x[2]=x[2].toString().replace(/\./g, ',');
                 }
                 if(x[3]!==null && x[3]!=='' && x[3]!==' '){
-                   x[3]=x[3].replace(/\./g, ',');
+                   x[3]=x[3].toString().replace(/\./g, ',');
                 }
                   }
           })      

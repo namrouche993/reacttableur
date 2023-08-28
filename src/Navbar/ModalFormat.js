@@ -215,10 +215,10 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
     x[1] == 7 || x[1] == 8
     ){
       if(x[2]!==null && x[2]!=='' && x[2]!==' '){
-        x[2]=x[2].replace(/\./g, ',');
+        x[2]=x[2].toString().replace(/\./g, ',');
       }
       if(x[3]!==null && x[3]!=='' && x[3]!==' '){
-        x[3]=x[3].replace(/\./g, ',');
+        x[3]=x[3].toString().replace(/\./g, ',');
       }
     }
 })
@@ -266,10 +266,10 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
   if( // editable
     x[1] == 7 || x[1] == 8    ){
       if(x[2]!==null && x[2]!=='' && x[2]!==' '){
-         x[2]=x[2].replace(/,/g, '.');
+         x[2]=x[2].toString().replace(/,/g, '.');
       }
       if(x[3]!==null && x[3]!=='' && x[3]!==' '){
-           x[3]=x[3].replace(/,/g, '.');
+           x[3]=x[3].toString().replace(/,/g, '.');
       }
     }
 })

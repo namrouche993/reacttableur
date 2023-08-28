@@ -60,7 +60,7 @@ import{
         minimumFractionDigits: afterdigit_nbnb,
         maximumFractionDigits: afterdigit_nbnb,
       });
-      const value_without_whitespace = value.replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2');
+      const value_without_whitespace = value.toString().replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2');
       const formattedNumber = formatter.format(Number(value_without_whitespace));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
 
@@ -72,7 +72,7 @@ import{
         }
       } else {
         if(value_without_whitespace.trim().includes("+")){
-          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
         }
@@ -88,7 +88,7 @@ import{
         minimumFractionDigits: afterdigit_nbnb,
         maximumFractionDigits: afterdigit_nbnb,
       });
-      const value_without_whitespace = value.replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2');
+      const value_without_whitespace = value.toString().replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2');
       const formattedNumber = formatter.format(Number(value_without_whitespace));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
 
@@ -103,7 +103,7 @@ import{
         }
       } else {
         if(value_without_whitespace.trim().includes("+")){
-          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
         }
@@ -116,7 +116,7 @@ import{
       ////console.log('we are inside rendere 1')
       ////console.log('//1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR')
       ////console.log(value)
-      const value_without_whitespace2 = value.replace(/^\s*([-+])\s*(\d+)/, '$1$2');
+      const value_without_whitespace2 = value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2');
 
       //const userLocale = Intl.NumberFormat().resolvedOptions().locale || 'fr' || 'en'
       const formatter = new Intl.NumberFormat(userLocale, {
@@ -142,7 +142,7 @@ import{
           }
         } else {
           if(value_without_whitespace2.trim().includes("+")){
-            td.innerHTML = formattedNumber22.replace("+",'') + currencyht_toshow_nbnb;
+            td.innerHTML = formattedNumber22.toString().replace("+",'') + currencyht_toshow_nbnb;
           } else {
             td.innerHTML = formattedNumber22 + currencyht_toshow_nbnb;
           }
@@ -162,7 +162,7 @@ import{
           }
         } else {
           if(value_without_whitespace2.trim().includes("+")){
-            td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+            td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
           } else {
             td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
           }
@@ -185,7 +185,7 @@ import{
         minimumFractionDigits: afterdigit_nbnb,
         maximumFractionDigits: afterdigit_nbnb,
       });
-      const value_without_whitespace3 = value.replace(/^\s*([-+])\s*(\d+)/, '$1$2');
+      const value_without_whitespace3 = value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2');
 
       ////console.log('value in second :')
       ////console.log(value_without_whitespace3)
@@ -217,7 +217,7 @@ import{
           }
         } else {
           if(value_without_whitespace32.trim().includes("+")){
-            td.innerHTML = formattedNumber33.replace("+",'') + currencyht_toshow_nbnb;
+            td.innerHTML = formattedNumber33.toString().replace("+",'') + currencyht_toshow_nbnb;
             //alert('in final i think it ends here 3 ')
           } else {
             td.innerHTML = formattedNumber33 + currencyht_toshow_nbnb;
@@ -243,7 +243,7 @@ import{
           }
         } else {
           if(value_without_whitespace32.trim().includes("+")){
-            td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+            td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
             //alert('in final i think it ends here 3 ')
           } else {
             td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
@@ -266,7 +266,7 @@ import{
         minimumFractionDigits: afterdigit_nbnb,
         maximumFractionDigits: afterdigit_nbnb,
       });
-      const value3 = value.replace(/\s/g, '').replace(',', '.');
+      const value3 = value.toString().replace(/\s/g, '').toString().replace(',', '.');
       const formattedNumber = formatter.format(Number(value3).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
 
@@ -278,7 +278,7 @@ import{
         }
       } else {
         if(value3.trim().includes("+")){
-          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
         }
@@ -299,7 +299,7 @@ import{
       });
       ////console.log('value in rendere 4 ')
       ////console.log(value)
-      const value4 = value.replace(/,/g, '')
+      const value4 = value.toString().replace(/,/g, '')
      ////console.log(hot.undoRedo.doneActions)
  
      ////console.log('value4:') 
@@ -315,7 +315,7 @@ import{
         }
       } else {
         if(value4.trim().includes("+")){
-          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
         }
@@ -334,9 +334,9 @@ import{
         minimumFractionDigits: afterdigit_nbnb,
         maximumFractionDigits: afterdigit_nbnb,
       });
-      const value_without_whitespace4 = value.replace(/^\s*([-+])\s*(\d+)/, '$1$2')
-      const value_without_whitespace45 = value_without_whitespace4.trim().replace(/\./g, '').replace(',', '.')
-      //const value5 = value.trim().replace(/\./g, '')
+      const value_without_whitespace4 = value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2')
+      const value_without_whitespace45 = value_without_whitespace4.trim().toString().replace(/\./g, '').toString().replace(',', '.')
+      //const value5 = value.trim().toString().replace(/\./g, '')
 
       const formattedNumber = formatter.format(Number(value_without_whitespace45).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
@@ -348,7 +348,7 @@ import{
         }
       } else {
         if(value_without_whitespace45.trim().includes("+")){
-          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
         }
@@ -366,7 +366,7 @@ import{
         minimumFractionDigits: afterdigit_nbnb,
         maximumFractionDigits: afterdigit_nbnb,
       });
-      const value6 = value.replace(/\s/g, '');
+      const value6 = value.toString().replace(/\s/g, '');
       const formattedNumber = formatter.format(Number(value6).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       if(Number(value6.trim())>0 && display_plus_sign_in_the_start==true){
@@ -377,7 +377,7 @@ import{
         }
       } else {
         if(value6.trim().includes("+")){
-          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
         }
@@ -394,7 +394,7 @@ import{
         minimumFractionDigits: afterdigit_nbnb,
         maximumFractionDigits: afterdigit_nbnb,
       });
-      const value7 = parseFloat(value.replace(/\s/g, ''));
+      const value7 = parseFloat(value.toString().replace(/\s/g, ''));
       const formattedNumber = formatter.format(Number(value7));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
       if(Number(value7.toString().trim())>0 && display_plus_sign_in_the_start==true){
@@ -405,7 +405,7 @@ import{
         }
       } else {
         if(value7.toString().trim().includes("+")){
-          td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+          td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
         } else {
           td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
         }
@@ -418,7 +418,7 @@ import{
       ////console.log('we are inside scientific notation with comma :');
       ////console.log('// 1,6e6 1,60E+04  -13,65E4  - 12,3E+03  scientific notation with E sign');
       ////console.log('value inside scientific notation with comma else if : ')
-      const value8 = parseFloat(value.replace(',', '.').replace(/\s/g, ''));
+      const value8 = parseFloat(value.toString().replace(',', '.').toString().replace(/\s/g, ''));
       ////console.log('value8 : ')
       ////console.log(value8)
 
@@ -440,7 +440,7 @@ import{
           }
         } else {
           if(value8.toString().trim().includes("+")){
-            td.innerHTML = formattedNumber88.replace("+",'') + currencyht_toshow_nbnb;
+            td.innerHTML = formattedNumber88.toString().replace("+",'') + currencyht_toshow_nbnb;
           } else {
             td.innerHTML = formattedNumber88 + currencyht_toshow_nbnb;
           }
@@ -464,7 +464,7 @@ import{
           }
         } else {
           if(value8.toString().trim().includes("+")){
-            td.innerHTML = formattedNumber.replace("+",'') + currencyht_toshow_nbnb;
+            td.innerHTML = formattedNumber.toString().replace("+",'') + currencyht_toshow_nbnb;
           } else {
             td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
           }
@@ -502,7 +502,7 @@ import{
       //////console.log('we are inside validator oldvalue==null')
       var value = null;
     }
-    //   const value = oldvalue.replace(currencyht_nbnb,'') ;
+    //   const value = oldvalue.toString().replace(currencyht_nbnb,'') ;
     // ////console.log('new VALuE in validator is : ' +  value);
 
     if (value == null ||
@@ -567,7 +567,7 @@ import{
     } else {
       var value = null
     }
-    //const value = oldvalue.replace(regexcurrenciesht, '');
+    //const value = oldvalue.toString().replace(regexcurrenciesht, '');
 
     ////console.log('source in afterValidate is : ')
     ////console.log(source)
@@ -591,7 +591,7 @@ import{
       if (/^[-+](?=\s)\s*\d+\s*$/.test(value.trim())) {
         ////console.log('if there is a whitespace between sign +/- and the value so remove this whitespace')
         ////console.log('we will call my_source_removewhitespacesign')
-        hot.setDataAtCell(row, prop, value.replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2'), 'my_source_removewhitespacesign');
+        hot.setDataAtCell(row, prop, value.toString().replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2'), 'my_source_removewhitespacesign');
       } else {
         if (Math.abs(Number(value.trim())) < bignb_nbnb) {
           if (decimalSeparator == '.') {
@@ -601,7 +601,7 @@ import{
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               if(/^([+-]?)0+(?=\d)/.test(value.trim())){
-                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                hot.setDataAtCell(row, prop, value.trim().toString().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
               } else {
                 if(Number(value.trim())>0 && display_plus_sign_in_the_start==true){
                   if(value.trim().includes("+")){
@@ -613,7 +613,7 @@ import{
                 //alert('we set must + sign')
                 } else {
                   if(value.trim().includes("+") && display_plus_sign_in_the_start==false){
-                    hot.setDataAtCell(row, prop, value.trim().replace("+",''), 'my_source_removewhitespacesign');
+                    hot.setDataAtCell(row, prop, value.trim().toString().replace("+",''), 'my_source_removewhitespacesign');
                   } else {
                 ////console.log('do nothing')
                 ////console.log('COULD END HERE')
@@ -630,9 +630,9 @@ import{
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               if(/^([+-]?)0+(?=\d)/.test(value.trim())){
-                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                hot.setDataAtCell(row, prop, value.trim().toString().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
               } else {
-                if(Number(value.trim().replace(',','.'))>0 && display_plus_sign_in_the_start==true){
+                if(Number(value.trim().toString().replace(',','.'))>0 && display_plus_sign_in_the_start==true){
                   if(value.trim().includes("+")){
                      ////console.log('COULD END HERE')
                      commentsPlugin.removeCommentAtCell(row,prop);
@@ -642,7 +642,7 @@ import{
                 //alert('we set must + sign')
                 } else {
                   if(value.trim().includes("+") && display_plus_sign_in_the_start==false){
-                    hot.setDataAtCell(row, prop, value.trim().replace("+",''), 'my_source_removewhitespacesign');
+                    hot.setDataAtCell(row, prop, value.trim().toString().replace("+",''), 'my_source_removewhitespacesign');
                   } else {
                 ////console.log('do nothing')
                 ////console.log('COULD END HERE')
@@ -661,13 +661,13 @@ import{
       }
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d+(\.\d*)?|\.\d+)\s*$/.test(value)) {
       //1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR
-      //const value_without_whitespace2= value.replace(/^\s*([-+])\s*(\d+)/, '$1$2');
+      //const value_without_whitespace2= value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2');
       //alert('aftervalidate amounts 2 elseif')
 
       if (/^\s*[-+]\s+\d/.test(value.trim())) {
         ////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 123456.89  ')
         ////console.log('we will call my_source_removewhitespacesign')
-        hot.setDataAtCell(row, prop, value.replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
+        hot.setDataAtCell(row, prop, value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
       } else {
         if (decimalSeparator == '.') {
           ////console.log('condition 3 ta3 do nothing')
@@ -675,7 +675,7 @@ import{
           if (Math.abs(Number(value.trim())) < bignb_nbnb) {
             
             if((value.trim().toString().split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_innumbers_nbnb) {
-              hot.setDataAtCell(row, prop,Number(value.trim()).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).replace(/\.?0+$/, "") , 'my_source');
+              hot.setDataAtCell(row, prop,Number(value.trim()).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).toString().replace(/\.?0+$/, "") , 'my_source');
               
                 commentsPlugin.removeCommentAtCell(row,prop);
                
@@ -685,7 +685,7 @@ import{
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               if(/^([+-]?)0+(?=\d)/.test(value.trim())){
-                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                hot.setDataAtCell(row, prop, value.trim().toString().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
               } else {
                 if(Number(value.trim())>0 && display_plus_sign_in_the_start==true){
                   if(value.trim().includes("+")){
@@ -697,7 +697,7 @@ import{
                 //alert('we set must + sign')
                 } else {
                   if(value.trim().includes("+") && display_plus_sign_in_the_start==false){
-                    hot.setDataAtCell(row, prop, value.trim().replace("+",''), 'my_source_removewhitespacesign');
+                    hot.setDataAtCell(row, prop, value.trim().toString().replace("+",''), 'my_source_removewhitespacesign');
                   } else {
                 ////console.log('do nothing')
                 ////console.log('COULD END HERE')
@@ -718,13 +718,13 @@ import{
           // do nothing
         } else if (decimalSeparator == ',') {
           ////console.log('condition 4')
-          //hot.setDataAtCell(row, prop, value.trim().replace('.', ','));
+          //hot.setDataAtCell(row, prop, value.trim().toString().replace('.', ','));
           //commentsPlugin.removeCommentAtCell(row,prop);
 
           if (/^\s*[-+]?(\s*\d{1,3}(\.\d{3})*|\d+)(,\d+)?\s*$/.test(value)) {
             ////console.log('condition 4.1')
             ////console.log('when 12.151')
-            hot.setDataAtCell(row, prop, value.replace('.', ''), 'my_source');
+            hot.setDataAtCell(row, prop, value.toString().replace('.', ''), 'my_source');
             
               commentsPlugin.removeCommentAtCell(row,prop);
              
@@ -747,7 +747,7 @@ import{
       if (/^\s*[-+]\s+\d/.test(value.trim())) {
         ////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 123456.89  ')
         ////console.log('we will call my_source_removewhitespacesign')
-        hot.setDataAtCell(row, prop, value.replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
+        hot.setDataAtCell(row, prop, value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
       } else {
         if (decimalSeparator == '.') {
 
@@ -760,7 +760,7 @@ import{
           if (/^\s*[-+]?(\s*\d{1,3}(,\d{3})*(\.\d+)?|\.\d+)\s*$/.test(value)) {
             ////console.log('condition 1.1')
             ////console.log('like whole number with , as thousand separator 1,234')
-            hot.setDataAtCell(row, prop, value.replace(/,/g, ''), 'my_source');
+            hot.setDataAtCell(row, prop, value.toString().replace(/,/g, ''), 'my_source');
             
               commentsPlugin.removeCommentAtCell(row,prop);
              
@@ -768,14 +768,14 @@ import{
           } else {
             ////console.log('condition 1.2')
             ////console.log('may cause problem')
-            ////alert('do you want to mean that ' + value + ' = ' + value.trim().replace(',', '.') + ' ?' )
-            //hot.setDataAtCell(row, prop, value.trim().replace(',', '.'));
-            //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().replace(',', '.') + " est correct");
+            ////alert('do you want to mean that ' + value + ' = ' + value.trim().toString().replace(',', '.') + ' ?' )
+            //hot.setDataAtCell(row, prop, value.trim().toString().replace(',', '.'));
+            //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().toString().replace(',', '.') + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_5','fr-FR',userLocale,decimalSeparator))
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           }
 
-          //hot.setDataAtCell(row, prop, value.replace(/,/g, '') );
+          //hot.setDataAtCell(row, prop, value.toString().replace(/,/g, '') );
 
         } else if (decimalSeparator == ',') {
           //alert('aftervalidate amounts 3 elseif and decimalseparator == , ')
@@ -784,28 +784,28 @@ import{
           //hot.setDataAtCell(row, prop, value.trim());
           //////console.log('COULD END HERE')
 
-          if (Math.abs(Number(value.trim().replace(',', '.'))) < bignb_nbnb) {
+          if (Math.abs(Number(value.trim().toString().replace(',', '.'))) < bignb_nbnb) {
             ////console.log('less than bignb_nbnb')
             ////console.log(value)
-            ////console.log((Number(value.toString().trim().replace(',', '.')).toString().split('.')[1] || '').length)
+            ////console.log((Number(value.toString().trim().toString().replace(',', '.')).toString().split('.')[1] || '').length)
             //commentsPlugin.removeCommentAtCell(row, prop);
-            if((value.toString().trim().replace(',', '.').toString().split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_innumbers_nbnb) {
+            if((value.toString().trim().toString().replace(',', '.').toString().split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_innumbers_nbnb) {
               ////console.log('inside first condition')
-              ////console.log(Number(value.toString().trim().replace(',', '.')).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).replace(/\.?0+$/, "").replace('.', ','))
-              hot.setDataAtCell(row, prop,Number(value.trim().replace(',', '.')).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).replace(/\.?0+$/, "").replace('.', ',') , 'my_source');
+              ////console.log(Number(value.toString().trim().toString().replace(',', '.')).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).toString().replace(/\.?0+$/, "").toString().replace('.', ','))
+              hot.setDataAtCell(row, prop,Number(value.trim().toString().replace(',', '.')).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).toString().replace(/\.?0+$/, "").toString().replace('.', ',') , 'my_source');
 
               
                 commentsPlugin.removeCommentAtCell(row,prop);
                              
             } else {
-              if(Number(value.trim().replace(',','.'))<0 && is_negativenb_accepted_nbnb==false){
+              if(Number(value.trim().toString().replace(',','.'))<0 && is_negativenb_accepted_nbnb==false){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               if(/^([+-]?)0+(?=\d)/.test(value.trim())){
-                hot.setDataAtCell(row, prop, value.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                hot.setDataAtCell(row, prop, value.trim().toString().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
               } else {
-                if(Number(value.trim().replace(',','.'))>0 && display_plus_sign_in_the_start==true){
+                if(Number(value.trim().toString().replace(',','.'))>0 && display_plus_sign_in_the_start==true){
                   if(value.trim().includes("+")){
                      ////console.log('COULD END HERE')
                      commentsPlugin.removeCommentAtCell(row,prop);
@@ -815,7 +815,7 @@ import{
                 //alert('we set must + sign')
                 } else {
                   if(value.trim().includes("+") && display_plus_sign_in_the_start==false){
-                    hot.setDataAtCell(row, prop, value.trim().replace("+",''), 'my_source_removewhitespacesign');
+                    hot.setDataAtCell(row, prop, value.trim().toString().replace("+",''), 'my_source_removewhitespacesign');
                   } else {
                 ////console.log('do nothing')
                 ////console.log('COULD END HERE')
@@ -841,10 +841,10 @@ import{
       // 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR
       ////console.log('condition out 5')
       ////console.log('// 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR')
-      //hot.setDataAtCell(row, prop, value.replace(/\s/g, '').replace(',', '.') );
-      //////console.log(value.replace(/\s/g, '').replace(',', '.'))
-      ////console.log(value.replace(/\s/g, ''))
-      hot.setDataAtCell(row, prop, value.replace(/\s/g, ''), 'my_source');
+      //hot.setDataAtCell(row, prop, value.toString().replace(/\s/g, '').toString().replace(',', '.') );
+      //////console.log(value.toString().replace(/\s/g, '').toString().replace(',', '.'))
+      ////console.log(value.toString().replace(/\s/g, ''))
+      hot.setDataAtCell(row, prop, value.toString().replace(/\s/g, ''), 'my_source');
 
 
 
@@ -857,7 +857,7 @@ import{
         // may cause problem
         ////console.log('condition out 6.1')
         ////alert('veuillez corriger l'ecriture selon la format de vos parametres)
-        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value.replace(/,/g, '')).toLocaleString(userLocale) + " est correct");
+        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value.toString().replace(/,/g, '')).toLocaleString(userLocale) + " est correct");
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_6','fr-FR',userLocale,decimalSeparator))
         hot.setDataAtCell(row, prop, '', 'my_source_empty');
 
@@ -865,13 +865,13 @@ import{
         //
         ////console.log('condition out 6.2')
       
-        hot.setDataAtCell(row, prop, value.replace(/,/g, ''), 'my_source');
+        hot.setDataAtCell(row, prop, value.toString().replace(/,/g, ''), 'my_source');
         
           commentsPlugin.removeCommentAtCell(row,prop);
          
          
       }
-      //hot.setDataAtCell(row, prop, value.replace(/,/g, '') );
+      //hot.setDataAtCell(row, prop, value.toString().replace(/,/g, '') );
       // 1,234,567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR
 
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d{1,3}(?:\.\d{3})+(?:,\d+)?)\s*(?=\s|$)/.test(value)) {
@@ -881,7 +881,7 @@ import{
       if (/^\s*[-+]\s+\d/.test(value.trim())) {
         ////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 1.234.567,89  ')
         ////console.log('we will call my_source_removewhitespacesign')
-        hot.setDataAtCell(row, prop, value.replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
+        hot.setDataAtCell(row, prop, value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
       } else {
         if (/^\s*[-+]?(?=\d)(?:(?:\d{1,3}(?:[.,\s]\d{3}){0,2})|(?:\d+))(?:,\d+)?(?<=,[\d,]*),(?!\d*,)\d+(?:\.\d+)?\s*$/.test(value)) {
           ////console.log('condition out 7.1')
@@ -892,15 +892,15 @@ import{
         } else {
           ////console.log('condition out 7')
           ////console.log('// 1.234.567,89 EUROPEAN NUMERIC FORMAT WITH THOUSAND SEPARATOR as dot')
-          //hot.setDataAtCell(row, prop, value.trim().replace(/\./g, '').replace(',', '.') );
+          //hot.setDataAtCell(row, prop, value.trim().toString().replace(/\./g, '').toString().replace(',', '.') );
           if (decimalSeparator == ',') {
-            hot.setDataAtCell(row, prop, value.trim().replace(/\./g, ''), 'my_source');
+            hot.setDataAtCell(row, prop, value.trim().toString().replace(/\./g, ''), 'my_source');
             commentsPlugin.removeCommentAtCell(row,prop);           
           } else {
             ////console.log('condition out 7.3')
             ////console.log('1.234.567 whole number')
-            //hot.setDataAtCell(row, prop, value.trim().replace(/\./g, '') );
-            //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().replace(/\./g, '').replace(',', '.') + " est correct");
+            //hot.setDataAtCell(row, prop, value.trim().toString().replace(/\./g, '') );
+            //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.trim().toString().replace(/\./g, '').toString().replace(',', '.') + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_8','fr-FR',userLocale,decimalSeparator))
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           }
@@ -912,8 +912,8 @@ import{
       // 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR
       ////console.log('condition out 8')
       ////console.log('// 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
-      hot.setDataAtCell(row, prop, value.replace(/\s/g, ''), 'my_source');
-      ////console.log(value.replace(/\s/g, ''))
+      hot.setDataAtCell(row, prop, value.toString().replace(/\s/g, ''), 'my_source');
+      ////console.log(value.toString().replace(/\s/g, ''))
       
         commentsPlugin.removeCommentAtCell(row,prop);
        
@@ -925,7 +925,7 @@ import{
       if (/^[+-]?[\s]+\d+(\.\d+)?([eE][+-]?\d+)?$/.test(value.trim())) {
         ////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 5e6  ')
         ////console.log('we will call my_source_removewhitespacesign')
-        hot.setDataAtCell(row, prop, value.trim().replace(/\s/g, ''), 'my_source_removewhitespacesign');
+        hot.setDataAtCell(row, prop, value.trim().toString().replace(/\s/g, ''), 'my_source_removewhitespacesign');
         
           commentsPlugin.removeCommentAtCell(row,prop);
          
@@ -956,16 +956,16 @@ import{
           } else {
             if (decimalSeparator == '.') {
               ////console.log('integer scinetific notation and english dot')
-              hot.setDataAtCell(row, prop, parseFloat(value.replace(/\s/g, '')).toString(), 'my_source');
-              ////console.log(parseFloat(value.replace(/\s/g, '')).toString())
+              hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString(), 'my_source');
+              ////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString())
 
             commentsPlugin.removeCommentAtCell(row,prop);
            
 
             } else if (decimalSeparator == ',') {
               ////console.log('integer scinetific notation and european comma')
-              hot.setDataAtCell(row, prop, parseFloat(value.replace(/\s/g, '')).toString().replace('.', ','), 'my_source');
-              ////console.log(parseFloat(value.replace(/\s/g, '')).toString().replace('.', ','))
+              hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.', ','), 'my_source');
+              ////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.', ','))
 
             commentsPlugin.removeCommentAtCell(row,prop);
            
@@ -1012,8 +1012,8 @@ import{
           if (decimalSeparator == '.') {
             ////console.log('scinetific notation and english dot')
             ////console.log('scientific format float mantissa and decimal separator is dot/dot and greater than 0.01')
-            ////console.log(parseFloat(value.replace(/\s/g, '')))
-            hot.setDataAtCell(row, prop, parseFloat(value.replace(/\s/g, '')).toString(), 'my_source');
+            ////console.log(parseFloat(value.toString().replace(/\s/g, '')))
+            hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString(), 'my_source');
 
             commentsPlugin.removeCommentAtCell(row,prop);
            
@@ -1025,8 +1025,8 @@ import{
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix','fr-FR',userLocale,decimalSeparator))
 
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
-            // hot.setDataAtCell(row, prop, parseFloat(value.replace(/\s/g, '')).toString().replace('.',',') );
-            // ////console.log(parseFloat(value.replace(/\s/g, '')).toString().replace('.',',') )
+            // hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.',',') );
+            // ////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.',',') )
           }
           //commentsPlugin.removeCommentAtCell(row,prop);
 
@@ -1040,7 +1040,7 @@ import{
       // 1,6e6 1,60E+04  -13,65E4  - 12,3E+03  scientific notation with E sign
       ////console.log('condition out 10')
       ////console.log(value)
-      const value1010 = value.replace(',', '.').replace(/\s/g, '')
+      const value1010 = value.toString().replace(',', '.').toString().replace(/\s/g, '')
       //alert('value1010 is : ' + value1010 + ' and value is : ' + value)
       ////console.log('value1010 : ')
       ////console.log(value1010)
@@ -1089,8 +1089,8 @@ import{
           } else if (decimalSeparator == ',') {
             //////console.log(' ////////////////////////////// we are inside condition out 10 decimal separator , /////////////////////////////////////////////')
             ////console.log('scientific format float mantissa and decimal separator is comma/comma and greather than 0.01')
-            ////console.log(parseFloat(value.replace(',', '.').replace(/\s/g, '')))
-            hot.setDataAtCell(row, prop, parseFloat(value.replace(',', '.').replace(/\s/g, '')).toString().replace('.', ','), 'my_source');
+            ////console.log(parseFloat(value.toString().replace(',', '.').toString().replace(/\s/g, '')))
+            hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(',', '.').toString().replace(/\s/g, '')).toString().replace('.', ','), 'my_source');
             
               commentsPlugin.removeCommentAtCell(row,prop);
              

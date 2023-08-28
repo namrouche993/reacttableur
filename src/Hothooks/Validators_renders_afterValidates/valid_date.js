@@ -66,35 +66,35 @@ import{
     decimalSeparator,userLocale,navigator_language,userTimeZone,usTimeZones,use_en_time
     ){
     if( value==null || 
-        /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(value.trim().replace(/\s*\/\s*/g,"/")) ||  // "31/12 / 1995"
-        /^\d{1,2}\-\d{1,2}\-\d{4}$/.test(value.trim().replace(/\s*-\s*/g,"-")) ||   // "31 - 12-1995"
-        /^\d{1,2}\.\d{1,2}\.\d{4}$/.test(value.trim().replace(/\s*\.\s*/g,".")) ||   // "31.12. 1995"
+        /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(value.trim().toString().replace(/\s*\/\s*/g,"/")) ||  // "31/12 / 1995"
+        /^\d{1,2}\-\d{1,2}\-\d{4}$/.test(value.trim().toString().replace(/\s*-\s*/g,"-")) ||   // "31 - 12-1995"
+        /^\d{1,2}\.\d{1,2}\.\d{4}$/.test(value.trim().toString().replace(/\s*\.\s*/g,".")) ||   // "31.12. 1995"
 
-        /^\d{4}\/\d{1,2}\/\d{1,2}$/.test(value.trim().replace(/\s*\/\s*/g,"/")) ||  // 1995/31/12
-        /^\d{4}\-\d{1,2}\-\d{1,2}$/.test(value.trim().replace(/\s*-\s*/g,"-")) ||   // 1995-12-31
-        /^\d{4}\.\d{1,2}\.\d{1,2}$/.test(value.trim().replace(/\s*\.\s*/g,".")) ||   // 1995.12.31
+        /^\d{4}\/\d{1,2}\/\d{1,2}$/.test(value.trim().toString().replace(/\s*\/\s*/g,"/")) ||  // 1995/31/12
+        /^\d{4}\-\d{1,2}\-\d{1,2}$/.test(value.trim().toString().replace(/\s*-\s*/g,"-")) ||   // 1995-12-31
+        /^\d{4}\.\d{1,2}\.\d{1,2}$/.test(value.trim().toString().replace(/\s*\.\s*/g,".")) ||   // 1995.12.31
 
-        /^\d{1,2}\/\d{1,2}\/\d{2}$/.test(value.trim().replace(/\s*\/\s*/g,"/")) ||   // 11/12/23
-        /^\d{1,2}\-\d{1,2}\-\d{2}$/.test(value.trim().replace(/\s*-\s*/g,"-"))  ||   // 11-12-23
-        /^\d{1,2}\.\d{1,2}\.\d{2}$/.test(value.trim().replace(/\s*\.\s*/g,".")) ||   // 11.12.23
+        /^\d{1,2}\/\d{1,2}\/\d{2}$/.test(value.trim().toString().replace(/\s*\/\s*/g,"/")) ||   // 11/12/23
+        /^\d{1,2}\-\d{1,2}\-\d{2}$/.test(value.trim().toString().replace(/\s*-\s*/g,"-"))  ||   // 11-12-23
+        /^\d{1,2}\.\d{1,2}\.\d{2}$/.test(value.trim().toString().replace(/\s*\.\s*/g,".")) ||   // 11.12.23
 
 
-        ///^\d{1,2}\/\d{1,2}$/.test(value.trim().replace(/\s*\/\s*/g,"/"))   // 01/12 25/12 99/11
-        /^\d{1,2}\/\d{1,2}(\/)?$/.test(value.trim().replace(/\s*\/\s*/g,"/")) ||   // 01/12 25/12/ 99/11/
-        /^\d{1,2}\-\d{1,2}(\-)?$/.test(value.trim().replace(/\s*-\s*/g,"-")) ||   // 01-12 25-12- 99-11-
-        /^\d{1,2}\.\d{1,2}(\.)?$/.test(value.trim().replace(/\s*\.\s*/g,".")) ||  // 01.12 25.12. 99.11.
+        ///^\d{1,2}\/\d{1,2}$/.test(value.trim().toString().replace(/\s*\/\s*/g,"/"))   // 01/12 25/12 99/11
+        /^\d{1,2}\/\d{1,2}(\/)?$/.test(value.trim().toString().replace(/\s*\/\s*/g,"/")) ||   // 01/12 25/12/ 99/11/
+        /^\d{1,2}\-\d{1,2}(\-)?$/.test(value.trim().toString().replace(/\s*-\s*/g,"-")) ||   // 01-12 25-12- 99-11-
+        /^\d{1,2}\.\d{1,2}(\.)?$/.test(value.trim().toString().replace(/\s*\.\s*/g,".")) ||  // 01.12 25.12. 99.11.
         
-        /^\d{4}\/\d{1,2}(\/)?$/.test(value.trim().replace(/\s*\/\s*/g,"/")) ||   // 2023/12 2022/1/
-        /^\d{4}\-\d{1,2}(\-)?$/.test(value.trim().replace(/\s*-\s*/g,"-")) ||   // 2001-12 2025-1-
-        /^\d{4}\.\d{1,2}(\.)?$/.test(value.trim().replace(/\s*\.\s*/g,".")) ||   // 2001.2 2025.12.
+        /^\d{4}\/\d{1,2}(\/)?$/.test(value.trim().toString().replace(/\s*\/\s*/g,"/")) ||   // 2023/12 2022/1/
+        /^\d{4}\-\d{1,2}(\-)?$/.test(value.trim().toString().replace(/\s*-\s*/g,"-")) ||   // 2001-12 2025-1-
+        /^\d{4}\.\d{1,2}(\.)?$/.test(value.trim().toString().replace(/\s*\.\s*/g,".")) ||   // 2001.2 2025.12.
 
-        /^\d{1,2}\/\d{4}(\/)?$/.test(value.trim().replace(/\s*\/\s*/g,"/")) ||   // 12/2023 1/2022/
-        /^\d{1,2}\-\d{4}(\-)?$/.test(value.trim().replace(/\s*-\s*/g,"-")) ||   // 12-2001 1-2025-
-        /^\d{1,2}\.\d{4}(\.)?$/.test(value.trim().replace(/\s*\.\s*/g,".")) ||   // 3.2001 12.2025.
+        /^\d{1,2}\/\d{4}(\/)?$/.test(value.trim().toString().replace(/\s*\/\s*/g,"/")) ||   // 12/2023 1/2022/
+        /^\d{1,2}\-\d{4}(\-)?$/.test(value.trim().toString().replace(/\s*-\s*/g,"-")) ||   // 12-2001 1-2025-
+        /^\d{1,2}\.\d{4}(\.)?$/.test(value.trim().toString().replace(/\s*\.\s*/g,".")) ||   // 3.2001 12.2025.
 
-        /^\d{4}\/?$/.test(value.trim().replace(/\s*\/\s*/g,"/")) ||              // 2023  2022/
-        /^\d{4}[-]?\s*$/.test(value.trim().replace(/\s*-\s*/g,"-")) ||              // 2023  2022-
-        /^\d{4}[.]?\s*$/.test(value.trim().replace(/\s*\.\s*/g,"."))                 // 2023  2022.
+        /^\d{4}\/?$/.test(value.trim().toString().replace(/\s*\/\s*/g,"/")) ||              // 2023  2022/
+        /^\d{4}[-]?\s*$/.test(value.trim().toString().replace(/\s*-\s*/g,"-")) ||              // 2023  2022-
+        /^\d{4}[.]?\s*$/.test(value.trim().toString().replace(/\s*\.\s*/g,"."))                 // 2023  2022.
 
     ){
       ////console.log('calback trueeeeeeeeeeeeee')
@@ -127,16 +127,16 @@ import{
           } else if (isValid && oldvalue !== undefined && typeof oldvalue === 'string'){
           ////console.log('condition date 2 !! ')
           ////console.log(oldvalue)
-          ////console.log(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(oldvalue.trim().replace(/\s*\/\s*/g,"/")))
+          ////console.log(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(oldvalue.trim().toString().replace(/\s*\/\s*/g,"/")))
               
              if(/\s+/.test(oldvalue)){
                ////console.log('condition date 2.1 removes whitespaces')
-              hot.setDataAtCell(row, prop, oldvalue.trim().replace(/\s*\/\s*/g,"/").replace(/\s*-\s*/g,"-").replace(/\s*\.\s*/g,"."),'my_source_removewhitespacesign_date')
+              hot.setDataAtCell(row, prop, oldvalue.trim().toString().replace(/\s*\/\s*/g,"/").toString().replace(/\s*-\s*/g,"-").toString().replace(/\s*\.\s*/g,"."),'my_source_removewhitespacesign_date')
               commentsPlugin.removeCommentAtCell(row, prop);
              }else{
               ////console.log('condition date 2.2')
               
-              if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(oldvalue.trim().replace(/\s*\/\s*/g,"/"))){
+              if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(oldvalue.trim().toString().replace(/\s*\/\s*/g,"/"))){
                 ////console.log('condition date 2.2.1  31/12/1995 like fr-FR and european an (en-US but with switching month and days) ')                  
                 var splitdate01='/';
                 ////console.log(navigator_language)
@@ -260,7 +260,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
               
-              else if (/^\d{1,2}\-\d{1,2}\-\d{4}$/.test(oldvalue.trim().replace(/\s*-\s*/g,"-"))){
+              else if (/^\d{1,2}\-\d{1,2}\-\d{4}$/.test(oldvalue.trim().toString().replace(/\s*-\s*/g,"-"))){
                 ////console.log('condition date 2.2.2  31-12-1995 like no one')                  
                 var splitdate02='-';
                 //var [daydate,monthdate, yeardate] = oldvalue.split(splitdate02); // edit it modify it change it , when US date format occurs                  
@@ -330,7 +330,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 
-} else if (/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(oldvalue.trim().replace(/\s*\.\s*/g,".")) ){
+} else if (/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(oldvalue.trim().toString().replace(/\s*\.\s*/g,".")) ){
                 ////console.log('condition date 2.2.3  31.12.1995 like  de-DE date format ')                  
                 var splitdate03='.';
                 if( (navigator_language=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal_withoutfct==true ){
@@ -419,7 +419,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 
-} else if (/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(oldvalue.trim().replace(/\s*\/\s*/g,"/")) ) {
+} else if (/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(oldvalue.trim().toString().replace(/\s*\/\s*/g,"/")) ) {
   // 1995/12/31
   ////console.log('condition date 2.2.4  1995/12/31 like ja-JP')
                   
@@ -513,7 +513,7 @@ import{
 // ************************ condition date 2.2.4  1995/12/31 finished *********************************
 // **********************************************************************************
 // **********************************************************************************
-  } else if (/^\d{4}\-\d{1,2}\-\d{1,2}$/.test(oldvalue.trim().replace(/\s*-\s*/g,"-")) ) {
+  } else if (/^\d{4}\-\d{1,2}\-\d{1,2}$/.test(oldvalue.trim().toString().replace(/\s*-\s*/g,"-")) ) {
   // 1995-12-31 5rd condition
   ////console.log('condition date 2.2.5  1995-12-31 like en-CA')
 
@@ -605,7 +605,7 @@ import{
 // ************************ condition date 2.2.5  1995-12-31 finished *********************************
 // **********************************************************************************
 // **********************************************************************************
-} else if (/^\d{4}\.\d{1,2}\.\d{1,2}$/.test(oldvalue.trim().replace(/\s*\.\s*/g,".")) ) {
+} else if (/^\d{4}\.\d{1,2}\.\d{1,2}$/.test(oldvalue.trim().toString().replace(/\s*\.\s*/g,".")) ) {
   // 1995.12.31 6rd condition
   ////console.log('condition date 2.2.6  1995.12.31 like ko-KR')
 
@@ -699,7 +699,7 @@ import{
 // ************************ condition date 2.2.6  1995.12.31 finished *********************************
 // **********************************************************************************
 // **********************************************************************************
-              } else if(/^\d{1,2}\/\d{1,2}\/\d{2}$/.test(oldvalue.trim().replace(/\s*\/\s*/g,"/")) ){
+              } else if(/^\d{1,2}\/\d{1,2}\/\d{2}$/.test(oldvalue.trim().toString().replace(/\s*\/\s*/g,"/")) ){
                 ////console.log('condition date 2.2.7  31/12/95 like fr-FR and european an (en-US but with switching month and days) ')                  
                 var splitdate01='/';
                 if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){
@@ -728,7 +728,7 @@ import{
 // ************************ condition date finished 2.2.7 *********************************
 // **********************************************************************************
 // **********************************************************************************
-} else if(/^\d{1,2}\-\d{1,2}\-\d{2}$/.test(oldvalue.trim().replace(/\s*-\s*/g,"-")) ){
+} else if(/^\d{1,2}\-\d{1,2}\-\d{2}$/.test(oldvalue.trim().toString().replace(/\s*-\s*/g,"-")) ){
                 ////console.log('condition date 2.2.8  31-12-95  ')                  
                 var splitdate01='-';
                 if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
@@ -757,7 +757,7 @@ import{
 // ************************ condition date finished 2.2.8 *********************************
 // **********************************************************************************
 // **********************************************************************************
-} else if(/^\d{1,2}\.\d{1,2}\.\d{2}$/.test(oldvalue.trim().replace(/\s*\.\s*/g,".")) ){
+} else if(/^\d{1,2}\.\d{1,2}\.\d{2}$/.test(oldvalue.trim().toString().replace(/\s*\.\s*/g,".")) ){
                 ////console.log('condition date 2.2.9  31.12.95  ')                  
                 var splitdate01='.';
                 if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
@@ -784,7 +784,7 @@ import{
 // ************************ condition date finished 2.2.9 *********************************
 // **********************************************************************************
 // **********************************************************************************
-                } else if (/^\d{1,2}\/\d{1,2}(\/)?$/.test(oldvalue.trim().replace(/\s*\/\s*/g,"/"))){
+                } else if (/^\d{1,2}\/\d{1,2}(\/)?$/.test(oldvalue.trim().toString().replace(/\s*\/\s*/g,"/"))){
                   ////console.log('condition date 2.2.10   like  31/12 12/06/  13/23 1/3 ')     
                   ////console.log(oldvalue)             
                   var splitdate01='/';
@@ -828,7 +828,7 @@ import{
 // ************************ condition date finished 2.2.10 *********************************
 // **********************************************************************************
 // **********************************************************************************
-            } else if (/^\d{1,2}\-\d{1,2}(\-)?$/.test(oldvalue.trim().replace(/\s*-\s*/g,"-"))){
+            } else if (/^\d{1,2}\-\d{1,2}(\-)?$/.test(oldvalue.trim().toString().replace(/\s*-\s*/g,"-"))){
               ////console.log('condition date 2.2.11   like  31-12 12-06  13-23 1-3 ')     
                   ////console.log(oldvalue)             
                   var splitdate01='-';
@@ -874,7 +874,7 @@ import{
 // ************************ condition date finished 2.2.11 *********************************
 // **********************************************************************************
 // **********************************************************************************
-                } else if (/^\d{1,2}\.\d{1,2}(\.)?$/.test(oldvalue.trim().replace(/\s*\.\s*/g,"."))){
+                } else if (/^\d{1,2}\.\d{1,2}(\.)?$/.test(oldvalue.trim().toString().replace(/\s*\.\s*/g,"."))){
                   ////console.log('condition date 2.2.12   like  31.12. 12.06.  13.23 1.3 ')     
                   ////console.log(oldvalue)             
                   var splitdate01='.';
@@ -918,7 +918,7 @@ import{
 // ************************ condition date finished 2.2.12 *********************************
 // **********************************************************************************
 // **********************************************************************************
-                } else if (/^\d{4}\/\d{1,2}(\/)?$/.test(oldvalue.trim().replace(/\s*\/\s*/g,"/"))){
+                } else if (/^\d{4}\/\d{1,2}(\/)?$/.test(oldvalue.trim().toString().replace(/\s*\/\s*/g,"/"))){
                   ////console.log('condition date 2.2.13   like  2031/12. 2012/06/  2013/2 ')     
                   ////console.log(oldvalue)             
                   var splitdate01='/';
@@ -973,7 +973,7 @@ import{
 // ************************ condition date finished 2.2.13 *********************************
 // **********************************************************************************
 // **********************************************************************************
-} else if (/^\d{4}\-\d{1,2}(\-)?$/.test(oldvalue.trim().replace(/\s*-\s*/g,"-"))){
+} else if (/^\d{4}\-\d{1,2}(\-)?$/.test(oldvalue.trim().toString().replace(/\s*-\s*/g,"-"))){
                   ////console.log('condition date 2.2.14   like  2031-12. 2012-06-  2013-2 ')     
                   ////console.log(oldvalue)             
                   var splitdate01='-';
@@ -1028,7 +1028,7 @@ import{
 // ************************ condition date finished 2.2.14 *********************************
 // **********************************************************************************
 // **********************************************************************************
-} else if (/^\d{4}\.\d{1,2}(\.)?$/.test(oldvalue.trim().replace(/\s*\.\s*/g,"."))){
+} else if (/^\d{4}\.\d{1,2}(\.)?$/.test(oldvalue.trim().toString().replace(/\s*\.\s*/g,"."))){
                   ////console.log('condition date 2.2.15   like  2031.12. 2012.06.  2013.2 ')     
                   ////console.log(oldvalue)             
                   var splitdate01='.';
@@ -1083,7 +1083,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 
-                } else if (/^\d{1,2}\/\d{4}(\/)?$/.test(oldvalue.trim().replace(/\s*\/\s*/g,"/"))){
+                } else if (/^\d{1,2}\/\d{4}(\/)?$/.test(oldvalue.trim().toString().replace(/\s*\/\s*/g,"/"))){
                   ////console.log('condition date 2.2.16   like  12/2023 06/2012/  2/2013/ ')     
                   ////console.log(oldvalue)             
                   var splitdate01='/';
@@ -1138,7 +1138,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 
-                } else if (/^\d{1,2}\-\d{4}(\-)?$/.test(oldvalue.trim().replace(/\s*-\s*/g,"-"))){
+                } else if (/^\d{1,2}\-\d{4}(\-)?$/.test(oldvalue.trim().toString().replace(/\s*-\s*/g,"-"))){
                   ////console.log('condition date 2.2.17   like  12-2023 06-2012-  2-2013- ')     
                   ////console.log(oldvalue)             
                   var splitdate01='-';
@@ -1193,7 +1193,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 
-                } else if (/^\d{1,2}\.\d{4}(\.)?$/.test(oldvalue.trim().replace(/\s*\.\s*/g,"."))){
+                } else if (/^\d{1,2}\.\d{4}(\.)?$/.test(oldvalue.trim().toString().replace(/\s*\.\s*/g,"."))){
                   ////console.log('condition date 2.2.18   like  12.2023 06.2012.  2.2013. ')     
                   ////console.log(oldvalue)             
                   var splitdate01='.';
@@ -1248,7 +1248,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 
-                } else if (/^\d{4}\/?$/.test(oldvalue.trim().replace(/\s*\/\s*/g,"/"))){
+                } else if (/^\d{4}\/?$/.test(oldvalue.trim().toString().replace(/\s*\/\s*/g,"/"))){
                   ////console.log('condition date 2.2.19   like  2023 2022/ ')     
                   ////console.log(oldvalue)             
                   var splitdate01='/';
@@ -1260,7 +1260,7 @@ import{
 // ************************ condition date finished 2.2.19 *********************************
 // **********************************************************************************
 // **********************************************************************************
-                } else if (/^\d{4}[-]?\s*$/.test(oldvalue.trim().replace(/\s*-\s*/g,"-")) ){
+                } else if (/^\d{4}[-]?\s*$/.test(oldvalue.trim().toString().replace(/\s*-\s*/g,"-")) ){
                   ////console.log('condition date 2.2.20   like  2023 2022- ')     
                   ////console.log(oldvalue)             
                   var splitdate01='-';
@@ -1273,7 +1273,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
         
-              } else if (/^\d{4}[.]?\s*$/.test(oldvalue.trim().replace(/\s*\.\s*/g,"."))){
+              } else if (/^\d{4}[.]?\s*$/.test(oldvalue.trim().toString().replace(/\s*\.\s*/g,"."))){
                   ////console.log('condition date 2.2.21   like  2023 2022. ')     
                   ////console.log(oldvalue)             
                   var splitdate01='.';

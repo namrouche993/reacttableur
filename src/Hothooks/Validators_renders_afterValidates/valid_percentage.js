@@ -59,7 +59,7 @@ import{
                           /^[-+]?(\s*\d+(,\d+)?)\s*$/.test(oldvalue.toString().trim()) // for example 14,65   "14,65 "
                         ) {
                              ////console.log('renderer percentage 1part')
-                             const value_percentage_renderer = parseFloat(oldvalue.toString().replace(',', '.').replace('%','').replace(/\s/g, ''));
+                             const value_percentage_renderer = parseFloat(oldvalue.toString().replace(',', '.').toString().replace('%','').toString().replace(/\s/g, ''));
                              ////console.log(oldvalue)
                              ////console.log(value_percentage_renderer)
                              if(Math.abs(value_percentage_renderer)<smallafterdigit_percentage_percperc){
@@ -79,7 +79,7 @@ import{
                                 }
                               } else {
                                 if(value_percentage_renderer.toString().trim().includes("+")){
-                                  td.innerHTML = formattedNumber88_percentage.replace("+",'') + '%';
+                                  td.innerHTML = formattedNumber88_percentage.toString().replace("+",'') + '%';
                                 } else {
                                   td.innerHTML = formattedNumber88_percentage + '%';
                                 }
@@ -112,7 +112,7 @@ import{
                                 }
                               } else {
                                 if(value_percentage_renderer.toString().trim().includes("+")){
-                                  td.innerHTML = formattedNumber_percentage.replace("+",'') + '%';
+                                  td.innerHTML = formattedNumber_percentage.toString().replace("+",'') + '%';
                                 } else {
                                   td.innerHTML = formattedNumber_percentage + '%';
                                 }
@@ -204,13 +204,13 @@ import{
             */
 
           } else if (isValid && oldvalue !== undefined && typeof oldvalue === 'string'){
-            if(Math.abs(Number(oldvalue.toString().replace('%','').replace(',','.').replace(/\s+/g, '').trim()))>bignbpercent_percperc){
+            if(Math.abs(Number(oldvalue.toString().replace('%','').toString().replace(',','.').toString().replace(/\s+/g, '').trim()))>bignbpercent_percperc){
               ////console.log('condition percentage 1,2')
               ////console.log('if the number is too big')
               //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator))
               hot.setDataAtCell(row, prop,'','my_source_empty_percentage')
-            } else if (Math.abs(Number(oldvalue.toString().replace('%','').replace(',','.').replace(/\s+/g, '').trim())  ) <smallnbpercent_percperc) {
+            } else if (Math.abs(Number(oldvalue.toString().replace('%','').toString().replace(',','.').toString().replace(/\s+/g, '').trim())  ) <smallnbpercent_percperc) {
               ////console.log('condition percentage 1,35')
               ////console.log('if the number is too small')
               //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
@@ -224,20 +224,20 @@ import{
               if((/\s+%$/.test(oldvalue.trim()) || /^[-+]\s/.test(oldvalue.trim())  ) ){ 
               // condition for removing leading zerors if((/\s+%$/.test(oldvalue.trim()) || /^[-+]\s/.test(oldvalue.trim()) || /^(\+|\-)?0+/.test(oldvalue.trim())  ) ){ 
                 ////console.log('condition percentage 1,5.1')
-                // removing leading zerors hot.setDataAtCell(row, prop, oldvalue.replace(/\s+/g, '').trim().replace(/^(\+|\-)?0+/, '$1'),'my_source_removewhitespacesign_percentage')
-                hot.setDataAtCell(row, prop, oldvalue.replace(/\s+/g, '').trim(),'my_source_removewhitespacesign_percentage')
+                // removing leading zerors hot.setDataAtCell(row, prop, oldvalue.toString().replace(/\s+/g, '').trim().toString().replace(/^(\+|\-)?0+/, '$1'),'my_source_removewhitespacesign_percentage')
+                hot.setDataAtCell(row, prop, oldvalue.toString().replace(/\s+/g, '').trim(),'my_source_removewhitespacesign_percentage')
                 commentsPlugin.removeCommentAtCell(row, prop);
               } else {
-                if(Number(oldvalue.replace('%','').trim())<0 && is_negativenb_accepted_percperc==false){
+                if(Number(oldvalue.toString().replace('%','').trim())<0 && is_negativenb_accepted_percperc==false){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                 } else {
-                  if(Number.isInteger(Number(oldvalue.replace('%','').trim()))==false && is_float_accepted_percperc==false ){
+                  if(Number.isInteger(Number(oldvalue.toString().replace('%','').trim()))==false && is_float_accepted_percperc==false ){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
-                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
-                      hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().toString().replace('%','')) ){
+                      hot.setDataAtCell(row, prop,oldvalue.trim().toString().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
                     
                     } else {
                       if(Number(oldvalue.toString().replace('%','').trim())>0 && display_plus_sign_in_the_start==true){
@@ -250,7 +250,7 @@ import{
                       //alert('we set must + sign')
                       } else {
                         if(oldvalue.trim().includes("+") && display_plus_sign_in_the_start==false){
-                          hot.setDataAtCell(row, prop, oldvalue.trim().replace("+",''), 'my_source_removewhitespacesign');
+                          hot.setDataAtCell(row, prop, oldvalue.trim().toString().replace("+",''), 'my_source_removewhitespacesign');
                         } else {               
                        ////console.log('do nothing')
                       ////console.log('COULD END HERE')
@@ -266,19 +266,19 @@ import{
               ////console.log('condition percentage 1,7')
               if((/^[-+]\s/.test(oldvalue.trim()) )){ 
                 ////console.log('condition percentage 1,7.1')
-                hot.setDataAtCell(row, prop, oldvalue.replace(/\s+/g, '').trim()+'%','my_source_removewhitespacesign_percentage')
+                hot.setDataAtCell(row, prop, oldvalue.toString().replace(/\s+/g, '').trim()+'%','my_source_removewhitespacesign_percentage')
                 commentsPlugin.removeCommentAtCell(row, prop);
               } else {
-                if(Number(oldvalue.replace('%','').trim())<0 && is_negativenb_accepted_percperc==false){
+                if(Number(oldvalue.toString().replace('%','').trim())<0 && is_negativenb_accepted_percperc==false){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                 } else {
-                  if(Number.isInteger(Number(oldvalue.replace('%','').trim()))==false && is_float_accepted_percperc==false ){
+                  if(Number.isInteger(Number(oldvalue.toString().replace('%','').trim()))==false && is_float_accepted_percperc==false ){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
-                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
-                      hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().toString().replace('%','')) ){
+                      hot.setDataAtCell(row, prop,oldvalue.trim().toString().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
                     } else {
                 ////console.log('condition percentage 1,7.2');
                 ////console.log('could end here');
@@ -293,16 +293,16 @@ import{
               if(decimalSeparator=='.'){    
                 ////console.log('condition percentage 2.1.1')            
                   ////console.log(' "+ 15.63" or "12.36" or "19"  and without % , so we add it and we remove whitespaces')
-                  //hot.setDataAtCell(row, prop, oldvalue.replace(/\s+/g, '').trim()+'%')
-                  hot.setDataAtCell(row, prop, Number(oldvalue.replace(/\s+/g, '').trim()).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).replace(/\.?0+$/, "")+'%','my_source_removewhitespacesign_percentage')
+                  //hot.setDataAtCell(row, prop, oldvalue.toString().replace(/\s+/g, '').trim()+'%')
+                  hot.setDataAtCell(row, prop, Number(oldvalue.toString().replace(/\s+/g, '').trim()).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).toString().replace(/\.?0+$/, "")+'%','my_source_removewhitespacesign_percentage')
 
                   commentsPlugin.removeCommentAtCell(row, prop);
 
               } else if (decimalSeparator==','){
                 ////console.log('condition percentage 2.1.2')            
                   ////console.log('may cause problem')
-                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.replace(/\s+/g, '').trim().replace('.', ',') + " est correct (virguale à la place du point)");
-                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.replace(/\s+/g, '').trim().replace('.', ',') + " est correct (virguale à la place du point)");
+                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').trim().toString().replace('.', ',') + " est correct (virguale à la place du point)");
+                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').trim().toString().replace('.', ',') + " est correct (virguale à la place du point)");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'val_try_to_fix_comma_instead_dot','fr-FR',userLocale,decimalSeparator))
 
                   hot.setDataAtCell(row, prop, '', 'my_source_empty_percentage');
@@ -312,14 +312,14 @@ import{
               if(decimalSeparator=='.'){
                 ////console.log('condition percentage 2.2.1')
                   ////console.log('may cause problem')
-                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.replace(/\s+/g, '').trim().replace(',', '.') + " est correct (point à la place de la virgule)");
+                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').trim().toString().replace(',', '.') + " est correct (point à la place de la virgule)");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'val_try_to_fix_dot_instead_comma','fr-FR',userLocale,decimalSeparator))
 
                   hot.setDataAtCell(row, prop, '', 'my_source_empty_percentage');
               } else if (decimalSeparator==','){
                 ////console.log('condition percentage 2.2.2')
                 ////console.log(' "+ 15,63" or "12,36" or "19"  and without % , so we add it and we remove whitespaces')
-                hot.setDataAtCell(row, prop, Number(oldvalue.replace(/\s+/g, '').trim().replace(',','.')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).replace(/\.?0+$/, "").replace('.',',')+'%','my_source_removewhitespacesign_percentage')
+                hot.setDataAtCell(row, prop, Number(oldvalue.toString().replace(/\s+/g, '').trim().toString().replace(',','.')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).toString().replace(/\.?0+$/, "").toString().replace('.',',')+'%','my_source_removewhitespacesign_percentage')
                 commentsPlugin.removeCommentAtCell(row, prop);
 
               }
@@ -329,7 +329,7 @@ import{
                 ////console.log('condition percentage 2.3.1')
                 if((/\s+%$/.test(oldvalue.trim()) || /^[-+]\s/.test(oldvalue.trim()) )){ 
                   ////console.log('condition percentage 2.3.1.1')
-                  hot.setDataAtCell(row, prop, Number(oldvalue.replace(/\s+/g, '').trim().replace('%','')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).replace(/\.?0+$/, "")+'%','my_source_removewhitespacesign_percentage' )
+                  hot.setDataAtCell(row, prop, Number(oldvalue.toString().replace(/\s+/g, '').trim().toString().replace('%','')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).toString().replace(/\.?0+$/, "")+'%','my_source_removewhitespacesign_percentage' )
                   commentsPlugin.removeCommentAtCell(row, prop);
                  } else {
                   if( (oldvalue.toString().replace('%','').split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_inpercentage_percperc ) {
@@ -338,21 +338,21 @@ import{
                       hot.setDataAtCell(row, prop,0,'my_source_convertitto_0');
                       commentsPlugin.removeCommentAtCell(row, prop);
                     } else {                  
-                    hot.setDataAtCell(row, prop, Number(oldvalue.toString().replace('%','')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).replace(/\.?0+$/, "")+'%','my_source_removegreaterdecimalnumbers_percentage' )
+                    hot.setDataAtCell(row, prop, Number(oldvalue.toString().replace('%','')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).toString().replace(/\.?0+$/, "")+'%','my_source_removegreaterdecimalnumbers_percentage' )
                     commentsPlugin.removeCommentAtCell(row, prop); 
                   }
 
                   } else {
-                  if(Number(oldvalue.replace('%','').trim())<0 && is_negativenb_accepted_percperc==false){
+                  if(Number(oldvalue.toString().replace('%','').trim())<0 && is_negativenb_accepted_percperc==false){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                 } else {
-                  if(Number.isInteger(Number(oldvalue.replace('%','').trim()))==false && is_float_accepted_percperc==false ){
+                  if(Number.isInteger(Number(oldvalue.toString().replace('%','').trim()))==false && is_float_accepted_percperc==false ){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
-                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
-                      hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().toString().replace('%','')) ){
+                      hot.setDataAtCell(row, prop,oldvalue.trim().toString().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
                     } else {
                       if(Number(oldvalue.toString().replace('%','').trim())>0 && display_plus_sign_in_the_start==true){
                         if(oldvalue.toString().trim().includes("+")){
@@ -364,7 +364,7 @@ import{
                       //alert('we set must + sign')
                       } else {
                         if(oldvalue.trim().includes("+") && display_plus_sign_in_the_start==false){
-                          hot.setDataAtCell(row, prop, oldvalue.trim().replace("+",''), 'my_source_removewhitespacesign');
+                          hot.setDataAtCell(row, prop, oldvalue.trim().toString().replace("+",''), 'my_source_removewhitespacesign');
                         } else {               
                        ////console.log('do nothing')
                       ////console.log('COULD END HERE')
@@ -378,7 +378,7 @@ import{
                 }
                 } else if(decimalSeparator==','){
                   ////console.log('condition percentage 2.3.2')
-                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.replace(/\s+/g, '').trim().replace('.', ',') + " est correct (virgule à la place du point)");
+                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').trim().toString().replace('.', ',') + " est correct (virgule à la place du point)");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'val_try_to_fix_comma_instead_dot','fr-FR',userLocale,decimalSeparator))
 
                   hot.setDataAtCell(row, prop, '', 'my_source_empty_percentage');
@@ -388,7 +388,7 @@ import{
                 ////console.log('aa')
                 if(decimalSeparator=='.'){
                   ////console.log('condition percentage 2.4.1')
-                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.replace(/\s+/g, '').trim().replace(',', '.') + " est correct (point à la place de la virgule)");
+                  //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').trim().toString().replace(',', '.') + " est correct (point à la place de la virgule)");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'val_try_to_fix_dot_instead_comma','fr-FR',userLocale,decimalSeparator))
 
                   hot.setDataAtCell(row, prop, '', 'my_source_empty_percentage');
@@ -396,41 +396,41 @@ import{
                   ////console.log('condition percentage 2.4.2')
                     if((/\s+%$/.test(oldvalue.trim()) || /^[-+]\s/.test(oldvalue.trim()) )){ 
                       ////console.log('condition percentage 2.4.2.1')
-                       hot.setDataAtCell(row, prop, Number(oldvalue.replace(/\s+/g, '').trim().replace('%','').replace(',','.')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).replace(/\.?0+$/, "").replace('.',',')+'%','my_source_removewhitespacesign_percentage' )
+                       hot.setDataAtCell(row, prop, Number(oldvalue.toString().replace(/\s+/g, '').trim().toString().replace('%','').toString().replace(',','.')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).toString().replace(/\.?0+$/, "").toString().replace('.',',')+'%','my_source_removewhitespacesign_percentage' )
                        commentsPlugin.removeCommentAtCell(row, prop);
                      } else {
-                       if( (oldvalue.toString().replace('%','').replace(',','.').split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_inpercentage_percperc ){
+                       if( (oldvalue.toString().replace('%','').toString().replace(',','.').split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_inpercentage_percperc ){
                           ////console.log('condition percentage 2.4.2.1.5')
                              //////console.log(oldvalue)
-                            //////console.log(Number(oldvalue.toString().replace('%','').replace(',','.'))<0 )
-                            //if( Math.abs(Number(oldvalue.toString().replace('%','').replace(',','.'))) < smallafterdigit_percentage_percperc ){
+                            //////console.log(Number(oldvalue.toString().replace('%','').toString().replace(',','.'))<0 )
+                            //if( Math.abs(Number(oldvalue.toString().replace('%','').toString().replace(',','.'))) < smallafterdigit_percentage_percperc ){
                             //  ////console.log('cons1.1')
-                            //  hot.setDataAtCell(row, prop, Number(oldvalue.toString().trim().replace('%','').replace(',','.')).toFixed(afterdigitsmallnb_percentage_percperc).replace(/\.?0+$/, "").replace('.',',')+'%','my_source_removegreaterdecimalnumbers_percentage' )
+                            //  hot.setDataAtCell(row, prop, Number(oldvalue.toString().trim().toString().replace('%','').toString().replace(',','.')).toFixed(afterdigitsmallnb_percentage_percperc).toString().replace(/\.?0+$/, "").toString().replace('.',',')+'%','my_source_removegreaterdecimalnumbers_percentage' )
                             //  commentsPlugin.removeCommentAtCell(row, prop);
                            //   } else {
-                            if( Math.abs(Number(oldvalue.toString().replace('%','').replace(',','.') ))<smallafterdigit_percentage_percperc ){ // smallafterdigit_percentage_percperc like 0.01 in case of 2
+                            if( Math.abs(Number(oldvalue.toString().replace('%','').toString().replace(',','.') ))<smallafterdigit_percentage_percperc ){ // smallafterdigit_percentage_percperc like 0.01 in case of 2
                               hot.setDataAtCell(row, prop,0,'my_source_convertitto_0');
                               commentsPlugin.removeCommentAtCell(row, prop);
                             } else {
                                 ////console.log('cons1.2')
-                                hot.setDataAtCell(row, prop, Number(oldvalue.toString().trim().replace('%','').replace(',','.')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).replace(/\.?0+$/, "").replace('.',',')+'%','my_source_removegreaterdecimalnumbers_percentage' )
+                                hot.setDataAtCell(row, prop, Number(oldvalue.toString().trim().toString().replace('%','').toString().replace(',','.')).toFixed(decimalnumbers_toshow_withoutrenderer_inpercentage_percperc).toString().replace(/\.?0+$/, "").toString().replace('.',',')+'%','my_source_removegreaterdecimalnumbers_percentage' )
                                 commentsPlugin.removeCommentAtCell(row, prop);
                             }
                                 // }
 
                        } else {
-                        if(Number(oldvalue.replace('%','').replace(',','.').trim())<0 && is_negativenb_accepted_percperc==false){
+                        if(Number(oldvalue.toString().replace('%','').toString().replace(',','.').trim())<0 && is_negativenb_accepted_percperc==false){
                           commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator))
                           hot.setDataAtCell(row, prop, '', 'my_source_empty');
                             } else {
-                              if(Number.isInteger(Number(oldvalue.replace('%','').replace(',','.').trim()))==false && is_float_accepted_percperc==false ){
+                              if(Number.isInteger(Number(oldvalue.toString().replace('%','').toString().replace(',','.').trim()))==false && is_float_accepted_percperc==false ){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
-                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().replace('%','')) ){
-                      hot.setDataAtCell(row, prop,oldvalue.trim().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
+                    if(/^([+-]?)0+(?=\d)/.test(oldvalue.trim().toString().replace('%','')) ){
+                      hot.setDataAtCell(row, prop,oldvalue.trim().toString().replace(/^([+-]?)0+(?=\d)/, '$1'), 'my_source_removewhitespacesign');
                     } else {
-                      if(Number(oldvalue.toString().replace('%','').replace(',','.').trim())>0 && display_plus_sign_in_the_start==true){
+                      if(Number(oldvalue.toString().replace('%','').toString().replace(',','.').trim())>0 && display_plus_sign_in_the_start==true){
                         if(oldvalue.toString().trim().includes("+")){
                            ////console.log('COULD END HERE')
                            commentsPlugin.removeCommentAtCell(row,prop);
@@ -440,7 +440,7 @@ import{
                       //alert('we set must + sign')
                       } else {
                         if(oldvalue.trim().includes("+") && display_plus_sign_in_the_start==false){
-                          hot.setDataAtCell(row, prop, oldvalue.trim().replace("+",''), 'my_source_removewhitespacesign');
+                          hot.setDataAtCell(row, prop, oldvalue.trim().toString().replace("+",''), 'my_source_removewhitespacesign');
                         } else {               
                        ////console.log('do nothing')
                       ////console.log('COULD END HERE')

@@ -17,11 +17,11 @@ export class PercentageEditor extends Handsontable.editors.TextEditor {
 
   setValue(value) {
       try {
-        var percentValue = value.replace(/%/g, '') + '%' || ''; // remove existing "%" signs and add a new one
+        var percentValue = value.toString().replace(/%/g, '') + '%' || ''; // remove existing "%" signs and add a new one
        } catch (error) {
         var percentValue = '';
       }
-    //const percentValue = value.replace(/%/g, '') + '%'; // remove existing "%" signs and add a new one
+    //const percentValue = value.toString().replace(/%/g, '') + '%'; // remove existing "%" signs and add a new one
     super.setValue(percentValue);
   }
   

@@ -31,7 +31,7 @@ export function pdf_return_table_to_downloading_Fct(hot){
       if(cellcontent.className!=''){
   
       //console.log('stylleeee : ')
-      var strcontent = "."+cellcontent.className.replace(/ /g, '.');
+      var strcontent = "."+cellcontent.className.toString().replace(/ /g, '.');
       //console.log(strcontent)
       var element = document.querySelector(strcontent)
       
