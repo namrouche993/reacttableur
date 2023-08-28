@@ -44,7 +44,7 @@ import{
   
   export function validator_email(value, callback){
     //console.log(value)
-    if(value==null || /^[\w.-]+@[a-zA-Z0-9.,-]+\.[a-zA-Z]{2,}$/.test(value.trim()) ) {
+    if(value==null || /^[\w.-]+@[a-zA-Z0-9.,-]+\.[a-zA-Z]{2,}$/.test(value.toString().trim()) ) {
          callback(true)
      } else {
        callback(false)
@@ -71,7 +71,7 @@ import{
          if(/^\s+|\s+$/g.test(oldvalue)){
            //console.log('if there is a trainling whitespace between ')
            //console.log('we will call my_source_removewhitespacesign_email')
-           hot.setDataAtCell(row, prop, oldvalue.trim(), 'my_source_removewhitespacesign');
+           hot.setDataAtCell(row, prop, oldvalue.toString().trim(), 'my_source_removewhitespacesign');
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>emails_length_em){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'email_invalid','fr-FR'))

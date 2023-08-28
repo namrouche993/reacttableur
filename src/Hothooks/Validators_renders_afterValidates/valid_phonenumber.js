@@ -52,9 +52,9 @@ import{
   
   export function validator_phonenumber(value, callback,phonenumbers_length_pn){
     //console.log(value)
-    //if(value==null || /^[\d+\(\)\/\s-]+$/.test(value.trim()) ) {
-    //if(value==null || /^\+?[\d\(\)\/\s-]+$/g.test(value.trim()) ) {  // when it may start with "+"
-    if(value==null || /^\+?[\d\/\s()\-_:]+$/.test(value.trim()) ) {  // when it may start with "+" or it includes / \ - ( ) _ : 
+    //if(value==null || /^[\d+\(\)\/\s-]+$/.test(value.toString().trim()) ) {
+    //if(value==null || /^\+?[\d\(\)\/\s-]+$/g.test(value.toString().trim()) ) {  // when it may start with "+"
+    if(value==null || /^\+?[\d\/\s()\-_:]+$/.test(value.toString().trim()) ) {  // when it may start with "+" or it includes / \ - ( ) _ : 
          callback(true)
      } else {
        callback(false)
@@ -81,7 +81,7 @@ import{
          if(/^\s+|\s+$/g.test(oldvalue)){
            //console.log('if there is a trainling whitespace between ')
            //console.log('we will call my_source_removewhitespacesign')
-           hot.setDataAtCell(row, prop, oldvalue.trim(), 'my_source_removewhitespacesign');
+           hot.setDataAtCell(row, prop, oldvalue.toString().trim(), 'my_source_removewhitespacesign');
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>phonenumbers_length_pn){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'))

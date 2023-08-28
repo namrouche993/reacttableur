@@ -51,7 +51,7 @@ import{
   
   export function validator_onlynb(value, callback,onlynumbers_length_on){
     //console.log(value)
-    if(value==null || /^\d+(\s*\d+)*$/.test(value.trim()) ) {
+    if(value==null || /^\d+(\s*\d+)*$/.test(value.toString().trim()) ) {
          callback(true)
      } else {
        callback(false)
@@ -83,7 +83,7 @@ import{
          if(/^\s+|\s+$/g.test(oldvalue)){
            //console.log('if there is a trainling whitespace between ')
            //console.log('we will call my_source_removewhitespacesign')
-           hot.setDataAtCell(row, prop, oldvalue.trim(), 'my_source_removewhitespacesign');
+           hot.setDataAtCell(row, prop, oldvalue.toString().trim(), 'my_source_removewhitespacesign');
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>onlynumbers_length_on){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'onlynumbers_depass_length','fr-FR'))

@@ -127,7 +127,7 @@ function ModalEdit(props) {
   const isValidEmail = (value) => {
     // Simple email validation using a regular expression
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailPattern.test(value.trim());
+    return emailPattern.test(value.toString().trim());
   };
 
   const handleEmailChange = (event) => {
@@ -155,7 +155,7 @@ function ModalEdit(props) {
   const isValidPhoneNumber = (value) => {
     // Simple phone number validation using a regular expression
     const phonePattern = /^\+?[\d\/\s()\-_:]+$/;
-    return phonePattern.test(value.trim());
+    return phonePattern.test(value.toString().trim());
   };
 
 

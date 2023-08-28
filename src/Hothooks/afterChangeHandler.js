@@ -114,7 +114,7 @@
           //alert('cellget')
           ////console.log(cellgetcell.innerHTML) 
           if(cellgetcell!==null && cellgetcell.childNodes[cellgetcell.children.length]!==undefined){
-            data22[x[0]][x[1]]=cellgetcell.childNodes[cellgetcell.children.length].textContent.trim()
+            data22[x[0]][x[1]]=cellgetcell.childNodes[cellgetcell.children.length].textContent.toString().trim()
           } else {
             data22[x[0]][x[1]]=''
           }
