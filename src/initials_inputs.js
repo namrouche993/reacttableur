@@ -118,7 +118,7 @@ import { ddatafct,data22fct } from './data.js';
         }
       }  
 
-      export const display_plus_sign_in_the_start = true;
+      export const display_plus_sign_in_the_start = false;
 
       //////////////////// REDUX ////////////////////////////
       export var navigator_language2 = navigator.language // 'fr-FR' 'en-CA'  // editable
