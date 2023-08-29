@@ -62,7 +62,8 @@ const appTheme = createTheme({
 function Navbar() {
   
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
-
+  const data22_redux = useSelector(state => state.data22)
+  
   const [modalOpenformat, setModalOpenformat] = useState(false);
   const handleOpenModalformat = () => {
     setModalOpenformat(true);
@@ -85,9 +86,11 @@ function Navbar() {
   };
 
   const submitdata = () => {
+    console.log('data22_redux : ')
+    console.log(data22_redux)
     alert('submitdata triggered')
     //console.log('submitting data ')
-    downloadfile(hotInstance_redux)
+    downloadfile(hotInstance_redux,data22_redux)
   }
 
   const undoclickfct = () =>{

@@ -4,11 +4,11 @@ import 'jspdf-autotable'
 import { pdf_return_table_to_downloading_Fct } from './pdf_return_table_to_downloading_Fct';
 import { pdf_edit_size_table_to_downloading_sadeg_Fct } from './pdf_edit_size_table_to_downloading_sadeg';
 
-export function downloadfile(hot) {
+export function downloadfile(hot,data22) {
     //console.log('hot just in starting downloadfile : ')
     //console.log(hot)
     var doc = new jsPDF({orientation:'landscape'});
-    const table=pdf_return_table_to_downloading_Fct(hot)
+    const table=pdf_return_table_to_downloading_Fct(hot,data22)
     //console.log('table in downloadfile after declaring :')
     //console.log(table)
 
@@ -25,7 +25,7 @@ export function downloadfile(hot) {
       lineColor: [0, 0, 0], // Set line color to black
       lineWidth: 0.1 // Set line width to 0.1 (adjust as needed)},
            },
-      didParseCell:function(data){data.cell.styles.font = "helvetica";}
+      didParseCell:function(data){data.cell.styles.font = "helvetica";} //helvetica
            
   })
   doc.save('taaa.pdf')

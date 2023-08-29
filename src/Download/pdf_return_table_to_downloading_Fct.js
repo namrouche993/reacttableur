@@ -1,13 +1,16 @@
 import {existsInArray} from '../Tools/existsInArray.js'
 
-export function pdf_return_table_to_downloading_Fct(hot){
+export function pdf_return_table_to_downloading_Fct(hot,data22){
     //const hot = otherArgs[otherArgs.length - 1];
     //console.log('******************************************************************')
   //doc.setFontSize(16)
   var hotInstance = hot;
   var table = [];
   var skipped = []
-  var cells = hotInstance.getData()
+  var cells = data22 //hotInstance.getData();
+  console.log('cells in pdf_return_table_to_downloading :')
+  console.log(cells)
+  //alert('check cells which is  hotinstance.getData()')
   for (var i = 4; i < cells.length; i++) {
     var row = [];
     for (var j = 1; j < 15; j++) {
@@ -18,11 +21,18 @@ export function pdf_return_table_to_downloading_Fct(hot){
       //var cellcontent = hotInstance.getCell(i, j);
       var cellcontent = document.createElement("td");
       cellcontent.className = hot.getCellMeta(i,j).className || '';
-      cellcontent.innerHTML = hot.getDataAtCell(i,j) || '';
+      //console.log('cellcontent.className : ')
+      //console.log(cellcontent.className)
+      cellcontent.innerHTML = cell.toString() || '' //hot.getDataAtCell(i,j) || '';
   
       var content = cellcontent.innerHTML;
-  
+      //console.log('content  :')
+      //console.log(content)
+        //console.log('content is : ')
+        //console.log(content)
       var cellProperties =hotInstance.getCellMeta(i,j)
+      //console.log('cellProperties : ')
+      //console.log(cellProperties)
       var colspan = cellProperties.colspan || 1;
       var rowspan = cellProperties.rowspan || 1;
       //var styles = cellProperties.style || {};
@@ -38,7 +48,7 @@ export function pdf_return_table_to_downloading_Fct(hot){
   
   
       
-      if(i==4 || i==5){
+      if(i==4 || i==5){ // editable index , for row i think
         var style = window.getComputedStyle(element) || '';
       ////console.log(style)
       var bgcolor = style.getPropertyValue('background-color') || '';
@@ -46,7 +56,7 @@ export function pdf_return_table_to_downloading_Fct(hot){
   
         var styles = {fillColor: bgcolor,halign:txtalign,valign:'top'}//,fontSize:6}
       } else {
-        if(j==2 || j==3) {
+        if(j==2 || j==3) { // editable index , for column i think
           var styles = {fillColor: '#ffffff',halign:'right',valign:'top'}//,fontSize:8}
   
         } else {
@@ -54,8 +64,11 @@ export function pdf_return_table_to_downloading_Fct(hot){
           ////console.log(style)
          var bgcolor = style.getPropertyValue('background-color') || '';
          var txtalign = style.getPropertyValue('text-align') || '';
+         var fontfamily = style.getPropertyValue('font-family') || '';
+         console.log('fontfamily :')
+         console.log(fontfamily)
   
-        var styles = {fillColor: bgcolor,halign:txtalign}//,fontSize:8}
+        var styles = {fillColor: bgcolor,halign:txtalign,font:'normal'}//,fontSize:8}
         }
       }
   
@@ -96,6 +109,8 @@ export function pdf_return_table_to_downloading_Fct(hot){
               }
           }
       }
+      //console.log('content beofre row push :')
+      //console.log(content)
       row.push({ content, colSpan:colspan, rowSpan:rowspan, styles:styles });
     }
     table.push(row);

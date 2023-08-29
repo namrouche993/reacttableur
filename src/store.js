@@ -15,6 +15,8 @@ import {
  }
    from './initials_inputs';
 
+   import { ddatafct,data22fct } from './data.js';
+
 const initialState = {
   hotInstance_redux:null,
   value1: 5,
@@ -28,7 +30,8 @@ const initialState = {
   use_english_date_by_user_himeself_in_modal_withoutfct:use_english_date_by_user_himeself_in_modal_withoutfct,
   //hot_undone2: hot_undone2,
 
-  unmerged_cells_to_unmerge: []
+  unmerged_cells_to_unmerge: [],
+  data22:data22fct()
 };
 
 const reducer = (state = initialState, action) => {
@@ -97,6 +100,11 @@ const reducer = (state = initialState, action) => {
                 return {
                   ...state,
                   unmerged_cells_to_unmerge: action.payload
+                };
+                case 'SET_DATA22':
+                return {
+                  ...state,
+                  data22: action.payload
                 };
                 
                 

@@ -62,6 +62,7 @@ function Hottable() {
   
 
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
+  //const data22_redux = useSelector(state => state.data22);
 
   
 
@@ -190,6 +191,7 @@ function Hottable() {
         console.log(hot.undoRedo.doneActions)
         console.log('data22 in afterChange end : ')
         console.log(data22)
+        dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
       });
     
       //setHotInstance(hot);  WITHOUT REDUX
