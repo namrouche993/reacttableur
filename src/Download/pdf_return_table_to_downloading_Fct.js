@@ -7,8 +7,12 @@ export function pdf_return_table_to_downloading_Fct(hot,data22){
   var hotInstance = hot;
   var table = [];
   var skipped = []
+  var cells0 = hotInstance.getData();
   var cells = data22 //hotInstance.getData();
-  console.log('cells in pdf_return_table_to_downloading :')
+
+  console.log('cells = hotinstance.getData() in pdf_return_table_to_downloading :')
+  console.log(cells0)
+  console.log('cells = data22 in pdf_return_table_to_downloading :')
   console.log(cells)
   //alert('check cells which is  hotinstance.getData()')
   for (var i = 4; i < cells.length; i++) {
@@ -21,18 +25,23 @@ export function pdf_return_table_to_downloading_Fct(hot,data22){
       //var cellcontent = hotInstance.getCell(i, j);
       var cellcontent = document.createElement("td");
       cellcontent.className = hot.getCellMeta(i,j).className || '';
+      
       //console.log('cellcontent.className : ')
       //console.log(cellcontent.className)
+      
       cellcontent.innerHTML = cell.toString() || '' //hot.getDataAtCell(i,j) || '';
-  
       var content = cellcontent.innerHTML;
-      //console.log('content  :')
+      
+      //console.log('content   :')
       //console.log(content)
-        //console.log('content is : ')
+       
+      //console.log('content is : ')
         //console.log(content)
       var cellProperties =hotInstance.getCellMeta(i,j)
+      
       //console.log('cellProperties : ')
       //console.log(cellProperties)
+      
       var colspan = cellProperties.colspan || 1;
       var rowspan = cellProperties.rowspan || 1;
       //var styles = cellProperties.style || {};
@@ -64,11 +73,20 @@ export function pdf_return_table_to_downloading_Fct(hot,data22){
           ////console.log(style)
          var bgcolor = style.getPropertyValue('background-color') || '';
          var txtalign = style.getPropertyValue('text-align') || '';
-         var fontfamily = style.getPropertyValue('font-family') || '';
-         console.log('fontfamily :')
-         console.log(fontfamily)
+         
+         console.log('-----------')
+         console.log('j text align : ')
+         console.log(j)
+         console.log(txtalign)
+         console.log(cell)
+         console.log(cellcontent)
+         console.log(element)
+         //var fontfamily = style.getPropertyValue('font-family') || '';
+        
+         //  console.log('fontfamily :')
+        //  console.log(fontfamily)
   
-        var styles = {fillColor: bgcolor,halign:txtalign,font:'normal'}//,fontSize:8}
+        var styles = {fillColor: bgcolor,halign:txtalign}//,fontSize:8}
         }
       }
   
@@ -115,7 +133,8 @@ export function pdf_return_table_to_downloading_Fct(hot,data22){
     }
     table.push(row);
   }
-  
+console.log('tablee before return table : ')
+console.log(table)
 return table
 //console.log('tableeeeeeeeeeeeee :')
 //console.log(table)

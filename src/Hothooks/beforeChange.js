@@ -32,5 +32,5 @@ export function beforeChangeFct(changes,source,hot,commentsPlugin){
       }
       ////console.log(`Change in row ${row} property ${prop}: ${oldValue} -> ${newValue}`);
     });
-    ////console.log('end before change')
+  console.log('end before change')
 }

@@ -24,7 +24,7 @@ import { ddatafct,data22fct } from './data.js';
   export const bignb_intint = 1e17;
   export const smallnb_intint = 1e-17;
   export const decimalnumbers_toshow_withoutrenderer_innumbers_intint = 2;
-  export const usegrouping_intint_if_true = false;
+  export const usegrouping_intint_if_true = true;
   export const is_negativenb_accepted_intint = false;
   export const is_float_accepted_intint = false;
 

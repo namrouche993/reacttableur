@@ -54,7 +54,7 @@ import{
     //console.log(value)
     //if(value==null || /^[\d+\(\)\/\s-]+$/.test(value.toString().trim()) ) {
     //if(value==null || /^\+?[\d\(\)\/\s-]+$/g.test(value.toString().trim()) ) {  // when it may start with "+"
-    if(value==null || /^\+?[\d\/\s()\-_:]+$/.test(value.toString().trim()) ) {  // when it may start with "+" or it includes / \ - ( ) _ : 
+    if(value==null || /^\+?[\d\/\s()+\-_:]+$/.test(value.toString().trim()) ) {  // when it may start with "+" or it includes / \ - ( ) _ : 
          callback(true)
      } else {
        callback(false)

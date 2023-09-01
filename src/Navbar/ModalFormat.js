@@ -73,6 +73,9 @@ function ModalFormat(props) {
 
     dispatch({ type: 'SET_decimalSeparator2', payload: new_selectedNumericFormat });  // WITH REDUX
     dispatch({ type: 'SET_navigator_language2', payload: new_selectedDateFormat });  // WITH REDUX
+
+    localStorage.setItem('decimalSeparator2_storage', new_selectedNumericFormat);
+    localStorage.setItem('navigator_language2_storage', new_selectedDateFormat);
     
     setSelectedNumericFormatsaved(new_selectedNumericFormat);
     setSelectedDateFormatsaved(new_selectedDateFormat);
@@ -149,15 +152,21 @@ for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index
 }
         if(new_selectedDateFormat=='en-US'){
           dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: true });  // WITH REDUX
+          localStorage.setItem('use_english_date_by_user_himeself_in_modal_storage', true);
+
           //setInputValue_use_english_date_by_user_himeself_in_modal(true)
         } else {
           dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: false });  // WITH REDUX
+          localStorage.setItem('use_english_date_by_user_himeself_in_modal_storage', false);
           //setInputValue_use_english_date_by_user_himeself_in_modal(false)
         }
         
 
         dispatch({ type: 'SET_navigator_language2_avant_modify', payload: navigator_language2_redux });  // WITH REDUX
+        localStorage.setItem('navigator_language2_avant_modify_storage', navigator_language2_redux);
+
         dispatch({ type: 'SET_navigator_language2', payload: selectedDateFormat });  // WITH REDUX
+        localStorage.setItem('navigator_language2_storage', selectedDateFormat);
 
         //dispatch({ type: 'SET_hot_undone2', payload: _.cloneDeep(hotInstance_redux.undoRedo.undoneActions) });  // WITH REDUX
         
@@ -177,20 +186,25 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
       // when we set the numeric format always be in fr 1 234 567.89  and modal language is in fr
 
       dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
+      localStorage.setItem('userLocale2_storage', 'fr');
 
       //setTitlemodalformat('fr'); // editable LATEEEEEEEEEEEEEEEERR if it's necessary
 
     } else if( (1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString()==','){
       dispatch({ type: 'SET_userLocale2', payload: Intl.DateTimeFormat().resolvedOptions().locale });  // // editable if it's necessary
+      localStorage.setItem('userLocale2_storage', Intl.DateTimeFormat().resolvedOptions().locale );
 
       //setTitlemodalformat(Intl.DateTimeFormat().resolvedOptions().locale);
 
       } else {
         //alert('i think we will be here ')
         dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
+        localStorage.setItem('userLocale2_storage', 'fr');
+
         //setTitlemodalformat('en')  editabler LATEEEEEEEEEEEEEEEEEEEEER
       }
       dispatch({ type: 'SET_decimalSeparator2', payload: ',' });  // WITH REDUX
+      localStorage.setItem('decimalSeparator2_storage', ',');
 
       data_to_convert.forEach((row, rowIndex) => {
             if (rowIndex > startRowIndex) {
@@ -224,6 +238,8 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
 })
 }
           dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
+          localStorage.setItem('ds_haschanged_storage', true);
+
           //dispatch({ type: 'SET_hot_undone2', payload: _.cloneDeep(hotInstance_redux.undoRedo.undoneActions) });  // WITH REDUX
           setInputValue_hot_undone2(_.cloneDeep(hotInstance_redux.undoRedo.undoneActions))
 
@@ -234,7 +250,10 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
           //alert('we made setDataatrowprop of changesdata_numeric')
   } else {
     dispatch({ type: 'SET_userLocale2', payload: 'en' });  // WITH REDUX
+    localStorage.setItem('userLocale2_storage', 'en');
+
     dispatch({ type: 'SET_decimalSeparator2', payload: '.' });  // WITH REDUX
+    localStorage.setItem('decimalSeparator2_storage', '.');
 
       data_to_convert.forEach((row, rowIndex) => {
             if (rowIndex > startRowIndex) {
@@ -276,6 +295,8 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
 }
 
 dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
+localStorage.setItem('ds_haschanged_storage', true);
+
 //dispatch({ type: 'SET_hot_undone2', payload: _.cloneDeep(hotInstance_redux.undoRedo.undoneActions) });  // WITH REDUX
 setInputValue_hot_undone2(_.cloneDeep(hotInstance_redux.undoRedo.undoneActions))
           hotInstance_redux.setDataAtRowProp(changesdata_numeric,'dataatrowprop_convert_to_en');

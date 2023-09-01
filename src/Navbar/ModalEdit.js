@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Handsontable from 'handsontable';
 import {
   Button,
   Dialog,
@@ -21,14 +22,25 @@ import {
   FormHelperText
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { useSelector } from 'react-redux';
 
+/*
 const organisme_data = [
   {val:'organisme01',label:'Organisme 01'},
   {val:'organisme02',label:'Organisme 02'},
   {val:'organisme03',label:'Organisme 03'},
   {val:'organisme04',label:'Organisme 04'},
 ];
-const region_data = [
+*/
+
+export const organisme_data = [
+  {val:'organisme_opgi',label:'OPGI'},
+  {val:'organisme_duac',label:'DUAC'},
+  {val:'organisme_dep',label:'DEP'},
+  {val:'organisme_dl',label:'DL'},
+];
+
+const region_data0 = [
   { region: '01-ADRAR', matriculeregion: '01', id: 1 },
   { region: '02-CHLEF', matriculeregion: '02', id: 2 },
   { region: '03-LAGHOUAT', matriculeregion: '03', id: 3 },
@@ -90,13 +102,17 @@ const region_data = [
   { region: '56-Djanet', matriculeregion: '56', id: 56 },
   { region: '57-El M\'Ghair', matriculeregion: '57', id: 57 },
   { region: '58-El Meniaa', matriculeregion: '58', id: 58 },
-
 ];
 
+export const region_data = region_data0.map(item => ({
+  ...item,
+  region2: item.region.substring(3)
+}));
 
 
 
 function ModalEdit(props) {
+  const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -154,7 +170,7 @@ function ModalEdit(props) {
 
   const isValidPhoneNumber = (value) => {
     // Simple phone number validation using a regular expression
-    const phonePattern = /^\+?[\d\/\s()\-_:]+$/;
+    const phonePattern = /^\+?[\d\/\s()+\-_:]+$/;
     return phonePattern.test(value.toString().trim());
   };
 
@@ -187,7 +203,29 @@ function ModalEdit(props) {
 
 
     if (organisme!=='' && region!=='' && isValidEmail(email) && isValidPhoneNumber(phoneNumber)){
-       props.onClose();
+        
+        var getcellmeta_of_31 = hotInstance_redux.getCellMeta(3, 1); // editable index
+        
+        getcellmeta_of_31.renderer= function(instance, td, row, col, prop, value, cellProperties) {
+          Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells
+        };
+        getcellmeta_of_31.validator=undefined;
+        
+        hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index
+        
+
+        
+        var organismechosen = organisme_data.find(item => item.val === organisme).label;
+        var regionchosen = region_data.find(item => item.matriculeregion === region).region;
+
+        hotInstance_redux.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen) // editable index
+
+        localStorage.setItem('organismechosen', organisme);
+        localStorage.setItem('region_storage', region);
+        localStorage.setItem('email_chosen', email);
+        localStorage.setItem('phone_chosen', phoneNumber);
+        
+        props.onClose();
     }
     
   };

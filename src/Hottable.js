@@ -22,6 +22,7 @@ import { getLast_row_to_use_for_dropdown_issue,
   setInputValue_hot_undone2
 } from './initials_inputs';
 
+import { organisme_data, region_data } from './Navbar/ModalEdit';
 function Hottable() {
   
   const userLocale2_redux  = useSelector(state => state.userLocale2);
@@ -196,8 +197,35 @@ function Hottable() {
     
       //setHotInstance(hot);  WITHOUT REDUX
       dispatch({ type: 'SET_HOT', payload: hot });  // WITH REDUX
-
+      
       const commentsPlugin = hot.getPlugin('comments');
+
+
+      if(
+        localStorage.getItem('organismechosen') !== null &&
+        localStorage.getItem('region_storage') !== null &&
+        localStorage.getItem('email_chosen') !== null &&
+        localStorage.getItem('phone_chosen') !== null
+        //localStorage.length>0
+        ){
+
+            const stored_organisme = localStorage.getItem('organismechosen');
+            const stored_region = localStorage.getItem('region_storage');
+            const stored_email = localStorage.getItem('email_chosen');
+            const stored_phonenumber = localStorage.getItem('phone_chosen');
+
+            var getcellmeta_of_31_0 = hot.getCellMeta(3, 1); // editable index
+            getcellmeta_of_31_0.renderer= function(instance, td, row, col, prop, value, cellProperties) {
+               Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells
+            };
+            getcellmeta_of_31_0.validator=undefined;
+            hot.setCellMeta(3,1,'readOnly',false);  // editable index
+
+            var organismechosen = organisme_data.find(item => item.val === stored_organisme).label;
+            var regionchosen = region_data.find(item => item.matriculeregion === stored_region).region;
+    
+            hot.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen) // editable index
+          }
 
     return () => {
       //console.log('unmount handsontable ')

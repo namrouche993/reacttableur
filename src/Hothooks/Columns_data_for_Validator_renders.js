@@ -250,7 +250,7 @@ else if( i == 2 ) { // validator of dropdown-  editable : source
      }
   }
 
-  else if( i == 3 ) {  // validator and renderer of emails
+else if( i == 3 ) {  // validator and renderer of emails
     var dd={
        className: "htLeft htMiddle" ,
        validator: function (oldvalue, callback) { // validator of emails
@@ -325,17 +325,19 @@ else if( i == 2 ) { // validator of dropdown-  editable : source
       }
 
   else if( i == 9 || i == 1) { // validator and renderers of text
-        var dd={
+        
+       var dd={
           className: "htRight htMiddle" ,
           validator: function (oldvalue, callback) { // validator of text
               const thisrow = this.row;
               const thiscol = this.col;
+              //alert('we are in i==9 or i==1')
               if(thisrow>5){ // editable
                 validator_text(oldvalue, callback,text_length_txt)
             }
             },
           renderer: function (instance, td, row, col, prop, oldvalue, cellProperties) { // renderer of numbers or amounts
-            
+            //alert('we are renderer in i==9 or i==1')
              if(row>5){ // editable
               renderer_text(instance, td, row, col, prop, oldvalue, cellProperties,text_length_txt,data22)
             } else if ( row>3 ) { // editable

@@ -114,12 +114,12 @@
           //alert('cellget')
           ////console.log(cellgetcell.innerHTML) 
           if(cellgetcell!==null && cellgetcell.childNodes[cellgetcell.children.length]!==undefined){
-            data22[x[0]][x[1]]=cellgetcell.childNodes[cellgetcell.children.length].textContent.toString().trim()
+            data22[x[0]][x[1]]=cellgetcell.childNodes[cellgetcell.children.length].textContent.toString().trim().replace(/[\s\u00A0]/g, ' ') 
           } else {
             data22[x[0]][x[1]]=''
           }
         })
-        
+        //alert('data22 triggered')
         ////console.log(' ----------------------------- ---------------------------- ------')
       }
       if(src=='dataatrowprop_convert_to_en'){
