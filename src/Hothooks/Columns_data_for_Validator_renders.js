@@ -63,17 +63,17 @@ export function Columns_data_for_Validator_renders(imin,imax,
   hot_undone2,
   ) {
     //alert('userLocale2  in Columns_data_for.. will be : '  + userLocale2.current + ' and decimalSeparator2 : ' + decimalSeparator2.current)
-  //console.log('before using it')
+  ////console.log('before using it')
 
-        //////console.log('columnsdata')
-        console.log('COLUMNS DATA FOR VALIDATOR')
+        ////////console.log('columnsdata')
+        //console.log('COLUMNS DATA FOR VALIDATOR')
         var fa=[]
         fa.push({data:0,readOnly:true})      
           for(let i=imin+1;i<imax-1;i++){
           // couting start from 1 (normal way ta3 normal way)  i==3 means the third column of THE SPREADSHEET without counting the first negeglible column (A)   
         
         if(i == 10){  // validator and renderers of integers i == 2 editable of course
-          ////console.log('************** before validator i === 2 ')
+          //////console.log('************** before validator i === 2 ')
             var dd={ data:i,
               className: "htRight htMiddle" ,
               validator: function (oldvalue, callback) { // validator of integers
@@ -381,15 +381,15 @@ else if( i == 3 ) {  // validator and renderer of emails
         }
       
         else { //editable if has to
-          //////console.log('columnsdata else ')
+          ////////console.log('columnsdata else ')
             var dd={data:i,type:'text'}
-            //////console.log(dd)
+            ////////console.log(dd)
           }
           */
           else { //editable if has to
-            //////console.log('columnsdata else ')
+            ////////console.log('columnsdata else ')
               var dd={data:i,type:'text'}
-              //////console.log(dd)
+              ////////console.log(dd)
             }
           fa.push(dd) 
       }

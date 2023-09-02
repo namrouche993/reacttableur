@@ -163,6 +163,14 @@ import { ddatafct,data22fct } from './data.js';
      }
   // end *********** condition_split2
 
+  let srcautofillactivated=false
+  export function setInputValue_srcautofillactivated(value) {
+    srcautofillactivated = value;
+   }
+  export function getInputValue_srcautofillactivated() {
+       return srcautofillactivated;
+   }
+
 
   let last_row_to_use_for_dropdown_issue = ddatafct().length;
   
@@ -228,8 +236,8 @@ export function getInputValue_navigator_language2_avant_modify() {
 
   // start -------- decimalseparator2
     let decimalSeparator2 = (1234567.73).toLocaleString(getInputValue_userLocale2(), { style: 'decimal' }).substring(9, 10).toString();
-    //console.log('decimalsep2 when let first : ')
-    //console.log(decimalSeparator2)
+    ////console.log('decimalsep2 when let first : ')
+    ////console.log(decimalSeparator2)
     export function setInputValue_decimalSeparator2(value) {     
       decimalSeparator2 = value;
      }

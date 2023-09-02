@@ -51,7 +51,7 @@ import{
                   }
   
   export function validator_phonenumber(value, callback,phonenumbers_length_pn){
-    //console.log(value)
+    ////console.log(value)
     //if(value==null || /^[\d+\(\)\/\s-]+$/.test(value.toString().trim()) ) {
     //if(value==null || /^\+?[\d\(\)\/\s-]+$/g.test(value.toString().trim()) ) {  // when it may start with "+"
     if(value==null || /^\+?[\d\/\s()+\-_:]+$/.test(value.toString().trim()) ) {  // when it may start with "+" or it includes / \ - ( ) _ : 
@@ -63,13 +63,13 @@ import{
 
 
   export function afterValidatefct_phonenumber(isValid, oldvalue, row, prop, source,hot,commentsPlugin,phonenumbers_length_pn){        
-    //console.log('prop==7')
-    //console.log(isValid)
+    ////console.log('prop==7')
+    ////console.log(isValid)
 
     if (isValid && oldvalue == null ) {
-       //console.log('condition phonenumbers  1')
-       //console.log('we are inside afterValidate phonenumbers value==null')
-       //console.log('COULD END HERE')
+       ////console.log('condition phonenumbers  1')
+       ////console.log('we are inside afterValidate phonenumbers value==null')
+       ////console.log('COULD END HERE')
        
        /*
        setTimeout(() => {
@@ -79,32 +79,32 @@ import{
 
       } else if (isValid && oldvalue !== undefined && typeof oldvalue === 'string'){
          if(/^\s+|\s+$/g.test(oldvalue)){
-           //console.log('if there is a trainling whitespace between ')
-           //console.log('we will call my_source_removewhitespacesign')
+           ////console.log('if there is a trainling whitespace between ')
+           ////console.log('we will call my_source_removewhitespacesign')
            hot.setDataAtCell(row, prop, oldvalue.toString().trim(), 'my_source_removewhitespacesign');
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>phonenumbers_length_pn){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'))
            hot.setDataAtCell(row, prop,'','my_source_empty_phonenumbers');
          } else {
-           //console.log('COULD END HERE')
-           //console.log('do nothing')
+           ////console.log('COULD END HERE')
+           ////console.log('do nothing')
            commentsPlugin.removeCommentAtCell(row,prop);
          }
        }
        else if ( oldvalue =='') {
-       //console.log('condition phonenumbers 3')
-       //console.log('do nothing could end here')
+       ////console.log('condition phonenumbers 3')
+       ////console.log('do nothing could end here')
        } else {
-         //console.log('condition phonenumbers 4')
+         ////console.log('condition phonenumbers 4')
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
-       if(source!=='Autofill.fill'){
+       if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'))
        }
        hot.setDataAtCell(row, prop,'','my_source_empty_phonenumbers')
 
-       //console.log('do nothing could end here')
-       //console.log('removes')
+       ////console.log('do nothing could end here')
+       ////console.log('removes')
      }
 
 }

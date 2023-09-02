@@ -98,10 +98,10 @@ function ModalFormat(props) {
                outerLoop: for (const lang of dateValues) {
                   for (const lang2 of dateValues) {
                     if(navigator_language2_redux==lang && new_selectedDateFormat==lang2){
-                      //console.log('before convertdateformat :')
-                      //console.log(cellValueDate)
-                      //console.log(lang)
-                      //console.log(lang2)
+                      ////console.log('before convertdateformat :')
+                      ////console.log(cellValueDate)
+                      ////console.log(lang)
+                      ////console.log(lang2)
                       var convertedDate = convertDateFormat(cellValueDate, lang, lang2);
                          if(convertedDate!=cellValueDate){
                              var changeonedata = [rowIndex, columnIndex, convertedDate];
@@ -118,11 +118,11 @@ function ModalFormat(props) {
        })
 
   for (let index = 0; index<hotInstance_redux.undoRedo.doneActions.length; index++) {
-        console.log('index : ')
-        console.log(index) 
+        //console.log('index : ')
+        //console.log(index) 
         hotInstance_redux.undoRedo.doneActions[index].changes.forEach((x,y)=>{
-          console.log('x of foreach : ')
-          console.log(x)
+          //console.log('x of foreach : ')
+          //console.log(x)
           if(x[1]==6) {  // editable index
             if(x[2]!==null && x[2]!=='' && x[2]!==' '){
               x[2]=convertDateFormat(x[2], navigator_language2_redux, new_selectedDateFormat) 
@@ -135,11 +135,11 @@ function ModalFormat(props) {
       }
 
 for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index++) {
-  console.log('index : ')
-  console.log(index) 
+  //console.log('index : ')
+  //console.log(index) 
   hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
-    console.log('x of foreach : ')
-    console.log(x)
+    //console.log('x of foreach : ')
+    //console.log(x)
     if(x[1]==6) {  // editable index
       if(x[2]!==null && x[2]!=='' && x[2]!==' '){
         x[2]=convertDateFormat(x[2], navigator_language2_redux, new_selectedDateFormat) 
@@ -213,9 +213,9 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
                      if(cellValue!==null & cellValue!==undefined){
                        const convertedNumber = cellValue.toString().replace(/\./g, ',');
                        if(convertedNumber!=cellValue){
-                         ////console.log('convert dontequal to cellvalue : ')
-                         ////console.log(convertedNumber)
-                         ////console.log(cellValue)
+                         //////console.log('convert dontequal to cellvalue : ')
+                         //////console.log(convertedNumber)
+                         //////console.log(cellValue)
                          var changeonedata = [rowIndex, columnIndex, convertedNumber];
                          changesdata_numeric.push(changeonedata);
                     }
@@ -226,7 +226,7 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
           
 for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index++) {
 hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
-  ////console.log('x in foreach :')
+  //////console.log('x in foreach :')
   if( // editable index
     x[1] == 7 || x[1] == 8
     ){
@@ -247,8 +247,8 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
 
           // setInputValue_hot_undone2(JSON.parse(JSON.stringify(hot.undoRedo.undoneActions)));              
           hotInstance_redux.setDataAtRowProp(changesdata_numeric,'dataatrowprop_convert_to_fr');
-          console.log('changesdata_numeric : ')
-          console.log(changesdata_numeric)
+          //console.log('changesdata_numeric : ')
+          //console.log(changesdata_numeric)
           //alert('we made setDataatrowprop of changesdata_numeric')
   } else {
     dispatch({ type: 'SET_userLocale2', payload: 'en' });  // WITH REDUX
@@ -259,15 +259,15 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
 
       data_to_convert.forEach((row, rowIndex) => {
             if (rowIndex > startRowIndex) {
-              console.log('----------------')
+              //console.log('----------------')
                 NumColumnsToConvert.forEach(columnIndex => {
                      const cellValue = row[columnIndex];
                    if(cellValue!==null & cellValue!==undefined){
                      const convertedNumber = cellValue.toString().replace(/,/g, '.');
                      if(convertedNumber!=cellValue){
-                       //console.log('convert dontequal to cellvalue : ')
-                       //console.log(convertedNumber)
-                       //console.log(cellValue)
+                       ////console.log('convert dontequal to cellvalue : ')
+                       ////console.log(convertedNumber)
+                       ////console.log(cellValue)
                        var changeonedata = [rowIndex, columnIndex, convertedNumber];
                        changesdata_numeric.push(changeonedata);
                     }
@@ -278,7 +278,7 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
 
           for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index++) {
 hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
-  //console.log('x in foreach :')
+  ////console.log('x in foreach :')
   if( // editable
     x[1] == 7 || x[1] == 8    ){
       if(x[2]!==null && x[2]!=='' && x[2]!==' '){

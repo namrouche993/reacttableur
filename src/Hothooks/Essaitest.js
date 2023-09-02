@@ -5,15 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function Essaitest() { // WITHOUT REDUX WE PUT Changeval(props)
 
-    //console.log('we are inside changeval component')
+    ////console.log('we are inside changeval component')
     const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
 
-     //console.log('hotInstance_redux : ')
-     //console.log(hotInstance_redux)
+     ////console.log('hotInstance_redux : ')
+     ////console.log(hotInstance_redux)
      const data00 = hotInstance_redux==null?"":hotInstance_redux.getData();
-     //console.log(data00)
+     ////console.log(data00)
 
-    // //console.log(hotInstance_redux.getData())
+    // ////console.log(hotInstance_redux.getData())
 
 
     const [input1text2,setInputtext2] = useState('')

@@ -23,12 +23,12 @@ function calcwidth(fontsize,textwidth) {
      return 1.38*textwidth;
  }
 }
-//console.log('table before slice : ')
-//console.log(table)
+////console.log('table before slice : ')
+////console.log(table)
 
 var data2=table.slice(2); //editable
-//console.log('data2 : ')
-//console.log(data2)
+////console.log('data2 : ')
+////console.log(data2)
 let columnMaxLengths = [];
 // Initialize the array with zeros for each column
 for (let i = 0; i < data2[0].length; i++) {
@@ -41,7 +41,7 @@ for (let row of data2) {
     columnMaxLengths[i] = Math.max(columnMaxLengths[i], calcwidth(font_size,cellValue.toString().length));
   }
 }
-//console.log(columnMaxLengths)
+////console.log(columnMaxLengths)
 for (let i = 0; i < data2[0].length; i++) {
     if(i==5 || i==6 || i==7 || i==8 ||  i==10 || i==11 || i==12 || i==13){
   columnMaxLengths[i] = Math.max(columnMaxLengths[i],normalmincolwidth(font_size)[i]); // so if columnMaxLengths max column width is too short , so we set normalmincolwidth so that's why above i said column title names
@@ -49,23 +49,23 @@ for (let i = 0; i < data2[0].length; i++) {
   columnMaxLengths[i] = normalmincolwidth(font_size)[i] // because obviously the columnMaxLengths will be short due to the cellvalues of percentages , so we take normalmincolwidth
     }   
 }
-//console.log('***************------------------------*******');
-//console.log("columnMaxLengths avant test sum : ");
-//console.log(columnMaxLengths)
-//console.log(font_size)
+////console.log('***************------------------------*******');
+////console.log("columnMaxLengths avant test sum : ");
+////console.log(columnMaxLengths)
+////console.log(font_size)
 
 var sumcolumnMaxLengths = columnMaxLengths.reduce((acc, curr) => acc + curr, 0); //calculates the sum of the array columnMaxLengths 
-//console.log('sumcolumnMaxLengths : ')
-//console.log(sumcolumnMaxLengths)
+////console.log('sumcolumnMaxLengths : ')
+////console.log(sumcolumnMaxLengths)
 
 //#region second part of sadeg example : (here we reduce font_size if the page is not enough)
     if(sumcolumnMaxLengths>290 && font_size>6){
-        //console.log('font_size : ')
-        //console.log(font_size)
+        ////console.log('font_size : ')
+        ////console.log(font_size)
         font_size--;
-        //console.log(font_size);
-        //console.log('yessss it is greather than 290');
-        //console.log(sumcolumnMaxLengths)
+        ////console.log(font_size);
+        ////console.log('yessss it is greather than 290');
+        ////console.log(sumcolumnMaxLengths)
         columnMaxLengths = [];
 // Initialize the array with zeros for each column
 for (let i = 0; i < data2[0].length; i++) {
@@ -77,8 +77,8 @@ for (let i = 0; i < data2[0].length; i++) {
 //    cellValue = row[i].content;
     var cellValue = row[i].content!==null ? row[i].content : '';
 
-    ////console.log('font_size after cellvalue : ');
-    ////console.log(font_size);
+    //////console.log('font_size after cellvalue : ');
+    //////console.log(font_size);
     columnMaxLengths[i] = Math.max(columnMaxLengths[i], calcwidth(font_size,cellValue.toString().length));
   }
 }
@@ -91,25 +91,25 @@ for (let i = 0; i < data2[0].length; i++) {
     }   
 }
     }
-//console.log("columnMaxLengths apres test sum : ");
-//console.log(columnMaxLengths)
+////console.log("columnMaxLengths apres test sum : ");
+////console.log(columnMaxLengths)
 var sumcolumnMaxLengths = columnMaxLengths.reduce((acc, curr) => acc + curr, 0);
-//console.log(sumcolumnMaxLengths)
+////console.log(sumcolumnMaxLengths)
 
 if(sumcolumnMaxLengths<286){
-  //console.log('sumcolwidth<286')
+  ////console.log('sumcolwidth<286')
   var restecolumnswidth = 286-sumcolumnMaxLengths
-  //console.log(sumcolumnMaxLengths)
-  //console.log(restecolumnswidth)
-  //console.log(columnMaxLengths)
+  ////console.log(sumcolumnMaxLengths)
+  ////console.log(restecolumnswidth)
+  ////console.log(columnMaxLengths)
   columnMaxLengths[0]=columnMaxLengths[0]+restecolumnswidth/2
   columnMaxLengths[8]=columnMaxLengths[8]+restecolumnswidth/4
   columnMaxLengths[13]=columnMaxLengths[13]+restecolumnswidth/4
 
 }
 
-//console.log('font_size : ')
-//console.log(font_size)
+////console.log('font_size : ')
+////console.log(font_size)
 //#endregion second part of sadeg example : (here we reduce font_size if the page is not enough)
 
 

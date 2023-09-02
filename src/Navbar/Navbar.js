@@ -86,10 +86,10 @@ function Navbar() {
   };
 
   const submitdata = () => {
-    console.log('data22_redux : ')
-    console.log(data22_redux)
+    //console.log('data22_redux : ')
+    //console.log(data22_redux)
     alert('submitdata triggered')
-    //console.log('submitting data ')
+    ////console.log('submitting data ')
     downloadfile(hotInstance_redux,data22_redux)
   }
 

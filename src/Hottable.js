@@ -153,7 +153,7 @@ function Hottable() {
             );
         },
         beforeCreateRow: function(index,amout,source) {
-          console.log('beforeCreateRow HOOOK')
+          //console.log('beforeCreateRow HOOOK')
 
           data22[data22.length]= ['','','','','','','','','','','','','','','','','',   ''] // editable the nb 
         },
@@ -180,19 +180,19 @@ function Hottable() {
     hot.addHook('beforeChange', function(changes, source) {
       //const hotInstance = hot; // Store the hot instance
       //beforeChangeFct(changes,source, ...otherArgs, hotInstance)
-      console.log('beforeChange triggered')
+      //console.log('beforeChange triggered')
       beforeChangeFct(changes,source,hot,commentsPlugin)
     });
 
       hot.addHook('afterChange', (changes, source) => {
-        console.log('afterChange triggered')
+        //console.log('afterChange triggered')
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
-        console.log('data22 in afterChange end : ')
-        console.log(data22)
-        console.log('hot undoredo : ')
-        console.log(hot.undoRedo.doneActions)
-        console.log(hot.undoRedo.undoneActions)
+        ////console.log('data22 in afterChange end : ')
+        ////console.log(data22)
+        ////console.log('hot undoredo : ')
+        ////console.log(hot.undoRedo.doneActions)
+        ////console.log(hot.undoRedo.undoneActions)
         dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
       });
     
@@ -229,7 +229,7 @@ function Hottable() {
           }
 
     return () => {
-      //console.log('unmount handsontable ')
+      ////console.log('unmount handsontable ')
       hot.destroy();
     };
   }, []);

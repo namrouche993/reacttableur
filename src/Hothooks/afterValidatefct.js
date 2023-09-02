@@ -49,7 +49,7 @@ export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLo
     //alert('we are in afterValidatefct , and userLocale.current is : ' + userLocale.current + ' and decimalSeparator.current : ' + decimalSeparator.current)
     
   /* if(isValid && oldvalue==null){
-    console.log('do nothing')
+    //console.log('do nothing')
 //    commentsPlugin.removeCommentAtCell(row, prop);
   } else {
     */

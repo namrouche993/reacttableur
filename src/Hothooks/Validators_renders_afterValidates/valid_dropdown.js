@@ -81,9 +81,9 @@ var data22 = data22fct();
 
 
   export function afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin){        
-    //console.log('prop==5')
+    ////console.log('prop==5')
     if(oldvalue==null){
-        //console.log('we are inside null');
+        ////console.log('we are inside null');
         
         /*
         setTimeout(() => {
@@ -92,44 +92,44 @@ var data22 = data22fct();
         */
 
         //data22[row][prop] = '';
-        ////console.log('data22 in oldvalue==null')
-        ////console.log(data22)
+        //////console.log('data22 in oldvalue==null')
+        //////console.log(data22)
 
       }else if(!isValid){
         ////alert('invalid dropdown')
-        //console.log('first cond')
+        ////console.log('first cond')
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
-        if(source!=='Autofill.fill'){
+        if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
         }
         hot.setDataAtCell(row, prop,' ','my_source_empty_dropdown');
         
         //data22[row][prop] = '';
-        ////console.log('data22 in !isvalid')
-        ////console.log(data22)
+        //////console.log('data22 in !isvalid')
+        //////console.log(data22)
 
 
         //hot.setDataAtCell(row, prop,'');
       } else if (oldvalue===' ') {
-        //console.log('2 cond')
+        ////console.log('2 cond')
         //commentsPlugin.removeCommentAtCell(row,prop);
-        if(source!=='Autofill.fill'){
+        if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
         }
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
         
         //data22[row][prop] = '';
-        ////console.log('data22 in oldvalue==" "')
-        ////console.log(data22)
+        //////console.log('data22 in oldvalue==" "')
+        //////console.log(data22)
 
         //hot.setDataAtCell(row, prop,'');
       } else {
-        //console.log('3 cond')
+        ////console.log('3 cond')
         commentsPlugin.removeCommentAtCell(row,prop);
         
         //data22[row][prop] = oldvalue;
-        ////console.log('data22 in else')
-        ////console.log(data22)
+        //////console.log('data22 in else')
+        //////console.log(data22)
 
 
       }

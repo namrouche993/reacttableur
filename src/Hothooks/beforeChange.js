@@ -10,27 +10,27 @@ export function beforeChangeFct(changes,source,hot,commentsPlugin){
 
 
     changes.forEach(([row, prop, oldValue, newValue]) => {
-      console.log('changes foreach in beforechange')
+      //console.log('changes foreach in beforechange')
 
       if (oldValue == '' && newValue == null  || oldValue == '' && newValue == '' && source == 'UndoRedo.undo' 
       ||  oldValue == ' ' && newValue == null  || oldValue == ' ' && newValue == ' ' && source == 'UndoRedo.undo' 
       ) {
         
         if(commentsPlugin.getCommentAtCell(row, prop)){
-          console.log('not empty to null')
+          //console.log('not empty to null')
           
           setTimeout(() => {
             commentsPlugin.removeCommentAtCell(row,prop);
           }, 100);
 
         } else {
-          console.log('empty to null')
+          //console.log('empty to null')
         };
       
         
-        ////console.log('comments removed')
+        //////console.log('comments removed')
       }
-      ////console.log(`Change in row ${row} property ${prop}: ${oldValue} -> ${newValue}`);
+      //////console.log(`Change in row ${row} property ${prop}: ${oldValue} -> ${newValue}`);
     });
-  console.log('end before change')
+  //console.log('end before change')
 }
