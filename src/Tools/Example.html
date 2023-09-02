@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Handsontable Example</title>
+  <!-- Include Handsontable CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.min.css">
+</head>
+<body>
+  <div id="example"></div>
+
+  <!-- Include Handsontable JavaScript library -->
+  <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
+
+  <script>
+    const numRows = 100;
+    const numColumns = 3;
+
+    // Create a empty data of 3column and 100 rows 
+    const emptyData = [];
+    for (let i = 0; i < numRows; i++) {
+      const row = [];
+      for (let j = 0; j < numColumns; j++) {
+         row.push("");
+      }
+      emptyData.push(row);
+    }
+
+    // var emptyData = [
+    //  ['','',''],
+    //  ['','',''],
+        // until 100 rows
+    // ] 
+
+      const my_validator = function(value, callback) {
+        console.log('my_validator ')
+        console.log(value)
+        if(value==null || value=='') {
+            callback(true) 
+        } else if ( !isNaN(Number(value)) ){          
+            callback(true) 
+        } else {
+          callback(false)
+        }
+      }
+
+    // Create Handsontable instance
+    var hot = new Handsontable(document.getElementById('example'), {
+      data: emptyData,
+      columns: [
+        {data:0 , validator:my_validator},
+        {data:1 , validator:my_validator},
+        {data:2 , validator:my_validator}
+      ],
+      comments: true,
+      
+    afterValidate: function(isValid, value, row, prop, source) {
+        var commentsPlugin = hot.getPlugin('comments');
+        if ( !isValid )  {
+          // if is not Valid , so set the cell equal to '' et make comment to inform 
+          hot.setDataAtCell(row, prop,'')
+          commentsPlugin.setCommentAtCell(row, prop,'Please write a number !!')
+        } else if (isValid && (value==null || value=='') ) {
+          // do nothing if value == null or value == ''
+        } else {  
+          // if the value is a real value  -  isNaN(Number(value))==false - : So remove the comment if it exist or not;
+          commentsPlugin.removeCommentAtCell(row,prop);
+        }
+        }
+    });
+
+  </script>
+</body>
+</html>

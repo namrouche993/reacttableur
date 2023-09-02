@@ -19,7 +19,10 @@ import{
   
     emails_length_em,
     phonenumbers_length_pn,
-    onlynumbers_length_on
+    onlynumbers_length_on,
+
+    setInputValue_copypastelength,
+    getInputValue_copypastelength
   } from '../../initials_inputs.js';
 
   import { comments_messages } from '../../Tools/comments_messages.js'
@@ -65,7 +68,6 @@ import{
   export function afterValidatefct_phonenumber(isValid, oldvalue, row, prop, source,hot,commentsPlugin,phonenumbers_length_pn){        
     ////console.log('prop==7')
     ////console.log(isValid)
-
     if (isValid && oldvalue == null ) {
        ////console.log('condition phonenumbers  1')
        ////console.log('we are inside afterValidate phonenumbers value==null')
@@ -98,7 +100,8 @@ import{
        } else {
          ////console.log('condition phonenumbers 4')
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
-       if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
+       
+       if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'))
        }
        hot.setDataAtCell(row, prop,'','my_source_empty_phonenumbers')

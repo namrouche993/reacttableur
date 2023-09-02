@@ -171,6 +171,15 @@ import { ddatafct,data22fct } from './data.js';
        return srcautofillactivated;
    }
 
+  let copypastelength = false;
+  export function setInputValue_copypastelength(value) {
+    copypastelength = value;
+   }
+  export function getInputValue_copypastelength() {
+       return copypastelength;
+   }
+
+
 
   let last_row_to_use_for_dropdown_issue = ddatafct().length;
   

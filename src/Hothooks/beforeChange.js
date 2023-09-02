@@ -1,14 +1,20 @@
 import 
 { 
   userTimeZone,usTimeZones, //is_date_exist==false
+  getInputValue_copypastelength,
+  setInputValue_copypastelength
 }
 from '../initials_inputs.js'
 
 export function beforeChangeFct(changes,source,hot,commentsPlugin){
     //const hot = otherArgs[otherArgs.length - 1];
     console.log('beforeChange triggered')
-
-
+    //console.log(changes)
+    //console.log(source)
+    if(source=='CopyPaste.paste' && changes.length>10){
+      setInputValue_copypastelength(true);
+    }
+    //alert('beforechange')
     changes.forEach(([row, prop, oldValue, newValue]) => {
       //console.log('changes foreach in beforechange')
 

@@ -2,7 +2,11 @@
     import { mergecellsarray,mycellmergedfct } from '../Tools/mergecells';
     import { getInputValue_hot_undone2,
       getInputValue_srcautofillactivated,
-      setInputValue_srcautofillactivated
+      setInputValue_srcautofillactivated,
+
+      setInputValue_copypastelength,
+      getInputValue_copypastelength
+
 
     } from '../initials_inputs';
 
@@ -46,6 +50,11 @@
          }
      if( (src=='Autofill.fill' && changes.length>1) || (src=='CopyPaste.paste' && changes.length>1) ){
       ////console.log('afterchange src autofill && changes.length sup 1 : ')
+      
+      if(getInputValue_copypastelength()==true){
+        alert('it will be back to false now ')
+        setInputValue_copypastelength(false)
+      }
 
       lastelement_supthan1=hot.undoRedo.doneActions.length
       setInputValue_srcautofillactivated(true)
