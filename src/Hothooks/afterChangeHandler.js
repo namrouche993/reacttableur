@@ -46,6 +46,11 @@
       //alert('edit and changes>1')
       lastelement_supthan1=hot.undoRedo.doneActions.length
      }
+
+     if(src=='changeorganismesrc') {
+      console.log('we will remove changeorganisme src')
+      hot.undoRedo.doneActions.pop()
+     }
     
     
      if(src=='my_source' || src=='my_source_removewhitespacesign' || src=='my_source_removewhitespacesign_percentage' || src=='my_source_removegreaterdecimalnumbers_percentage' || src=='my_source_convertitto_0' || src=='my_source_removewhitespacesign_date' || src=='my_source_date'){
@@ -182,6 +187,7 @@
       hot.undoRedo.doneActions.pop();
       hot.undoRedo.undoneActions=_.cloneDeep(getInputValue_hot_undone2())
     }
+
     // place of else datepart
     
        // }

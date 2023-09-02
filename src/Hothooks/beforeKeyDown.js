@@ -10,7 +10,6 @@ export function beforeKeyDownfct(event,hot,
   commentsPlugin
   //condition_split2
   ) {  // editable the 2 indexx later inside 
-    console.log('beforekeydown : ')
 
 
     var selected = hot.getSelected();

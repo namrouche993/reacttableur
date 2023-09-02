@@ -37,7 +37,7 @@ for (let i = 0; i < data2[0].length; i++) {
 // Iterate over each row and update the maximum length for each column
 for (let row of data2) {
   for (let i = 0; i < row.length; i++) {
-    var cellValue = row[i].content;
+    var cellValue = row[i].content!==null ? row[i].content : '';
     columnMaxLengths[i] = Math.max(columnMaxLengths[i], calcwidth(font_size,cellValue.toString().length));
   }
 }
@@ -74,7 +74,9 @@ for (let i = 0; i < data2[0].length; i++) {
 
         for (let row of data2) {
   for (let i = 0; i < row.length; i++) {
-    cellValue = row[i].content;
+//    cellValue = row[i].content;
+    var cellValue = row[i].content!==null ? row[i].content : '';
+
     ////console.log('font_size after cellvalue : ');
     ////console.log(font_size);
     columnMaxLengths[i] = Math.max(columnMaxLengths[i], calcwidth(font_size,cellValue.toString().length));

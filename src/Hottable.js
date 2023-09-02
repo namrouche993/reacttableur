@@ -188,10 +188,11 @@ function Hottable() {
         console.log('afterChange triggered')
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
-        console.log('undo')
-        console.log(hot.undoRedo.doneActions)
         console.log('data22 in afterChange end : ')
         console.log(data22)
+        console.log('hot undoredo : ')
+        console.log(hot.undoRedo.doneActions)
+        console.log(hot.undoRedo.undoneActions)
         dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
       });
     
@@ -224,7 +225,7 @@ function Hottable() {
             var organismechosen = organisme_data.find(item => item.val === stored_organisme).label;
             var regionchosen = region_data.find(item => item.matriculeregion === stored_region).region;
     
-            hot.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen) // editable index
+            hot.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen,'changeorganismesrc') // editable index
           }
 
     return () => {

@@ -45,6 +45,11 @@ div#example1 {
    font-family: Roboto !important;
  }
 
+ td.headertop {
+  /* font-weight: bold !important; */
+  font-size: 14px !important;
+ }
+
  td.custom-titlecell {
    background-color: rgb(204,204,204) !important;
    font-weight: bold !important;

@@ -3,7 +3,7 @@ export function ddatafct(){
             var ddata= [];
             ddata.push(  
             ['',"République Algérienne Démocratique et Populaire",'','','','','','','','','','','','','','','',   ''],
-            ['',"Ministére de l'Habitat, de l'Urbanisme et de la Villa",'','','','','','','','','','','','','','','',   ''],
+            ['',"Ministére de l'Habitat, de l'Urbanisme et de la Ville",'','','','','','','','','','','','','','','',   ''],
          // ['',"Raccordement en énergies électriques et gazières et créances impayées auprés de la SADEG",'','','','','','','','','','','','','','','','',   ''],
             ['',"Etat d'éxecution des travaux de raccordement en énergies électrique et gaziéres  - Projets achevés ou dépassants les 50% d'avancement",'','','','','','','','','','','','','','','',   ''],
             ['','Organisme :','','','','','','','','','','','','','','','',''],

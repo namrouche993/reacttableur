@@ -116,7 +116,7 @@ function ModalEdit(props) {
 
   const [submitted, setSubmitted] = useState(false);
 
-  const [organisme, setOrganisme] = useState('');
+  const [organisme, setOrganisme] = useState(localStorage.getItem('organismechosen')==null ? '' : localStorage.getItem('organismechosen'));
   const [errorOrganisme, setErrorOrganisme] = useState(false);
 
   const handleOrganismeChange = (event) => {
@@ -126,7 +126,8 @@ function ModalEdit(props) {
   };
 
   
-  const [region, setRegion] = useState('');
+  const [region, setRegion] = useState(localStorage.getItem('region_storage') == null ? '' : localStorage.getItem('region_storage'));
+  
   const [errorRegion, setErrorRegion] = useState(false);
 
   const handleRegionChange = (event) => {
@@ -136,8 +137,7 @@ function ModalEdit(props) {
   };
 
 
-
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(localStorage.getItem('email_chosen') == null ? '' : localStorage.getItem('email_chosen') );
   const [errorEmail, setErrorEmail] = useState(false);
 
   const isValidEmail = (value) => {
@@ -156,7 +156,7 @@ function ModalEdit(props) {
 
 
 
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState( localStorage.getItem('phone_chosen') == null ? '' : localStorage.getItem('phone_chosen') );
   const [errorPN, setErrorPN] = useState(false);
 
   const handlePhoneNumberChange = (event) => {
@@ -218,7 +218,7 @@ function ModalEdit(props) {
         var organismechosen = organisme_data.find(item => item.val === organisme).label;
         var regionchosen = region_data.find(item => item.matriculeregion === region).region;
 
-        hotInstance_redux.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen) // editable index
+        hotInstance_redux.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen,'changeorganismesrc') // editable index
 
         localStorage.setItem('organismechosen', organisme);
         localStorage.setItem('region_storage', region);

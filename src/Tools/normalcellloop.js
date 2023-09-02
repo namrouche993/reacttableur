@@ -6,10 +6,10 @@ export function normalcellloop(){ // editable of course
   //console.log('******* normalcellloop ******++++++++++++++++++')
   ////console.log(otherArgs)
     const aus = [
-      { row: 0, col: 1, className: 'htCenter htMiddle' },  // Etat
-      { row: 1, col: 1, className: 'htCenter htMiddle' },  // Etat2
-      { row: 2, col: 1, className: 'htCenter htMiddle' },  // Etat333
-      { row: 3, col: 1, className: 'htLeft htMiddle' },    // Etat444
+      { row: 0, col: 1, className: 'htCenter htMiddle headertop' },  // Etat
+      { row: 1, col: 1, className: 'htCenter htMiddle headertop' },  // Etat2
+      { row: 2, col: 1, className: 'htCenter htMiddle headertop' },  // Etat333
+      { row: 3, col: 1, className: 'htLeft htMiddle headertop' },    // Etat444
   
   
       { row: 4, col: 1, className: 'htCenter htMiddle custom-titlecell' },

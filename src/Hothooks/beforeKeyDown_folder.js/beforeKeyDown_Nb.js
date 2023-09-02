@@ -13,9 +13,6 @@
     navigator_language,
     //condition_split
     ) {  // editable the 2 indexx later inside 
-      console.log('event.key : ')
-      console.log(event)
-      console.log(event.key)
       //alert('eventkey is : ' + event.key )
       var selectedCell = hot.getSelectedLast(); // Get selected cell object
       //var selectedRow = selectedCell[0][0]; // Get selected row index
