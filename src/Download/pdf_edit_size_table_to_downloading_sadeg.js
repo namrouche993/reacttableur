@@ -38,8 +38,6 @@ for (let i = 0; i < data2[0].length; i++) {
 for (let row of data2) {
   for (let i = 0; i < row.length; i++) {
     var cellValue = row[i].content;
-    ////console.log('cellValue : ')
-    ////console.log(cellValue)
     columnMaxLengths[i] = Math.max(columnMaxLengths[i], calcwidth(font_size,cellValue.toString().length));
   }
 }

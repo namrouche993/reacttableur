@@ -220,7 +220,7 @@ else if(i == 6){ // validator and renderers of dates
         if(thisrow>5){ // editable
           validator_date(oldvalue, callback, // validator of dates
                 decimalSeparator2.current,userLocale2.current,navigator_language2,userTimeZone,usTimeZones,use_en_time,
-                use_english_date_by_user_himeself_in_modal_withoutfct
+                use_english_date_by_user_himeself_in_modal.current
             )
       }
       },

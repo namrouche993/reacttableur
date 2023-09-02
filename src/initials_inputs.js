@@ -121,13 +121,31 @@ import { ddatafct,data22fct } from './data.js';
       export const display_plus_sign_in_the_start = true;
 
       //////////////////// REDUX ////////////////////////////
-      export var navigator_language2 = navigator.language // 'fr-FR' 'en-CA'  // editable
+      
+      export var navigator_language2 = localStorage.getItem('navigator_language2_storage')==null ? navigator.language : localStorage.getItem('navigator_language2_storage') // 'fr-FR' 'en-CA'  // editable
+      //export var navigator_language2 = navigator.language // 'fr-FR' 'en-CA'  // editable
+      
+      
       export var navigator_language2_avant_modify=navigator_language2;
-      export var userLocale2 = Intl.DateTimeFormat().resolvedOptions().locale //'fr'// editable maybe Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || navigator.userLanguage;
-      export var decimalSeparator2 = (1234567.73).toLocaleString(userLocale2, { style: 'decimal' }).substring(9, 10).toString();
+      
+
+      export var userLocale2 = localStorage.getItem('userLocale2_storage')==null ? Intl.DateTimeFormat().resolvedOptions().locale : localStorage.getItem('userLocale2_storage'); //'fr'// editable maybe Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || navigator.userLanguage;
+      //export var userLocale2 = Intl.DateTimeFormat().resolvedOptions().locale //'fr'// editable maybe Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || navigator.userLanguage;
+      
+      
+      export var decimalSeparator2 = localStorage.getItem('decimalSeparator2_storage')==null ? (1234567.73).toLocaleString(userLocale2, { style: 'decimal' }).substring(9, 10).toString() : localStorage.getItem('decimalSeparator2_storage');
+      //export var decimalSeparator2 = (1234567.73).toLocaleString(userLocale2, { style: 'decimal' }).substring(9, 10).toString();
+
+
       //export var condition_split2=true;
-      export var ds_haschanged=false;
-      export var use_english_date_by_user_himeself_in_modal = false;
+
+      //export var ds_haschanged= localStorage.getItem('ds_haschanged_storage')==null ? false : localStorage.getItem('ds_haschanged_storage');
+      export var ds_haschanged=false; // editable and may deleted
+
+      export var use_english_date_by_user_himeself_in_modal = localStorage.getItem('use_english_date_by_user_himeself_in_modal_storage')==null ? false : localStorage.getItem('use_english_date_by_user_himeself_in_modal_storage');
+      //export var use_english_date_by_user_himeself_in_modal = false;
+      
+      
       //export var hot_undone2={};
       export var use_english_date_by_user_himeself_in_modal_withoutfct=false;
 

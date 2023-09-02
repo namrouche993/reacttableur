@@ -210,14 +210,16 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
             if (rowIndex > startRowIndex) {
                 NumColumnsToConvert.forEach(columnIndex => {
                      const cellValue = row[columnIndex];
-                     const convertedNumber = cellValue.toString().replace(/\./g, ',');
-                     if(convertedNumber!=cellValue){
-                       ////console.log('convert dontequal to cellvalue : ')
-                       ////console.log(convertedNumber)
-                       ////console.log(cellValue)
-                       var changeonedata = [rowIndex, columnIndex, convertedNumber];
-                       changesdata_numeric.push(changeonedata);
+                     if(cellValue!==null & cellValue!==undefined){
+                       const convertedNumber = cellValue.toString().replace(/\./g, ',');
+                       if(convertedNumber!=cellValue){
+                         ////console.log('convert dontequal to cellvalue : ')
+                         ////console.log(convertedNumber)
+                         ////console.log(cellValue)
+                         var changeonedata = [rowIndex, columnIndex, convertedNumber];
+                         changesdata_numeric.push(changeonedata);
                     }
+                  }
                 });
               }
           });
@@ -260,11 +262,6 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
               console.log('----------------')
                 NumColumnsToConvert.forEach(columnIndex => {
                      const cellValue = row[columnIndex];
-                     console.log('cellValue : ')
-                     console.log(cellValue)
-                     console.log(cellValue==null)
-                     console.log(cellValue=='')
-                     console.log(cellValue==undefined)
                    if(cellValue!==null & cellValue!==undefined){
                      const convertedNumber = cellValue.toString().replace(/,/g, '.');
                      if(convertedNumber!=cellValue){
@@ -299,6 +296,8 @@ localStorage.setItem('ds_haschanged_storage', true);
 
 //dispatch({ type: 'SET_hot_undone2', payload: _.cloneDeep(hotInstance_redux.undoRedo.undoneActions) });  // WITH REDUX
 setInputValue_hot_undone2(_.cloneDeep(hotInstance_redux.undoRedo.undoneActions))
+//localStorage.setItem('hot_undone2_storage', _.cloneDeep(hotInstance_redux.undoRedo.undoneActions)); // editable if we save the undoredo
+
           hotInstance_redux.setDataAtRowProp(changesdata_numeric,'dataatrowprop_convert_to_en');
   }
 }
@@ -343,12 +342,16 @@ setInputValue_hot_undone2(_.cloneDeep(hotInstance_redux.undoRedo.undoneActions))
       dispatch({ type: 'SET_userLocale2', payload: userlocale2_bydefault_ifnotexist });  // WITH REDUX
       dispatch({ type: 'SET_decimalSeparator2', payload: decimalseparator2_bydefault_ifnotexist });  // WITH REDUX
       
+      localStorage.setItem('userLocale2_storage', userlocale2_bydefault_ifnotexist);
+      localStorage.setItem('decimalSeparator2_storage', decimalseparator2_bydefault_ifnotexist);
+
       //setInputValue_userLocale2(userlocale2_bydefault_ifnotexist);      
       //setInputValue_decimalSeparator2(decimalseparator2_bydefault_ifnotexist)      
       }
 
       if (!dateValues.includes(navigator_language2_redux)){ //is_date_exist==false
           dispatch({ type: 'SET_navigator_language2', payload: navigator_language2_bydefault_ifnotexist });  // WITH REDUX
+          localStorage.setItem('navigator_language2_storage', navigator_language2_bydefault_ifnotexist);
           // editable later for russian and turkey and some others
         }
     

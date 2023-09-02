@@ -74,13 +74,6 @@ export function pdf_return_table_to_downloading_Fct(hot,data22){
          var bgcolor = style.getPropertyValue('background-color') || '';
          var txtalign = style.getPropertyValue('text-align') || '';
          
-         console.log('-----------')
-         console.log('j text align : ')
-         console.log(j)
-         console.log(txtalign)
-         console.log(cell)
-         console.log(cellcontent)
-         console.log(element)
          //var fontfamily = style.getPropertyValue('font-family') || '';
         
          //  console.log('fontfamily :')

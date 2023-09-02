@@ -12,7 +12,7 @@ import { cellscells,normalcellloop } from './Tools/normalcellloop';
 import { mergecellsarray,mycellmergedfct,getCellsBetweenRanges,myoldmergedcells_fct,hasCommonPair } from './Tools/mergecells';
 
 import { afterValidatefct} from './Hothooks/afterValidatefct'
-import { beforeValidatefct } from './Hothooks/beforeValidate';
+// import { beforeValidatefct } from './Hothooks/beforeValidate';
 
 import { beforeChangeFct } from './Hothooks/beforeChange';
 
@@ -102,7 +102,7 @@ function Hottable() {
         ds_haschanged_ref,
         use_english_date_by_user_himeself_in_modal_ref,
         use_english_date_by_user_himeself_in_modal_withoutfct_ref,
-        getInputValue_hot_undone2()        
+        getInputValue_hot_undone2()
         ),
 
         contextMenu: {
@@ -143,7 +143,7 @@ function Hottable() {
         copyPaste: true,
 
         afterValidate: (isValid, value, row, prop, source) => {
-          afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_withoutfct_ref,commentsPlugin);
+          afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin);
         },
         beforeKeyDown: (event) => {
 
@@ -258,10 +258,12 @@ function Hottable() {
   
   useEffect(() => {
     use_english_date_by_user_himeself_in_modal_ref.current = use_english_date_by_user_himeself_in_modal_redux; // Update the ref whenever value11 changes
+    //alert('use_english_date_by_user_himeself_in_modal_redux is triggered : ' + use_english_date_by_user_himeself_in_modal_redux )
   }, [use_english_date_by_user_himeself_in_modal_redux]);
   
   useEffect(() => {
     use_english_date_by_user_himeself_in_modal_withoutfct_ref.current = use_english_date_by_user_himeself_in_modal_withoutfct_redux; // Update the ref whenever value11 changes
+  //alert('use_english_date_by_user_himeself_in_modal_withoutfct_redux is triggered')
   }, [use_english_date_by_user_himeself_in_modal_withoutfct_redux]);
   
   // useEffect(() => {
