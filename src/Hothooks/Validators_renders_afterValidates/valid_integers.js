@@ -20,8 +20,11 @@ import{
     is_negativenb_accepted_percperc,is_float_accepted_percperc,
   
     emails_length_em,
-     phonenumbers_length_pn,
-    onlynumbers_length_on
+    phonenumbers_length_pn,
+    onlynumbers_length_on,
+
+    setInputValue_copypastelength,
+    getInputValue_copypastelength
   
 } from '../../initials_inputs.js'
 
@@ -1090,8 +1093,8 @@ import { comments_messages } from '../../Tools/comments_messages.js'
       ////console.log('we are before COMMENT CONTENTS !!!!!!!!!!!!!!!!!!!!!!!!!!')
       ////console.log(value)
       //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
-      if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
-      commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
+      if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+        commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
 
       //commentsPlugin.setCommentAtCell(row, prop, 'Please enter only numbers.<br><br><p style="color:red;">Veuillez entrer uniquement des nombres.</p>');
 

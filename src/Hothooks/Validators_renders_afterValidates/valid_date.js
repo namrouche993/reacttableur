@@ -24,7 +24,10 @@ import{
     text_length_txt,
     use_en_time,
     setInputValue_condition_split2,
-    getInputValue_use_english_date_by_user_himeself_in_modal
+    getInputValue_use_english_date_by_user_himeself_in_modal,
+
+    setInputValue_copypastelength,
+    getInputValue_copypastelength
   } from '../../initials_inputs.js';
 
   import { comments_messages } from '../../Tools/comments_messages.js'
@@ -1302,8 +1305,8 @@ import{
           } else {
             //////console.log('condition date 4')
           //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
-          if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
-          commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+          if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
           }
           hot.setDataAtCell(row, prop,'','my_source_empty_date')
           ////////console.log('do nothing could end here')

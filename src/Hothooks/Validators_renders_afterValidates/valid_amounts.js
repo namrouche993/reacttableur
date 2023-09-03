@@ -22,7 +22,10 @@ import{
     emails_length_em,
     phonenumbers_length_pn,
     onlynumbers_length_on,
-    text_length_txt
+    text_length_txt,
+
+    setInputValue_copypastelength,
+    getInputValue_copypastelength
   } from '../../initials_inputs.js';
 
   import { comments_messages } from '../../Tools/comments_messages.js'
@@ -1084,8 +1087,8 @@ import{
             //maybe it will be a problem here : to fix after
             //////console.log('scientific format float mantissa and decimal separator is comma/dot and greather than 0.01')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
-            if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
-            commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
+            if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+              commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
             }
             hot.setDataAtCell(row, prop, '', 'my_source_empty')
           } else if (decimalSeparator == ',') {
@@ -1114,8 +1117,8 @@ import{
       //////console.log(value)
       //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
     
-    if(source!=='Autofill.fill' && source!=='CopyPaste.paste' ){
-      commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
+      if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+        commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
       commentsPlugin.showAtCell(row, prop);  
     }
       //commentsPlugin.setCommentAtCell(row, prop, 'Please enter only numbers.<br><br><p style="color:red;">Veuillez entrer uniquement des nombres.</p>');

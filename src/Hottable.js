@@ -127,7 +127,19 @@ function Hottable() {
           var cellsToAutofill = getCellsBetweenRanges(sourceRange.from, targetRange.to);
           var myoldmergedcells = myoldmergedcells_fct();
           const commonPairExists = hasCommonPair(cellsToAutofill, myoldmergedcells);
-      
+          console.log('beforeAutofill :')
+          console.log(sourceRange)
+          console.log(targetRange)
+          console.log(sourceRange.from)
+          console.log(targetRange.to)
+          console.log('cellsToAutofill :')
+          console.log(cellsToAutofill)
+          console.log('myoldmergedcells :')
+          console.log(myoldmergedcells)
+          console.log('commonPairExists :')
+          console.log(commonPairExists)
+          console.log('end beforeAutofill')
+          
           if (commonPairExists) {
             hot.updateSettings({mergeCells:mycellmergedfct(mergecellsarray)})
           } else {

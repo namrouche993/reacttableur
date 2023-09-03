@@ -18,8 +18,11 @@ import{
     is_negativenb_accepted_percperc,is_float_accepted_percperc,
   
     emails_length_em,
-     phonenumbers_length_pn,
-    onlynumbers_length_on
+    phonenumbers_length_pn,
+    onlynumbers_length_on,
+
+    setInputValue_copypastelength,
+    getInputValue_copypastelength
   } from '../../initials_inputs.js';
 
   import { comments_messages } from '../../Tools/comments_messages.js'
@@ -102,7 +105,7 @@ import{
        } else {
          ////console.log('condition onlynumbers 4')
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
-       if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
+       if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'onlynumbers_invalid','fr-FR'))
        }
        //console.log('three space instead of empty ')

@@ -18,8 +18,11 @@ import{
     is_negativenb_accepted_percperc,is_float_accepted_percperc,
   
     emails_length_em,
-     phonenumbers_length_pn,
-    onlynumbers_length_on
+    phonenumbers_length_pn,
+    onlynumbers_length_on,
+
+    setInputValue_copypastelength,
+    getInputValue_copypastelength
   } from '../../initials_inputs.js';
 
   import { comments_messages } from '../../Tools/comments_messages.js'
@@ -99,8 +102,8 @@ var data22 = data22fct();
         ////alert('invalid dropdown')
         ////console.log('first cond')
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
-        if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
-        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
+        if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+          commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
         }
         hot.setDataAtCell(row, prop,' ','my_source_empty_dropdown');
         
@@ -113,8 +116,8 @@ var data22 = data22fct();
       } else if (oldvalue===' ') {
         ////console.log('2 cond')
         //commentsPlugin.removeCommentAtCell(row,prop);
-        if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
-        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
+        if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+          commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
         }
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
         

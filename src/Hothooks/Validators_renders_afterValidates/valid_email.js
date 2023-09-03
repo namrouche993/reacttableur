@@ -19,7 +19,10 @@ import{
   
     emails_length_em,
      phonenumbers_length_pn,
-    onlynumbers_length_on
+    onlynumbers_length_on,
+
+    setInputValue_copypastelength,
+    getInputValue_copypastelength
   } from '../../initials_inputs.js';
 
   import { comments_messages } from '../../Tools/comments_messages.js'
@@ -88,8 +91,8 @@ import{
        } else {
          ////console.log('condition email 4')
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
-       if(source!=='Autofill.fill' && source!=='CopyPaste.paste'){
-       commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'email_invalid','fr-FR'))
+       if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'email_invalid','fr-FR'))
        }
        hot.setDataAtCell(row, prop,'','my_source_empty_email')
 
