@@ -69,3 +69,35 @@ export function normalcellloop(){ // editable of course
       }
       return cellProperties;
     }
+
+// Define a function to check if a cell is read-only
+function isCellReadOnly(row, col,hot) {
+  // You can customize this logic based on your cellProperties structure
+  return hot.getCellMeta(row, col).readOnly === true;
+}
+
+export function cells_with_readonly(hot){
+      // Assuming you have a Handsontable instance named "hot"
+
+
+// Get the number of rows and columns in your table
+const rowCount = hot.countRows();
+const colCount = hot.countCols();
+
+// Create an array to store the cell coordinates of read-only cells
+const readOnlyCells = [];
+
+// Iterate through all cells and add the read-only ones to the array
+for (let row = 0; row < rowCount; row++) {
+  for (let col = 0; col < colCount; col++) {
+    if (isCellReadOnly(row, col,hot)) {
+      readOnlyCells.push({ row, col });
+    }
+  }
+}
+
+// Use the selectCells method to select all read-only cells
+//hot.selectCells(readOnlyCells);
+
+return readOnlyCells
+    }

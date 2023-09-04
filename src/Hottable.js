@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { ddatafct,data22fct } from './data.js';
 import { Columns_data_for_Validator_renders } from './Hothooks/Columns_data_for_Validator_renders';
-import { cellscells,normalcellloop } from './Tools/normalcellloop';
+import { cellscells,normalcellloop,cells_with_readonly } from './Tools/normalcellloop';
 import { mergecellsarray,mycellmergedfct,getCellsBetweenRanges,myoldmergedcells_fct,hasCommonPair } from './Tools/mergecells';
 
 import { afterValidatefct} from './Hothooks/afterValidatefct'
@@ -126,21 +126,16 @@ function Hottable() {
         beforeAutofill: (selectionData, sourceRange, targetRange, direction) => {
           var cellsToAutofill = getCellsBetweenRanges(sourceRange.from, targetRange.to);
           var myoldmergedcells = myoldmergedcells_fct();
-          const commonPairExists = hasCommonPair(cellsToAutofill, myoldmergedcells);
-          console.log('beforeAutofill :')
-          console.log(sourceRange)
-          console.log(targetRange)
-          console.log(sourceRange.from)
-          console.log(targetRange.to)
-          console.log('cellsToAutofill :')
-          console.log(cellsToAutofill)
-          console.log('myoldmergedcells :')
-          console.log(myoldmergedcells)
-          console.log('commonPairExists :')
-          console.log(commonPairExists)
-          console.log('end beforeAutofill')
-          
+          //console.log('hot in beforeautofill : ')
+          //console.log(hot)
+          var cells_with_readonly0 = cells_with_readonly(hot)
+          //console.log(cells_with_readonly0)
+
+          //const commonPairExists = hasCommonPair(cellsToAutofill, myoldmergedcells);
+          const commonPairExists = hasCommonPair(cellsToAutofill, cells_with_readonly0);
+
           if (commonPairExists) {
+            //alert('yes inside')
             hot.updateSettings({mergeCells:mycellmergedfct(mergecellsarray)})
           } else {
             ////alert("No common pair exists in both arrays.");
@@ -202,9 +197,10 @@ function Hottable() {
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
         ////console.log('data22 in afterChange end : ')
         ////console.log(data22)
-        ////console.log('hot undoredo : ')
-        ////console.log(hot.undoRedo.doneActions)
-        ////console.log(hot.undoRedo.undoneActions)
+        console.log('hot undoredo : ')
+        console.log(hot.undoRedo.doneActions)
+        console.log(hot.undoRedo.undoneActions)
+        
         dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
       });
     
