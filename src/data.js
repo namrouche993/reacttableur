@@ -32,3 +32,5 @@ export function ddatafct(){
             var retddata = ddatafct(last_row_after_header)
             return retddata.map(arr => [...arr]);
         }
+
+        export var data_localstorage = localStorage.getItem('data_localstorage_storage')==null ? ddatafct() : localStorage.getItem('data_localstorage_storage');

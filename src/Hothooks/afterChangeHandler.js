@@ -180,11 +180,24 @@
         */
 
         if(src!=='loadData'){
-        changes.forEach((x,y)=>{
+console.log('changes ***************')
+console.log(changes)
+          changes.forEach((x,y)=>{
           //////console.log(y)
           ////console.log('cellgetcell : ')
+          console.log('------------')
+          console.log(y)
+          console.log(x)
+          console.log(data22)
+
+
           var cellgetcell = hot.getCell(x[0],x[1]);
-          ////console.log(cellgetcell)
+
+          console.log(cellgetcell)
+          console.log('------------')
+
+
+
           ////console.log(cellgetcell.childNodes)
           ////console.log(cellgetcell.childNodes[cellgetcell.children.length])
           //alert('cellget')

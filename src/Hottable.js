@@ -6,7 +6,7 @@ import { afterChangeHandler } from './Hothooks/afterChangeHandler';
 import Essaitest from './Hothooks/Essaitest';
 import { useSelector, useDispatch } from 'react-redux'; 
 
-import { ddatafct,data22fct } from './data.js';
+import { ddatafct,data22fct,data_localstorage } from './data.js';
 import { Columns_data_for_Validator_renders } from './Hothooks/Columns_data_for_Validator_renders';
 import { cellscells,normalcellloop,cells_with_readonly } from './Tools/normalcellloop';
 import { mergecellsarray,mycellmergedfct,getCellsBetweenRanges,myoldmergedcells_fct,hasCommonPair } from './Tools/mergecells';
@@ -23,6 +23,9 @@ import { getLast_row_to_use_for_dropdown_issue,
 } from './initials_inputs';
 
 import { organisme_data, region_data } from './Navbar/ModalEdit';
+import LoadingSpinner from './LoadingSpinner.js';
+
+
 function Hottable() {
   
   const userLocale2_redux  = useSelector(state => state.userLocale2);
@@ -68,15 +71,30 @@ function Hottable() {
   
 
   const dispatch = useDispatch();
-
+  let changeTimer;
   
-  var data = ddatafct();
+  var data = JSON.parse(data_localstorage) //ddatafct();
   var data22 = data22fct()
   const array_of_notmerged_cells = [];
 
   const hotTableComponent = React.useRef(null);
   // const [hotInstance, setHotInstance] = useState(null);  WITHOUT REDUX
   //const [skipAfterValidate,setSkipAfterValidate]=useState(false)
+
+  const [isLoading, setIsLoading] = useState(false);
+  // Function to show the spinner
+  const showSpinner = () => {
+    setIsLoading(true);
+  };
+
+  // Function to hide the spinner
+  const hideSpinner = () => {
+    setIsLoading(false);
+  };
+
+
+
+
 
   React.useEffect(() => {
     //alert('userlocal2_redix just before setting hot = newhandsontable will be : '  + userLocale2_redux + ' and decimalSeparator2_redux : ' + decimalSeparator2_redux)
@@ -188,7 +206,11 @@ function Hottable() {
       //const hotInstance = hot; // Store the hot instance
       //beforeChangeFct(changes,source, ...otherArgs, hotInstance)
       //console.log('beforeChange triggered')
+      if(source=='CopyPaste.paste' && changes.length>30){
+        showSpinner()
+      }
       beforeChangeFct(changes,source,hot,commentsPlugin)
+
     });
 
       hot.addHook('afterChange', (changes, source) => {
@@ -200,6 +222,24 @@ function Hottable() {
         console.log('hot undoredo : ')
         console.log(hot.undoRedo.doneActions)
         console.log(hot.undoRedo.undoneActions)
+        
+
+        if (changeTimer) {
+          clearTimeout(changeTimer);
+        }
+    
+        // Set a new timer to trigger something after 1 second
+        changeTimer = setTimeout(function () {
+          // Perform the action you want to trigger here
+          var my_actual_getdata = JSON.stringify(hot.getData());
+
+          localStorage.setItem('data_localstorage_storage',my_actual_getdata)
+          if(!isLoading){
+            hideSpinner()
+          }
+          //alert('Triggered after the last afterChange event within 1 second.');
+        }, 1000);
+
         
         dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
       });
@@ -300,6 +340,9 @@ function Hottable() {
     <>
     {/* <Essaitest/>  WITH REDUX : */}
     <div>
+      {/* <button onClick={showSpinner}>Show Spinner</button>
+      <button onClick={hideSpinner}>Hide Spinner</button> */}
+      <LoadingSpinner open={isLoading} />
       <div ref={hotTableComponent} />
     </div>
     </>
