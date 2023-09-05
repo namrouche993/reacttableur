@@ -181,7 +181,7 @@ import { ddatafct,data22fct } from './data.js';
 
 
 
-  let last_row_to_use_for_dropdown_issue = ddatafct().length;
+  let last_row_to_use_for_dropdown_issue = ddatafct(last_row_after_header).length;
   
   export function setLast_row_to_use_for_dropdown_issue(value) {
     last_row_to_use_for_dropdown_issue=value;

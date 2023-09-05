@@ -1,5 +1,6 @@
 import{ last_row_after_header} from './initials_inputs'
-export function ddatafct(){
+
+export function ddatafct(last_row_after_header){
             var ddata= [];
             ddata.push(  
             ['',"République Algérienne Démocratique et Populaire",'','','','','','','','','','','','','','','',   ''],
@@ -33,4 +34,4 @@ export function ddatafct(){
             return retddata.map(arr => [...arr]);
         }
 
-        export var data_localstorage = localStorage.getItem('data_localstorage_storage')==null ? ddatafct() : localStorage.getItem('data_localstorage_storage');
+export var data_localstorage = localStorage.getItem('data_localstorage_storage')==null ? ddatafct(last_row_after_header) : localStorage.getItem('data_localstorage_storage');

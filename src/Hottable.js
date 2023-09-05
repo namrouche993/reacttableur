@@ -16,7 +16,9 @@ import { afterValidatefct} from './Hothooks/afterValidatefct'
 
 import { beforeChangeFct } from './Hothooks/beforeChange';
 
-import { getLast_row_to_use_for_dropdown_issue,
+import { 
+  last_row_after_header,
+  getLast_row_to_use_for_dropdown_issue,
   setLast_row_to_use_for_dropdown_issue,
   getInputValue_hot_undone2,
   setInputValue_hot_undone2
@@ -73,7 +75,7 @@ function Hottable() {
   const dispatch = useDispatch();
   let changeTimer;
   
-  var data = JSON.parse(data_localstorage) //ddatafct();
+  var data = JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
   var data22 = data22fct()
   const array_of_notmerged_cells = [];
 
