@@ -1,5 +1,5 @@
 import { startsWithElement } from './Tools/startsWithElement.js'
-import { ddatafct,data22fct } from './data.js';
+// import { ddatafct,data22fct } from './data.js';
   //#region initials inputs nb
   export const last_row_after_header = 15;
 
@@ -181,15 +181,6 @@ import { ddatafct,data22fct } from './data.js';
 
 
 
-  let last_row_to_use_for_dropdown_issue = ddatafct(last_row_after_header).length;
-  
-  export function setLast_row_to_use_for_dropdown_issue(value) {
-    last_row_to_use_for_dropdown_issue=value;
-  }
-
-  export function getLast_row_to_use_for_dropdown_issue(value) {
-    return last_row_to_use_for_dropdown_issue;
-  }
 
 
   let hot_undone2={};

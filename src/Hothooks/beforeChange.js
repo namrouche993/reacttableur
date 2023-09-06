@@ -11,7 +11,7 @@ export function beforeChangeFct(changes,source,hot,commentsPlugin){
     console.log('beforeChange triggered')
     //console.log(changes)
     //console.log(source)
-    if(source=='CopyPaste.paste' && changes.length>20){
+    if(source=='CopyPaste.paste' && changes.length>30){
       setInputValue_copypastelength(true);
     }
     //alert('beforechange')

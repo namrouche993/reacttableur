@@ -180,22 +180,12 @@
         */
 
         if(src!=='loadData'){
-console.log('changes ***************')
-console.log(changes)
           changes.forEach((x,y)=>{
           //////console.log(y)
           ////console.log('cellgetcell : ')
-          console.log('------------')
-          console.log(y)
-          console.log(x)
-          console.log(data22)
-
+        
 
           var cellgetcell = hot.getCell(x[0],x[1]);
-
-          console.log(cellgetcell)
-          console.log('------------')
-
 
 
           ////console.log(cellgetcell.childNodes)
@@ -205,7 +195,7 @@ console.log(changes)
           if(cellgetcell!==null && cellgetcell.childNodes[cellgetcell.children.length]!==undefined){
             data22[x[0]][x[1]]=cellgetcell.childNodes[cellgetcell.children.length].textContent.toString().trim().replace(/[\s\u00A0]/g, ' ') 
           } else {
-            data22[x[0]][x[1]]=''
+            data22[x[0]][x[1]]='';
           }
         })
         //alert('data22 triggered')

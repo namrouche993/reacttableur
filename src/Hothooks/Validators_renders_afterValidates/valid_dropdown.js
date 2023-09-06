@@ -22,11 +22,12 @@ import{
     onlynumbers_length_on,
 
     setInputValue_copypastelength,
-    getInputValue_copypastelength
+    getInputValue_copypastelength,
+
   } from '../../initials_inputs.js';
 
   import { comments_messages } from '../../Tools/comments_messages.js'
-  import {data22fct} from '../../data.js'
+  // import {data22fct} from '../../data.js'
   import {isValidDate} from  '../../Tools/isValidDate.js';
 
   // REMEMBER , NOTE : dont change source and to include it (obviously)
@@ -55,7 +56,7 @@ else if( i == 1 ) {
 
   
   
-var data22 = data22fct();
+//var data22 = data22fct(last_row_after_header);
 
 
   export function renderer_dropdown(instance, td, row, col, prop, oldvalue, cellProperties,data22){

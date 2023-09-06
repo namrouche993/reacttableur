@@ -1,4 +1,4 @@
-import{ last_row_after_header} from './initials_inputs'
+import { last_row_after_header } from './initials_inputs.js';
 
 export function ddatafct(last_row_after_header){
             var ddata= [];
@@ -29,9 +29,23 @@ export function ddatafct(last_row_after_header){
         return ddata
     }
 
-        export function data22fct(){
-            var retddata = ddatafct(last_row_after_header)
+    export var data_localstorage = localStorage.getItem('data_localstorage_storage')==null ? ddatafct(last_row_after_header) : localStorage.getItem('data_localstorage_storage');
+    
+    export function data22fct(last_row_after_header){
+            alert('data2ffcttt')
+            var retddata = JSON.parse(data_localstorage)
             return retddata.map(arr => [...arr]);
         }
 
-export var data_localstorage = localStorage.getItem('data_localstorage_storage')==null ? ddatafct(last_row_after_header) : localStorage.getItem('data_localstorage_storage');
+
+        
+let last_row_to_use_for_dropdown_issue = ddatafct(last_row_after_header).length;
+  
+export function setLast_row_to_use_for_dropdown_issue(value) {
+    last_row_to_use_for_dropdown_issue=value;
+}
+
+export function getLast_row_to_use_for_dropdown_issue(value) {
+    return last_row_to_use_for_dropdown_issue;
+}
+

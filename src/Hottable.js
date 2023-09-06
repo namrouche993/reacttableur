@@ -1,14 +1,26 @@
 import React, { useRef, useState,useEffect } from 'react'
 import 'handsontable/dist/handsontable.full.css'; // Import Handsontable CSS
 import Handsontable from 'handsontable';
+
+import { 
+  last_row_after_header,
+  getInputValue_hot_undone2,
+  setInputValue_hot_undone2
+} from './initials_inputs.js';
+
+import { ddatafct,data22fct,data_localstorage,
+
+  getLast_row_to_use_for_dropdown_issue,
+  setLast_row_to_use_for_dropdown_issue,
+} from './data.js';
+import { cellscells,normalcellloop,cells_with_readonly } from './Tools/normalcellloop';
+
 import { beforeKeyDownfct } from './Hothooks/beforeKeyDown';
 import { afterChangeHandler } from './Hothooks/afterChangeHandler';
 import Essaitest from './Hothooks/Essaitest';
 import { useSelector, useDispatch } from 'react-redux'; 
 
-import { ddatafct,data22fct,data_localstorage } from './data.js';
 import { Columns_data_for_Validator_renders } from './Hothooks/Columns_data_for_Validator_renders';
-import { cellscells,normalcellloop,cells_with_readonly } from './Tools/normalcellloop';
 import { mergecellsarray,mycellmergedfct,getCellsBetweenRanges,myoldmergedcells_fct,hasCommonPair } from './Tools/mergecells';
 
 import { afterValidatefct} from './Hothooks/afterValidatefct'
@@ -16,13 +28,6 @@ import { afterValidatefct} from './Hothooks/afterValidatefct'
 
 import { beforeChangeFct } from './Hothooks/beforeChange';
 
-import { 
-  last_row_after_header,
-  getLast_row_to_use_for_dropdown_issue,
-  setLast_row_to_use_for_dropdown_issue,
-  getInputValue_hot_undone2,
-  setInputValue_hot_undone2
-} from './initials_inputs';
 
 import { organisme_data, region_data } from './Navbar/ModalEdit';
 import LoadingSpinner from './LoadingSpinner.js';
@@ -68,7 +73,7 @@ function Hottable() {
   
 
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
-  //const data22_redux = useSelector(state => state.data22);
+  const data22 = useSelector(state => state.data22);  //data22_redux
 
   
 
@@ -76,7 +81,6 @@ function Hottable() {
   let changeTimer;
   
   var data = JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
-  var data22 = data22fct()
   const array_of_notmerged_cells = [];
 
   const hotTableComponent = React.useRef(null);
@@ -100,6 +104,7 @@ function Hottable() {
 
   React.useEffect(() => {
     //alert('userlocal2_redix just before setting hot = newhandsontable will be : '  + userLocale2_redux + ' and decimalSeparator2_redux : ' + decimalSeparator2_redux)
+    //var data22 = data22fct(last_row_after_header)
 
     const hot  = new Handsontable(hotTableComponent.current, {
       data,
@@ -122,7 +127,10 @@ function Hottable() {
         ds_haschanged_ref,
         use_english_date_by_user_himeself_in_modal_ref,
         use_english_date_by_user_himeself_in_modal_withoutfct_ref,
-        getInputValue_hot_undone2()
+        getInputValue_hot_undone2(),
+
+        data22 //data22_redux
+        //,data22
         ),
 
         contextMenu: {
@@ -183,6 +191,9 @@ function Hottable() {
           //console.log('beforeCreateRow HOOOK')
 
           data22[data22.length]= ['','','','','','','','','','','','','','','','','',   ''] // editable the nb 
+          dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
+          console.log(' data 22 beforeCreateRow')
+          console.log(data22)
         },
 
       
@@ -208,7 +219,12 @@ function Hottable() {
       //const hotInstance = hot; // Store the hot instance
       //beforeChangeFct(changes,source, ...otherArgs, hotInstance)
       //console.log('beforeChange triggered')
-      if(source=='CopyPaste.paste' && changes.length>30){
+      
+      //if( (source=='CopyPaste.paste' && changes.length>30) || (source=='edit' && changes.length>30) || (source=='Autofill.fill' && changes.length>30) || (source=='UndoRedo.redo' && changes.length>30) ){
+     if (changes.length>30){
+        console.log('show showspinner : ')
+        console.log(source)
+        console.log(changes)
         showSpinner()
       }
       beforeChangeFct(changes,source,hot,commentsPlugin)
@@ -216,15 +232,14 @@ function Hottable() {
     });
 
       hot.addHook('afterChange', (changes, source) => {
+        console.log('afterChange : ')
+        console.log(source)
+        console.log(changes)
         //console.log('afterChange triggered')
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
         ////console.log('data22 in afterChange end : ')
         ////console.log(data22)
-        console.log('hot undoredo : ')
-        console.log(hot.undoRedo.doneActions)
-        console.log(hot.undoRedo.undoneActions)
-        
 
         if (changeTimer) {
           clearTimeout(changeTimer);
@@ -234,6 +249,10 @@ function Hottable() {
         changeTimer = setTimeout(function () {
           // Perform the action you want to trigger here
           var my_actual_getdata = JSON.stringify(hot.getData());
+//          dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
+          
+          dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
+                   
 
           localStorage.setItem('data_localstorage_storage',my_actual_getdata)
           if(!isLoading){
@@ -241,9 +260,9 @@ function Hottable() {
           }
           //alert('Triggered after the last afterChange event within 1 second.');
         }, 1000);
-
         
-        dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
+        //dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
+
       });
     
       //setHotInstance(hot);  WITHOUT REDUX

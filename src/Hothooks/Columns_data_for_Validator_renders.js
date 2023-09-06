@@ -1,4 +1,4 @@
-import { data22fct } from '../data.js';
+// import { data22fct } from '../data.js';
 import { PercentageEditor } from '../Tools/PercentageEditor';
 import { validator_amounts,renderer_amounts } from './Validators_renders_afterValidates/valid_amounts.js'
 import { validator_integers,renderer_integers } from './Validators_renders_afterValidates/valid_integers'
@@ -37,7 +37,7 @@ import{
   userTimeZone,
   usTimeZones,
   use_en_time,
-
+  
   display_plus_sign_in_the_start
 
 } from '../initials_inputs.js';
@@ -47,7 +47,7 @@ import Handsontable from 'handsontable';
 
 
 
-var data22 = data22fct()
+//var data22 = data22fct(last_row_after_header)
 
 //var columnsdata = (imin,imax) => {
 export function Columns_data_for_Validator_renders(imin,imax,
@@ -61,6 +61,8 @@ export function Columns_data_for_Validator_renders(imin,imax,
   use_english_date_by_user_himeself_in_modal,
   use_english_date_by_user_himeself_in_modal_withoutfct,
   hot_undone2,
+
+  data22
   ) {
     //alert('userLocale2  in Columns_data_for.. will be : '  + userLocale2.current + ' and decimalSeparator2 : ' + decimalSeparator2.current)
   ////console.log('before using it')

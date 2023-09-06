@@ -10,6 +10,7 @@ import {
   use_english_date_by_user_himeself_in_modal,
   use_english_date_by_user_himeself_in_modal_withoutfct,
   hot_undone2,
+  last_row_after_header
 
   
  }
@@ -31,7 +32,7 @@ const initialState = {
   //hot_undone2: hot_undone2,
 
   unmerged_cells_to_unmerge: [],
-  data22:data22fct()
+  data22:data22fct(last_row_after_header)
 };
 
 const reducer = (state = initialState, action) => {
@@ -102,6 +103,8 @@ const reducer = (state = initialState, action) => {
                   unmerged_cells_to_unmerge: action.payload
                 };
                 case 'SET_DATA22':
+                  console.log('we are inside case SET_DATA22')
+                  console.log(action.payload)
                 return {
                   ...state,
                   data22: action.payload
