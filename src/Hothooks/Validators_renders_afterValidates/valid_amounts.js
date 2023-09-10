@@ -560,7 +560,7 @@ import{
     //////console.log(oldvalue)
     //////console.log(typeof oldvalue)
 
-    if (oldvalue !== null) {
+    if (oldvalue !== null && oldvalue !== undefined) {
       if (oldvalue.toString().includes(currencyht_nbnb) && currencyht_nbnb!=''   ) {
         //////console.log('new VALuE in afterValidator will be : ' + oldvalue.toString().replace(currencyht_nbnb, ''))
         hot.setDataAtCell(row, prop, oldvalue.toString().replace(currencyht_nbnb, ''), 'my_source');

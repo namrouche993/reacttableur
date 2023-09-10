@@ -12,7 +12,9 @@ function App() {
     <Navbar/>
     {/* Hi world */}
     <br></br>
+    <div style={{marginTop:43}}>
     <Hottable/>
+    </div>
     </>
   );
 }

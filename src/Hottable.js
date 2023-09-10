@@ -5,7 +5,11 @@ import Handsontable from 'handsontable';
 import { 
   last_row_after_header,
   getInputValue_hot_undone2,
-  setInputValue_hot_undone2
+  setInputValue_hot_undone2,
+
+  getInputValue_spinnerf,
+  setInputValue_spinnerf
+
 } from './initials_inputs.js';
 
 import { ddatafct,data22fct,data_localstorage,
@@ -131,6 +135,7 @@ function Hottable() {
 
         data22 //data22_redux
         //,data22
+        
         ),
 
         contextMenu: {
@@ -161,6 +166,14 @@ function Hottable() {
 
           //const commonPairExists = hasCommonPair(cellsToAutofill, myoldmergedcells);
           const commonPairExists = hasCommonPair(cellsToAutofill, cells_with_readonly0);
+          console.log('cellsToAutofill :')
+          console.log(cellsToAutofill)
+          console.log('cells_with_readonly0 :')
+          console.log(cells_with_readonly0)
+          console.log('commonPairExists :')
+          console.log(commonPairExists)
+
+
 
           if (commonPairExists) {
             //alert('yes inside')
@@ -178,7 +191,14 @@ function Hottable() {
         copyPaste: true,
 
         afterValidate: (isValid, value, row, prop, source) => {
-          afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin);
+          if(prop==2 && value==null & isValid==true){ // editable index , 2 means dropdown 
+          setTimeout(() => {
+            if(!isLoading){
+              hideSpinner()
+            }
+          }, 1000);
+        }
+          afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin,isLoading);
         },
         beforeKeyDown: (event) => {
 
@@ -222,10 +242,11 @@ function Hottable() {
       
       //if( (source=='CopyPaste.paste' && changes.length>30) || (source=='edit' && changes.length>30) || (source=='Autofill.fill' && changes.length>30) || (source=='UndoRedo.redo' && changes.length>30) ){
      if (changes.length>30){
-        console.log('show showspinner : ')
-        console.log(source)
-        console.log(changes)
-        showSpinner()
+        //console.log('show showspinner : ')
+        //console.log(source)
+        //console.log(changes)
+        showSpinner();
+        //setInputValue_spinnerf(true);
       }
       beforeChangeFct(changes,source,hot,commentsPlugin)
 
@@ -233,8 +254,10 @@ function Hottable() {
 
       hot.addHook('afterChange', (changes, source) => {
         console.log('afterChange : ')
-        console.log(source)
-        console.log(changes)
+        //console.log(source)
+        //console.log(changes)
+        //console.log(changeTimer)
+        //console.log(isLoading)
         //console.log('afterChange triggered')
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
@@ -343,6 +366,11 @@ function Hottable() {
   useEffect(() => {
     unmerged_cells_to_unmerge_ref.current = unmerged_cells_to_unmerge_redux; // Update the ref whenever value11 changes
   }, [unmerged_cells_to_unmerge_redux]);
+  
+  useEffect(() => {
+    console.log('we are inside if useEffect getInputValue_spinnerf ')
+    setIsLoading(getInputValue_spinnerf()); // Update the ref whenever value11 changes
+  }, [getInputValue_spinnerf()]);
   
 
 

@@ -25,7 +25,7 @@ const appTheme = createTheme({
         styleOverrides: {
           root: {
             minHeight: '48px !important', // Set your desired minHeight value
-            backgroundColor:'#f2f2f2'
+            backgroundColor:'#f2f2f2',
           },
         },
       },
@@ -106,7 +106,7 @@ function Navbar() {
 
   return (
         <ThemeProvider theme={appTheme}>
-         <AppBar position="static" sx={{height:50}}>
+         <AppBar position="fixed" sx={{height:50}}>
          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
             <div id='idfor2buttons'>
             <Tooltip title={<span style={{fontSize:16}}>Undo (Ctrl+Z)</span>} >

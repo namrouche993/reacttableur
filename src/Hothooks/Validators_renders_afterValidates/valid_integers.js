@@ -561,7 +561,7 @@ import { comments_messages } from '../../Tools/comments_messages.js'
     ////console.log(oldvalue)
     ////console.log(typeof oldvalue)
 
-     if (oldvalue !== null) {
+     if (oldvalue !== null && oldvalue !== undefined) {
        if (oldvalue.toString().includes(currencyht_intint) && currencyht_intint!=''  ) {
          ////console.log('new VALuE in afterValidator will be : ' + oldvalue.toString().replace(currencyht_intint, ''))
          hot.setDataAtCell(row, prop, oldvalue.toString().replace(currencyht_intint, ''), 'my_source');

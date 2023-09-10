@@ -103,8 +103,6 @@ const reducer = (state = initialState, action) => {
                   unmerged_cells_to_unmerge: action.payload
                 };
                 case 'SET_DATA22':
-                  console.log('we are inside case SET_DATA22')
-                  console.log(action.payload)
                 return {
                   ...state,
                   data22: action.payload

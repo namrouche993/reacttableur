@@ -9,8 +9,8 @@ from '../initials_inputs.js'
 export function beforeChangeFct(changes,source,hot,commentsPlugin){
     //const hot = otherArgs[otherArgs.length - 1];
     console.log('beforeChange triggered')
-    //console.log(changes)
-    //console.log(source)
+    console.log(changes)
+    console.log(source)
     if(source=='CopyPaste.paste' && changes.length>30){
       setInputValue_copypastelength(true);
     }

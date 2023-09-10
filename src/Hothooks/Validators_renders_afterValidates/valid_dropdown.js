@@ -24,6 +24,9 @@ import{
     setInputValue_copypastelength,
     getInputValue_copypastelength,
 
+    getInputValue_spinnerf,
+    setInputValue_spinnerf
+
   } from '../../initials_inputs.js';
 
   import { comments_messages } from '../../Tools/comments_messages.js'
@@ -60,6 +63,8 @@ else if( i == 1 ) {
 
 
   export function renderer_dropdown(instance, td, row, col, prop, oldvalue, cellProperties,data22){
+    console.log('renderer_dropdown')
+
     //const data22 = otherArgs[otherArgs.length - 1];
     //td.innerHTML=oldvalue;
     //data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
@@ -72,6 +77,7 @@ else if( i == 1 ) {
                   }
   
   export function validator_dropdown(value, callback,my_source){
+    console.log('validator_dropdown')
     if(value==null){
         callback(true)
       }else if(my_source.includes(value)){
@@ -84,17 +90,16 @@ else if( i == 1 ) {
         }
 
 
-  export function afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin){        
+  export function afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin,isLoading){        
     ////console.log('prop==5')
-    if(oldvalue==null){
-        ////console.log('we are inside null');
-        
-        /*
-        setTimeout(() => {
-          commentsPlugin.removeCommentAtCell(row,prop);
-        }, 100);
-        */
+    console.log('afterValidate_dropdown')
+    console.log(isValid)
+    console.log(oldvalue)
+    console.log(row)
+    console.log(prop)
+    console.log(source)
 
+    if(oldvalue==null){
         //data22[row][prop] = '';
         //////console.log('data22 in oldvalue==null')
         //////console.log(data22)

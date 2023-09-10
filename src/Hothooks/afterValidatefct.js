@@ -42,9 +42,10 @@ import{
 
 
   
-export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLocale,decimalSeparator,navigator_language,use_english_date_by_user_himeself_in_modal,commentsPlugin){
+export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLocale,decimalSeparator,navigator_language,use_english_date_by_user_himeself_in_modal,commentsPlugin,isLoading){
   
   console.log('aftervalidate Function triggered')
+ 
     // const hot = otherArgs[otherArgs.length - 1];
     //alert('we are in afterValidatefct , and userLocale.current is : ' + userLocale.current + ' and decimalSeparator.current : ' + decimalSeparator.current)
     
@@ -103,7 +104,7 @@ display_plus_sign_in_the_start
   }
   
   else if (prop == 2 ) {
-    afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin)
+    afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin,isLoading)
   }
   
   else if (prop == 3) {

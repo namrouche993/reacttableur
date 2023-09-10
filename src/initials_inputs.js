@@ -179,6 +179,18 @@ import { startsWithElement } from './Tools/startsWithElement.js'
        return copypastelength;
    }
 
+   let spinnerf = false;
+   export function getInputValue_spinnerf() {
+    return spinnerf;
+   }
+   export function setInputValue_spinnerf(value) {
+    spinnerf = value;
+      }
+
+
+
+
+
 
 
 
