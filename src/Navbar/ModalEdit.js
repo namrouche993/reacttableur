@@ -175,8 +175,49 @@ function ModalEdit(props) {
   };
 
 
+  const handleSubmit2 = async(e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/register',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "organisme":organisme,
+          "region":region,
+          "email":email,
+          "phoneNumber":phoneNumber
+        }
+          )
 
+      });
+      console.log('info :')
+      console.log(JSON.stringify({
+        "organisme":organisme,
+        "region":region,
+        "email":email,
+        "phoneNumber":phoneNumber
+      }
+        ))
+      console.log(organisme)
+      console.log(region)
+      console.log(email)
+      console.log(phoneNumber)
 
+      if (response.status === 201) {
+        // Successful registration, redir ect to the main page
+        //window.location.href = '/main-page';
+        alert('registration successufly')
+      } else {
+        // Handle registration error
+        alert('registration failed')
+      }
+
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
+  }
   const handleSubmit = () => {
     setSubmitted(true);
     setErrorPN(!isValidPhoneNumber(phoneNumber));
@@ -341,6 +382,8 @@ function ModalEdit(props) {
       <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1'}}>
         <Button size="small" variant="outlined" onClick={props.onClose}>Cancel</Button>
         <Button size="small" variant="contained" onClick={handleSubmit}>Submit</Button>
+        <Button size="small" variant="contained" onClick={handleSubmit2}>Submit2</Button>
+
       </DialogActions>
     </Dialog>
   );
