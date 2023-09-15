@@ -175,8 +175,16 @@ function ModalEdit(props) {
   };
 
 
-  const handleSubmit2 = async(e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+
+    setSubmitted(true);
+    setErrorPN(!isValidPhoneNumber(phoneNumber));
+    setErrorEmail(!isValidEmail(email));
+
+    setErrorOrganisme(organisme==='');
+    setErrorRegion(region==='');
+
     try {
       const response = await fetch('http://localhost:5000/register',{
         method: 'POST',
@@ -192,70 +200,18 @@ function ModalEdit(props) {
           )
 
       });
-      console.log('info :')
-      console.log(JSON.stringify({
-        "organisme":organisme,
-        "region":region,
-        "email":email,
-        "phoneNumber":phoneNumber
-      }
-        ))
-      console.log(organisme)
-      console.log(region)
-      console.log(email)
-      console.log(phoneNumber)
-
+      
       if (response.status === 201) {
         // Successful registration, redir ect to the main page
         //window.location.href = '/main-page';
-        alert('registration successufly')
-      } else {
-        // Handle registration error
-        alert('registration failed')
-      }
 
-    } catch (error) {
-      console.error('Error during registration:', error);
-    }
-  }
-  const handleSubmit = () => {
-    setSubmitted(true);
-    setErrorPN(!isValidPhoneNumber(phoneNumber));
-    setErrorEmail(!isValidEmail(email));
-
-    setErrorOrganisme(organisme==='');
-    setErrorRegion(region==='');
-
-    if (isValidEmail(email)) {
-      // Do something with the valid email
-      ////console.log('Valid email:', email);
-    } else {
-      // Display error or handle invalid email
-      ////console.log('Invalid email:', email);
-    }
-
-    if (isValidPhoneNumber(phoneNumber)) {
-      // Do something with the valid phone number
-      ////console.log('Valid phone number:', phoneNumber);
-    } else {
-      // Display error or handle invalid phone number
-      ////console.log('Invalid phone number:', phoneNumber);
-    }
-
-
-    if (organisme!=='' && region!=='' && isValidEmail(email) && isValidPhoneNumber(phoneNumber)){
-        
-        var getcellmeta_of_31 = hotInstance_redux.getCellMeta(3, 1); // editable index
-        
+        var getcellmeta_of_31 = hotInstance_redux.getCellMeta(3, 1); // editable index      
         getcellmeta_of_31.renderer= function(instance, td, row, col, prop, value, cellProperties) {
           Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells
         };
         getcellmeta_of_31.validator=undefined;
-        
         hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index
-        
 
-        
         var organismechosen = organisme_data.find(item => item.val === organisme).label;
         var regionchosen = region_data.find(item => item.matriculeregion === region).region;
 
@@ -267,7 +223,18 @@ function ModalEdit(props) {
         localStorage.setItem('phone_chosen', phoneNumber);
         
         props.onClose();
+
+        //alert('registration successufly')
+      
+      } else {
+        // Handle registration error
+        console.log('registration failed')
+      }
+
+    } catch (error) {
+      console.error('Error during registration:', error);
     }
+
     
   };
 
@@ -382,7 +349,6 @@ function ModalEdit(props) {
       <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1'}}>
         <Button size="small" variant="outlined" onClick={props.onClose}>Cancel</Button>
         <Button size="small" variant="contained" onClick={handleSubmit}>Submit</Button>
-        <Button size="small" variant="contained" onClick={handleSubmit2}>Submit2</Button>
 
       </DialogActions>
     </Dialog>
