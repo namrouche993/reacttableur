@@ -35,6 +35,7 @@ import { beforeChangeFct } from './Hothooks/beforeChange';
 
 import { organisme_data, region_data } from './Navbar/ModalEdit';
 import LoadingSpinner from './LoadingSpinner.js';
+import { encryptOnServer,decryptOnServer } from './Tools/crypto.js';
 
 
 function Hottable() {
