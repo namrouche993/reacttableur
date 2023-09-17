@@ -85,7 +85,7 @@ function Hottable() {
   const dispatch = useDispatch();
   let changeTimer;
   
-  var data = JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
+  var data = data_localstorage //JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
   const array_of_notmerged_cells = [];
 
   const hotTableComponent = React.useRef(null);
