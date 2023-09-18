@@ -36,6 +36,7 @@ import { beforeChangeFct } from './Hothooks/beforeChange';
 import { organisme_data, region_data } from './Navbar/ModalEdit';
 import LoadingSpinner from './LoadingSpinner.js';
 import { encryptOnServer,decryptOnServer } from './Tools/crypto.js';
+import { saveDataToServer } from './Tools/DataToFromServer.js';
 
 
 function Hottable() {
@@ -80,12 +81,28 @@ function Hottable() {
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
   const data22 = useSelector(state => state.data22);  //data22_redux
 
-  
+  const [savedData,setSavedData]=useState(data_localstorage);
 
   const dispatch = useDispatch();
   let changeTimer;
   
-  var data = data_localstorage //JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
+  const fetchDataFromServer = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/getData');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const datafetch = await response.json();
+      setSavedData(datafetch);
+      console.log('Data fetched from server:', datafetch);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+    
+  var data = savedData // data_localstorage //JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
+  
   const array_of_notmerged_cells = [];
 
   const hotTableComponent = React.useRef(null);
@@ -110,6 +127,8 @@ function Hottable() {
   React.useEffect(() => {
     //alert('userlocal2_redix just before setting hot = newhandsontable will be : '  + userLocale2_redux + ' and decimalSeparator2_redux : ' + decimalSeparator2_redux)
     //var data22 = data22fct(last_row_after_header)
+
+    fetchDataFromServer();
 
     const hot  = new Handsontable(hotTableComponent.current, {
       data,
@@ -278,7 +297,9 @@ function Hottable() {
           dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
                    
 
-          localStorage.setItem('data_localstorage_storage',my_actual_getdata)
+          localStorage.setItem('data_localstorage_storage',my_actual_getdata);
+          saveDataToServer(JSON.parse(my_actual_getdata));
+
           if(!isLoading){
             hideSpinner()
           }

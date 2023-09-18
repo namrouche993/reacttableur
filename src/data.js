@@ -29,6 +29,7 @@ export function ddatafct(last_row_after_header){
         return ddata
     }
 
+    
     export var data_localstorage = localStorage.getItem('data_localstorage_storage')==null ? ddatafct(last_row_after_header) : JSON.parse(localStorage.getItem('data_localstorage_storage'));
     
     export function data22fct(last_row_after_header){
