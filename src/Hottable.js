@@ -36,7 +36,7 @@ import { beforeChangeFct } from './Hothooks/beforeChange';
 import { organisme_data, region_data } from './Navbar/ModalEdit';
 import LoadingSpinner from './LoadingSpinner.js';
 import { encryptOnServer,decryptOnServer } from './Tools/crypto.js';
-import { saveDataToServer } from './Tools/DataToFromServer.js';
+// import { saveDataToServer } from './Tools/DataToFromServer.js';
 
 
 function Hottable() {
@@ -85,7 +85,8 @@ function Hottable() {
 
   const dispatch = useDispatch();
   let changeTimer;
-  
+
+  /*
   const fetchDataFromServer = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/getData');
@@ -99,9 +100,9 @@ function Hottable() {
       console.error('Error fetching data:', error);
     }
   };
-
+*/
     
-  var data = savedData // data_localstorage //JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
+  var data = data_localstorage //savedData // data_localstorage //JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
   
   const array_of_notmerged_cells = [];
 
@@ -128,7 +129,7 @@ function Hottable() {
     //alert('userlocal2_redix just before setting hot = newhandsontable will be : '  + userLocale2_redux + ' and decimalSeparator2_redux : ' + decimalSeparator2_redux)
     //var data22 = data22fct(last_row_after_header)
 
-    fetchDataFromServer();
+    //fetchDataFromServer();
 
     const hot  = new Handsontable(hotTableComponent.current, {
       data,
@@ -298,7 +299,7 @@ function Hottable() {
                    
 
           localStorage.setItem('data_localstorage_storage',my_actual_getdata);
-          saveDataToServer(JSON.parse(my_actual_getdata));
+          //saveDataToServer(JSON.parse(my_actual_getdata));
 
           if(!isLoading){
             hideSpinner()
