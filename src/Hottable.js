@@ -36,6 +36,7 @@ import { beforeChangeFct } from './Hothooks/beforeChange';
 import { organisme_data, region_data } from './Navbar/ModalEdit';
 import LoadingSpinner from './LoadingSpinner.js';
 import { encryptOnServer,decryptOnServer } from './Tools/crypto.js';
+import { generateRandomString } from './Tools/Randst.js';
 // import { saveDataToServer } from './Tools/DataToFromServer.js';
 
 
@@ -122,10 +123,79 @@ function Hottable() {
   };
 
 
+  
+  const handlebuttongetdata = () =>{
+    var idusernameget = localStorage.getItem('ussd74kasd75');
+    const tokenget = localStorage.getItem('token');
+    console.log('tokengt')
+    console.log(tokenget)
+
+    const fetchUserDataget = () => {
+      fetch(`http://localhost:5000/api/${idusernameget}`,{
+        method:'GET',
+        headers:{
+          'Authorization': `Bearer ${tokenget}`  // Include the token in the header
+        }
+      })
+        .then(response => response.json())
+        .then(responseData => {
+          // Use the responseData to populate the spreadsheet
+          const userPreviousData = responseData[0].dataa;
+          console.log(responseData)
+          console.log('userPreviousData :')
+          console.log(userPreviousData);
+
+          // Update the Handsontable spreadsheet with userPreviousData
+          // ...
+        })
+        .catch(error => console.error('Error fetching user data:', error));
+    };
+    
+    // Call fetchUserData when the user revisits the webpage
+    fetchUserDataget();
+    
+  }
 
 
 
   React.useEffect(() => {
+    if(localStorage.getItem('ussd74kasd75')!==null){
+    
+    } else {
+      var randstr=generateRandomString(14);
+      localStorage.setItem('ussd74kasd75',randstr);
+
+
+      async function fetchDataUsEffect1() {
+        try {
+          const response = await fetch('http://localhost:5000/api/login', {
+             method: 'POST',
+             headers: {
+               'Content-Type': 'application/json'
+             },
+             body: JSON.stringify({"idusername":randstr,"dataa":data_localstorage})
+           });
+     
+           if (response.ok) {
+             console.log('Data sent successfully to the server.');
+             const datajj = await response.json();
+             localStorage.setItem('token', datajj.token);
+             //return datajj.token; // Return the JWT token
+
+
+           } else {
+             console.error('Error sending data to the server.');
+           }
+         } catch (error) {
+           console.error('Error:', error);
+         }
+   }
+   fetchDataUsEffect1();
+
+      
+    }
+
+
     //alert('userlocal2_redix just before setting hot = newhandsontable will be : '  + userLocale2_redux + ' and decimalSeparator2_redux : ' + decimalSeparator2_redux)
     //var data22 = data22fct(last_row_after_header)
 
@@ -298,7 +368,26 @@ function Hottable() {
           dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
                    
 
+
           localStorage.setItem('data_localstorage_storage',my_actual_getdata);
+          fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: "include",
+            body: JSON.stringify({idusername:"user487abcd","dataa":JSON.parse(my_actual_getdata)})
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            console.log('Data sent successfully to the server.');
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        
           //saveDataToServer(JSON.parse(my_actual_getdata));
 
           if(!isLoading){
@@ -412,6 +501,7 @@ function Hottable() {
     <>
     {/* <Essaitest/>  WITH REDUX : */}
     <div>
+      <button onClick={handlebuttongetdata}>Click</button>
       {/* <button onClick={showSpinner}>Show Spinner</button>
       <button onClick={hideSpinner}>Hide Spinner</button> */}
       <LoadingSpinner open={isLoading} />

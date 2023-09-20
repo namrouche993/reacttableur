@@ -184,6 +184,7 @@ function ModalEdit(props) {
 
     setErrorOrganisme(organisme==='');
     setErrorRegion(region==='');
+    /*
     try {
       const response = await fetch('http://localhost:5000/api/login',{
         method: 'POST',
@@ -195,6 +196,7 @@ function ModalEdit(props) {
       } catch(error){
         console.log(error);
       }
+    */
 
     try {
       const response = await fetch('http://localhost:5000/register',{
