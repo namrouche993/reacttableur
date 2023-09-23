@@ -87,22 +87,6 @@ function Hottable() {
   const dispatch = useDispatch();
   let changeTimer;
 
-  /*
-  const fetchDataFromServer = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/getData');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const datafetch = await response.json();
-      setSavedData(datafetch);
-      console.log('Data fetched from server:', datafetch);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-*/
-    
   var data = data_localstorage //savedData // data_localstorage //JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
   
   const array_of_notmerged_cells = [];
@@ -126,15 +110,14 @@ function Hottable() {
   
   const handlebuttongetdata = () =>{
     var idusernameget = localStorage.getItem('ussd74kasd75');
-    const tokenget = localStorage.getItem('token');
-    console.log('tokengt')
-    console.log(tokenget)
 
     const fetchUserDataget = () => {
       fetch(`http://localhost:5000/api/${idusernameget}`,{
         method:'GET',
+        credentials: 'include',
         headers:{
-          'Authorization': `Bearer ${tokenget}`  // Include the token in the header
+          'Content-Type': 'application/json'
+          //'Authorization': `Bearer ${tokenget}`  // Include the token in the header
         }
       })
         .then(response => response.json())
@@ -156,8 +139,10 @@ function Hottable() {
     
   }
 
-
-
+  let isUserNearCloseArea = false;
+  const closeAreaThreshold = 30; // Threshold for proximity to the right edge and top
+  
+  
   React.useEffect(() => {
     if(localStorage.getItem('ussd74kasd75')!==null){
     
@@ -170,16 +155,17 @@ function Hottable() {
         try {
           const response = await fetch('http://localhost:5000/api/login', {
              method: 'POST',
+             credentials: 'include',
              headers: {
                'Content-Type': 'application/json'
              },
-             body: JSON.stringify({"idusername":randstr,"dataa":data_localstorage})
+             body: JSON.stringify({"idusername":randstr,"dataa": ddatafct(last_row_after_header) })//data_localstorage})
            });
      
            if (response.ok) {
              console.log('Data sent successfully to the server.');
-             const datajj = await response.json();
-             localStorage.setItem('token', datajj.token);
+             //const datajj = await response.json();
+             //localStorage.setItem('token', datajj.token);
              //return datajj.token; // Return the JWT token
 
 
@@ -209,6 +195,7 @@ function Hottable() {
       comments: true,
       manualColumnResize: true,
       manualRowResize: true,
+      persistentState: true,
       colWidths: [50,200,100,120,120, 120,120,120,120,100,  120,120,120,120,100,    20 ], // editable of course
       undo: true,
       //maxRows: data.length, // editable if we set it maxRows:data.length (that means we don't want to add new rows)
@@ -323,6 +310,7 @@ function Hottable() {
       }
     },
 
+
     
   });
 
@@ -370,24 +358,7 @@ function Hottable() {
 
 
           localStorage.setItem('data_localstorage_storage',my_actual_getdata);
-          fetch('http://localhost:5000/api/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            credentials: "include",
-            body: JSON.stringify({idusername:"user487abcd","dataa":JSON.parse(my_actual_getdata)})
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            console.log('Data sent successfully to the server.');
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-        
+          
           //saveDataToServer(JSON.parse(my_actual_getdata));
 
           if(!isLoading){
@@ -432,13 +403,47 @@ function Hottable() {
             hot.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen,'changeorganismesrc') // editable index
           }
 
+          /*
+          document.addEventListener('mouseout', (event) => {
+            // Check if the mouse is out of the document (user is likely leaving)
+            if (event.relatedTarget === null) {
+              console.log('mouse out the document')
+              //isUserActive = false;
+              //resetInactivityTimer();
+            }
+          });
+          */
+
+          const handleVisibilityChange = () => {
+            console.log('we call handleVisibilityChange')
+            if (document.visibilityState === 'hidden') {
+              console.log('handleVisibilityChange and document.vibisiltystate == hidden ')
+              // Page is being hidden, send the data to the server
+              const mydata_whenclosed = hot.getData(); // Obtain the data from Handsontable
+              const jsonData_whenclosed = JSON.stringify(mydata_whenclosed);
+              //const jsonData_whenclosed = mydata_whenclosed;
+              console.log(jsonData_whenclosed)
+              const serverUrl = 'http://localhost:5500/beacondata';
+      
+              // Send the data to the server using sendBeacon
+              navigator.sendBeacon(serverUrl, jsonData_whenclosed);
+            }
+          };
+      
+          document.addEventListener('visibilitychange', handleVisibilityChange);
+      
     return () => {
-      ////console.log('unmount handsontable ')
+      //alert('unmout return() ')   
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       hot.destroy();
+      //window.removeEventListener('beforeunload', handlebeforeunloadfct(hot));
+
     };
   }, []);
 
   
+  
+
   useEffect(() => {
     //alert('use effect of hottable i think will be here (userlocale2_redux) - userLocale2_redux: ' +  userLocale2_redux )
     userLocale2_ref.current = userLocale2_redux; // Update the ref whenever value11 changes
@@ -492,6 +497,34 @@ function Hottable() {
     setInputtext1(e.target.value)
   }
 
+  function handlebeforeunloadfct(hot) {  
+    console.log('we are inside window addeventlistener beforeunload : ')
+    if(hot){
+      console.log('we are if hotindex_redux')
+     console.log(hot.getData())
+     const data = hot.getData(); //JSON.parse(hotInstance_redux);  // Get the data from Handsontable
+     console.log(JSON.stringify(data))
+     fetch('http://localhost:5000/save-data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+//      body: data
+
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+    }
+  }
+  
+  
 
 
 
