@@ -23,6 +23,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
+import  secureLocalStorage  from  "react-secure-storage";
 
 /*
 const organisme_data = [
@@ -116,7 +117,7 @@ function ModalEdit(props) {
 
   const [submitted, setSubmitted] = useState(false);
 
-  const [organisme, setOrganisme] = useState(localStorage.getItem('organismechosen')==null ? '' : localStorage.getItem('organismechosen'));
+  const [organisme, setOrganisme] = useState(secureLocalStorage.getItem('organismechosen')==null ? '' : secureLocalStorage.getItem('organismechosen'));
   const [errorOrganisme, setErrorOrganisme] = useState(false);
 
   const handleOrganismeChange = (event) => {
@@ -126,7 +127,7 @@ function ModalEdit(props) {
   };
 
   
-  const [region, setRegion] = useState(localStorage.getItem('region_storage') == null ? '' : localStorage.getItem('region_storage'));
+  const [region, setRegion] = useState(secureLocalStorage.getItem('region_storage') == null ? '' : secureLocalStorage.getItem('region_storage'));
   
   const [errorRegion, setErrorRegion] = useState(false);
 
@@ -137,7 +138,7 @@ function ModalEdit(props) {
   };
 
 
-  const [email, setEmail] = useState(localStorage.getItem('email_chosen') == null ? '' : localStorage.getItem('email_chosen') );
+  const [email, setEmail] = useState(secureLocalStorage.getItem('email_chosen') == null ? '' : secureLocalStorage.getItem('email_chosen') );
   const [errorEmail, setErrorEmail] = useState(false);
 
   const isValidEmail = (value) => {
@@ -156,7 +157,7 @@ function ModalEdit(props) {
 
 
 
-  const [phoneNumber, setPhoneNumber] = useState( localStorage.getItem('phone_chosen') == null ? '' : localStorage.getItem('phone_chosen') );
+  const [phoneNumber, setPhoneNumber] = useState( secureLocalStorage.getItem('phone_chosen') == null ? '' : secureLocalStorage.getItem('phone_chosen') );
   const [errorPN, setErrorPN] = useState(false);
 
   const handlePhoneNumberChange = (event) => {
@@ -230,10 +231,10 @@ function ModalEdit(props) {
 
         hotInstance_redux.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen,'changeorganismesrc') // editable index
 
-        localStorage.setItem('organismechosen', organisme);
-        localStorage.setItem('region_storage', region);
-        localStorage.setItem('email_chosen', email);
-        localStorage.setItem('phone_chosen', phoneNumber);
+        secureLocalStorage.setItem('organismechosen', organisme);
+        secureLocalStorage.setItem('region_storage', region);
+        secureLocalStorage.setItem('email_chosen', email);
+        secureLocalStorage.setItem('phone_chosen', phoneNumber);
         
         props.onClose();
 

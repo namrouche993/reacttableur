@@ -280,8 +280,13 @@ else if( i == 3 ) {  // validator and renderer of emails
       var dd={
         className: "htLeft htMiddle" ,
         validator: function (oldvalue, callback) { // validator of onlynb
-            const thisrow = this.row;
-            const thiscol = this.col;
+          console.log('we are in validator of i == 4 ')
+          console.log(oldvalue);  
+          const thisrow = this.row;
+          const thiscol = this.col;
+          console.log(thisrow);
+          console.log(thiscol);
+
             if(thisrow>5){ // editable
               validator_onlynb(oldvalue, callback,onlynumbers_length_on)
           }

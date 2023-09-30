@@ -1,6 +1,7 @@
 import React, { useRef, useState,useEffect } from 'react'
 import 'handsontable/dist/handsontable.full.css'; // Import Handsontable CSS
 import Handsontable from 'handsontable';
+import  secureLocalStorage  from  "react-secure-storage";
 
 import { 
   last_row_after_header,
@@ -38,6 +39,8 @@ import LoadingSpinner from './LoadingSpinner.js';
 import { encryptOnServer,decryptOnServer } from './Tools/crypto.js';
 import { generateRandomString } from './Tools/Randst.js';
 // import { saveDataToServer } from './Tools/DataToFromServer.js';
+
+import { fetchDataUsEffect1 } from './Tools/fetchDataUsEffect1.js';
 
 
 function Hottable() {
@@ -83,11 +86,12 @@ function Hottable() {
   const data22 = useSelector(state => state.data22);  //data22_redux
 
   const [savedData,setSavedData]=useState(data_localstorage);
+  const [csrftoken,setCSRFToken]=useState('');
 
   const dispatch = useDispatch();
   let changeTimer;
 
-  var data = data_localstorage //savedData // data_localstorage //JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
+  var data = savedData //data_localstorage //savedData // data_localstorage //JSON.parse(data_localstorage) //ddatafct(last_row_after_header);
   
   const array_of_notmerged_cells = [];
 
@@ -96,6 +100,7 @@ function Hottable() {
   //const [skipAfterValidate,setSkipAfterValidate]=useState(false)
 
   const [isLoading, setIsLoading] = useState(false);
+
   // Function to show the spinner
   const showSpinner = () => {
     setIsLoading(true);
@@ -106,78 +111,25 @@ function Hottable() {
     setIsLoading(false);
   };
 
-
   
-  const handlebuttongetdata = () =>{
-    var idusernameget = localStorage.getItem('ussd74kasd75');
-
-    const fetchUserDataget = () => {
-      fetch(`http://localhost:5000/api/${idusernameget}`,{
-        method:'GET',
-        credentials: 'include',
-        headers:{
-          'Content-Type': 'application/json'
-          //'Authorization': `Bearer ${tokenget}`  // Include the token in the header
-        }
-      })
-        .then(response => response.json())
-        .then(responseData => {
-          // Use the responseData to populate the spreadsheet
-          const userPreviousData = responseData[0].dataa;
-          console.log(responseData)
-          console.log('userPreviousData :')
-          console.log(userPreviousData);
-
-          // Update the Handsontable spreadsheet with userPreviousData
-          // ...
-        })
-        .catch(error => console.error('Error fetching user data:', error));
-    };
-    
-    // Call fetchUserData when the user revisits the webpage
-    fetchUserDataget();
-    
-  }
-
-  let isUserNearCloseArea = false;
-  const closeAreaThreshold = 30; // Threshold for proximity to the right edge and top
+  const [numbval,setNumbval]=useState('aa') //useState(secureLocalStorage.getItem("numb"))
+  const [idusername00,setIdusername00]=useState(secureLocalStorage.getItem('ussd74kasd75_2'));
   
   
   React.useEffect(() => {
-    if(localStorage.getItem('ussd74kasd75')!==null){
-    
+    if(secureLocalStorage.getItem('ussd74kasd75_2')!==null){ 
+      // after the first time the user open the webpage : 
+      // until now do nothing , maybe editable
+
     } else {
+      // the first time the user open the webpage : 
+      
       var randstr=generateRandomString(14);
-      localStorage.setItem('ussd74kasd75',randstr);
 
-
-      async function fetchDataUsEffect1() {
-        try {
-          const response = await fetch('http://localhost:5000/api/login', {
-             method: 'POST',
-             credentials: 'include',
-             headers: {
-               'Content-Type': 'application/json'
-             },
-             body: JSON.stringify({"idusername":randstr,"dataa": ddatafct(last_row_after_header) })//data_localstorage})
-           });
-     
-           if (response.ok) {
-             console.log('Data sent successfully to the server.');
-             //const datajj = await response.json();
-             //localStorage.setItem('token', datajj.token);
-             //return datajj.token; // Return the JWT token
-
-
-           } else {
-             console.error('Error sending data to the server.');
-           }
-         } catch (error) {
-           console.error('Error:', error);
-         }
-   }
-   fetchDataUsEffect1();
-
+      secureLocalStorage.setItem("ussd74kasd75_2", randstr);
+      setIdusername00(randstr)
+      // sending data as post request in the server :
+      fetchDataUsEffect1(randstr,ddatafct(last_row_after_header)); // post to /api/login
       
     }
 
@@ -244,14 +196,6 @@ function Hottable() {
 
           //const commonPairExists = hasCommonPair(cellsToAutofill, myoldmergedcells);
           const commonPairExists = hasCommonPair(cellsToAutofill, cells_with_readonly0);
-          console.log('cellsToAutofill :')
-          console.log(cellsToAutofill)
-          console.log('cells_with_readonly0 :')
-          console.log(cells_with_readonly0)
-          console.log('commonPairExists :')
-          console.log(commonPairExists)
-
-
 
           if (commonPairExists) {
             //alert('yes inside')
@@ -333,15 +277,9 @@ function Hottable() {
 
       hot.addHook('afterChange', (changes, source) => {
         console.log('afterChange : ')
-        //console.log(source)
-        //console.log(changes)
-        //console.log(changeTimer)
-        //console.log(isLoading)
-        //console.log('afterChange triggered')
+
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
-        ////console.log('data22 in afterChange end : ')
-        ////console.log(data22)
 
         if (changeTimer) {
           clearTimeout(changeTimer);
@@ -357,9 +295,9 @@ function Hottable() {
                    
 
 
-          localStorage.setItem('data_localstorage_storage',my_actual_getdata);
-          
-          //saveDataToServer(JSON.parse(my_actual_getdata));
+          secureLocalStorage.setItem("data_localstorage_storage_2", my_actual_getdata);
+
+          //saveDataToServer(JSON.parse(my_actual_getdata)); // editable when we want to synchronise the data for each change
 
           if(!isLoading){
             hideSpinner()
@@ -378,17 +316,17 @@ function Hottable() {
 
 
       if(
-        localStorage.getItem('organismechosen') !== null &&
-        localStorage.getItem('region_storage') !== null &&
-        localStorage.getItem('email_chosen') !== null &&
-        localStorage.getItem('phone_chosen') !== null
+        secureLocalStorage.getItem('organismechosen') !== null &&
+        secureLocalStorage.getItem('region_storage') !== null &&
+        secureLocalStorage.getItem('email_chosen') !== null &&
+        secureLocalStorage.getItem('phone_chosen') !== null
         //localStorage.length>0
         ){
 
-            const stored_organisme = localStorage.getItem('organismechosen');
-            const stored_region = localStorage.getItem('region_storage');
-            const stored_email = localStorage.getItem('email_chosen');
-            const stored_phonenumber = localStorage.getItem('phone_chosen');
+            const stored_organisme = secureLocalStorage.getItem('organismechosen');
+            const stored_region = secureLocalStorage.getItem('region_storage');
+            const stored_email = secureLocalStorage.getItem('email_chosen');
+            const stored_phonenumber = secureLocalStorage.getItem('phone_chosen');
 
             var getcellmeta_of_31_0 = hot.getCellMeta(3, 1); // editable index
             getcellmeta_of_31_0.renderer= function(instance, td, row, col, prop, value, cellProperties) {
@@ -403,34 +341,31 @@ function Hottable() {
             hot.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen,'changeorganismesrc') // editable index
           }
 
-          /*
-          document.addEventListener('mouseout', (event) => {
-            // Check if the mouse is out of the document (user is likely leaving)
-            if (event.relatedTarget === null) {
-              console.log('mouse out the document')
-              //isUserActive = false;
-              //resetInactivityTimer();
-            }
-          });
-          */
 
           const handleVisibilityChange = () => {
             console.log('we call handleVisibilityChange')
+            console.log(document.visibilityState);
+
             if (document.visibilityState === 'hidden') {
               console.log('handleVisibilityChange and document.vibisiltystate == hidden ')
               // Page is being hidden, send the data to the server
-              const mydata_whenclosed = hot.getData(); // Obtain the data from Handsontable
-              const jsonData_whenclosed = JSON.stringify(mydata_whenclosed);
+              //const mydata_whenclosed = hot.getData(); // Obtain the data from Handsontable
+              const jsonData_whenclosed = JSON.stringify(hot.getData());
               //const jsonData_whenclosed = mydata_whenclosed;
-              console.log(jsonData_whenclosed)
-              const serverUrl = 'http://localhost:5500/beacondata';
-      
+              //console.log(jsonData_whenclosed)
+              //const serverUrl = 'http://localhost:5000/beacondata';
+              //const idusername = secureLocalStorage.getItem('ussd74kasd75_2');
               // Send the data to the server using sendBeacon
-              navigator.sendBeacon(serverUrl, jsonData_whenclosed);
+
+              //idusername00 is from usestate 
+              //const requestData = JSON.stringify({ jsonData_whenclosed, idusername00 });
+              const blobData = new Blob([JSON.stringify({ jsonData_whenclosed, idusername00 })], { type: 'application/json' });
+              navigator.sendBeacon('http://localhost:5000/beacondata',blobData);
             }
           };
       
           document.addEventListener('visibilitychange', handleVisibilityChange);
+        
       
     return () => {
       //alert('unmout return() ')   
@@ -441,9 +376,8 @@ function Hottable() {
     };
   }, []);
 
-  
-  
 
+  
   useEffect(() => {
     //alert('use effect of hottable i think will be here (userlocale2_redux) - userLocale2_redux: ' +  userLocale2_redux )
     userLocale2_ref.current = userLocale2_redux; // Update the ref whenever value11 changes
@@ -491,50 +425,11 @@ function Hottable() {
   
 
 
-  const [input1text1,setInputtext1] = useState('')
-
-  const onchangeinputfct1 = (e) => {
-    setInputtext1(e.target.value)
-  }
-
-  function handlebeforeunloadfct(hot) {  
-    console.log('we are inside window addeventlistener beforeunload : ')
-    if(hot){
-      console.log('we are if hotindex_redux')
-     console.log(hot.getData())
-     const data = hot.getData(); //JSON.parse(hotInstance_redux);  // Get the data from Handsontable
-     console.log(JSON.stringify(data))
-     fetch('http://localhost:5000/save-data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-//      body: data
-
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-    }
-  }
-  
-  
-
-
-
-
 
   return (
     <>
     {/* <Essaitest/>  WITH REDUX : */}
     <div>
-      <button onClick={handlebuttongetdata}>Click</button>
       {/* <button onClick={showSpinner}>Show Spinner</button>
       <button onClick={hideSpinner}>Hide Spinner</button> */}
       <LoadingSpinner open={isLoading} />

@@ -1,21 +1,18 @@
 import { last_row_after_header } from './initials_inputs.js';
+import  secureLocalStorage  from  "react-secure-storage";
 
 export function ddatafct(last_row_after_header){
             var ddata= [];
             ddata.push(  
-            ['',"République Algérienne Démocratique et Populaire",'','','','','','','','','','','','','','','',   ''],
-            ['',"Ministére de l'Habitat, de l'Urbanisme et de la Ville",'','','','','','','','','','','','','','','',   ''],
-         // ['',"Raccordement en énergies électriques et gazières et créances impayées auprés de la SADEG",'','','','','','','','','','','','','','','','',   ''],
-            ['',"Etat d'éxecution des travaux de raccordement en énergies électrique et gaziéres  - Projets achevés ou dépassants les 50% d'avancement",'','','','','','','','','','','','','','','',   ''],
-            ['','Organisme :','','','','','','','','','','','','','','','',''],
-            //['','','','','','','','','','','','','','','','','',''],
-            //[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
+            ['',"République Algérienne Démocratique et Populaire",'','','','','','','','','','','','','',   ''],
+            ['',"Ministére de l'Habitat, de l'Urbanisme et de la Ville",'','','','','','','','','','','','','',   ''],
+            ['',"Etat d'éxecution des travaux de raccordement en énergies électrique et gaziéres  - Projets achevés ou dépassants les 50% d'avancement",'','','','','','','','','','','','','',   ''],
+
+            ['','Organisme :','','','','','','','','','','','','','',''],
+
+
             ['','Projet','Consistance de Projet',"Taux d'\navancement\ndes travaux\nlogements","Taux d'avancement des travaux VRD",'Raccordement en énergie Electrique','','','','','Raccordement en énergie Gaziere','','','','',   ''],
             ['','','','','',"Taux d'avancement des travaux",'Montant des travaux (devis SADEG)','Montant payé (DA)','Créances détenues travaux','Contraintes',"Taux d'avancement des travaux",'Montant des travaux (devis SADEG)','Montant payé (DA)','Créances détenues travaux','Contraintes',   ''],
-            //['','aaz','36','','','','','','','','','','','','','','',   ''],
-            //['','','','','','','','','','','','','','','','','',   '']       
-            //['','','','','','','','','','','','','','','','','','',   '']            
-
             
             
             ) 
@@ -30,7 +27,7 @@ export function ddatafct(last_row_after_header){
     }
 
     
-    export var data_localstorage = localStorage.getItem('data_localstorage_storage')==null ? ddatafct(last_row_after_header) : JSON.parse(localStorage.getItem('data_localstorage_storage'));
+    export var data_localstorage = secureLocalStorage.getItem('data_localstorage_storage_2')==null ? ddatafct(last_row_after_header) : JSON.parse(secureLocalStorage.getItem('data_localstorage_storage_2'));
     
     export function data22fct(last_row_after_header){
            // alert('data2ffcttt')
