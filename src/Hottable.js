@@ -124,12 +124,12 @@ function Hottable() {
     } else {
       // the first time the user open the webpage : 
       
-      var randstr=generateRandomString(14);
+      //var randstr=generateRandomString(14);
 
-      secureLocalStorage.setItem("ussd74kasd75_2", randstr);
-      setIdusername00(randstr)
+      //secureLocalStorage.setItem("ussd74kasd75_2", randstr);
+      //setIdusername00(randstr)
       // sending data as post request in the server :
-      fetchDataUsEffect1(randstr,ddatafct(last_row_after_header)); // post to /api/login
+      //fetchDataUsEffect1(randstr,ddatafct(last_row_after_header)); // post to /api/login
       
     }
 
@@ -346,7 +346,7 @@ function Hottable() {
             console.log('we call handleVisibilityChange')
             console.log(document.visibilityState);
 
-            if (document.visibilityState === 'hidden') {
+            if (secureLocalStorage.getItem('ussd74kasd75_2')!==null && document.visibilityState === 'hidden') {
               console.log('handleVisibilityChange and document.vibisiltystate == hidden ')
               // Page is being hidden, send the data to the server
               //const mydata_whenclosed = hot.getData(); // Obtain the data from Handsontable
@@ -359,7 +359,12 @@ function Hottable() {
 
               //idusername00 is from usestate 
               //const requestData = JSON.stringify({ jsonData_whenclosed, idusername00 });
-              const blobData = new Blob([JSON.stringify({ jsonData_whenclosed, idusername00 })], { type: 'application/json' });
+              var idusername002 = secureLocalStorage.getItem('ussd74kasd75_2');
+              console.log('idusername00 in sendbeacon:')
+              console.log(idusername00)
+              console.log(idusername002)
+              console.log(jsonData_whenclosed)
+              const blobData = new Blob([JSON.stringify({ jsonData_whenclosed, idusername002 })], { type: 'application/json' });
               navigator.sendBeacon('http://localhost:5000/beacondata',blobData);
             }
           };

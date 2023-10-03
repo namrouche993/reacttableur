@@ -77,7 +77,7 @@ function Navbar() {
   }
 
 
-  const [modalOpenedit, setModalOpenedit] = useState(false);
+  const [modalOpenedit, setModalOpenedit] = useState(true); // it was false;
   const handleOpenModaledit = () => {
     setModalOpenedit(true);
   };
@@ -85,7 +85,7 @@ function Navbar() {
  
   
   const handleCloseModaledit = () => {
-    setModalOpenedit(false);
+    setModalOpenedit(false); // (false) its default
   };
 
   const submitdata = () => {
