@@ -43,7 +43,7 @@ import { generateRandomString } from './Tools/Randst.js';
 import { fetchDataUsEffect1 } from './Tools/fetchDataUsEffect1.js';
 
 
-function Hottable() {
+function Hottable(props) {
   
   const userLocale2_redux  = useSelector(state => state.userLocale2);
   const userLocale2_ref = useRef(userLocale2_redux);
@@ -111,12 +111,14 @@ function Hottable() {
     setIsLoading(false);
   };
 
+  const [readonlyhot,setReadonlyhot] = useState(false);
   
   const [numbval,setNumbval]=useState('aa') //useState(secureLocalStorage.getItem("numb"))
   const [idusername00,setIdusername00]=useState(secureLocalStorage.getItem('ussd74kasd75_2'));
   
   
   React.useEffect(() => {
+  //alert('read_only would be : ' + props.read_only)
     if(secureLocalStorage.getItem('ussd74kasd75_2')!==null){ 
       // after the first time the user open the webpage : 
       // until now do nothing , maybe editable
@@ -124,12 +126,14 @@ function Hottable() {
     } else {
       // the first time the user open the webpage : 
       
-      var randstr=generateRandomString(14);
+      //var randstr=generateRandomString(14);
 
-      secureLocalStorage.setItem("ussd74kasd75_2", randstr);
-      setIdusername00(randstr)
+      //secureLocalStorage.setItem("ussd74kasd75_2", randstr);
+      //setIdusername00(randstr)
       // sending data as post request in the server :
-      fetchDataUsEffect1(randstr,ddatafct(last_row_after_header)); // post to /api/login
+
+
+      //fetchDataUsEffect1(randstr,ddatafct(last_row_after_header)); // post to /api/login
       
     }
 
@@ -141,6 +145,7 @@ function Hottable() {
 
     const hot  = new Handsontable(hotTableComponent.current, {
       data,
+      readOnly: readonlyhot,
       rowHeaders: true,
       wordWrap: true,
       colHeaders: true,
@@ -322,7 +327,6 @@ function Hottable() {
         secureLocalStorage.getItem('phone_chosen') !== null
         //localStorage.length>0
         ){
-
             const stored_organisme = secureLocalStorage.getItem('organismechosen');
             const stored_region = secureLocalStorage.getItem('region_storage');
             const stored_email = secureLocalStorage.getItem('email_chosen');
@@ -353,13 +357,14 @@ function Hottable() {
               const jsonData_whenclosed = JSON.stringify(hot.getData());
               //const jsonData_whenclosed = mydata_whenclosed;
               //console.log(jsonData_whenclosed)
-              //const serverUrl = 'http://localhost:5000/beacondata';
+              //const serverUrl = 'http://localhost:5000/beacondata';;
               //const idusername = secureLocalStorage.getItem('ussd74kasd75_2');
               // Send the data to the server using sendBeacon
 
               //idusername00 is from usestate 
               //const requestData = JSON.stringify({ jsonData_whenclosed, idusername00 });
               const blobData = new Blob([JSON.stringify({ jsonData_whenclosed, idusername00 })], { type: 'application/json' });
+              
               navigator.sendBeacon('http://localhost:5000/beacondata',blobData);
             }
           };

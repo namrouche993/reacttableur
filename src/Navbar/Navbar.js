@@ -59,12 +59,13 @@ const appTheme = createTheme({
   }
 
 
-function Navbar() {
+function Navbar(props) {
   
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
   const data22_redux = useSelector(state => state.data22)
   
   const [modalOpenformat, setModalOpenformat] = useState(false);
+
   const handleOpenModalformat = () => {
     setModalOpenformat(true);
   };
@@ -78,16 +79,22 @@ function Navbar() {
 
 
   const [modalOpenedit, setModalOpenedit] = useState(false);
+  
   const handleOpenModaledit = () => {
     setModalOpenedit(true);
   };
-
- 
   
   const handleCloseModaledit = () => {
-    setModalOpenedit(false);
+    props.display_modaledit ? setModalOpenedit(true) : props.displayed_pr ? setModalOpenedit(false) : setModalOpenedit(true)
+    //setModalOpenedit(true)
   };
 
+  useEffect(() => {
+    console.log('we are in useeffect because props.dispaly_modaledit changed')
+    setModalOpenedit(props.display_modaledit);
+    //window.location.reload();
+  }, [props.display_modaledit])
+  
   const submitdata = () => {
     //console.log('data22_redux : ')
     //console.log(data22_redux)
@@ -145,7 +152,7 @@ function Navbar() {
            </Toolbar>
          </AppBar>
          <ModalFormat open={modalOpenformat} onClose={handleCloseModalformat} senddata={handlesending}/>
-         <ModalEdit open={modalOpenedit} onClose={handleCloseModaledit} />
+         <ModalEdit open={modalOpenedit} onClose={handleCloseModaledit}/>
 
         </ThemeProvider>
 

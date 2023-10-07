@@ -185,20 +185,65 @@ function ModalEdit(props) {
 
     setErrorOrganisme(organisme==='');
     setErrorRegion(region==='');
-    /*
+    
     try {
-      const response = await fetch('http://localhost:5000/api/login',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({"idusername":email,"dataa":hotInstance_redux.getData()})
-      })
-      } catch(error){
-        console.log(error);
-      }
-    */
+      const response = await fetch('http://localhost:5000/api/login', {
+         method: 'POST',
+         credentials: 'include',
+         headers: {
+           'Content-Type': 'application/json'
+         },
+         //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
+         body: JSON.stringify({"organisme":organisme,"email":email, "region":region , "phoneNumber":phoneNumber })//data_localstorage})
+       });
+ 
+       if (response.ok) {
+         const data_response = await response.json();
+         
+         secureLocalStorage.setItem("ussd74kasd75_2", data_response.idusername_to_client_side);
 
+         secureLocalStorage.setItem('organismechosen', organisme);
+         secureLocalStorage.setItem('region_storage', region);
+         secureLocalStorage.setItem('email_chosen', email);
+         secureLocalStorage.setItem('phone_chosen', phoneNumber);
+
+         secureLocalStorage.setItem('hisownroute', 'api/'+data_response.hisownroute);
+
+         // Successful registration, redir ect to the main page
+         //window.location.href = '/main-page';
+
+/*
+         var getcellmeta_of_31 = hotInstance_redux.getCellMeta(3, 1); // editable index      
+         getcellmeta_of_31.renderer= function(instance, td, row, col, prop, value, cellProperties) {
+           Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells
+         };
+         getcellmeta_of_31.validator=undefined;
+
+         hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index
+         var organismechosen = organisme_data.find(item => item.val === organisme).label;
+         var regionchosen = region_data.find(item => item.matriculeregion === region).region;
+         hotInstance_redux.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen,'changeorganismesrc') // editable index
+*/
+
+         props.onClose();
+         console.log('Data sent successfully to the server.');
+         
+         //window.location.href = data_response.hisownroute;
+         window.location.reload();
+         
+         //const datajj = await response.json();
+         //localStorage.setItem('token', datajj.token);
+         //return datajj.token; // Return the JWT token
+
+       } else {
+         console.error('Error sending data to the server.');
+       }
+     } catch (error) {
+       console.error('Error:', error);
+     }
+
+
+      /*
     try {
       const response = await fetch('http://localhost:5000/register',{
         method: 'POST',
@@ -248,7 +293,7 @@ function ModalEdit(props) {
     } catch (error) {
       console.error('Error during registration:', error);
     }
-
+*/
     
   };
 
