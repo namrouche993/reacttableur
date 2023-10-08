@@ -159,7 +159,7 @@ function OwnAppComponent(){
         
         //const datajj = await response.json();
         //localStorage.setItem('token', datajj.token);
-        //return datajj.token; // Return the JWT token
+        //return datajj.token; // Return the JWT token///
  
       } else {
 
