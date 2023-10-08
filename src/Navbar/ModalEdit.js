@@ -24,6 +24,10 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
 import  secureLocalStorage  from  "react-secure-storage";
+import { generateRandomString } from '../Tools/Randst';
+import { fetchDataUsEffect1 } from '../Tools/fetchDataUsEffect1';
+import { last_row_after_header } from '../initials_inputs';
+import { ddatafct } from '../data';
 
 /*
 const organisme_data = [
@@ -281,6 +285,10 @@ function ModalEdit(props) {
         secureLocalStorage.setItem('email_chosen', email);
         secureLocalStorage.setItem('phone_chosen', phoneNumber);
         
+        var randstr=generateRandomString(14);
+        secureLocalStorage.setItem("ussd74kasd75_2", randstr);
+        fetchDataUsEffect1(randstr,ddatafct(last_row_after_header)); // post to /api/login
+
         props.onClose();
 
         //alert('registration successufly')

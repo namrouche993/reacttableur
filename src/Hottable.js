@@ -29,7 +29,7 @@ import { Columns_data_for_Validator_renders } from './Hothooks/Columns_data_for_
 import { mergecellsarray,mycellmergedfct,getCellsBetweenRanges,myoldmergedcells_fct,hasCommonPair } from './Tools/mergecells';
 
 import { afterValidatefct} from './Hothooks/afterValidatefct'
-// import { beforeValidatefct } from './Hothooks/beforeValidate'; // !!!
+// import { beforeValidatefct } from './Hothooks/beforeValidate';
 
 import { beforeChangeFct } from './Hothooks/beforeChange';
 
