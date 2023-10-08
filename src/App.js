@@ -150,7 +150,7 @@ function OwnAppComponent(){
         };
         getcellmeta_of_31.validator=undefined;
         hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index        
-        hotInstance_redux.setDataAtCell(3,1,values_ownroute.organisme + ' ||| ' + values_ownroute.region,'changeorganismesrc') // editable index
+        hotInstance_redux.setDataAtCell(3,1,values_ownroute.organisme + ' | ' + values_ownroute.region,'changeorganismesrc') // editable index
 
         //window.location.href = value_ownroute.hisownroute;
         //alert('already entered')
