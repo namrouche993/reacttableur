@@ -9,6 +9,9 @@ import HotEmpty from './Tools/HotEmpty';
 import { BrowserRouter, Routes, Route,useParams } from "react-router-dom";
 import Handsontable from 'handsontable';
 
+import LoadingComponent from './Tools/LoadingComponent';
+import NotAuthorized401 from './NotAuthorized401';
+import NotFoundComponent400 from './NotFoundComponent400';
 
 
 function AppComponent() {
@@ -105,20 +108,18 @@ function AppComponent() {
 }
 
 
-function NotFoundComponent() {
-  return (
-    <div>
-      <h2>404 - Not Found</h2>
-      <p>The page you are looking for does not exist.</p>
-    </div>
-  )
-}
+
+
 
 function OwnAppComponent(){
 
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
+  console.log('hotInstance_redux')
+  console.log(hotInstance_redux);
   let ownRoute = useParams();
   console.log(ownRoute.ownroute)
+  const [displayHot,setDisplayHot]=useState(false);
+  const [displayHot401,setDisplayHot401]=useState(false);
 
   
   async function FetchAppOwnEnter(){
@@ -135,10 +136,12 @@ function OwnAppComponent(){
          "ownroute":ownRoute.ownroute
        }) //data_localstorage})
       });
-      //console.log('response : ');
-      //console.log(response);
+      console.log('response : ');
+      console.log(response);
       
       if (response.ok) {
+        setDisplayHot(true);
+        console.log('response.ok true in ownenter request')
         //props.onClose();
         const values_ownroute = await response.json();
         console.log('values_ownroute :')
@@ -161,6 +164,8 @@ function OwnAppComponent(){
         //localStorage.setItem('token', datajj.token);
         //return datajj.token; // Return the JWT token///
  
+      } else if(response.status==401) {
+        setDisplayHot401(true);
       } else {
 
         console.error('Error sending data to the server.');
@@ -174,15 +179,39 @@ function OwnAppComponent(){
   // if(displayed==true){
   //   return <p>404 Error</p>
   // }
+
+  const [displayeddelay, setDisplayeddelay] = useState(true);
+
+  useEffect(() => {
+    const delay = 100; // 2 seconds delay
+    const timeoutId = setTimeout(() => {
+      setDisplayeddelay(false);
+    }, delay);
+
+    // Clear the timeout if the component is unmounted or if the delay changes
+    return () => clearTimeout(timeoutId);
+  }, []);
+ 
+  return (  
+    <div>
+      {/* {displayHot ? <AppHotableFinal/> : displayHot401 ? <NotAuthorized401/> : displayeddelay ? <LoadingComponent/> : <NotFoundComponent400/> }      */}
+      {displayHot ? <AppHotableFinal/> : displayHot401 ? <NotAuthorized401/> : displayeddelay ? <LoadingComponent/> : <NotFoundComponent400/> }     
+    
+    </div>
+  )
+
+}
+
+
+const AppHotableFinal = () => {
   return (
     <div>
-       <Navbar display_modaledit={false} displayed_pr={false} />
-       <br></br>
-       <div style={{marginTop:43}}>
-         <Hottable/>
-        </div>
-        <h1>Own App Component for Route: {ownRoute.ownroute}</h1>       
-    </div>
+     <Navbar display_modaledit={false} displayed_pr={false} />
+     <br></br>
+     <div style={{marginTop:43}}>
+       <Hottable/>
+      </div>
+  </div>
   )
 }
 
@@ -193,7 +222,7 @@ const App = () => {
        <Routes>
           <Route path="/" element={<AppComponent/>}>        </Route>
           <Route path="/api/:ownroute" element={<OwnAppComponent/>}>        </Route>
-          <Route path="*" element={<NotFoundComponent/>}>        </Route>
+          <Route path="*" element={<NotFoundComponent400/>}>        </Route>
           
        </Routes>
     </BrowserRouter>

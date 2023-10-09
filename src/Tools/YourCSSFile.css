@@ -1,0 +1,54 @@
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #595BD4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.loading p {
+    margin-bottom: 10px;
+}
+
+.loading span {
+    position: relative;
+    display: inline-block;
+    width: 84px;
+    height: 10px;
+}
+
+.loading span i {
+    position: absolute;
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    background: yellow; /* Adjust the colors as needed */
+    animation: wait 0.9s infinite; /* Adjust animation duration as needed */
+}
+
+.loading span i:nth-child(1) {
+    left: 0;
+    animation-delay: 0.1s;
+}
+
+.loading span i:nth-child(2) {
+    left: 20px;
+    animation-delay: 0.2s;
+}
+
+
+
+@keyframes wait {
+    0%   { left: -7px; }
+    50%  { left: 100%; }
+    80%  { left: 100%; }
+    100% { left: 100%; }
+}
+
