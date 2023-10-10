@@ -228,11 +228,17 @@ function Hottable(props) {
           afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin,isLoading);
         },
         beforeKeyDown: (event) => {
-
+          if (event.key === 'Enter' && event.shiftKey) {
+            alert('To break the line please, click Ctrl+Enter or Alt+Enter')    
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            console.log('Shift+Enter pressed');
+          } else {              
           beforeKeyDownfct(event,hot,
             userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,commentsPlugin
             //,condition_split2_redux
             );
+          }
         },
         beforeCreateRow: function(index,amout,source) {
           //console.log('beforeCreateRow HOOOK')

@@ -28,6 +28,7 @@ import { generateRandomString } from '../Tools/Randst';
 import { fetchDataUsEffect1 } from '../Tools/fetchDataUsEffect1';
 import { last_row_after_header } from '../initials_inputs';
 import { ddatafct } from '../data';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 /*
 const organisme_data = [
@@ -179,10 +180,25 @@ function ModalEdit(props) {
     return phonePattern.test(value.toString().trim());
   };
 
+  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
+
+  const handleRecaptchaVerify = (token) =>{
+    setRecaptchaToken(token);
+    setIsVerified(true);
+  }
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-
+    
+    if (!isVerified) {
+      alert('Please complete the reCAPTCHA verification.');
+      return;
+    }
+    console.log('isVerified')
+    console.log(!isVerified)
+    console.log(recaptchaToken);
+    
     setSubmitted(true);
     setErrorPN(!isValidPhoneNumber(phoneNumber));
     setErrorEmail(!isValidEmail(email));
@@ -198,7 +214,14 @@ function ModalEdit(props) {
            'Content-Type': 'application/json'
          },
          //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
-         body: JSON.stringify({"organisme":organisme,"email":email, "region":region , "phoneNumber":phoneNumber })//data_localstorage})
+         body: JSON.stringify({
+          "organisme":organisme,
+          "email":email,
+          "region":region,
+          "phoneNumber":phoneNumber,
+        
+          "recaptchaToken":recaptchaToken
+        })//data_localstorage})
        });
  
        if (response.ok) {
@@ -410,12 +433,16 @@ function ModalEdit(props) {
       />
   </FormControl>
 
+  <ReCAPTCHA 
+     sitekey='6LfIgpAoAAAAAEz3uqm3v5E-sCmkKrzMW6-sS48r'
+     onChange={handleRecaptchaVerify}
+  />
 
       </DialogContent>
 
       <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1'}}>
         <Button size="small" variant="outlined" onClick={props.onClose}>Cancel</Button>
-        <Button size="small" variant="contained" onClick={handleSubmit}>Submit</Button>
+        <Button size="small" variant="contained" disabled={!isVerified} onClick={handleSubmit}>Submit</Button>
 
       </DialogActions>
     </Dialog>
