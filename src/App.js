@@ -46,6 +46,7 @@ function AppComponent() {
        //console.log(response);
        
        if (response.ok) {
+        console.log('try to knwo how many times it renders !!! ');
          //props.onClose();
          setAlreadylogin(false);
          const value_ownroute = await response.json();
@@ -68,8 +69,8 @@ function AppComponent() {
      }
     }
 
-    console.log(secureLocalStorage.getItem('ussd74kasd75_2'))
-    console.log(secureLocalStorage.getItem('hisownroute'))
+    // console.log(secureLocalStorage.getItem('ussd74kasd75_2'))
+    // console.log(secureLocalStorage.getItem('hisownroute'))
 
     if(secureLocalStorage.getItem('hisownroute')!==undefined && secureLocalStorage.getItem('hisownroute')!==null ){
       console.log(secureLocalStorage.getItem('hisownroute'));
@@ -152,9 +153,11 @@ function OwnAppComponent(){
           Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells
         };
         getcellmeta_of_31.validator=undefined;
-        hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index        
-        hotInstance_redux.setDataAtCell(3,1,values_ownroute.organisme + ' | ' + values_ownroute.region,'changeorganismesrc') // editable index
-
+        //setTimeout(() => {
+          //hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index        
+          //hotInstance_redux.setDataAtCell(3,1,values_ownroute.organisme + ' | ' + values_ownroute.region,'changeorganismesrc') // editable index      
+        //}, 5000);
+      
         //window.location.href = value_ownroute.hisownroute;
         //alert('already entered')
         
@@ -221,7 +224,7 @@ const App = () => {
     <BrowserRouter>
        <Routes>
           <Route path="/" element={<AppComponent/>}>        </Route>
-          <Route path="/api/:ownroute" element={<OwnAppComponent/>}>        </Route>
+          <Route path="/tab/:ownroute" element={<OwnAppComponent/>}>        </Route>
           <Route path="*" element={<NotFoundComponent400/>}>        </Route>
           
        </Routes>

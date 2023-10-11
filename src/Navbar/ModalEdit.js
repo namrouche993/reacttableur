@@ -205,7 +205,10 @@ function ModalEdit(props) {
 
     setErrorOrganisme(organisme==='');
     setErrorRegion(region==='');
-    
+
+    if( !(!errorOrganisme && !errorRegion && isValidEmail(email) && isValidPhoneNumber(phoneNumber)) ){
+      return console.log("Error Filling");
+    }
     try {
       const response = await fetch('http://localhost:5000/api/login', {
          method: 'POST',
@@ -234,23 +237,10 @@ function ModalEdit(props) {
          secureLocalStorage.setItem('email_chosen', email);
          secureLocalStorage.setItem('phone_chosen', phoneNumber);
 
-         secureLocalStorage.setItem('hisownroute', 'api/'+data_response.hisownroute);
+         secureLocalStorage.setItem('hisownroute', 'tab/'+data_response.hisownroute);
 
          // Successful registration, redir ect to the main page
          //window.location.href = '/main-page';
-
-/*
-         var getcellmeta_of_31 = hotInstance_redux.getCellMeta(3, 1); // editable index      
-         getcellmeta_of_31.renderer= function(instance, td, row, col, prop, value, cellProperties) {
-           Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells
-         };
-         getcellmeta_of_31.validator=undefined;
-
-         hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index
-         var organismechosen = organisme_data.find(item => item.val === organisme).label;
-         var regionchosen = region_data.find(item => item.matriculeregion === region).region;
-         hotInstance_redux.setDataAtCell(3,1,organismechosen + ' | ' + regionchosen,'changeorganismesrc') // editable index
-*/
 
          props.onClose();
          console.log('Data sent successfully to the server.');
@@ -332,7 +322,7 @@ function ModalEdit(props) {
     <Dialog open={props.open} onClose={props.onClose}
     maxWidth="sm" // Adjust the maxWidth as needed
     fullWidth
-    sx={{ '& .MuiDialog-paper': { minWidth: 320, maxWidth: '36%',borderRadius: 2 }  }} // Adjust the minWidth and maxWidth
+    sx={{ '& .MuiDialog-paper': { minWidth: 320, maxWidth: '36%',borderRadius: 2,height:'103%' }  }} // Adjust the minWidth and maxWidth
 >
       <DialogTitle sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',fontSize:'1.8rem'}}>Choose Format</DialogTitle>
       <IconButton
@@ -433,11 +423,21 @@ function ModalEdit(props) {
       />
   </FormControl>
 
+<br></br>
+
+<FormControl 
+    sx={{ m: 1, width: 200,marginLeft:"-80px" }}
+    >
   <ReCAPTCHA 
      sitekey='6LfIgpAoAAAAAEz3uqm3v5E-sCmkKrzMW6-sS48r'
      onChange={handleRecaptchaVerify}
+     //size="compact"  // Change the size to compact
   />
 
+</FormControl>
+
+
+  
       </DialogContent>
 
       <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1'}}>
