@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function NotFoundComponent400() {
+export default function AppNotFoundComponent400() {
     return (
       <div>
         <h2>404 - Not Found</h2>
