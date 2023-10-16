@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
+import LoadingComponent from './Tools/LoadingComponent';
 
 export default function AppNotFoundComponent400() {
+  const [displayeddelay,setDisplayeddelay]=useState(true);
+
+  useEffect(() => {
+    const delay = 100; // 2 seconds delay
+    const timeoutId = setTimeout(() => {
+      setDisplayeddelay(false);
+    }, delay);
+  });
+
     return (
       <div>
-        <h2>404 - Not Found</h2>
-        <p>The page you are looking for does not exist.</p>
+          {displayeddelay ? <LoadingComponent/> : 
+            <div> 
+              <h2>404- Not Found</h2> 
+              <p>The page you are looking for does not exist.</p> 
+            </div> 
+            }
       </div>
     )
   }

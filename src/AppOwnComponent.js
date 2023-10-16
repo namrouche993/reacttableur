@@ -79,8 +79,11 @@ export default function AppOwnComponent() {
       }
      }
   
-     FetchAppOwnEnter();
-    // if(displayed==true){
+     if(!displayeddelay && !displayHot){
+      FetchAppOwnEnter();
+     }
+    
+     // if(displayed==true){
     //   return <p>404 Error</p>
     // }
   
