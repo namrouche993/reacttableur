@@ -26,7 +26,7 @@ export default function AppOwnComponent() {
     
     async function FetchAppOwnEnter(){
       try {
-       const response = await fetch('http://localhost:5000/api/ownenter', {
+       const response = await fetch('http://localhost:5000/tab/ownenter', {
           method: 'POST',
           credentials: 'include',
           headers: {

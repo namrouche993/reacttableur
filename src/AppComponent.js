@@ -6,6 +6,7 @@ import { useState,useEffect,useRef } from 'react';
 import { useSelector } from 'react-redux';
 import  secureLocalStorage  from  "react-secure-storage";
 import HotEmpty from './Tools/HotEmpty';
+import AppErrorRequestComponent from './AppErrorRequestComponent';
 
 export default function AppComponent() {
     const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
@@ -14,14 +15,15 @@ export default function AppComponent() {
     const alreadylogin_ref = useRef(false);
 
     const [displayed, setDisplayed] = useState(false);
-  
+    const value_to_use_in_error = useRef(true);
+    const [errorComponent,setErrorComponent]=useState(false);
   
   
     useEffect(() => {
   
       async function FetchAppEnter(){
        try {
-        const response = await fetch('http://localhost:5000/api/enter', {
+        const response = await fetch('http://localhost:5000/tab/enter', {
            method: 'POST',
            credentials: 'include',
            headers: {
@@ -31,6 +33,8 @@ export default function AppComponent() {
             "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
           })
          });
+         console.log('response of fetchAppenter in frontend :')
+         console.log(response)
          
          if (response.ok) {
           console.log('try to knwo how many times it renders !!! ');
@@ -48,12 +52,19 @@ export default function AppComponent() {
          }
        } catch (error) {
          console.error('Error:', error);
+         //alert('we are in error')
+         value_to_use_in_error.current=false;
        }
       }
 
-      const delay = 100; // 2 seconds delay
+      const delay = 3000; // 2 seconds delay!!
       const timeoutId = setTimeout(() => {
-        setDisplayed(true);
+        //alert('value_to_use_in_error is ' + value_to_use_in_error.current)
+        if(value_to_use_in_error.current){
+          setDisplayed(true);
+        } else {
+          setErrorComponent(true);
+        }
       }, delay);
   
   
@@ -72,14 +83,19 @@ export default function AppComponent() {
     
   
     return (
-      <>
-         <Navbar display_modaledit={alreadylogin} displayed_pr={displayed} />
-         <br></br>
+    <>
+         {errorComponent ? <p>.</p> : 
+         <div>
+               <Navbar display_modaledit={alreadylogin} displayed_pr={displayed} />
+            <br></br>
+         </div>
+         }
          <div style={{marginTop:43}}>
-            {alreadylogin ? <HotEmpty/> : displayed ? <Hottable/> : <HotEmpty/> }
+            {errorComponent? <AppErrorRequestComponent/> : alreadylogin ? <HotEmpty/> : displayed ? <Hottable/> : <HotEmpty/> }
          </div>
   
       </>
+
     );
   }
   

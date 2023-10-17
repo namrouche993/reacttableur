@@ -1,84 +1,97 @@
+import React from 'react'
+import './App.css';
+import Navbar from './Navbar/Navbar';
+import Hottable from './Hottable';
+import { useState,useEffect,useRef } from 'react';
+import { useSelector } from 'react-redux';
+import  secureLocalStorage  from  "react-secure-storage";
+import HotEmpty from './Tools/HotEmpty';
+import AppErrorRequestComponent from './AppErrorRequestComponent';
 
-function OwnAppComponent(){
+export default function AppComponent() {
+    const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
+    const hotInstance_existed = hotInstance_redux!==undefined && hotInstance_redux!==null ? hotInstance_redux.getData() : [] ;
+    const [alreadylogin,setAlreadylogin]=useState(false);
+    const alreadylogin_ref = useRef(false);
 
-  const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
-  console.log('hotInstance_redux')
-  console.log(hotInstance_redux);
-
-  let ownRoute = useParams();
-  console.log(ownRoute.ownroute)
-
-  /*
-  async function FetchAppOwnEnter (){
-    try {
-     const response = await fetch('http://localhost:5000/api/ownenter', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
-        body: JSON.stringify({
-         //"act_data":hotInstance_existed,
-         "ownroute":ownRoute.ownroute
-       }) //data_localstorage})
-      });
-      //console.log('response : ');
-      //console.log(response);
-      
-      if (response.ok) {
-        console.log('response.ok true in ownenter request')
-        //props.onClose();
-        const values_ownroute = await response.json();
-        console.log('values_ownroute :')
-        console.log(values_ownroute)
-        console.log(hotInstance_redux)
-        console.log('getcellmeta_of_31 : ')
-        var getcellmeta_of_31 = hotInstance_redux.getCellMeta(3, 1); // editable index      
-        console.log(getcellmeta_of_31)
-        getcellmeta_of_31.renderer= function(instance, td, row, col, prop, value, cellProperties) {
-          Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells
-        };
-        getcellmeta_of_31.validator=undefined;
-        hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index        
-        hotInstance_redux.setDataAtCell(3,1,values_ownroute.organisme + ' | ' + values_ownroute.region,'changeorganismesrc') // editable index
+    const [displayed, setDisplayed] = useState(false);
+    const value_to_use_in_error = useRef(true);
+    const [errorComponent,setErrorComponent]=useState(false);
   
-        //window.location.href = value_ownroute.hisownroute;
-        //alert('already entered')
-        
-        console.log('Data sent successfully to the server.');
-        return (
-          <div>
-          <Navbar display_modaledit={false} displayed_pr={false} />
-          <br></br>
-          <div style={{marginTop:43}}>
-            <Hottable/>
-           </div>
-           <h1>Own App Component for Route: {ownRoute.ownroute}</h1>       
-       </div>
-        )
-        //const datajj = await response.json();
-        //localStorage.setItem('token', datajj.token);
-        //return datajj.token; // Return the JWT token///
   
-      } else {
-        return (
-        <div>
-          <h2>404 - Not Found</h2>
-          <p>The page you are looking for does not exist.</p>
-        </div>
-        )
-        console.error('Error sending data to the server.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-   }
-  */
-
-  const rendererComponentOwnEnter =  'aaa' //FetchAppOwnEnter();
-
-  return  <div> {rendererComponentOwnEnter} </div>
+    useEffect(() => {
+  
+      async function FetchAppEnter(){
+       try {
+        const response = await fetch('http://localhost:5000/tab/enter', {
+           method: 'POST',
+           credentials: 'include',
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+            "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
+          })
+         });
          
+         if (response.ok) {
+          console.log('try to knwo how many times it renders !!! ');
+           //props.onClose();
+           setAlreadylogin(false);
+           const value_ownroute = await response.json();
+  
+           window.location.href = value_ownroute.hisownroute;
+  
+           console.log('Data sent successfully to the server.');
+    
+         } else {
+            setAlreadylogin(true);
+            console.error('Error sending data to the server.');
+         }
+       } catch (error) {
+         console.error('Error:', error);
+         //alert('we are in error')
+         value_to_use_in_error.current=false;
+       }
+      }
 
-}
+      const delay = 3000; // 2 seconds delay!!
+      const timeoutId = setTimeout(() => {
+        //alert('value_to_use_in_error is ' + value_to_use_in_error.current)
+        if(value_to_use_in_error.current){
+          setDisplayed(true);
+        } else {
+          setErrorComponent(true);
+        }
+      }, delay);
+  
+  
+      if(secureLocalStorage.getItem('hisownroute')!==undefined && secureLocalStorage.getItem('hisownroute')!==null ){
+        console.log(secureLocalStorage.getItem('hisownroute'));
+
+        window.location.href = secureLocalStorage.getItem('hisownroute');
+      } else {
+        FetchAppEnter();
+      }
+      
+      return () => clearTimeout(timeoutId);
+
+    }, [])
+    
+    
+  
+    return (
+      <>
+         {errorComponent? <AppErrorRequestComponent/> : alreadylogin ? <HotEmpty/> : displayed ?
+         <div>
+             <Navbar display_modaledit={alreadylogin} displayed_pr={displayed} />
+             <br></br>
+             <div style={{marginTop:43}}>
+                <Hottable/>
+             </div>
+         </div>
+         : <HotEmpty/>
+        }
+      </>
+    );
+  }
