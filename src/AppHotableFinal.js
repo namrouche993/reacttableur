@@ -7,7 +7,7 @@ import Hottable from './Hottable';
 export default function AppHotableFinal() {
     return (
       <div>
-       <Navbar display_modaledit={false} displayed_pr={false} />
+       <Navbar display_modaledit={false} displayed_pr={true} />
        <br></br>
        <div style={{marginTop:43}}>
          <Hottable/>

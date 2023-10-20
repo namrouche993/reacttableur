@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Handsontable from 'handsontable';
 
 import LoadingComponent from './Tools/LoadingComponent';
-import NotAuthorized401 from './NotAuthorized401';
+import AppNotAuthorized401 from './AppNotAuthorized401';
 import AppNotFoundComponent400 from './AppNotFoundComponent400';
 import AppHotableFinal from './AppHotableFinal';
 import {useParams}  from 'react-router-dom';
@@ -100,8 +100,8 @@ export default function AppOwnComponent() {
    
     return (  
       <div>
-        {/* {displayHot ? <AppHotableFinal/> : displayHot401 ? <NotAuthorized401/> : displayeddelay ? <LoadingComponent/> : <NotFoundComponent400/> }      */}
-        {displayHot ? <AppHotableFinal/> : displayHot401 ? <NotAuthorized401/> : displayeddelay ? <LoadingComponent/> : <AppNotFoundComponent400/> }     
+        {/* {displayHot ? <AppHotableFinal/> : displayHot401 ? <AppNotAuthorized401/> : displayeddelay ? <LoadingComponent/> : <NotFoundComponent400/> }      */}
+        {displayHot ? <AppHotableFinal/> : displayHot401 ? <AppNotAuthorized401/> : displayeddelay ? <LoadingComponent/> : <AppNotFoundComponent400/> }     
       
       </div>
     )

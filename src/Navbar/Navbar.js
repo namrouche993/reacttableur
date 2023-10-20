@@ -32,7 +32,7 @@ const appTheme = createTheme({
       MuiAppBar: {
         styleOverrides: {
           root: {
-            backgroundColor:'darkgrey'
+            backgroundColor:'darkgrey',
           },
         },
       },
@@ -85,6 +85,10 @@ function Navbar(props) {
   };
   
   const handleCloseModaledit = () => {
+    console.log('handleCloseModaledit :')
+    console.log(props.display_modaledit)
+    console.log(props.displayed_pr);
+    
     props.display_modaledit ? setModalOpenedit(true) : props.displayed_pr ? setModalOpenedit(false) : setModalOpenedit(true)
     //setModalOpenedit(true)
   };
@@ -117,11 +121,13 @@ function Navbar(props) {
   return (
         <ThemeProvider theme={appTheme}>
          <AppBar position="fixed" sx={{height:50}}>
+         {!props.display_modaledit ? 
          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
             <div id='idfor2buttons'>
+            
             <Tooltip title={<span style={{fontSize:16}}>Undo (Ctrl+Z)</span>} >
               <Button onClick={undoclickfct} color="inherit" sx={{...buttonStyles,marginRight:0.6}} > <UndoIcon sx={{ fontSize: 30 }} />  </Button>
-            </Tooltip>
+            </Tooltip>:
 
             <Tooltip title={<span style={{fontSize:16}}>Redo (Ctrl+Y)</span>} >
               <Button onClick={redoclickfct} color="inherit" sx={{...buttonStyles}} > <RedoIcon sx={{ fontSize: 30 }} />  </Button>
@@ -150,6 +156,8 @@ function Navbar(props) {
               
             </div>
            </Toolbar>
+           : <a></a> }
+
          </AppBar>
          <ModalFormat open={modalOpenformat} onClose={handleCloseModalformat} senddata={handlesending}/>
          <ModalEdit open={modalOpenedit} onClose={handleCloseModaledit}/>

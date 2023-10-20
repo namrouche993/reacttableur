@@ -244,9 +244,10 @@ function ModalEdit(props) {
 
          props.onClose();
          console.log('Data sent successfully to the server.');
-         
-         //window.location.href = data_response.hisownroute;
-         window.location.reload();
+         console.log('before doing window.location.href :')
+         console.log(secureLocalStorage.getItem('hisownroute'))
+         window.location.href = '/tab/'+data_response.hisownroute; //secureLocalStorage.getItem('hisownroute')
+         //window.location.reload();
          
          //const datajj = await response.json();
          //localStorage.setItem('token', datajj.token);

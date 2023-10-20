@@ -90,6 +90,7 @@ export default function AppComponent() {
             <br></br>
          </div>
          }
+
          <div style={{marginTop:43}}>
             {errorComponent? <AppErrorRequestComponent/> : alreadylogin ? <HotEmpty/> : displayed ? <Hottable/> : <HotEmpty/> }
          </div>
