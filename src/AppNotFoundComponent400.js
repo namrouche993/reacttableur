@@ -15,8 +15,8 @@ export default function AppNotFoundComponent400() {
       <div>
           {displayeddelay ? <LoadingComponent/> : 
             <div> 
-              <h2>404- Not Found</h2> 
-              <p>The page you are looking for does not exist.</p> 
+              <h2>404- Not Found</h2> {/* editable langauge */}
+              <p>The page you are looking for does not exist.</p>  {/* editable langauge */}
             </div> 
             }
       </div>

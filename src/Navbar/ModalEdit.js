@@ -325,7 +325,7 @@ function ModalEdit(props) {
     fullWidth
     sx={{ '& .MuiDialog-paper': { minWidth: 320, maxWidth: '36%',borderRadius: 2,height:'103%' }  }} // Adjust the minWidth and maxWidth
 >
-      <DialogTitle sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',fontSize:'1.8rem'}}>Choose Format</DialogTitle>
+      <DialogTitle sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',fontSize:'1.8rem'}}>Données Préliminaires</DialogTitle> {/* editable langauge */}
       <IconButton
           edge="end"
           color="inherit"
@@ -342,7 +342,7 @@ function ModalEdit(props) {
     sx={{ m: 1, minWidth: 200 }}
     //fullWidth
    >
-   <InputLabel id="demo-simple-select-label">Organisme</InputLabel>
+   <InputLabel id="demo-simple-select-label">Organisme</InputLabel> {/*May editablE */}
    <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
@@ -367,7 +367,7 @@ function ModalEdit(props) {
     sx={{ m: 1, minWidth: 200 }}
     //fullWidth
    >
-   <InputLabel id="demo-simple-select-label">Wilaya</InputLabel>
+   <InputLabel id="demo-simple-select-label">Wilaya</InputLabel> {/* editable */}
    <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
@@ -442,8 +442,8 @@ function ModalEdit(props) {
       </DialogContent>
 
       <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1'}}>
-        <Button size="small" variant="outlined" onClick={props.onClose}>Cancel</Button>
-        <Button size="small" variant="contained" disabled={!isVerified} onClick={handleSubmit}>Submit</Button>
+        <Button size="small" variant="outlined" onClick={props.onClose}>Cancel</Button> {/* editable langauge */}
+        <Button size="small" variant="contained" disabled={!isVerified} onClick={handleSubmit}>Submit</Button> {/* editable langauge */}
 
       </DialogActions>
     </Dialog>

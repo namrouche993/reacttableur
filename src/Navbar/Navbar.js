@@ -11,10 +11,13 @@ import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 
 import SendIcon from '@mui/icons-material/Send';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+
 import { Modal } from '@mui/base';
 
 import ModalFormat from './ModalFormat';
 import ModalEdit from './ModalEdit';
+import ModalAdd from './ModalAdd';
 
 import { useSelector, useDispatch } from 'react-redux'; 
 import { downloadfile } from '../Download/downloadfile';
@@ -79,7 +82,6 @@ function Navbar(props) {
 
 
   const [modalOpenedit, setModalOpenedit] = useState(false);
-  
   const handleOpenModaledit = () => {
     setModalOpenedit(true);
   };
@@ -92,6 +94,17 @@ function Navbar(props) {
     props.display_modaledit ? setModalOpenedit(true) : props.displayed_pr ? setModalOpenedit(false) : setModalOpenedit(true)
     //setModalOpenedit(true)
   };
+
+
+  const [modalOpenadd, setModalOpenadd] = useState(false);
+  const handleOpenModalAddUser = () => {
+    setModalOpenadd(true);
+  }
+const handleCloseModaladd = () => {
+    console.log('handleCloseModaladd :')
+    setModalOpenadd(false);
+  };
+  
 
   useEffect(() => {
     console.log('we are in useeffect because props.dispaly_modaledit changed')
@@ -125,11 +138,11 @@ function Navbar(props) {
          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
             <div id='idfor2buttons'>
             
-            <Tooltip title={<span style={{fontSize:16}}>Undo (Ctrl+Z)</span>} >
+            <Tooltip title={<span style={{fontSize:16}}>Undo (Ctrl+Z)</span>} > {/* editable langauge */}
               <Button onClick={undoclickfct} color="inherit" sx={{...buttonStyles,marginRight:0.6}} > <UndoIcon sx={{ fontSize: 30 }} />  </Button>
             </Tooltip>:
 
-            <Tooltip title={<span style={{fontSize:16}}>Redo (Ctrl+Y)</span>} >
+            <Tooltip title={<span style={{fontSize:16}}>Redo (Ctrl+Y)</span>} > {/* editable langauge */}
               <Button onClick={redoclickfct} color="inherit" sx={{...buttonStyles}} > <RedoIcon sx={{ fontSize: 30 }} />  </Button>
             </Tooltip>
 
@@ -137,20 +150,28 @@ function Navbar(props) {
 
                  
             <div>
-            <Tooltip title={<span style={{fontSize:12}}>Change format</span>} >
+            <Tooltip title={<span style={{fontSize:12}}>Change format</span>} > {/* editable langauge */}
                 <Button onClick={handleOpenModalformat} color="inherit" sx={{...buttonchangeformatStyles,marginRight: isSmallScreen?'0':'70px'}}> <LanguageIcon sx={{fontSize:25}}/> </Button>
               </Tooltip>
 
             <Tooltip title={<span style={{fontSize:14}}>
               <div style={{textAlign:'center'}}>
-                Términer <br></br>et Envoyer les données
+                Términer <br></br>et Envoyer les données {/* editable langauge */}
               </div>
               </span>} >
-                <Button onClick={submitdata} variant="contained" sx={{marginRight: isSmallScreen?'0':'40px'}} endIcon={<SendIcon sx={{fontSize:32}}/> }> Send </Button>
+                <Button onClick={submitdata} variant="contained" sx={{marginRight: isSmallScreen?'0':'40px'}} endIcon={<SendIcon sx={{fontSize:32}}/> }> Send </Button> {/* editable langauge */}
             </Tooltip>
 
+            <Tooltip title={<span style={{fontSize:12}}>
+            <div style={{textAlign:'center'}}>
+              Travail collaboratif<br></br>Ajouter des utilisateurs <br></br>avec des droits de modifications
+            </div>
+              </span>} > {/* editable langauge */}
+              <Button onClick={handleOpenModalAddUser} color="inherit" sx={{color:'black'}}> <GroupAddIcon sx={{fontSize:26}}/> </Button>
+            </Tooltip>
+              
 
-            <Tooltip title={<span style={{fontSize:12}}>Modifier les informations <br></br>préliminaires</span>} >
+            <Tooltip title={<span style={{fontSize:12}}>Modifier les informations <br></br>préliminaires</span>} > {/* editable langauge */}
               <Button onClick={handleOpenModaledit} color="inherit" sx={{color:'black'}}> <AutorenewIcon sx={{fontSize:26}}/> </Button>
             </Tooltip>
               
@@ -161,6 +182,7 @@ function Navbar(props) {
          </AppBar>
          <ModalFormat open={modalOpenformat} onClose={handleCloseModalformat} senddata={handlesending}/>
          <ModalEdit open={modalOpenedit} onClose={handleCloseModaledit}/>
+         <ModalAdd open={modalOpenadd} onClose={handleCloseModaladd}/>
 
         </ThemeProvider>
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import PinInput from 'react-pin-input';
+//import PinInput from 'react-pin-input';
+import { PinInput } from 'react-input-pin-code' // ES Module
+
 import { useSpring, animated } from 'react-spring';
 
 import {
@@ -23,22 +25,54 @@ import {
   TextField,
   FormHelperText,
   Box,
+  InputAdornment,
+  Input
 } from '@mui/material';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+
+
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
 import secureLocalStorage from 'react-secure-storage';
 import ReCAPTCHA from 'react-google-recaptcha';
 
+import { createTheme, ThemeProvider, Theme, useTheme } from '@mui/material/styles';
+
+const customTheme = (outerTheme) =>
+  createTheme({
+    palette: {
+      mode: outerTheme.palette.mode,
+    },
+  });
+
+  const isEmptyArrayfct = (myarray) =>{
+    return Array.from({ length: 8 }).every((_, index) => myarray[index] === '' || myarray[index] === null || myarray[index] == undefined);
+}
+
+
+
+
 function AppNotAuthorized401(props) {
+
+  const outerTheme = useTheme();
+
   const [showModalBox, setShowModalBox] = useState(false);
   const [showPinCodeFields, setShowPinCodeFields] = useState(false);
+  const [codemessageincorrect,setCodemessageincorrect]=useState('');
+  const [emailentered, setEmailentered]=useState('')
+
+  const onchangepincode = (value, index, values) => {
+    setPinCode(values);
+    setCodemessageincorrect('')
+  }
 
   const boxAnimation = useSpring({
     // opacity: showPinCodeFields ? 0 : 1, // You can add more animated properties here
     transform: showPinCodeFields ? 'translateX(0%)' : 'translateX(100%)', // Example translation animation
   });
 
-  const [pinCode, setPinCode] = useState('');
+  //const [pinCode, setPinCode] = useState(['', '', '', '', '', '', '']);
+  const [pinCode, setPinCode] = useState(['', '', '', '', '', '', '']);
 
   const [nextted, setNextted] = useState(false);
 
@@ -106,6 +140,7 @@ function AppNotAuthorized401(props) {
         secureLocalStorage.setItem('email_chosen', data_response.email);
         //secureLocalStorage.setItem('hisownroute', 'tab/' + data_response.hisownroute);
         setShowPinCodeFields(true);
+        setEmailentered(data_response.email)
         setNextted(true)
 
         //props.onClose();
@@ -129,7 +164,7 @@ function AppNotAuthorized401(props) {
   
     setErrorEmail(!isValidEmail(email));
   
-    if (!isValidEmail(email) || pinCode === '') {
+    if (!isValidEmail(email) || !isEmptyArrayfct(pinCode) ) {
       return console.log('Error Filling');
     }
   
@@ -161,7 +196,8 @@ function AppNotAuthorized401(props) {
           console.log('Data sent successfully to the server.');
           window.location.reload();
         } else {
-          alert('Email and pin code not verified. Please try again or contact the owner.');
+          setCodemessageincorrect('the code you entered is incorrect !') // editable language
+          //alert('Email and pin code not verified. Please try again or contact the owner.');
         }
       } else {
         console.error('Error sending data to the server.');
@@ -200,7 +236,7 @@ function AppNotAuthorized401(props) {
 
         <Typography variant="body1" sx={{ margin: '20px 0' }}>
           {/* You are not authorized to visit or modify this table. */}
-          You currently do not have authorization to access or modify this table. To request authorization, please provide your email.
+          You currently do not have authorization to access or modify this table.<br></br>To verify your authorization for access, please provide your email.  {/* editable language */}
         </Typography>
 
         <FormControl sx={{ m: 1, width: 250 }}>
@@ -223,35 +259,68 @@ function AppNotAuthorized401(props) {
       </Box>
 :
 
+
+
       <Box>
     <animated.div style={boxAnimation}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' , overflowX:'hidden',overflowY:'hidden' }}>
         <Typography variant="h4" sx={{ margin: '20px 0' }}>
                Authorization is necessary ! {/* editable language */}
         </Typography>
+        <FormControl variant="standard" sx={{alignItems:'center'}}>
+        <ThemeProvider theme={customTheme(outerTheme)}>
+<TextField
+id="input-with-icon-adornment"
+variant="standard" // Set the input to outlined mode
+defaultValue={emailentered}
+fullWidth
+InputProps={{
+  style: { width: `${emailentered.length * 13}px` }, // Adjust the multiplier as needed for desired spacing
+
+//readOnly: true,
+startAdornment: (
+  <InputAdornment position="start">
+    <AccountCircle />
+  </InputAdornment>
+),
+}}
+sx={{
+  '& div': {
+    borderRadius: 'none', // Set the border-radius to create a circle
+  },
+'& input': { fontWeight: 'bold',  borderBottom: 'none', // Remove the bottom border line
+   '&.Mui-disabled': { // Target the input element in the disabled state
+  '-webkit-text-fill-color': 'black', // Change the text color to black
+},
+},
+// '& .MuiInput-root': {
+//   borderBottom: 'none', // Remove the bottom border line
+// },
+
+}} // Set the input style to bold
+
+disabled
+//disabled // Set the disabled prop to true if you want it initially disabled
+/>
+</ThemeProvider>
+</FormControl>
 
         <Typography variant="body1" sx={{ margin: '20px 0' }}>
           {/* You are not authorized to visit or modify this table. */}
-          You currently do not have authorization to access or modify this table. To request authorization, please provide your email.
+          Please provide the code that was sent to you from the owner of this table :  {/* editable language */}
         </Typography>
 
-
-        <FormControl sx={{ m: 1, width: 400 }}>
-        <PinInput 
-  length={6} 
-  initialValue=""
-  //secret
-  //secretDelay={100} 
-  onChange={(e) => setPinCode(e.target.value)} 
-  type="custom" //numeric 
-  //inputMode="number"
-  style={{padding: '10px'}}  
-  inputStyle={{borderColor: 'black'}}
-  inputFocusStyle={{borderColor: 'blue'}}
-  //onComplete={(value, index) => {}}
-  autoSelect={true}
-  regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
-/>
+        <FormControl sx={{ m: 1, width: 400,alignItems:'center' }}>
+    <PinInput
+      values={pinCode}
+      onChange={onchangepincode}
+      type='number'
+      autoFocus='true'
+      autoTab='true'
+      validBorderColor='rgb(204,204,204)'
+      placeholder='.'
+    />
+    <p style={{color:'red'}}>{codemessageincorrect}</p>
 </FormControl>
             <ReCAPTCHA
               sitekey="6LfIgpAoAAAAAEz3uqm3v5E-sCmkKrzMW6-sS48r"
@@ -260,7 +329,7 @@ function AppNotAuthorized401(props) {
       </Box>
       <DialogActions sx={{ fontFamily: 'system-ui' }}>
         <Button size="small" variant="contained" onClick={handleSubmit}>
-        Submit {/* editable language Suivant */}
+        Next {/* editable language Suivant */}
      </Button>
       </DialogActions>
       </animated.div>
