@@ -22,6 +22,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { useSelector, useDispatch } from 'react-redux'; 
 import ReCAPTCHA from 'react-google-recaptcha';
+import  secureLocalStorage  from  "react-secure-storage";
 
 
 
@@ -47,11 +48,11 @@ function ModalAdd(props) {
      }
   };
 
-  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const [recaptchaToken_add, setRecaptchaToken_add] = useState('');
   const [isVerified, setIsVerified] = useState(false);
 
-  const handleRecaptchaVerify = (token) => {
-    setRecaptchaToken(token);
+  const handleRecaptchaaddVerify = (token) => {
+    setRecaptchaToken_add(token);
     setIsVerified(true);
   }
 
@@ -71,7 +72,7 @@ function ModalAdd(props) {
       return console.log("Error Filling");
     }
     try {
-      const response = await fetch('http://localhost:5000/tab/login', {
+      const response = await fetch('http://localhost:5000/add', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -79,15 +80,18 @@ function ModalAdd(props) {
         },
         //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
         body: JSON.stringify({
-         "email":inputEmail, 
-         "recaptchaToken":recaptchaToken
+         "email_owner":secureLocalStorage.getItem('email_chosen'),
+         "username_owner":secureLocalStorage.getItem('ussd74kasd75_2'),
+         "new_email_added":inputEmail,
+         "recaptchaToken_add":recaptchaToken_add
        })
 
       });
+      console.log('response in add post :')
+      console.log(recaptchaToken_add)
+      console.log(response)
       if (response.ok) {
         const data_response = await response.json();
-
-       window.location.reload();
 
         setEmails(inputEmail);
         setInputEmail('');
@@ -184,8 +188,8 @@ function ModalAdd(props) {
     */}
 
       <ReCAPTCHA 
-     sitekey='6LfIgpAoAAAAAEz3uqm3v5E-sCmkKrzMW6-sS48r'
-     onChange={handleRecaptchaVerify}
+     sitekey='6LfZqc0oAAAAALYohDB07_qhlAjTh9boGWa7HDw4'
+     onChange={handleRecaptchaaddVerify}
      //size="compact"  // Change the size to compact
   />
 </div>
