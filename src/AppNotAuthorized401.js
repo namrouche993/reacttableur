@@ -106,10 +106,10 @@ function AppNotAuthorized401(props) {
   const handleNext = async (e) => {
     e.preventDefault();
 
-    setErrorEmail(!isValidEmail(email));
     //setShowModalBox(!showModalBox)
 
     if (!(isValidEmail(email))) {
+      setErrorEmail(!isValidEmail(email));
       return console.log('Error Filling');
     }
 
@@ -147,6 +147,8 @@ function AppNotAuthorized401(props) {
         console.log('Data sent successfully to the server.');
         //window.location.reload();
       } else {
+        setNextted(true)
+        setErrorEmail(true)
         console.error('Error ,Email is not verified.');
       }
     } catch (error) {
@@ -246,7 +248,7 @@ function AppNotAuthorized401(props) {
             value={email}
             onChange={handleEmailChange}
             error={nextted && errorEmail}
-            helperText={nextted && errorEmail ? 'Invalid email format' : ''}
+            helperText={nextted && errorEmail ? isValidEmail(email) ? 'Invalid Email' : 'Invalid email format' : ''}
           />
         </FormControl>
         </Box>
@@ -323,7 +325,7 @@ disabled
     <p style={{color:'red'}}>{codemessageincorrect}</p>
 </FormControl>
             <ReCAPTCHA
-              sitekey="6LfIgpAoAAAAAEz3uqm3v5E-sCmkKrzMW6-sS48r"
+              sitekey="6LcPEtIoAAAAAFT_7t4pjHElX8YeiPrFDLEI9WKU"
               onChange={handleRecaptchaVerifyAccess}
             />
       </Box>

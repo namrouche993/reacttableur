@@ -15,14 +15,18 @@ import {
   Radio,
   RadioGroup,
   Grid,
-  Typography
+  Typography,
+  List, ListItem, ListItemText, ListItemSecondaryAction,Tooltip
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import RemoveIcon from '@mui/icons-material/Delete';
+
 import AddIcon from '@mui/icons-material/Add';
 
 import { useSelector, useDispatch } from 'react-redux'; 
 import ReCAPTCHA from 'react-google-recaptcha';
 import  secureLocalStorage  from  "react-secure-storage";
+
 
 
 
@@ -55,6 +59,54 @@ function ModalAdd(props) {
     setRecaptchaToken_add(token);
     setIsVerified(true);
   }
+
+  const [emails_added_list,setEmails_added_list]=useState([])
+  //const [emailsadded2,setEmailsadded2]=useState('')
+  //const [emailsadded3,setEmailsadded3]=useState('')
+
+
+
+
+
+  useEffect(() => {
+  
+    async function FetchListAllowedEmails(){
+     try {
+      const response_allowedemails = await fetch('http://localhost:5000/allowedemails', {
+         method: 'POST',
+         credentials: 'include',
+         headers: {
+           'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+          "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
+        })
+       });
+
+       if (response_allowedemails.ok) {
+        console.log('try to knwo how many times it renders !!! ');
+
+        const value_allowedemails = await response_allowedemails.json();
+        var emails_in_list = Object.values(value_allowedemails)
+        setEmails_added_list(emails_in_list)
+
+        //setEmailsadded2(value_allowedemails.user2email)
+        //setEmailsadded3(value_allowedemails.user3email)
+        
+        console.log('Data sent successfully to the server.');
+       } else {
+          console.error('Error sending data to the server.');
+       }
+     } catch (error) {
+       console.error('Error:', error);
+       //alert('we are in error')
+     }
+    }
+
+    FetchListAllowedEmails();
+
+  }, [])
+  
 
 
   const handleButtonAddClick = async(e) => {
@@ -154,7 +206,8 @@ function ModalAdd(props) {
       <Typography variant="body1" fontWeight='bold' sx={{ margin: '20px 0' }}>
           {/* You are not authorized to visit or modify this table. */}
           If you want to give a user editing access to this table.<br></br>Please provide his email address.  {/* editable language */}
-        </Typography>
+          <br></br>
+      </Typography>
 
 
         <div style={{textAlign:'-webkit-center'}}>
@@ -167,32 +220,43 @@ function ModalAdd(props) {
       <br></br>
       <br></br>
 
-    {/* 
-    <div style={{ height: '100%', display: 'contents', alignItems: 'center' }}>
-      <Button
-        variant="outlined"
-        color="primary"
-        onClick={handleButtonAddClick}
-        startIcon={<AddIcon />}
-        style={{
-        height: '55px',
-        color: 'black',
-        borderColor: 'black',
-        paddingRight: '5px',
-        backgroundColor: 'lightsteelblue',
-    }}
-      >
-      </Button>
-      </div>
-    
-    */}
-
       <ReCAPTCHA 
      sitekey='6LfZqc0oAAAAALYohDB07_qhlAjTh9boGWa7HDw4'
      onChange={handleRecaptchaaddVerify}
      //size="compact"  // Change the size to compact
   />
 </div>
+<br></br>
+<br></br>
+<div style={{textAlign:'-webkit-center'}}>
+      <List sx={{maxWidth:320,alignContent:'center',borderTop:'ridge'}}>
+
+      {emails_added_list.map((email, index) => (
+                <Box
+                key={index}
+                sx={{
+                  '&:hover': {
+                    backgroundColor: '#f0f0f0',
+                  },
+                  transition: 'background-color 0.3s',
+                  borderBottom: '1px solid #ccc', // Add the underline
+                }}
+              >
+        <ListItem key={index}>
+          <ListItemText primary={email} />
+          <ListItemSecondaryAction>
+            <Tooltip title="Remove">
+               <IconButton edge="end" aria-label="remove"  sx={{ color: 'brown' }} >  {/* onClick={() => handleRemove(index)}> */}
+                   <RemoveIcon />
+               </IconButton>
+             </Tooltip>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </Box>
+      ))}
+    </List>
+    </div>
+
       </Box>
     </div>
 
