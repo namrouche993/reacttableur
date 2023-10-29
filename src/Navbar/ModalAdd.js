@@ -87,8 +87,13 @@ function ModalAdd(props) {
         console.log('try to knwo how many times it renders !!! ');
 
         const value_allowedemails = await response_allowedemails.json();
-        var emails_in_list = Object.values(value_allowedemails)
-        setEmails_added_list(emails_in_list)
+        var emails_in_list = Object.values(value_allowedemails);
+        
+        // Filtering out null elements from the array
+        let emails_in_list_withoutNull = emails_in_list.filter(element => element !== null);
+
+
+        setEmails_added_list(emails_in_list_withoutNull)
 
         //setEmailsadded2(value_allowedemails.user2email)
         //setEmailsadded3(value_allowedemails.user3email)
@@ -104,7 +109,7 @@ function ModalAdd(props) {
     }
 
     FetchListAllowedEmails();
-
+  
   }, [])
   
 
@@ -144,13 +149,13 @@ function ModalAdd(props) {
       console.log(response)
       if (response.ok) {
         const data_response = await response.json();
-
-        setEmails(inputEmail);
+        setEmails_added_list(prevList => [...prevList, inputEmail]);
         setInputEmail('');
         props.onClose();
   
       } else {
         console.error('Error sending data to the server.');
+        props.onClose();
       }
 
 
@@ -169,13 +174,12 @@ function ModalAdd(props) {
 
   
   const onClosing = () =>{
+    console.log('emails_added_list');
+    console.log(emails_added_list);
+
     props.onClose()
    //props.senddata(props.onClose())
   }
-
-  useEffect(() => {
-
-})
   
 
   return (
@@ -226,6 +230,7 @@ function ModalAdd(props) {
      //size="compact"  // Change the size to compact
   />
 </div>
+
 <br></br>
 <br></br>
 <div style={{textAlign:'-webkit-center'}}>
@@ -256,7 +261,6 @@ function ModalAdd(props) {
       ))}
     </List>
     </div>
-
       </Box>
     </div>
 
