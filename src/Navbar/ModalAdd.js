@@ -20,12 +20,16 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Delete';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+
 
 import AddIcon from '@mui/icons-material/Add';
 
 import { useSelector, useDispatch } from 'react-redux'; 
 import ReCAPTCHA from 'react-google-recaptcha';
 import  secureLocalStorage  from  "react-secure-storage";
+import ModalConfirm from './ModalConfirm';
+import ModalSuccessAdd from './ModalSuccessAdd';
 
 
 
@@ -65,11 +69,66 @@ function ModalAdd(props) {
   //const [emailsadded3,setEmailsadded3]=useState('')
 
 
+  const [open_confirmmodal,setOpen_confirmmodal]=useState(false);
+  const [emailtosend_in_modalconfirm_toremovec,setEmailtosend_in_modalconfirm_toremovec]=useState('');
 
+  const handleOpen_confirmmodal = (BttnRmv)=>{
+    setSelectedEmailRemovedButton(BttnRmv)
+    setOpen_confirmmodal(true);
+    setEmailtosend_in_modalconfirm_toremovec(BttnRmv)
+  }
+
+  const [test_display_codepin_user1,setTest_display_codepin_user1]=useState(false);
+
+  const handleVpnKeyClick = (Bttncodepin) =>{
+    setTest_display_codepin_user1(!test_display_codepin_user1);
+    //alert("vpn clicked" + Bttncodepin)
+  }
+
+  const handleConfirm_confirmmodal = async () =>{
+    try {
+      const response = await fetch('http://localhost:5000/removedemail', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
+          body: JSON.stringify({
+           "emailremoved":emailtosend_in_modalconfirm_toremovec,
+           "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
+          })
+  
+        });
+        console.log(response)
+        if (response.ok) {
+          //const data_response = await response.json();
+          //setEmails_added_list(prevList => prevList.filter(email => email !== emailtosend_in_modalconfirm_toremovec));
+          setEmails_added_list(prevState => prevState.filter(row => row[0] !== emailtosend_in_modalconfirm_toremovec));
+
+          setInputEmail('');
+          setOpen_confirmmodal(false);
+    
+        } else {
+          console.error('Error sending data to the server.');
+          setOpen_confirmmodal(false);
+        }
+    
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  
+  }
+
+  const [selectedEmailRemovedButton, setSelectedEmailRemovedButton] = useState(null);
+
+
+  const [open_successmodal,setOpen_successmodal]=useState(false);
+  const [emailtosend_in_modalsuccess,setEmailtosend_in_modalsuccess]=useState('');
+  const [codepass,setCodepass]=useState('')
 
 
   useEffect(() => {
-  
     async function FetchListAllowedEmails(){
      try {
       const response_allowedemails = await fetch('http://localhost:5000/allowedemails', {
@@ -84,15 +143,17 @@ function ModalAdd(props) {
        });
 
        if (response_allowedemails.ok) {
-        console.log('try to knwo how many times it renders !!! ');
+        console.log('try to knwo how many times it renders !!!!!!!!!!!!!!!!!!!! ');
 
         const value_allowedemails = await response_allowedemails.json();
-        var emails_in_list = Object.values(value_allowedemails);
-        
+        console.log(value_allowedemails)
+        //var emails_in_list = Object.values(value_allowedemails);
+        var emails_in_list = Object.entries(value_allowedemails).map(([key, value]) => [value.useremail, value.code])
+        console.log(emails_in_list)
         // Filtering out null elements from the array
-        let emails_in_list_withoutNull = emails_in_list.filter(element => element !== null);
-
-
+        //let emails_in_list_withoutNull = emails_in_list.filter(element => element !== null);
+        let emails_in_list_withoutNull = emails_in_list.filter(arr => !arr.every(el => el === null));
+        console.log(emails_in_list_withoutNull)
         setEmails_added_list(emails_in_list_withoutNull)
 
         //setEmailsadded2(value_allowedemails.user2email)
@@ -111,8 +172,8 @@ function ModalAdd(props) {
     FetchListAllowedEmails();
   
   }, [])
-  
 
+  
 
   const handleButtonAddClick = async(e) => {
     
@@ -149,9 +210,12 @@ function ModalAdd(props) {
       console.log(response)
       if (response.ok) {
         const data_response = await response.json();
-        setEmails_added_list(prevList => [...prevList, inputEmail]);
+        setEmails_added_list(prevList => [...prevList, [inputEmail,data_response.codepass]]);
         setInputEmail('');
-        props.onClose();
+        setCodepass(data_response.codepass);
+        setEmailtosend_in_modalsuccess(inputEmail);
+        setOpen_successmodal(true);
+        //props.onClose();
   
       } else {
         console.error('Error sending data to the server.');
@@ -207,14 +271,16 @@ function ModalAdd(props) {
         </Typography>
 
 
-      <Typography variant="body1" fontWeight='bold' sx={{ margin: '20px 0' }}>
+
+
+        <div style={{textAlign:'-webkit-center'}}>
+        {emails_added_list.length<2 ? 
+        <div>
+                <Typography variant="body1" fontWeight='bold' sx={{ margin: '20px 0' }}>
           {/* You are not authorized to visit or modify this table. */}
           If you want to give a user editing access to this table.<br></br>Please provide his email address.  {/* editable language */}
           <br></br>
       </Typography>
-
-
-        <div style={{textAlign:'-webkit-center'}}>
       <TextField
         label="Email"
         value={inputEmail}
@@ -229,6 +295,26 @@ function ModalAdd(props) {
      onChange={handleRecaptchaaddVerify}
      //size="compact"  // Change the size to compact
   />
+  </div>
+      :
+      <div>
+      <Typography variant="body1" fontWeight='bold' sx={{ margin: '20px 0' }}>
+      {/* You are not authorized to visit or modify this table. */}
+      Deux Adresses Email ont déjà été ajoutées, vous avez atteint la limite autorisée.  {/* editable language */}
+      <br></br>
+  </Typography>
+      <TextField
+      label="Limite de 02 Emails.." // editable language
+      value={inputEmail}
+      onChange={(e) => setInputEmail(e.target.value)}
+      disabled
+      variant="filled"
+      //fullWidth
+    />
+      </div>
+
+        }
+
 </div>
 
 <br></br>
@@ -236,7 +322,7 @@ function ModalAdd(props) {
 <div style={{textAlign:'-webkit-center'}}>
       <List sx={{maxWidth:320,alignContent:'center',borderTop:'ridge'}}>
 
-      {emails_added_list.map((email, index) => (
+      {emails_added_list.map((rowofemail, index) => (
                 <Box
                 key={index}
                 sx={{
@@ -248,11 +334,19 @@ function ModalAdd(props) {
                 }}
               >
         <ListItem key={index}>
-          <ListItemText primary={email} />
+          <ListItemText primary={rowofemail[0]} />
           <ListItemSecondaryAction>
-            <Tooltip title="Remove">
-               <IconButton edge="end" aria-label="remove"  sx={{ color: 'brown' }} >  {/* onClick={() => handleRemove(index)}> */}
-                   <RemoveIcon />
+
+          {test_display_codepin_user1 ? <p style={{display:'inline'}}>{rowofemail[1]}</p> : <span></span>}
+          <Tooltip title="Show the pin code">  {/* editable langauge */}
+          <IconButton aria-label="VpnKeyIcon" onClick={() => handleVpnKeyClick(rowofemail[1])}>
+                  <VpnKeyIcon />
+                </IconButton>
+          </Tooltip>
+
+            <Tooltip title="Remove"> {/* editable langauge */}
+               <IconButton edge="end" aria-label="remove"  sx={{ color: 'brown' }} onClick={() => handleOpen_confirmmodal(rowofemail[0])} >  {/* onClick={() => handleRemove(index)}> */}
+                   <RemoveIcon /> 
                </IconButton>
              </Tooltip>
           </ListItemSecondaryAction>
@@ -260,6 +354,11 @@ function ModalAdd(props) {
       </Box>
       ))}
     </List>
+    <ModalConfirm open_confirmmodal={open_confirmmodal}
+                  setOpen_confirmmodal={setOpen_confirmmodal}
+                  handleConfirm_confirmmodal={handleConfirm_confirmmodal}
+                  emailreceived_in_modalconfirm_toremove={emailtosend_in_modalconfirm_toremovec}
+                  />
     </div>
       </Box>
     </div>
@@ -270,7 +369,13 @@ function ModalAdd(props) {
         <Button size="small" variant="outlined" onClick={onClosing}>Cancel</Button>
         <Button size="small" variant="contained" onClick={handleButtonAddClick}>Submit</Button>
       </DialogActions>
-      
+    
+      <ModalSuccessAdd open_successmodal={open_successmodal}
+                  setOpen_successmodal={setOpen_successmodal}
+                  emailreceived_in_modalsuccess={emailtosend_in_modalsuccess}
+                  codepin_in_modalsuccess={codepass}
+                  />
+
     </Dialog>
   );
 }
