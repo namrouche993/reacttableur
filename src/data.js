@@ -26,8 +26,51 @@ export function ddatafct(last_row_after_header){
         return ddata
     }
 
+    var connecting_multiple_users = true;
+
+    console.log('dataaa 31 ')
+    console.log(secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined')
     
-    export var data_localstorage = secureLocalStorage.getItem('data_localstorage_storage_2')==null ? ddatafct(last_row_after_header) : JSON.parse(secureLocalStorage.getItem('data_localstorage_storage_2'));
+    const fetchData = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/getdata');
+          if (response.ok) {
+            const result = await response.json();
+            return result.data00;
+          } else {
+            throw new Error('Failed to fetch data');
+          }
+        } catch (error) {
+          console.error(error);
+          return null;
+        }
+      };
+      
+      const processFetchedData = async () => {
+        try {
+          const resultdatafromfct = await fetchData();
+          console.log('Result from fetchData:');
+          console.log(resultdatafromfct);
+      
+          // Here you can perform any further operations with the data
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+      
+      (async () => {
+        console.log('dataa file : ')
+
+        const result = await processFetchedData();
+        // Further operations with the result, if needed
+        console.log('Result:', result); // Log the result here
+      })();
+
+      
+      
+
+
+    export var data_localstorage =  secureLocalStorage.getItem('data_localstorage_storage_2')==null || secureLocalStorage.getItem('data_localstorage_storage_2')==undefined || secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined' ? ddatafct(last_row_after_header) : JSON.parse(secureLocalStorage.getItem('data_localstorage_storage_2'));
     
     export function data22fct(last_row_after_header){
            // alert('data2ffcttt')

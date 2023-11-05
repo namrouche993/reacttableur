@@ -10,6 +10,8 @@ import AppNotAuthorized401 from './AppNotAuthorized401';
 import AppNotFoundComponent400 from './AppNotFoundComponent400';
 import AppHotableFinal from './AppHotableFinal';
 import {useParams}  from 'react-router-dom';
+import secureLocalStorage from 'react-secure-storage';
+
 
 
 export default function AppOwnComponent() {
@@ -42,18 +44,24 @@ export default function AppOwnComponent() {
         console.log(response);
         
         if (response.ok) {
-          setDisplayHot(true);
           console.log('response.ok true in ownenter request')
           //props.onClose();
           const values_ownroute = await response.json();
           console.log('values_ownroute :')
-          console.log(values_ownroute)
-  
+          console.log(values_ownroute.dataa[6])
+          secureLocalStorage.setItem('data_localstorage_storage_2', JSON.stringify(values_ownroute.dataa));
+          setDisplayHot(true);
+          
+          
+          /*
           var getcellmeta_of_31 = hotInstance_redux.getCellMeta(3, 1); // editable index      
           getcellmeta_of_31.renderer= function(instance, td, row, col, prop, value, cellProperties) {
             Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells
           };
           getcellmeta_of_31.validator=undefined;
+          */
+
+
           //setTimeout(() => {
             //hotInstance_redux.setCellMeta(3,1,'readOnly',false);  // editable index        
             //hotInstance_redux.setDataAtCell(3,1,values_ownroute.organisme + ' | ' + values_ownroute.region,'changeorganismesrc') // editable index      
@@ -62,7 +70,7 @@ export default function AppOwnComponent() {
           //window.location.href = value_ownroute.hisownroute;
           //alert('already entered')
           
-          console.log('Data sent successfully to the server.');
+          console.log('Data sent successfully to the server.!!!!!!!!!!!! ownenter !!!!!!!!!');
           
           //const datajj = await response.json();
           //localStorage.setItem('token', datajj.token);

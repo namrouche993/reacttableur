@@ -119,6 +119,11 @@ function Hottable(props) {
   
   React.useEffect(() => {
   //alert('read_only would be : ' + props.read_only)
+  console.log('ussd74kasd75_2 is ::::::::::::')
+  console.log(secureLocalStorage.getItem('ussd74kasd75_2'))
+
+
+
     if(secureLocalStorage.getItem('ussd74kasd75_2')!==null){ 
       // after the first time the user open the webpage : 
       // until now do nothing , maybe editable
@@ -387,7 +392,11 @@ function Hottable(props) {
     };
   }, []);
 
-
+  useEffect(() => {
+    console.log('useeffct do nothing')
+  
+  }, [])
+  
   
   useEffect(() => {
     //alert('use effect of hottable i think will be here (userlocale2_redux) - userLocale2_redux: ' +  userLocale2_redux )

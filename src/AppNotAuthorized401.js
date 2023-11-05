@@ -72,7 +72,7 @@ function AppNotAuthorized401(props) {
   });
 
   //const [pinCode, setPinCode] = useState(['', '', '', '', '', '', '']);
-  const [pinCode, setPinCode] = useState(['', '', '', '', '', '', '']);
+  const [pinCode, setPinCode] = useState(['', '', '', '', '', '', '', '']);
 
   const [nextted, setNextted] = useState(false);
 
@@ -136,7 +136,7 @@ function AppNotAuthorized401(props) {
         const data_response = await responseem.json();
         console.log('data_response  :')
         console.log(data_response)
-        secureLocalStorage.setItem('ussd74kasd75_2', data_response.idusername_to_client_side);
+        //secureLocalStorage.setItem('ussd74kasd75_2', data_response.idusername_to_client_side);
         secureLocalStorage.setItem('email_chosen', data_response.email);
         //secureLocalStorage.setItem('hisownroute', 'tab/' + data_response.hisownroute);
         setShowPinCodeFields(true);
@@ -164,10 +164,12 @@ function AppNotAuthorized401(props) {
       return;
     }
   
-    setErrorEmail(!isValidEmail(email));
-  
-    if (!isValidEmail(email) || !isEmptyArrayfct(pinCode) ) {
-      return console.log('Error Filling');
+    setErrorEmail(!isValidEmail(email))
+    console.log(pinCode)
+    console.log(email)
+
+    if (!isValidEmail(email) || isEmptyArrayfct(pinCode) ) {
+      return console.log('Error Filling!!!!!!!!!!!!!!');
     }
   
     try {
@@ -186,22 +188,35 @@ function AppNotAuthorized401(props) {
   
       if (responsecp.ok) {
         const data_responsecp = await responsecp.json();
-  
-        if (data_responsecp.ok) {
+        console.log('data_responsecp')
+        console.log(data_responsecp);
+        console.log(data_responsecp.dataa)
+        alert('dataaa')
+       // if (data_responsecp.ok) {
           // Email and pin code are verified, perform the next actions
-          //secureLocalStorage.setItem('ussd74kasd75_2', data_responsecp.idusername_to_client_side);
-          //secureLocalStorage.setItem('email_chosen', email);
-          
+
+
+
+          secureLocalStorage.setItem('ussd74kasd75_2', data_responsecp.idusername_to_client_side);
+          secureLocalStorage.setItem('email_chosen', data_responsecp.email);
+          secureLocalStorage.setItem('phone_chosen', data_responsecp.phoneNumber_owner);
+          secureLocalStorage.setItem('organismechosen', data_responsecp.organisme);
+          secureLocalStorage.setItem('region_storage', data_responsecp.region);
+          secureLocalStorage.setItem('data_localstorage_storage_2', JSON.stringify(data_responsecp.dataa));
           secureLocalStorage.setItem('hisownroute', 'tab/' + data_responsecp.hisownroute);
   
           //props.onClose();
           console.log('Data sent successfully to the server.');
           window.location.reload();
-        } else {
+       
+        /*} else {
           setCodemessageincorrect('the code you entered is incorrect !') // editable language
           //alert('Email and pin code not verified. Please try again or contact the owner.');
         }
+        */
+        
       } else {
+        setCodemessageincorrect('the code you entered is incorrect !') // editable language
         console.error('Error sending data to the server.');
       }
     } catch (error) {

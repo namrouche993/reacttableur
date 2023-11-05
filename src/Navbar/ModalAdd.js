@@ -22,6 +22,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Delete';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,styled } from '@mui/material';
+
 
 import AddIcon from '@mui/icons-material/Add';
 
@@ -32,9 +34,23 @@ import ModalConfirm from './ModalConfirm';
 import ModalSuccessAdd from './ModalSuccessAdd';
 
 
+const StyledTableContainer = styled(TableContainer)({
+  maxWidth: 500, // Adjust the value to control the width
+  margin: '0 auto', // Center the table within its container
+  boxShadow:'none',
+  padding:'0px'
+});
+
+const StyledTableRow = styled(TableRow)({
+  '& > td, & > th': {
+    padding: '8px 16px', // Adjust the padding as needed
+  },
+});
+
 
 
 function ModalAdd(props) {
+
   const dispatch = useDispatch();
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
 
@@ -68,6 +84,8 @@ function ModalAdd(props) {
   //const [emailsadded2,setEmailsadded2]=useState('')
   //const [emailsadded3,setEmailsadded3]=useState('')
 
+  const [selectedEmailRemovedButton, setSelectedEmailRemovedButton] = useState(null);
+
 
   const [open_confirmmodal,setOpen_confirmmodal]=useState(false);
   const [emailtosend_in_modalconfirm_toremovec,setEmailtosend_in_modalconfirm_toremovec]=useState('');
@@ -78,10 +96,19 @@ function ModalAdd(props) {
     setEmailtosend_in_modalconfirm_toremovec(BttnRmv)
   }
 
-  const [test_display_codepin_user1,setTest_display_codepin_user1]=useState(false);
 
-  const handleVpnKeyClick = (Bttncodepin) =>{
-    setTest_display_codepin_user1(!test_display_codepin_user1);
+  const [selectedPassdButton, setSelectedPassdButton] = useState(null);
+
+  const [test_display_codepin_user1,setTest_display_codepin_user1]=useState([false,false]);
+
+  const handleVpnKeyClick = (Bttncodepin,index) =>{
+    setSelectedPassdButton(Bttncodepin)
+   // setTest_display_codepin_user1(!test_display_codepin_user1 );
+
+    setTest_display_codepin_user1(prevState => {
+      return prevState.map((value, i) => (i === index ? !value : value));
+    });
+
     //alert("vpn clicked" + Bttncodepin)
   }
 
@@ -120,7 +147,6 @@ function ModalAdd(props) {
   
   }
 
-  const [selectedEmailRemovedButton, setSelectedEmailRemovedButton] = useState(null);
 
 
   const [open_successmodal,setOpen_successmodal]=useState(false);
@@ -284,7 +310,11 @@ function ModalAdd(props) {
       <TextField
         label="Email"
         value={inputEmail}
-        onChange={(e) => setInputEmail(e.target.value)}
+        //onChange={(e) => setInputEmail(e.target.value)}
+        onChange={handleEmailChange}
+        error={errorEmail}
+        helperText={errorEmail ? 'Invalid email format' : ''}
+
         //fullWidth
       />
       <br></br>
@@ -306,7 +336,8 @@ function ModalAdd(props) {
       <TextField
       label="Limite de 02 Emails.." // editable language
       value={inputEmail}
-      onChange={(e) => setInputEmail(e.target.value)}
+      //onChange={(e) => setInputEmail(e.target.value)}
+      onChange={handleEmailChange}
       disabled
       variant="filled"
       //fullWidth
@@ -320,40 +351,44 @@ function ModalAdd(props) {
 <br></br>
 <br></br>
 <div style={{textAlign:'-webkit-center'}}>
-      <List sx={{maxWidth:320,alignContent:'center',borderTop:'ridge'}}>
+<StyledTableContainer component={Paper}>
+      <Table sx={{boxShadow:'none'}}>
+        <TableBody>
+          {emails_added_list.map((rowofemail, index) => (
+            <StyledTableRow key={index}>
+              <TableCell>{rowofemail[0]}</TableCell>
+              <TableCell align="right">
+                {test_display_codepin_user1[index] ? (
+                  <p style={{ display: 'inline' }}>{rowofemail[1]}</p>
+                ) : (
+                  <span></span>
+                )}
+                <Tooltip title="Show the pin code">
+                  <IconButton
+                    aria-label="VpnKeyIcon"
+                    onClick={() => handleVpnKeyClick(rowofemail[1], index)}
+                  >
+                    <VpnKeyIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Remove">
+                  <IconButton
+                    aria-label="remove"
+                    sx={{ color: 'brown' }}
+                    onClick={() => handleOpen_confirmmodal(rowofemail[0])}
+                  >
+                    <RemoveIcon />
+                  </IconButton>
+                </Tooltip>
+              </TableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </StyledTableContainer>
 
-      {emails_added_list.map((rowofemail, index) => (
-                <Box
-                key={index}
-                sx={{
-                  '&:hover': {
-                    backgroundColor: '#f0f0f0',
-                  },
-                  transition: 'background-color 0.3s',
-                  borderBottom: '1px solid #ccc', // Add the underline
-                }}
-              >
-        <ListItem key={index}>
-          <ListItemText primary={rowofemail[0]} />
-          <ListItemSecondaryAction>
 
-          {test_display_codepin_user1 ? <p style={{display:'inline'}}>{rowofemail[1]}</p> : <span></span>}
-          <Tooltip title="Show the pin code">  {/* editable langauge */}
-          <IconButton aria-label="VpnKeyIcon" onClick={() => handleVpnKeyClick(rowofemail[1])}>
-                  <VpnKeyIcon />
-                </IconButton>
-          </Tooltip>
 
-            <Tooltip title="Remove"> {/* editable langauge */}
-               <IconButton edge="end" aria-label="remove"  sx={{ color: 'brown' }} onClick={() => handleOpen_confirmmodal(rowofemail[0])} >  {/* onClick={() => handleRemove(index)}> */}
-                   <RemoveIcon /> 
-               </IconButton>
-             </Tooltip>
-          </ListItemSecondaryAction>
-        </ListItem>
-      </Box>
-      ))}
-    </List>
     <ModalConfirm open_confirmmodal={open_confirmmodal}
                   setOpen_confirmmodal={setOpen_confirmmodal}
                   handleConfirm_confirmmodal={handleConfirm_confirmmodal}
@@ -374,6 +409,7 @@ function ModalAdd(props) {
                   setOpen_successmodal={setOpen_successmodal}
                   emailreceived_in_modalsuccess={emailtosend_in_modalsuccess}
                   codepin_in_modalsuccess={codepass}
+                  setOpen_addmodal={onClosing}
                   />
 
     </Dialog>

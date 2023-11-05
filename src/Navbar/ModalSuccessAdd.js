@@ -17,6 +17,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 export default function ModalSuccessAdd(props) {
   const handleClose = () => {
     props.setOpen_successmodal(false);
+    props.setOpen_addmodal(false);
   };
 
   const Transition = React.forwardRef(function Transition(props, ref) {
