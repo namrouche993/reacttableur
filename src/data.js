@@ -30,8 +30,8 @@ export function ddatafct(last_row_after_header){
 
     console.log('dataaa 31 ')
     console.log(secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined')
-    
-    const fetchData = async () => {
+    //alert('we are in data.js')    
+    const fetchDatadata = async () => {
         try {
           const response = await fetch('http://localhost:5000/getdata');
           if (response.ok) {
@@ -48,29 +48,26 @@ export function ddatafct(last_row_after_header){
       
       const processFetchedData = async () => {
         try {
-          const resultdatafromfct = await fetchData();
+          const resultdatafromfct = await fetchDatadata();
           console.log('Result from fetchData:');
           console.log(resultdatafromfct);
+          return resultdatafromfct
       
           // Here you can perform any further operations with the data
         } catch (error) {
           console.error('Error:', error);
         }
       };
-      
-      (async () => {
-        console.log('dataa file : ')
-
-        const result = await processFetchedData();
-        // Further operations with the result, if needed
-        console.log('Result:', result); // Log the result here
-      })();
-
-      
-      
 
 
-    export var data_localstorage =  secureLocalStorage.getItem('data_localstorage_storage_2')==null || secureLocalStorage.getItem('data_localstorage_storage_2')==undefined || secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined' ? ddatafct(last_row_after_header) : JSON.parse(secureLocalStorage.getItem('data_localstorage_storage_2'));
+    var result_from_fetch_data = await processFetchedData();
+    console.log('result_from_fetch_data ----------------------------------- ')
+    console.log(result_from_fetch_data)
+    
+    export var data_localstorage =  result_from_fetch_data ? result_from_fetch_data : secureLocalStorage.getItem('data_localstorage_storage_2')==null || secureLocalStorage.getItem('data_localstorage_storage_2')==undefined || secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined' ? ddatafct(last_row_after_header) : JSON.parse(secureLocalStorage.getItem('data_localstorage_storage_2'));
+    console.log('data_localstorage')
+    console.log(data_localstorage)
+
     
     export function data22fct(last_row_after_header){
            // alert('data2ffcttt')

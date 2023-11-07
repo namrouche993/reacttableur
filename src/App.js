@@ -34,7 +34,8 @@ const App = () => {
         // Handle errors here
       }
     };
-    //alert('we will use fetchData')
+
+    //alert('we will use fetchData in App.js')
     //fetchData(); // Invoke the fetch function
   }, []);
 

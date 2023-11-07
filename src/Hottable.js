@@ -42,9 +42,9 @@ import { generateRandomString } from './Tools/Randst.js';
 
 import { fetchDataUsEffect1 } from './Tools/fetchDataUsEffect1.js';
 
+//alert('we are in Hottable ')  
 
 function Hottable(props) {
-  
   const userLocale2_redux  = useSelector(state => state.userLocale2);
   const userLocale2_ref = useRef(userLocale2_redux);
  
@@ -293,6 +293,8 @@ function Hottable(props) {
 
       hot.addHook('afterChange', (changes, source) => {
         console.log('afterChange : ')
+        console.log('---------------------------------------------')
+
 
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
@@ -308,10 +310,41 @@ function Hottable(props) {
 //          dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
           
           dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
-                   
+          console.log('*****************************************')
 
 
           secureLocalStorage.setItem("data_localstorage_storage_2", my_actual_getdata);
+
+          async function postData(url,data) {
+            try {
+              const response = await fetch(url, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  "jsonData_whenclosed":data,
+                  "idusername00":idusername00
+                })
+              });
+              console.log('response ')
+              console.log(response)
+              if (response.ok) {
+                const responseafterchange = response; // If expecting JSON response
+                console.log('responseafterchange')
+                console.log(responseafterchange)
+                //alert('successs')
+              } else {
+                throw new Error('Network response was not ok.');
+              }
+          
+            } catch (error) {
+              console.error('Error:', error);
+              throw error;
+            }
+          }
+          postData('http://localhost:5000/beacondata',my_actual_getdata);
 
           //saveDataToServer(JSON.parse(my_actual_getdata)); // editable when we want to synchronise the data for each change
 
@@ -360,8 +393,9 @@ function Hottable(props) {
           const handleVisibilityChange = () => {
             console.log('we call handleVisibilityChange')
             console.log(document.visibilityState);
-
+            //alert('we are in beacon handlevisivilitychange fct ')
             if (document.visibilityState === 'hidden') {
+              //alert('document visibiliystate hidden ')
               console.log('handleVisibilityChange and document.vibisiltystate == hidden ')
               // Page is being hidden, send the data to the server
               //const mydata_whenclosed = hot.getData(); // Obtain the data from Handsontable
@@ -376,7 +410,9 @@ function Hottable(props) {
               //const requestData = JSON.stringify({ jsonData_whenclosed, idusername00 });
               const blobData = new Blob([JSON.stringify({ jsonData_whenclosed, idusername00 })], { type: 'application/json' });
               
-              navigator.sendBeacon('http://localhost:5000/beacondata',blobData);
+              //navigator.sendBeacon('http://localhost:5000/beacondata',blobData);
+            } else if (document.visibilityState==='visible'){
+              //alert('document visibiliystate visibile ')
             }
           };
       
@@ -389,6 +425,7 @@ function Hottable(props) {
       hot.destroy();
       //window.removeEventListener('beforeunload', handlebeforeunloadfct(hot));
 
+      
     };
   }, []);
 
