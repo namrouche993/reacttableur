@@ -21,6 +21,11 @@ import ModalAdd from './ModalAdd';
 
 import { useSelector, useDispatch } from 'react-redux'; 
 import { downloadfile } from '../Download/downloadfile';
+import { socket } from '../socket';
+import IconButton from '@mui/material/IconButton';
+//import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonIcon from '@mui/icons-material/Person';
+
 
 const appTheme = createTheme({
     components: {
@@ -130,7 +135,24 @@ const handleCloseModaladd = () => {
   }
 
   const isSmallScreen = useMediaQuery(appTheme.breakpoints.down('sm')); // Adjust the breakpoint as needed
+  const [showinUser1connecting,setShowinUser1connecting]=useState(false);
+  const [list_users_conncting,setList_users_connecting]=useState([]);
 
+  useEffect(() => {
+    socket.on('received_userconncted_msg',(data) =>{
+      //alert('data in received_userconncted_msg is : ' + data)
+      setShowinUser1connecting(data)
+    })
+
+    socket.on('list_userconncted',(data)=>{
+      console.log('--------------------------------------------------------------')
+      console.log(data)
+      setList_users_connecting(data)
+    })
+    console.log('list_users_conncting :')
+    console.log(list_users_conncting)
+  }, [])
+  
   return (
         <ThemeProvider theme={appTheme}>
          <AppBar position="fixed" sx={{height:50}}>
@@ -148,8 +170,22 @@ const handleCloseModaladd = () => {
 
             </div>
 
-                 
+            {list_users_conncting.forEach((x,index)=>{
+                          <div>
+                          <Tooltip title="User1 is connecting now .. "> {/* editable langauge */}
+                             <IconButton style={{cursor:'default',borderTop:'double' }}>
+                               {/* <AccountCircleIcon/> */}
+                               <PersonIcon/>
+                             </IconButton >
+                             </Tooltip>
+               
+                           </div>
+               
+            })
+            }
+
             <div>
+
             <Tooltip title={<span style={{fontSize:12}}>Change format</span>} > {/* editable langauge */}
                 <Button onClick={handleOpenModalformat} color="inherit" sx={{...buttonchangeformatStyles,marginRight: isSmallScreen?'0':'70px'}}> <LanguageIcon sx={{fontSize:25}}/> </Button>
               </Tooltip>

@@ -336,7 +336,8 @@ function Hottable(props) {
                 console.log(responseafterchange)
                 //alert('successs')
               } else {
-                throw new Error('Network response was not ok.');
+                console.log('error ')
+                //throw new Error('Network response was not ok.');
               }
           
             } catch (error) {

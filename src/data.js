@@ -33,12 +33,28 @@ export function ddatafct(last_row_after_header){
     //alert('we are in data.js')    
     const fetchDatadata = async () => {
         try {
-          const response = await fetch('http://localhost:5000/getdata');
+          const response = await fetch('http://localhost:5000/getdata',{
+          method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            
+            //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
+            body: JSON.stringify({
+             //"act_data":hotInstance_existed,
+             "hisroute":secureLocalStorage.getItem('hisownroute'),
+             "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
+           }) //data_localstorage})
+          })
+
+          //const response = await fetch('http://localhost:5000/getdata');
           if (response.ok) {
             const result = await response.json();
             return result.data00;
           } else {
-            throw new Error('Failed to fetch data');
+            return null;
+            // new Error('Failed to fetch data');
           }
         } catch (error) {
           console.error(error);
