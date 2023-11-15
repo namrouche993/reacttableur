@@ -12,7 +12,10 @@ import { socket } from './socket';
 
 
 const App = () => {
+  
   useEffect(() => {
+    
+    
     // Function to fetch data
     socket.emit('user_connected',{msg:'HI FROM A USER'})
 
@@ -29,14 +32,14 @@ const App = () => {
     socket.on('received_userdisconnect',()=>{
       //alert('ONE USER DISCONNECT')
     })
-    /*
-    socket.emit('user_connected', (msg) => {
-      console.log('we will alert ')
-      //alert('NEW USER CONNECTED')
-      //setMessages((prevMessages) => [...prevMessages, msg]);
-    });
+    
+   // socket.emit('user_connected', (msg) => {
+   //   console.log('we will alert ')
+  //    //alert('NEW USER CONNECTED')
+  //    //setMessages((prevMessages) => [...prevMessages, msg]);
+  //  });
 
-    */
+  
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:5000/getdata',{

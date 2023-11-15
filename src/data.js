@@ -1,5 +1,7 @@
 import { last_row_after_header } from './initials_inputs.js';
 import  secureLocalStorage  from  "react-secure-storage";
+import { useLocation } from 'react-router-dom';
+
 
 export function ddatafct(last_row_after_header){
             var ddata= [];
@@ -29,8 +31,11 @@ export function ddatafct(last_row_after_header){
     var connecting_multiple_users = true;
 
     console.log('dataaa 31 ')
+    console.log(secureLocalStorage.getItem('ussd74kasd75_2aaa')==null)
     console.log(secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined')
     //alert('we are in data.js')    
+
+    if(secureLocalStorage.getItem('ussd74kasd75_2')!==null && secureLocalStorage.getItem('hisownroute')!==null){
     const fetchDatadata = async () => {
         try {
           const response = await fetch('http://localhost:5000/getdata',{
@@ -43,7 +48,7 @@ export function ddatafct(last_row_after_header){
             //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
             body: JSON.stringify({
              //"act_data":hotInstance_existed,
-             "hisroute":secureLocalStorage.getItem('hisownroute'),
+             "hisroute": window.location.pathname,//secureLocalStorage.getItem('hisownroute'),
              "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
            }) //data_localstorage})
           })
@@ -75,11 +80,15 @@ export function ddatafct(last_row_after_header){
         }
       };
 
-
+    
     var result_from_fetch_data = await processFetchedData();
     console.log('result_from_fetch_data ----------------------------------- ')
     console.log(result_from_fetch_data)
-    
+  } else {
+    var result_from_fetch_data = null ;
+  }
+console.log('result_from_fetch_data')
+console.log(result_from_fetch_data)
     export var data_localstorage =  result_from_fetch_data ? result_from_fetch_data : secureLocalStorage.getItem('data_localstorage_storage_2')==null || secureLocalStorage.getItem('data_localstorage_storage_2')==undefined || secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined' ? ddatafct(last_row_after_header) : JSON.parse(secureLocalStorage.getItem('data_localstorage_storage_2'));
     console.log('data_localstorage')
     console.log(data_localstorage)
