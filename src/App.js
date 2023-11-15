@@ -17,7 +17,7 @@ const App = () => {
     
     
     // Function to fetch data
-    socket.emit('user_connected',{msg:'HI FROM A USER'})
+    //socket.emit('user_connected',{msg:'HI FROM A USER'})
 
     socket.on('received_userconncted_msg',(data) =>{
       ///alert(data.msg)

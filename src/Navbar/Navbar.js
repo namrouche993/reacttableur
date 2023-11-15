@@ -25,6 +25,7 @@ import { socket } from '../socket';
 import IconButton from '@mui/material/IconButton';
 //import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
+import  secureLocalStorage  from  "react-secure-storage";
 
 
 const appTheme = createTheme({
@@ -145,9 +146,12 @@ const handleCloseModaladd = () => {
     })
 
     socket.on('list_userconncted',(data)=>{
-      console.log('--------------------------------------------------------------')
+      console.log('-------------------------------------------------------------!!!-')
       console.log(data)
-      setList_users_connecting(data)
+      var data2_without_own_username = data.filter(element => element !== secureLocalStorage.getItem('ussd74kasd75_2'));
+      setList_users_connecting(data2_without_own_username)
+      console.log(data2_without_own_username)
+      console.log(list_users_conncting)
     })
     console.log('list_users_conncting :')
     console.log(list_users_conncting)
@@ -169,8 +173,8 @@ const handleCloseModaladd = () => {
             </Tooltip>
 
             </div>
-
-            {list_users_conncting.forEach((x,index)=>{
+            {list_users_conncting.map((x,index)=>{ 
+              return (
                           <div>
                           <Tooltip title="User1 is connecting now .. "> {/* editable langauge */}
                              <IconButton style={{cursor:'default',borderTop:'double' }}>
@@ -180,7 +184,7 @@ const handleCloseModaladd = () => {
                              </Tooltip>
                
                            </div>
-               
+              )
             })
             }
 

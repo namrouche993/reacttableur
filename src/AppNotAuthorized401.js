@@ -191,7 +191,7 @@ function AppNotAuthorized401(props) {
         console.log('data_responsecp')
         console.log(data_responsecp);
         console.log(data_responsecp.dataa)
-        alert('dataaa')
+        //alert('dataaa')
        // if (data_responsecp.ok) {
           // Email and pin code are verified, perform the next actions
 
