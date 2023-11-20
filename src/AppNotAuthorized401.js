@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { PinInput } from 'react-input-pin-code' // ES Module
 
 import { useSpring, animated } from 'react-spring';
+import { useNavigate } from 'react-router-dom';
+
 
 import {
   Button,
@@ -26,7 +28,8 @@ import {
   FormHelperText,
   Box,
   InputAdornment,
-  Input
+  Input,
+  Stack
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
@@ -37,6 +40,7 @@ import secureLocalStorage from 'react-secure-storage';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { createTheme, ThemeProvider, Theme, useTheme } from '@mui/material/styles';
+import ModalConfirmNewTable from './Navbar/ModalConfirmNewTable';
 
 const customTheme = (outerTheme) =>
   createTheme({
@@ -114,6 +118,7 @@ function AppNotAuthorized401(props) {
     }
 
     try {
+      var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
       const responseem = await fetch('http://localhost:5000/acc/accessfromurlem', {
         method: 'POST',
         credentials: 'include',
@@ -122,6 +127,7 @@ function AppNotAuthorized401(props) {
         },
         body: JSON.stringify({
           email: email,
+          currentrouteofurl:currentrouteofurl
           //recaptchaTokenAccess: recaptchaTokenAccess,
         }),
       });
@@ -173,6 +179,8 @@ function AppNotAuthorized401(props) {
     }
   
     try {
+      var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
+
       const responsecp = await fetch('http://localhost:5000/acc/accessfromurlcp', {
         method: 'POST',
         credentials: 'include',
@@ -183,6 +191,7 @@ function AppNotAuthorized401(props) {
           email: email,
           pinCode: pinCode,
           recaptchaTokenAccess: recaptchaTokenAccess,
+          currentrouteofurl:currentrouteofurl
         }),
       });
   
@@ -223,7 +232,58 @@ function AppNotAuthorized401(props) {
       console.error('Error:', error);
     }
   };
-  
+
+  const navigate = useNavigate();
+
+  const [open_confirmmodal,setOpen_confirmmodal]=useState(false);
+
+  const handleOpen_confirmmodal = ()=>{
+    setOpen_confirmmodal(true);
+  }
+
+  const handleConfirm_confirmmodal = async () =>{
+    secureLocalStorage.removeItem("ussd74kasd75_2");
+    secureLocalStorage.removeItem("email_chosen");
+    secureLocalStorage.removeItem("phone_chosen");
+    secureLocalStorage.removeItem("organismechosen");
+    secureLocalStorage.removeItem("region_storage");
+    secureLocalStorage.removeItem("data_localstorage_storage_2");
+    secureLocalStorage.removeItem("hisownroute");
+
+    try {
+      // Make a request to the server to clear the cookie
+      const response = await fetch('http://localhost:5000/clearcookie', {
+        method: 'POST',
+        credentials: 'include', // Include credentials (cookies) in the request
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      console.log('response in clearCookie :')
+      console.log(response)
+
+      if (response.ok) {
+        console.log('Cookie cleared successfully');
+        secureLocalStorage.removeItem("ussd74kasd75_2");
+        secureLocalStorage.removeItem("email_chosen");
+        secureLocalStorage.removeItem("phone_chosen");
+        secureLocalStorage.removeItem("organismechosen");
+        secureLocalStorage.removeItem("region_storage");
+        secureLocalStorage.removeItem("data_localstorage_storage_2");
+        secureLocalStorage.removeItem("hisownroute");
+        navigate('/');
+        window.location.reload()
+        setOpen_confirmmodal(false);
+        // history.push('/');
+        //window.location.reload()
+    
+      } else {
+        console.error('Failed to clear cookie');
+      }
+    } catch (error) {
+      console.error('Error while clearing cookie:', error);
+    }
+  }
 
   return (
     <Dialog
@@ -266,14 +326,32 @@ function AppNotAuthorized401(props) {
             helperText={nextted && errorEmail ? isValidEmail(email) ? 'Invalid Email' : 'Invalid email format' : ''}
           />
         </FormControl>
+        <Typography variant="body2" sx={{ margin: '20px 0' }}>
+          {/* You are not authorized to visit or modify this table. */}
+          Or you can create a new table by Clicking the the button Create New Table.  {/* editable language */}
+        </Typography>
         </Box>
+        <br></br>
 
-        <DialogActions sx={{ fontFamily: 'system-ui' }}>
-        <Button size="small" variant="contained" onClick={handleNext}>
+        <DialogActions sx={{ fontFamily: 'system-ui',justifyContent: 'space-between' }}>
+        {/* <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}> */}
+        <Button size="small" variant="outlined" sx={{ height: '100%',textTransform: 'none' }} onClick={() => handleOpen_confirmmodal()}>
+           Create New Table' {/* editable language Suivant */}
+        </Button>
+
+        <Button size="medium" variant="contained" sx={{ height: '100%',marginLeft:'20px !important' }} onClick={handleNext}>
            Next' {/* editable language Suivant */}
         </Button>
+        {/* </Stack> */}
+
       </DialogActions>
+      <ModalConfirmNewTable open_confirmmodal={open_confirmmodal}
+                  setOpen_confirmmodal={setOpen_confirmmodal}
+                  handleConfirm_confirmmodal={handleConfirm_confirmmodal}
+                  />
+
       </Box>
+      
 :
 
 

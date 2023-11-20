@@ -15,31 +15,7 @@ const App = () => {
   
   useEffect(() => {
     
-    
-    // Function to fetch data
-    //socket.emit('user_connected',{msg:'HI FROM A USER'})
 
-    socket.on('received_userconncted_msg',(data) =>{
-      ///alert(data.msg)
-    })
-
-    socket.on('disconnect', () => {
-      console.log('Disconnected from the server');
-      //alert('ONE USER disconnect')
-      // Add logic to handle the disconnection
-    });
-
-    socket.on('received_userdisconnect',()=>{
-      //alert('ONE USER DISCONNECT')
-    })
-    
-   // socket.emit('user_connected', (msg) => {
-   //   console.log('we will alert ')
-  //    //alert('NEW USER CONNECTED')
-  //    //setMessages((prevMessages) => [...prevMessages, msg]);
-  //  });
-
-  
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:5000/getdata',{
@@ -71,10 +47,6 @@ const App = () => {
 
     //alert('we will use fetchData in App.js')
     //fetchData(); // Invoke the fetch function
-
-    return () => {
-      socket.disconnect();
-    };
 
   }, []);
 

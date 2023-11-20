@@ -138,23 +138,58 @@ const handleCloseModaladd = () => {
   const isSmallScreen = useMediaQuery(appTheme.breakpoints.down('sm')); // Adjust the breakpoint as needed
   const [showinUser1connecting,setShowinUser1connecting]=useState(false);
   const [list_users_conncting,setList_users_connecting]=useState([]);
+  
+
+
+  const mynamespace0 = secureLocalStorage.getItem('hisownroute')
+  if(!mynamespace0){
+    var mynamespace = mynamespace0;
+  } else {
+    var mynamespace = mynamespace0.toString().replace('tab/','');
+  }  
+
+  socket.emit('join', mynamespace);
+
+
+  socket.on('reconnect', () => {
+    console.log('Reconnected to the server');
+//    alert('reconnect')
+    // Re-subscribe to the 'listingusers' event after reconnection
+    
+    socket.emit('join', mynamespace);
+    socket.emit('subscribeToListingUsers');
+  
+    // Perform any other necessary setup after reconnection
+  });
+
+  //alert('useeffect ')
+  socket.on('listingusers',(users)=>{
+    //alert('listinguers')
+    console.log('we are in listingusers :')
+    console.log(users)
+    //alert('listingusers :  ' + users)
+    var uniqueSet = new Set(users);
+    // Convert the Set back to an array
+    var uniqueArray = Array.from(uniqueSet);
+    const uniqueArraywithoutnull = uniqueArray.filter(user => user !== 'null').filter(user => user !== secureLocalStorage.getItem('email_chosen'));
+    //console.log('**************ssssssssssssssssssssssOOOOOOOOOOOOOOOOOOOOOOOsss*')
+    //console.log(uniqueArray)
+    console.log(uniqueArraywithoutnull)
+
+    setList_users_connecting(uniqueArraywithoutnull);
+  })
 
   useEffect(() => {
-    socket.on('received_userconncted_msg',(data) =>{
-      //alert('data in received_userconncted_msg is : ' + data)
-      setShowinUser1connecting(data)
-    })
 
-    socket.on('list_userconncted',(data)=>{
-      console.log('-------------------------------------------------------------!!!-')
-      console.log(data)
-      var data2_without_own_username = data.filter(element => element !== secureLocalStorage.getItem('ussd74kasd75_2'));
-      setList_users_connecting(data2_without_own_username)
-      console.log(data2_without_own_username)
-      console.log(list_users_conncting)
-    })
-    console.log('list_users_conncting :')
-    console.log(list_users_conncting)
+    
+    //socket.emit('join', mynamespace);
+    socket.emit('subscribeToListingUsers');
+
+    return () => {
+      socket.off('reconnect');
+      socket.off('listingusers');
+    };
+    
   }, [])
   
   return (
@@ -173,11 +208,12 @@ const handleCloseModaladd = () => {
             </Tooltip>
 
             </div>
+            <div style={{display:'inline-flex'}}>
             {list_users_conncting.map((x,index)=>{ 
               return (
-                          <div>
-                          <Tooltip title="User1 is connecting now .. "> {/* editable langauge */}
-                             <IconButton style={{cursor:'default',borderTop:'double' }}>
+                     <div key={index} style={{marginRight:27}}>
+                           <Tooltip title={`${x} is connecting now .. `}> {/* editable langauge */}
+                             <IconButton style={{cursor:'default',borderTop:'double',borderColor:'green' }}>
                                {/* <AccountCircleIcon/> */}
                                <PersonIcon/>
                              </IconButton >
@@ -187,7 +223,7 @@ const handleCloseModaladd = () => {
               )
             })
             }
-
+            </div>
             <div>
 
             <Tooltip title={<span style={{fontSize:12}}>Change format</span>} > {/* editable langauge */}
@@ -204,9 +240,9 @@ const handleCloseModaladd = () => {
 
             <Tooltip title={<span style={{fontSize:12}}>
             <div style={{textAlign:'center'}}>
-              Travail collaboratif<br></br>Ajouter des utilisateurs <br></br>avec des droits de modifications
+              Travail collaboratif<br></br>Ajouter des utilisateurs <br></br>avec des droits de modifications {/* editable langauge */}
             </div>
-              </span>} > {/* editable langauge */}
+              </span>} > 
               <Button onClick={handleOpenModalAddUser} color="inherit" sx={{color:'black'}}> <GroupAddIcon sx={{fontSize:26}}/> </Button>
             </Tooltip>
               
