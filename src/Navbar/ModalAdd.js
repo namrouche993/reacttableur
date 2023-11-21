@@ -16,11 +16,16 @@ import {
   RadioGroup,
   Grid,
   Typography,
-  List, ListItem, ListItemText, ListItemSecondaryAction,Tooltip
+  List, ListItem, ListItemText, ListItemSecondaryAction,Tooltip,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Delete';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,styled } from '@mui/material';
 
@@ -174,7 +179,7 @@ function ModalAdd(props) {
         const value_allowedemails = await response_allowedemails.json();
         console.log(value_allowedemails)
         //var emails_in_list = Object.values(value_allowedemails);
-        var emails_in_list = Object.entries(value_allowedemails).map(([key, value]) => [value.useremail, value.code])
+        var emails_in_list = Object.entries(value_allowedemails).map(([key, value]) => [value.useremail,value.role, value.code])
         console.log(emails_in_list)
         // Filtering out null elements from the array
         //let emails_in_list_withoutNull = emails_in_list.filter(element => element !== null);
@@ -227,6 +232,7 @@ function ModalAdd(props) {
          "email_owner":secureLocalStorage.getItem('email_chosen'),
          "username_owner":secureLocalStorage.getItem('ussd74kasd75_2'),
          "new_email_added":inputEmail,
+         "role_new_user":role,
          "recaptchaToken_add":recaptchaToken_add
        })
 
@@ -236,7 +242,9 @@ function ModalAdd(props) {
       console.log(response)
       if (response.ok) {
         const data_response = await response.json();
-        setEmails_added_list(prevList => [...prevList, [inputEmail,data_response.codepass]]);
+        console.log('data_response.role')
+        console.log(data_response.role)
+        setEmails_added_list(prevList => [...prevList, [inputEmail,data_response.role,data_response.codepass]]);
         setInputEmail('');
         setCodepass(data_response.codepass);
         setEmailtosend_in_modalsuccess(inputEmail);
@@ -270,7 +278,27 @@ function ModalAdd(props) {
     props.onClose()
    //props.senddata(props.onClose())
   }
-  
+
+  const [role,setRole]=useState('Admin');
+
+  const handleChangeRole = (event) => {
+    setRole(event.target.value)
+    console.log('rolle')
+  }
+
+  const getHelperText = () => {
+    // Add logic to determine helper text based on the selected role
+    switch (role) {
+      case 'Admin':
+        return 'Admins have full access. ( he can fill the table - add new users - Submit the finished table ';
+      case 'Writer':
+        return 'Writers can edit content. ( He cannot add users and he cannot submit )';
+      case 'Viewer':
+        return 'Viewers can only view content.';
+      default:
+        return '';
+    }
+  };
 
   return (
     <Dialog open={props.open} onClose={onClosing}
@@ -307,6 +335,7 @@ function ModalAdd(props) {
           If you want to give a user editing access to this table.<br></br>Please provide his email address.  {/* editable language */}
           <br></br>
       </Typography>
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
       <TextField
         label="Email"
         value={inputEmail}
@@ -317,6 +346,29 @@ function ModalAdd(props) {
 
         //fullWidth
       />
+      <FormControl>
+  <InputLabel id="demo-simple-select-label">Role</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    defaultValue="Admin"
+    value={role}
+    label="Role"
+    onChange={handleChangeRole}
+  >
+    <MenuItem value={"Admin"}>Admin</MenuItem>
+    <MenuItem value={"Writer"}>Writer</MenuItem>
+    <MenuItem value={"Viewer"}>Viewer</MenuItem>
+  </Select>
+</FormControl>
+</div>
+<div>
+{getHelperText() && (
+        <div style={{ marginLeft: '10px', fontSize: 'small' }}>
+          <p>{getHelperText()}</p>
+        </div>
+      )}
+</div>
       <br></br>
       <br></br>
 
@@ -357,16 +409,18 @@ function ModalAdd(props) {
           {emails_added_list.map((rowofemail, index) => (
             <StyledTableRow key={index}>
               <TableCell>{rowofemail[0]}</TableCell>
+              <TableCell>Role : {rowofemail[1]}</TableCell>
+
               <TableCell align="right">
                 {test_display_codepin_user1[index] ? (
-                  <p style={{ display: 'inline' }}>{rowofemail[1]}</p>
+                  <p style={{ display: 'inline' }}>{rowofemail[2]}</p>
                 ) : (
                   <span></span>
                 )}
                 <Tooltip title="Show the pin code">
                   <IconButton
                     aria-label="VpnKeyIcon"
-                    onClick={() => handleVpnKeyClick(rowofemail[1], index)}
+                    onClick={() => handleVpnKeyClick(rowofemail[2], index)}
                   >
                     <VpnKeyIcon />
                   </IconButton>

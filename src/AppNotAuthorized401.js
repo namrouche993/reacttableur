@@ -213,7 +213,8 @@ function AppNotAuthorized401(props) {
           secureLocalStorage.setItem('region_storage', data_responsecp.region);
           secureLocalStorage.setItem('data_localstorage_storage_2', JSON.stringify(data_responsecp.dataa));
           secureLocalStorage.setItem('hisownroute', 'tab/' + data_responsecp.hisownroute);
-  
+          secureLocalStorage.setItem('role_storage', data_responsecp.role);
+
           //props.onClose();
           console.log('Data sent successfully to the server.');
           window.location.reload();
@@ -328,7 +329,7 @@ function AppNotAuthorized401(props) {
         </FormControl>
         <Typography variant="body2" sx={{ margin: '20px 0' }}>
           {/* You are not authorized to visit or modify this table. */}
-          Or you can create a new table by Clicking the the button Create New Table.  {/* editable language */}
+          Or you can create your own table by Clicking to the button Create New Table.  {/* editable language */}
         </Typography>
         </Box>
         <br></br>

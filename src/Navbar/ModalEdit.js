@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Handsontable from 'handsontable';
 import {
   Button,
@@ -29,6 +29,9 @@ import { fetchDataUsEffect1 } from '../Tools/fetchDataUsEffect1';
 import { last_row_after_header } from '../initials_inputs';
 import { ddatafct } from '../data';
 import ReCAPTCHA from 'react-google-recaptcha';
+import ModalConfirmNewTable from './ModalConfirmNewTable';
+import { useNavigate } from 'react-router-dom';
+
 
 /*
 const organisme_data = [
@@ -236,8 +239,9 @@ function ModalEdit(props) {
          secureLocalStorage.setItem('region_storage', region);
          secureLocalStorage.setItem('email_chosen', email);
          secureLocalStorage.setItem('phone_chosen', phoneNumber);
-
          secureLocalStorage.setItem('hisownroute', 'tab/'+data_response.hisownroute);
+         secureLocalStorage.setItem('role_storage', "Owner");
+
 
          // Successful registration, redir ect to the main page
          //window.location.href = '/main-page';
@@ -318,6 +322,77 @@ function ModalEdit(props) {
 */
     
   };
+
+  const [display_CreateNewTable_button,setDisplay_CreateNewTable_button]=useState(false);
+  useEffect(() => {
+    if(
+      secureLocalStorage.getItem("ussd74kasd75_2") &&
+      secureLocalStorage.getItem("email_chosen") &&
+      secureLocalStorage.getItem("phone_chosen") &&
+      secureLocalStorage.getItem("organismechosen") &&
+      secureLocalStorage.getItem("region_storage") &&
+      secureLocalStorage.getItem("data_localstorage_storage_2") &&
+      secureLocalStorage.getItem("hisownroute")
+    ) {
+      //alert('securelocalstorage items are existing')
+      setDisplay_CreateNewTable_button(true);
+    } else {
+      //alert('securelocalstorage items are not existing')
+      setDisplay_CreateNewTable_button(false);
+    }
+  }, [])
+  
+  const navigate = useNavigate();
+
+  const [open_confirmmodal,setOpen_confirmmodal]=useState(false);
+
+  const handleOpen_confirmmodal = ()=>{
+    setOpen_confirmmodal(true);
+  }
+
+  const handleConfirm_confirmmodal = async () =>{
+    secureLocalStorage.removeItem("ussd74kasd75_2");
+    secureLocalStorage.removeItem("email_chosen");
+    secureLocalStorage.removeItem("phone_chosen");
+    secureLocalStorage.removeItem("organismechosen");
+    secureLocalStorage.removeItem("region_storage");
+    secureLocalStorage.removeItem("data_localstorage_storage_2");
+    secureLocalStorage.removeItem("hisownroute");
+
+    try {
+      // Make a request to the server to clear the cookie
+      const response = await fetch('http://localhost:5000/clearcookie', {
+        method: 'POST',
+        credentials: 'include', // Include credentials (cookies) in the request
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      console.log('response in clearCookie :')
+      console.log(response)
+
+      if (response.ok) {
+        console.log('Cookie cleared successfully');
+        secureLocalStorage.removeItem("ussd74kasd75_2");
+        secureLocalStorage.removeItem("email_chosen");
+        secureLocalStorage.removeItem("phone_chosen");
+        secureLocalStorage.removeItem("organismechosen");
+        secureLocalStorage.removeItem("region_storage");
+        secureLocalStorage.removeItem("data_localstorage_storage_2");
+        secureLocalStorage.removeItem("hisownroute");
+        navigate('/');
+        window.location.reload()
+        setOpen_confirmmodal(false);
+        // history.push('/');
+        //window.location.reload()
+    
+      } else {
+        console.error('Failed to clear cookie');
+      }
+    } catch (error) {
+      console.error('Error while clearing cookie:', error);
+    }
+  }
 
   return (
     <Dialog open={props.open} onClose={props.onClose}
@@ -441,11 +516,25 @@ function ModalEdit(props) {
   
       </DialogContent>
 
-      <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1'}}>
-        <Button size="small" variant="outlined" onClick={props.onClose}>Cancel</Button> {/* editable langauge */}
-        <Button size="small" variant="contained" disabled={!isVerified} onClick={handleSubmit}>Submit</Button> {/* editable langauge */}
-
+      <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',display: 'flex', justifyContent: 'space-between' }}>
+      {display_CreateNewTable_button ? 
+      <div>
+      <Button size="small" variant="outlined" sx={{ height: '100%',textTransform: 'none' }} onClick={() => handleOpen_confirmmodal()}>
+           Create New Table {/* editable language Suivant */}
+        </Button>
+      </div> :
+      <p>.</p>
+     }
+        <div>
+         <Button size="small" variant="outlined" onClick={props.onClose}>Cancel</Button> {/* editable langauge */}
+         <Button size="small" variant="contained" disabled={!isVerified} onClick={handleSubmit}>Submit</Button> {/* editable langauge */}
+        </div>
       </DialogActions>
+      <ModalConfirmNewTable open_confirmmodal={open_confirmmodal}
+                  setOpen_confirmmodal={setOpen_confirmmodal}
+                  handleConfirm_confirmmodal={handleConfirm_confirmmodal}
+                  />
+
     </Dialog>
   );
 }
