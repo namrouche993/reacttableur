@@ -191,6 +191,61 @@ const handleCloseModaladd = () => {
     };
     
   }, [])
+
+  const [role_of_user_component,setRole_of_user_component]=useState('Viewer');
+
+  useEffect( async () => {
+    try {
+      var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
+      const response = await fetch('http://localhost:5000/users_roles_navbar', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: secureLocalStorage.getItem('ussd74kasd75_2'),
+          hisownroute:currentrouteofurl
+        })
+      });
+      //var responsejson = await responseem.json();
+      //console.log(responsejson)
+      if (response.ok) {
+        console.log('we are in response.ok')
+        const data_response = await response.json();
+        console.log('data_response  :')
+        console.log(data_response)
+        var role_of_user = data_response.role;
+        if(role_of_user=='Owner'){
+          setRole_of_user_component('Owner')
+
+        } else if(role_of_user=='Admin'){
+          setRole_of_user_component('Admin')
+
+        } else if (role_of_user=='Writer'){
+          setRole_of_user_component('Writer')
+
+        } else if (role_of_user=='Viewer'){
+          setRole_of_user_component('Viewer')
+        
+        } else {
+          setRole_of_user_component('Viewer')
+        }
+        //props.onClose();
+        console.log('Data sent successfully to the server.');
+        //window.location.reload();
+      } else {
+        setRole_of_user_component('Viewer')
+        console.error('Error ,Authorization is not verified.');
+      }
+    } catch (error) {
+      setRole_of_user_component('Viewer')
+      console.error('Error:', error);
+    }
+
+  
+  }, [])
+  
   
   return (
         <ThemeProvider theme={appTheme}>
@@ -198,13 +253,12 @@ const handleCloseModaladd = () => {
          {!props.display_modaledit ? 
          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
             <div id='idfor2buttons'>
-            
-            <Tooltip title={<span style={{fontSize:16}}>Undo (Ctrl+Z)</span>} > {/* editable langauge */}
-              <Button onClick={undoclickfct} color="inherit" sx={{...buttonStyles,marginRight:0.6}} > <UndoIcon sx={{ fontSize: 30 }} />  </Button>
+            <Tooltip title={<span style={{fontSize:16}}>Undo (Ctrl+Z) {role_of_user_component=='Viewer' ? " | As a Viewer, you don't have the permissions to edit" : ''} </span>} > {/* editable langauge */}
+              <Button disabled={role_of_user_component=='Viewer' ? true : false} onClick={undoclickfct} color="inherit" sx={{...buttonStyles,marginRight:0.6}} > <UndoIcon sx={{ fontSize: 30 }} />  </Button>
             </Tooltip>:
 
-            <Tooltip title={<span style={{fontSize:16}}>Redo (Ctrl+Y)</span>} > {/* editable langauge */}
-              <Button onClick={redoclickfct} color="inherit" sx={{...buttonStyles}} > <RedoIcon sx={{ fontSize: 30 }} />  </Button>
+            <Tooltip title={<span style={{fontSize:16}}>Redo (Ctrl+Y) {role_of_user_component=='Viewer' ? " | As a Viewer, you don't have the permissions to edit" : ''} </span>} > {/* editable langauge */}
+              <Button disabled={role_of_user_component=='Viewer' ? true : false} onClick={redoclickfct} color="inherit" sx={{...buttonStyles}} > <RedoIcon sx={{ fontSize: 30 }} />  </Button>
             </Tooltip>
 
             </div>
@@ -226,25 +280,57 @@ const handleCloseModaladd = () => {
             </div>
             <div>
 
-            <Tooltip title={<span style={{fontSize:12}}>Change format</span>} > {/* editable langauge */}
-                <Button onClick={handleOpenModalformat} color="inherit" sx={{...buttonchangeformatStyles,marginRight: isSmallScreen?'0':'70px'}}> <LanguageIcon sx={{fontSize:25}}/> </Button>
+            <Tooltip 
+            // title={<span style={{fontSize:12,textAlign:'center',alignContent:'center',alignItems:'center',alignSelf:'centers'}}>Change format {role_of_user_component!='Owner' ? <span><br></br> Only the Owner of this table who has the permissions to Change format</span> : ''}</span>} 
+            title={
+              <span style={{ fontSize: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <span>Change format</span>
+                {role_of_user_component !== 'Owner' ? <div>- Only the Owner of this table has the permissions to change the format -</div> : <span></span> }
+              </span>
+            }
+            > {/* editable langauge */}
+                <Button disabled={role_of_user_component!=='Owner' ? true : false} onClick={handleOpenModalformat} color="inherit" sx={{...buttonchangeformatStyles,marginRight: isSmallScreen?'0':'70px'}}> <LanguageIcon sx={{fontSize:25}}/> </Button>
               </Tooltip>
 
-            <Tooltip title={<span style={{fontSize:14}}>
-              <div style={{textAlign:'center'}}>
-                Términer <br></br>et Envoyer les données {/* editable langauge */}
-              </div>
-              </span>} >
-                <Button onClick={submitdata} variant="contained" sx={{marginRight: isSmallScreen?'0':'40px'}} endIcon={<SendIcon sx={{fontSize:32}}/> }> Send </Button> {/* editable langauge */}
+            <Tooltip
+              title={
+                <span style={{ fontSize: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                { (role_of_user_component=='Owner' || role_of_user_component=='Admin') ?
+                    <div style={{textAlign:'center'}}>
+                   Términer <br></br>et Envoyer les données {/* editable langauge */}
+                  </div>
+                  :
+                 
+                 <div>
+                     Términer <br></br>Seuls les Admins qui peuvent Términer et Envoyer les données {/* editable langauge */}
+                  </div> }
+             
+                </span>
+                }
+              >
+                <Button disabled={ (role_of_user_component=='Owner' || role_of_user_component=='Admin') ? false : true} onClick={submitdata} variant="contained" sx={{marginRight: isSmallScreen?'0':'40px'}} endIcon={<SendIcon sx={{fontSize:32}}/> }> Send </Button> {/* editable langauge */}
             </Tooltip>
 
-            <Tooltip title={<span style={{fontSize:12}}>
-            <div style={{textAlign:'center'}}>
-              Travail collaboratif<br></br>Ajouter des utilisateurs <br></br>avec des droits de modifications {/* editable langauge */}
-            </div>
-              </span>} > 
-              <Button onClick={handleOpenModalAddUser} color="inherit" sx={{color:'black'}}> <GroupAddIcon sx={{fontSize:26}}/> </Button>
+
+            <Tooltip
+            title={
+              <span style={{ fontSize: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              { (role_of_user_component=='Owner' || role_of_user_component=='Admin') ?
+                  <div style={{textAlign:'center'}}>
+                   Travail collaboratif<br></br>Ajouter des utilisateurs <br></br>avec des droits de modifications {/* editable langauge */}
+                </div>
+                :
+               
+               <div>
+                   Travail collaboratif<br></br>Seuls les Admins qui peuvent ajouter des nouveaux utilisateurs {/* editable langauge */}
+                </div> }
+           
+              </span>
+              }
+              >
+                <Button disabled={ (role_of_user_component=='Owner' || role_of_user_component=='Admin') ? false : true} onClick={handleOpenModalAddUser} color="inherit" sx={{color:'black'}}  > <GroupAddIcon sx={{fontSize:26}}/> </Button> {/* editable langauge */}
             </Tooltip>
+
               
 
             <Tooltip title={<span style={{fontSize:12}}>Modifier les informations <br></br>préliminaires</span>} > {/* editable langauge */}
@@ -257,7 +343,7 @@ const handleCloseModaladd = () => {
 
          </AppBar>
          <ModalFormat open={modalOpenformat} onClose={handleCloseModalformat} senddata={handlesending}/>
-         <ModalEdit open={modalOpenedit} onClose={handleCloseModaledit}/>
+         <ModalEdit open={modalOpenedit} onClose={handleCloseModaledit} role_of_user_component={role_of_user_component}/>
          <ModalAdd open={modalOpenadd} onClose={handleCloseModaladd}/>
 
         </ThemeProvider>

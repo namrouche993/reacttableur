@@ -425,7 +425,7 @@ function ModalEdit(props) {
     label="Organisme"
     onChange={handleOrganismeChange}
     error={submitted && errorOrganisme}
-
+    disabled={ (props.role_of_user_component=='Owner') ? false : true}
   >
     {organisme_data.map(({val,label},index)=>{
       return (
@@ -450,6 +450,7 @@ function ModalEdit(props) {
     label="Wilaya"
     onChange={handleRegionChange}
     error={submitted && errorRegion}
+    disabled={ (props.role_of_user_component=='Owner') ? false : true}
 
     MenuProps={{
       PaperProps: {
@@ -480,11 +481,12 @@ function ModalEdit(props) {
         onChange={handleEmailChange}
         error={submitted && errorEmail}
         helperText={submitted && errorEmail ? 'Invalid email format' : ''}
+        disabled={ (props.role_of_user_component=='Owner') ? false : true}
       />
   </FormControl>
 <br></br>
 <br></br>
-
+{props.role_of_user_component=='Owner' &&
   <FormControl 
     sx={{ m: 1, width: 200 }}
     >
@@ -495,11 +497,13 @@ function ModalEdit(props) {
         onChange={handlePhoneNumberChange}
         error={submitted && errorPN}
         helperText={submitted && errorPN ? 'Invalid phone number format' : ''}
-
+        disabled={ (props.role_of_user_component=='Owner') ? false : true}
       />
   </FormControl>
+}
 
 <br></br>
+{props.role_of_user_component=='Owner' ?
 
 <FormControl 
     sx={{ m: 1, width: 200,marginLeft:"-80px" }}
@@ -510,9 +514,14 @@ function ModalEdit(props) {
      //size="compact"  // Change the size to compact
   />
 
-</FormControl>
+</FormControl> :
+        <DialogContentText id="alert-dialog-slide-description" align="center" color="black">
+        <Typography variant="body1" color='slategrey'>
+          Only the Owner who can edit these informations
+        </Typography>
+      </DialogContentText>
 
-
+}
   
       </DialogContent>
 
@@ -520,7 +529,12 @@ function ModalEdit(props) {
       {display_CreateNewTable_button ? 
       <div>
       <Button size="small" variant="outlined" sx={{ height: '100%',textTransform: 'none' }} onClick={() => handleOpen_confirmmodal()}>
-           Create New Table {/* editable language Suivant */}
+      {/* editable language Suivant */}
+      {props.role_of_user_component=='Owner' ? 
+           <span>Create New Table</span> 
+           :
+           <span>Create Your Own Table</span> 
+      }
         </Button>
       </div> :
       <p>.</p>
@@ -533,6 +547,7 @@ function ModalEdit(props) {
       <ModalConfirmNewTable open_confirmmodal={open_confirmmodal}
                   setOpen_confirmmodal={setOpen_confirmmodal}
                   handleConfirm_confirmmodal={handleConfirm_confirmmodal}
+                  role_of_user_component={props.role_of_user_component}
                   />
 
     </Dialog>

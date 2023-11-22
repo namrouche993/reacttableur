@@ -226,6 +226,8 @@ export function beforeKeyDown_Dates_fct(event,hot,
         // ////console.log(condition_split)
       
         //var [daydate,monthdate,yeardate] = dateformatlanguage.split(splitdate);
+          console.log('hot.getActiveEditor')
+          console.log(hot.getActiveEditor())
           var betweensplit_dot = hot.getActiveEditor().getValue().split(".")
           var betweensplit_slash = hot.getActiveEditor().getValue().split("/")
           var betweensplit_hyphen = hot.getActiveEditor().getValue().split("-")

@@ -85,6 +85,8 @@ function ModalAdd(props) {
     setIsVerified(true);
   }
 
+  const [requestor_role,setRequestor_role]=useState('Viewer');
+
   const [emails_added_list,setEmails_added_list]=useState([])
   //const [emailsadded2,setEmailsadded2]=useState('')
   //const [emailsadded3,setEmailsadded3]=useState('')
@@ -160,6 +162,8 @@ function ModalAdd(props) {
 
 
   useEffect(() => {
+    var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
+
     async function FetchListAllowedEmails(){
      try {
       const response_allowedemails = await fetch('http://localhost:5000/allowedemails', {
@@ -169,15 +173,19 @@ function ModalAdd(props) {
            'Content-Type': 'application/json'
          },
          body: JSON.stringify({
-          "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
+          "idusername":secureLocalStorage.getItem('ussd74kasd75_2'),
+          "hisownroute":currentrouteofurl
         })
        });
 
        if (response_allowedemails.ok) {
         console.log('try to knwo how many times it renders !!!!!!!!!!!!!!!!!!!! ');
 
-        const value_allowedemails = await response_allowedemails.json();
+        const value_allowedemails_with_requestor = await response_allowedemails.json();
+        const value_allowedemails = {"user2":value_allowedemails_with_requestor.user2 , "user3":value_allowedemails_with_requestor.user3}
+        const role_of_the_requestor = value_allowedemails_with_requestor.role_of_the_requestor
         console.log(value_allowedemails)
+
         //var emails_in_list = Object.values(value_allowedemails);
         var emails_in_list = Object.entries(value_allowedemails).map(([key, value]) => [value.useremail,value.role, value.code])
         console.log(emails_in_list)
@@ -186,6 +194,7 @@ function ModalAdd(props) {
         let emails_in_list_withoutNull = emails_in_list.filter(arr => !arr.every(el => el === null));
         console.log(emails_in_list_withoutNull)
         setEmails_added_list(emails_in_list_withoutNull)
+        setRequestor_role(role_of_the_requestor)
 
         //setEmailsadded2(value_allowedemails.user2email)
         //setEmailsadded3(value_allowedemails.user3email)
@@ -221,6 +230,7 @@ function ModalAdd(props) {
       return console.log("Error Filling");
     }
     try {
+      var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
       const response = await fetch('http://localhost:5000/add', {
         method: 'POST',
         credentials: 'include',
@@ -233,7 +243,8 @@ function ModalAdd(props) {
          "username_owner":secureLocalStorage.getItem('ussd74kasd75_2'),
          "new_email_added":inputEmail,
          "role_new_user":role,
-         "recaptchaToken_add":recaptchaToken_add
+         "recaptchaToken_add":recaptchaToken_add,
+         "route":currentrouteofurl
        })
 
       });

@@ -111,7 +111,7 @@ function Hottable(props) {
     setIsLoading(false);
   };
 
-  const [readonlyhot,setReadonlyhot] = useState(false);
+  const [readonlyhot,setReadonlyhot] = useState(true);
   
   const [numbval,setNumbval]=useState('aa') //useState(secureLocalStorage.getItem("numb"))
   const [idusername00,setIdusername00]=useState(secureLocalStorage.getItem('ussd74kasd75_2'));
