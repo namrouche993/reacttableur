@@ -21,7 +21,8 @@ export function beforeKeyDown_Dates_fct(event,hot,
   ) {  // editable the 2 indexx later inside 
 ////console.log('condition_split : ')
 ////console.log(getInputValue_condition_split2())
-
+try {
+  
   let condition_split=getInputValue_condition_split2();
     if(navigator_language=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time){
         var dateformatlanguage = 'mm/dd/yyyy'; // 12/31/1990
@@ -226,8 +227,8 @@ export function beforeKeyDown_Dates_fct(event,hot,
         // ////console.log(condition_split)
       
         //var [daydate,monthdate,yeardate] = dateformatlanguage.split(splitdate);
-          console.log('hot.getActiveEditor')
-          console.log(hot.getActiveEditor())
+          //console.log('hot.getActiveEditor')
+          //console.log(hot.getActiveEditor())
           var betweensplit_dot = hot.getActiveEditor().getValue().split(".")
           var betweensplit_slash = hot.getActiveEditor().getValue().split("/")
           var betweensplit_hyphen = hot.getActiveEditor().getValue().split("-")
@@ -263,5 +264,7 @@ export function beforeKeyDown_Dates_fct(event,hot,
          //////console.log(condition_split)
       
       }
-      
+    } catch (error) {
+      console.log('Error : ' + 'Maybe viewer with editing dates' + error)
+    }      
 }

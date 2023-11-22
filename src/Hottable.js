@@ -44,7 +44,8 @@ import { fetchDataUsEffect1 } from './Tools/fetchDataUsEffect1.js';
 
 //alert('we are in Hottable ')  
 
-function Hottable(props) {
+function Hottable() {
+  
   const userLocale2_redux  = useSelector(state => state.userLocale2);
   const userLocale2_ref = useRef(userLocale2_redux);
  
@@ -80,10 +81,14 @@ function Hottable(props) {
   
   const unmerged_cells_to_unmerge_redux  = useSelector(state => state.unmerged_cells_to_unmerge);
   const unmerged_cells_to_unmerge_ref = useRef(unmerged_cells_to_unmerge_redux);
-  
+
+  const role_user_redux  = useSelector(state => state.role_user_redux);
+  const role_user_ref = useRef(role_user_redux);
+
 
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
   const data22 = useSelector(state => state.data22);  //data22_redux
+
 
   const [savedData,setSavedData]=useState(data_localstorage);
   const [csrftoken,setCSRFToken]=useState('');
@@ -111,17 +116,18 @@ function Hottable(props) {
     setIsLoading(false);
   };
 
-  const [readonlyhot,setReadonlyhot] = useState(true);
   
   const [numbval,setNumbval]=useState('aa') //useState(secureLocalStorage.getItem("numb"))
   const [idusername00,setIdusername00]=useState(secureLocalStorage.getItem('ussd74kasd75_2'));
-  
-  
+
+  const [readonlyhot,setReadonlyhot]=useState('nifanitr');
+
   React.useEffect(() => {
   //alert('read_only would be : ' + props.read_only)
   console.log('ussd74kasd75_2 is ::::::::::::')
   console.log(secureLocalStorage.getItem('ussd74kasd75_2'))
 
+  //alert('readonlyhot :' + readonlyhot ? 'trueee ' : 'falseee')
 
 
     if(secureLocalStorage.getItem('ussd74kasd75_2')!==null){ 
@@ -147,10 +153,9 @@ function Hottable(props) {
     //var data22 = data22fct(last_row_after_header)
 
     //fetchDataFromServer();
-
     const hot  = new Handsontable(hotTableComponent.current, {
       data,
-      readOnly: readonlyhot,
+      readOnly : role_user_redux,
       rowHeaders: true,
       wordWrap: true,
       colHeaders: true,
@@ -230,6 +235,9 @@ function Hottable(props) {
             }
           }, 1000);
         }
+        if(role_user_redux){
+          return
+        }
           afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin,isLoading);
         },
         beforeKeyDown: (event) => {
@@ -278,7 +286,9 @@ function Hottable(props) {
       //const hotInstance = hot; // Store the hot instance
       //beforeChangeFct(changes,source, ...otherArgs, hotInstance)
       //console.log('beforeChange triggered')
-      
+      if(role_user_redux){
+        return
+      }
       //if( (source=='CopyPaste.paste' && changes.length>30) || (source=='edit' && changes.length>30) || (source=='Autofill.fill' && changes.length>30) || (source=='UndoRedo.redo' && changes.length>30) ){
      if (changes.length>30){
         //console.log('show showspinner : ')
@@ -287,10 +297,13 @@ function Hottable(props) {
         showSpinner();
         //setInputValue_spinnerf(true);
       }
+      console.log('we wil lcall beforechangefcr')
       beforeChangeFct(changes,source,hot,commentsPlugin)
 
     });
 
+
+  
       hot.addHook('afterChange', (changes, source) => {
         console.log('afterChange : ')
         console.log('---------------------------------------------')
@@ -306,6 +319,8 @@ function Hottable(props) {
         // Set a new timer to trigger something after 1 second
         changeTimer = setTimeout(function () {
           // Perform the action you want to trigger here
+          try {
+            
           var my_actual_getdata = JSON.stringify(hot.getData());
 //          dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
           
@@ -352,6 +367,10 @@ function Hottable(props) {
           if(!isLoading){
             hideSpinner()
           }
+          
+        } catch (error) {
+         console.log('error in afterchange changetimer : ' + error)   
+        }
           //alert('Triggered after the last afterChange event within 1 second.');
         }, 1000);
         
@@ -428,13 +447,12 @@ function Hottable(props) {
 
       
     };
-  }, []);
+  }, [role_user_redux]);
 
-  useEffect(() => {
-    console.log('useeffct do nothing')
-  
-  }, [])
-  
+
+
+
+
   
   useEffect(() => {
     //alert('use effect of hottable i think will be here (userlocale2_redux) - userLocale2_redux: ' +  userLocale2_redux )
@@ -475,12 +493,15 @@ function Hottable(props) {
   useEffect(() => {
     unmerged_cells_to_unmerge_ref.current = unmerged_cells_to_unmerge_redux; // Update the ref whenever value11 changes
   }, [unmerged_cells_to_unmerge_redux]);
+
+  useEffect(() => {
+    role_user_ref.current = role_user_redux; // Update the ref whenever value11 changes
+  }, [role_user_redux]);
   
   useEffect(() => {
     console.log('we are inside if useEffect getInputValue_spinnerf ')
     setIsLoading(getInputValue_spinnerf()); // Update the ref whenever value11 changes
   }, [getInputValue_spinnerf()]);
-  
 
 
 

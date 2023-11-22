@@ -32,7 +32,9 @@ const initialState = {
   //hot_undone2: hot_undone2,
 
   unmerged_cells_to_unmerge: [],
-  data22:data22fct(last_row_after_header)
+  data22:data22fct(last_row_after_header),
+  role_user_redux:'Writer'
+  
 };
 
 const reducer = (state = initialState, action) => {
@@ -102,11 +104,16 @@ const reducer = (state = initialState, action) => {
                   ...state,
                   unmerged_cells_to_unmerge: action.payload
                 };
-                case 'SET_DATA22':
+              case 'SET_DATA22':
                 return {
                   ...state,
                   data22: action.payload
                 };
+              case 'SET_ROLE_USER_REDUX':
+                  return {
+                    ...state,
+                    role_user_redux: action.payload
+                  };
                 
                 
               

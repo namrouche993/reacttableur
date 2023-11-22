@@ -73,6 +73,8 @@ function Navbar(props) {
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
   const data22_redux = useSelector(state => state.data22)
   
+  const dispatch = useDispatch();
+
   const [modalOpenformat, setModalOpenformat] = useState(false);
 
   const handleOpenModalformat = () => {
@@ -194,6 +196,8 @@ const handleCloseModaladd = () => {
 
   const [role_of_user_component,setRole_of_user_component]=useState('Viewer');
 
+
+
   useEffect( async () => {
     try {
       var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
@@ -218,28 +222,51 @@ const handleCloseModaladd = () => {
         var role_of_user = data_response.role;
         if(role_of_user=='Owner'){
           setRole_of_user_component('Owner')
+          //props.readonlycells_in_hottable = false;
+         // props.readonlycells_in_hottable('Owner');
+          dispatch({ type: 'SET_ROLE_USER_REDUX', payload: false })
+          
 
         } else if(role_of_user=='Admin'){
-          setRole_of_user_component('Admin')
+          setRole_of_user_component('Admin');
+          // props.readonlycells_in_hottable('Admin');
+          dispatch({ type: 'SET_ROLE_USER_REDUX', payload: false })
+
 
         } else if (role_of_user=='Writer'){
           setRole_of_user_component('Writer')
+          // props.readonlycells_in_hottable('Writer');
+          dispatch({ type: 'SET_ROLE_USER_REDUX', payload: false })
+
+
 
         } else if (role_of_user=='Viewer'){
           setRole_of_user_component('Viewer')
-        
+          // props.readonlycells_in_hottable('Viewer');
+          dispatch({ type: 'SET_ROLE_USER_REDUX', payload: true })
+          //alert('we set it to Viewer')
+
+
         } else {
           setRole_of_user_component('Viewer')
+          // props.readonlycells_in_hottable('Viewer');
+          dispatch({ type: 'SET_ROLE_USER_REDUX', payload: true })
+
         }
         //props.onClose();
         console.log('Data sent successfully to the server.');
         //window.location.reload();
       } else {
         setRole_of_user_component('Viewer')
+          // props.readonlycells_in_hottable('Viewer');
+          dispatch({ type: 'SET_ROLE_USER_REDUX', payload: true })
         console.error('Error ,Authorization is not verified.');
       }
     } catch (error) {
       setRole_of_user_component('Viewer')
+          // props.readonlycells_in_hottable('Viewer');
+          dispatch({ type: 'SET_ROLE_USER_REDUX', payload: true })
+
       console.error('Error:', error);
     }
 
