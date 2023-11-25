@@ -552,7 +552,7 @@ import{
     bignb_nbnb,smallnb_nbnb,decimalnumbers_toshow_withoutrenderer_innumbers_nbnb,usegrouping_nbnb_if_true,
     is_negativenb_accepted_nbnb,
 
-    display_plus_sign_in_the_start
+    display_plus_sign_in_the_start,setNotification
     ){      
 
       //alert('aftervalidate amount and the value is : ' + oldvalue )
@@ -603,6 +603,13 @@ import{
             //////console.log('condition afterValidate whole number .')
             if(Number(value.toString().trim())<0 && is_negativenb_accepted_nbnb==false){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
+              setNotification({
+                message: comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator),
+                status: 'error',
+                autoDismissTimeout: 3000, // Set your desired timeout
+                lengthscreen:4,
+                triggerNotification: Math.random()// Trigger when message is present
+              });
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               if(/^([+-]?)0+(?=\d)/.test(value.toString().trim())){
@@ -632,6 +639,13 @@ import{
           } else if (decimalSeparator == ",") {
             if(Number(value.toString().trim())<0 && is_negativenb_accepted_nbnb==false){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
+              setNotification({
+                message: comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator),
+                status: 'error',
+                autoDismissTimeout: 3000, // Set your desired timeout
+                lengthscreen:4,
+                triggerNotification: Math.random()// Trigger when message is present
+              });
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               if(/^([+-]?)0+(?=\d)/.test(value.toString().trim())){
@@ -660,7 +674,13 @@ import{
         } else {
           //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
-
+          setNotification({
+            message: comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator),
+            status: 'error',
+            autoDismissTimeout: 3000, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
           hot.setDataAtCell(row, prop, '', 'my_source_empty');
         }
       }
@@ -687,6 +707,13 @@ import{
               } else {
               if(Number(value.toString().trim())<0 && is_negativenb_accepted_nbnb==false){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
+              setNotification({
+                message: comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator),
+                status: 'error',
+                autoDismissTimeout: 3000, // Set your desired timeout
+                lengthscreen:4,
+                triggerNotification: Math.random()// Trigger when message is present
+              });
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               if(/^([+-]?)0+(?=\d)/.test(value.toString().trim())){
@@ -717,6 +744,13 @@ import{
           } else {
             //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
+            setNotification({
+              message: comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator),
+              status: 'error',
+              autoDismissTimeout: 3000, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           }
 
@@ -739,7 +773,14 @@ import{
             ////alert('voulez vous dire que 3.16 egale a 3,14 ? si oui changer svp ')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value).toLocaleString(userLocale) + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_4','fr-FR',userLocale,decimalSeparator))
-            commentsPlugin.showAtCell(row, prop);
+            commentsPlugin.showAtCell(row, prop); // maybe editable , i dont know why it s here , maybe we remove it !!
+            setNotification({
+              message: comments_messages(oldvalue,'val_try_to_fix_4','fr-FR',userLocale,decimalSeparator),
+              status: 'error',
+              autoDismissTimeout: 4500, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           }
 
@@ -777,6 +818,13 @@ import{
             //hot.setDataAtCell(row, prop, value.toString().trim().replace(',', '.'));
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.toString().trim().replace(',', '.') + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_5','fr-FR',userLocale,decimalSeparator))
+            setNotification({
+              message: comments_messages(oldvalue,'val_try_to_fix_5','fr-FR',userLocale,decimalSeparator),
+              status: 'error',
+              autoDismissTimeout: 4500, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           }
 
@@ -805,6 +853,13 @@ import{
             } else {
               if(Number(value.toString().trim().replace(',','.'))<0 && is_negativenb_accepted_nbnb==false){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
+              setNotification({
+                message: comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator),
+                status: 'error',
+                autoDismissTimeout: 3000, // Set your desired timeout
+                lengthscreen:4,
+                triggerNotification: Math.random()// Trigger when message is present
+              });
               hot.setDataAtCell(row, prop, '', 'my_source_empty');
             } else {
               if(/^([+-]?)0+(?=\d)/.test(value.toString().trim())){
@@ -834,6 +889,13 @@ import{
           } else {
             //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
+            setNotification({
+              message: comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator),
+              status: 'error',
+              autoDismissTimeout: 3000, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           }
 
@@ -864,6 +926,13 @@ import{
         ////alert('veuillez corriger l'ecriture selon la format de vos parametres)
         //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value.toString().replace(/,/g, '')).toLocaleString(userLocale) + " est correct");
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_6','fr-FR',userLocale,decimalSeparator))
+        setNotification({
+          message: comments_messages(oldvalue,'val_try_to_fix_6','fr-FR',userLocale,decimalSeparator),
+          status: 'error',
+          autoDismissTimeout: 4500, // Set your desired timeout
+          lengthscreen:4,
+          triggerNotification: Math.random()// Trigger when message is present
+        });
         hot.setDataAtCell(row, prop, '', 'my_source_empty');
 
       } else {
@@ -892,7 +961,14 @@ import{
           //////console.log('condition out 7.1')
           //////console.log('like 1,234,56 or 1.234.567,8956,78')
           //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
-            commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
+          commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
+          setNotification({
+            message: comments_messages(oldvalue,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator),
+            status: 'error',
+            autoDismissTimeout: 4500, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
           hot.setDataAtCell(row, prop, '', 'my_source_empty');
         } else {
           //////console.log('condition out 7')
@@ -907,6 +983,13 @@ import{
             //hot.setDataAtCell(row, prop, value.toString().trim().replace(/\./g, '') );
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.toString().trim().replace(/\./g, '').toString().replace(',', '.') + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_8','fr-FR',userLocale,decimalSeparator))
+            setNotification({
+              message: comments_messages(oldvalue,'val_try_to_fix_8','fr-FR',userLocale,decimalSeparator),
+              status: 'error',
+              autoDismissTimeout: 4500, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           }
         }
@@ -941,6 +1024,13 @@ import{
         } else if (Math.abs(Number(value)) > Number(bignb_nbnb) || Math.abs(Number(value)) < Number(smallnb_nbnb)) {
           //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
+          setNotification({
+            message: comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator),
+            status: 'error',
+            autoDismissTimeout: 3000, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
           hot.setDataAtCell(row, prop, '', 'my_source_empty');
         } else {
           if (Math.abs(Number(value)) < smallafterdigit_nbnb) {
@@ -996,6 +1086,13 @@ import{
       else if (Math.abs(Number(value)) > Number(bignb_nbnb) || Math.abs(Number(value)) < Number(smallnb_nbnb)) {
         //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
+        setNotification({
+          message: comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator),
+          status: 'error',
+          autoDismissTimeout: 3000, // Set your desired timeout
+          lengthscreen:4,
+          triggerNotification: Math.random()// Trigger when message is present
+        });
         hot.setDataAtCell(row, prop, '', 'my_source_empty');
       } else {
         if (Math.abs(Number(value)) < smallafterdigit_nbnb) {
@@ -1010,7 +1107,13 @@ import{
             //////console.log('scientific format float mantissa and decimal separator is dot/comma and less than 0.01')
            // commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres ");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix','fr-FR',userLocale,decimalSeparator))
-
+            setNotification({
+              message: comments_messages(oldvalue,'val_try_to_fix','fr-FR',userLocale,decimalSeparator),
+              status: 'error',
+              autoDismissTimeout: 4500, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           }
         } else {
@@ -1028,7 +1131,13 @@ import{
             //////console.log('scinetific notation and european comma')
            // commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres ");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix','fr-FR',userLocale,decimalSeparator))
-
+            setNotification({
+              message: comments_messages(oldvalue,'val_try_to_fix','fr-FR',userLocale,decimalSeparator),
+              status: 'error',
+              autoDismissTimeout: 4500, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
             // hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.',',') );
             // //////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.',',') )
@@ -1060,6 +1169,13 @@ import{
       } else if (Math.abs(Number(value1010)) > Number(bignb_nbnb) || Math.abs(Number(value1010)) < Number(smallnb_nbnb)) {
         //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'limit_autor','fr-FR',userLocale,decimalSeparator))
+        setNotification({
+          message: comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator),
+          status: 'error',
+          autoDismissTimeout: 3000, // Set your desired timeout
+          lengthscreen:4,
+          triggerNotification: Math.random()// Trigger when message is present
+        });
         hot.setDataAtCell(row, prop, '', 'my_source_empty');
 
       } else {
@@ -1068,7 +1184,13 @@ import{
             //////console.log('scientific format float mantissa and decimal separator is comma/dot and less than 0.01')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres ");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix','fr-FR',userLocale,decimalSeparator))
-
+            setNotification({
+              message: comments_messages(oldvalue,'val_try_to_fix','fr-FR',userLocale,decimalSeparator),
+              status: 'error',
+              autoDismissTimeout: 4500, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
           } else if (decimalSeparator == ',') {
             //bg=BigNumber(val)
@@ -1089,6 +1211,13 @@ import{
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
             if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
+              setNotification({
+                message: comments_messages(oldvalue,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator),
+                status: 'error',
+                autoDismissTimeout: 4500, // Set your desired timeout
+                lengthscreen:4,
+                triggerNotification: Math.random()// Trigger when message is present
+              });
             }
             hot.setDataAtCell(row, prop, '', 'my_source_empty')
           } else if (decimalSeparator == ',') {
@@ -1119,7 +1248,14 @@ import{
     
       if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
-      commentsPlugin.showAtCell(row, prop);  
+      commentsPlugin.showAtCell(row, prop);  // maybe editable ,and maybe remove it , idont know why it s here
+      setNotification({
+        message: comments_messages(oldvalue,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator),
+        status: 'error',
+        autoDismissTimeout: 4500, // Set your desired timeout
+        lengthscreen:4,
+        triggerNotification: Math.random()// Trigger when message is present
+      });
     }
       //commentsPlugin.setCommentAtCell(row, prop, 'Please enter only numbers.<br><br><p style="color:red;">Veuillez entrer uniquement des nombres.</p>');
 

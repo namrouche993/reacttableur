@@ -1,0 +1,34 @@
+.custom-alert {
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  opacity: 0.9; /* Opacity */
+  transition: opacity 0.6s; /* Fade in transition */
+  line-height: 0.1;
+}
+
+.custom-alert-info {
+  background-color: #2196F3; /* Blue background color */
+}
+
+.custom-alert-success {
+  background-color: #4CAF50; /* Green background color */
+}
+
+.custom-alert-warning {
+  background-color: #ff9800; /* Orange background color */
+}
+
+.custom-alert-error {
+  background-color: #f44336; /* Red background color */
+}
+
+.custom-alert-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.custom-alert:hover {
+  opacity: 1; /* Full opacity on hover */
+}

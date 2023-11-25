@@ -26,6 +26,8 @@ import{
 
     display_plus_sign_in_the_start
   } from '../initials_inputs.js';
+  import { addToast } from 'react-toast-notifications';
+
 
 
   import { comments_messages } from '../Tools/comments_messages'
@@ -42,7 +44,7 @@ import{
 
 
   
-export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLocale,decimalSeparator,navigator_language,use_english_date_by_user_himeself_in_modal,commentsPlugin,isLoading){
+export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLocale,decimalSeparator,navigator_language,use_english_date_by_user_himeself_in_modal,commentsPlugin,isLoading,setNotification){
   
   console.log('aftervalidate Function triggered')
  
@@ -63,7 +65,7 @@ export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLo
       bignb_intint,smallnb_intint,decimalnumbers_toshow_withoutrenderer_innumbers_intint,usegrouping_intint_if_true,
       is_negativenb_accepted_intint,is_float_accepted_intint,
 
-      display_plus_sign_in_the_start
+      display_plus_sign_in_the_start,setNotification
   
                   )
           }
@@ -79,7 +81,7 @@ export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLo
               bignb_nbnb,smallnb_nbnb,decimalnumbers_toshow_withoutrenderer_innumbers_nbnb,usegrouping_nbnb_if_true,
               is_negativenb_accepted_nbnb,
 
-              display_plus_sign_in_the_start
+              display_plus_sign_in_the_start,setNotification
 
               )
 
@@ -93,33 +95,33 @@ afterdigit_percentage_percperc,smallafterdigit_percentage_percperc,afterdigitsma
 bignbpercent_percperc,smallnbpercent_percperc,decimalnumbers_toshow_withoutrenderer_inpercentage_percperc,
 is_negativenb_accepted_percperc,is_float_accepted_percperc,
 
-display_plus_sign_in_the_start
+display_plus_sign_in_the_start,setNotification
           )
   }
   else if (prop == 6 ) {
     afterValidatefct_date(isValid, oldvalue, row, prop, source,hot,commentsPlugin,
       decimalSeparator.current,userLocale.current,navigator_language.current,userTimeZone,usTimeZones,use_en_time,
-      use_english_date_by_user_himeself_in_modal.current
+      use_english_date_by_user_himeself_in_modal.current,setNotification
       )        
   }
   
   else if (prop == 2 ) {
-    afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin,isLoading)
+    afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin,isLoading,setNotification)
   }
   
   else if (prop == 3) {
-    afterValidatefct_email(isValid, oldvalue, row, prop, source,hot,commentsPlugin,emails_length_em)
+    afterValidatefct_email(isValid, oldvalue, row, prop, source,hot,commentsPlugin,emails_length_em,setNotification)
   }
 
   else if (prop == 4 ){
-    afterValidatefct_onlynb(isValid, oldvalue, row, prop, source,hot,commentsPlugin,onlynumbers_length_on)
+    afterValidatefct_onlynb(isValid, oldvalue, row, prop, source,hot,commentsPlugin,onlynumbers_length_on,setNotification)
   }
 
   else if (prop == 5) {
-    afterValidatefct_phonenumber(isValid, oldvalue, row, prop, source,hot,commentsPlugin,phonenumbers_length_pn)
+    afterValidatefct_phonenumber(isValid, oldvalue, row, prop, source,hot,commentsPlugin,phonenumbers_length_pn,setNotification)
   }
   else if (prop==9) {
-    afterValidatefct_text(isValid, oldvalue, row, prop, source,hot,commentsPlugin,text_length_txt)
+    afterValidatefct_text(isValid, oldvalue, row, prop, source,hot,commentsPlugin,text_length_txt,setNotification)
   }
 
 //}

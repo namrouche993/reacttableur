@@ -65,7 +65,7 @@ import{
         }
 
 
-  export function afterValidatefct_phonenumber(isValid, oldvalue, row, prop, source,hot,commentsPlugin,phonenumbers_length_pn){        
+  export function afterValidatefct_phonenumber(isValid, oldvalue, row, prop, source,hot,commentsPlugin,phonenumbers_length_pn,setNotification){        
     ////console.log('prop==7')
     ////console.log(isValid)
     if (isValid && oldvalue == null ) {
@@ -87,6 +87,20 @@ import{
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>phonenumbers_length_pn){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'))
+           setNotification({
+            message: comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'),
+            status: 'error',
+            autoDismissTimeout: 3000, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
+           setNotification({
+            message: comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'),
+            status: 'error',
+            autoDismissTimeout: 3000, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
            hot.setDataAtCell(row, prop,'','my_source_empty_phonenumbers');
          } else {
            ////console.log('COULD END HERE')
@@ -103,6 +117,13 @@ import{
        
        if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'))
+       setNotification({
+        message: comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'),
+        status: 'error',
+        autoDismissTimeout: 3000, // Set your desired timeout
+        lengthscreen:4,
+        triggerNotification: Math.random()// Trigger when message is present
+      });
        }
        hot.setDataAtCell(row, prop,'','my_source_empty_phonenumbers')
 

@@ -187,7 +187,7 @@ import{
     bignbpercent_percperc,smallnbpercent_percperc,decimalnumbers_toshow_withoutrenderer_inpercentage_percperc,
     is_negativenb_accepted_percperc,is_float_accepted_percperc,
 
-    display_plus_sign_in_the_start
+    display_plus_sign_in_the_start,setNotification
 
     
     ){      
@@ -212,6 +212,13 @@ import{
               //////console.log('if the number is too big')
               //commentsPlugin.setCommentAtCell(row, prop, "La valeur que vous avez saisie dépasse la limite autorisée !!");
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator))
+              setNotification({
+                message: comments_messages(oldvalue,'limit_autor','fr-FR',userLocale,decimalSeparator),
+                status: 'error',
+                autoDismissTimeout: 3000, // Set your desired timeout
+                lengthscreen:4,
+                triggerNotification: Math.random()// Trigger when message is present
+              });
               hot.setDataAtCell(row, prop,'','my_source_empty_percentage')
             } else if (Math.abs(Number(oldvalue.toString().replace('%','').toString().replace(',','.').toString().replace(/\s+/g, '').toString().trim())  ) <smallnbpercent_percperc) {
               //////console.log('condition percentage 1,35')
@@ -233,10 +240,24 @@ import{
               } else {
                 if(Number(oldvalue.toString().replace('%','').toString().trim())<0 && is_negativenb_accepted_percperc==false){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator))
+                    setNotification({
+                      message: comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator),
+                      status: 'error',
+                      autoDismissTimeout: 3000, // Set your desired timeout
+                      lengthscreen:4,
+                      triggerNotification: Math.random()// Trigger when message is present
+                    });
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                 } else {
                   if(Number.isInteger(Number(oldvalue.toString().replace('%','').toString().trim()))==false && is_float_accepted_percperc==false ){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
+                    setNotification({
+                      message: comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator),
+                      status: 'error',
+                      autoDismissTimeout: 3000, // Set your desired timeout
+                      lengthscreen:4,
+                      triggerNotification: Math.random()// Trigger when message is present
+                    });
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
                     if(/^([+-]?)0+(?=\d)/.test(oldvalue.toString().trim().replace('%','')) ){
@@ -274,10 +295,24 @@ import{
               } else {
                 if(Number(oldvalue.toString().replace('%','').toString().trim())<0 && is_negativenb_accepted_percperc==false){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator))
+                    setNotification({
+                      message: comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator),
+                      status: 'error',
+                      autoDismissTimeout: 3000, // Set your desired timeout
+                      lengthscreen:4,
+                      triggerNotification: Math.random()// Trigger when message is present
+                    });
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                 } else {
                   if(Number.isInteger(Number(oldvalue.toString().replace('%','').toString().trim()))==false && is_float_accepted_percperc==false ){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
+                    setNotification({
+                      message: comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator),
+                      status: 'error',
+                      autoDismissTimeout: 3000, // Set your desired timeout
+                      lengthscreen:4,
+                      triggerNotification: Math.random()// Trigger when message is present
+                    });
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
                     if(/^([+-]?)0+(?=\d)/.test(oldvalue.toString().trim().replace('%','')) ){
@@ -307,7 +342,13 @@ import{
                   //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').toString().trim().replace('.', ',') + " est correct (virguale à la place du point)");
                   //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').toString().trim().replace('.', ',') + " est correct (virguale à la place du point)");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'val_try_to_fix_comma_instead_dot','fr-FR',userLocale,decimalSeparator))
-
+                  setNotification({
+                    message: comments_messages(oldvalue,'val_try_to_fix_comma_instead_dot','fr-FR',userLocale,decimalSeparator),
+                    status: 'error',
+                    autoDismissTimeout: 4500, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
                   hot.setDataAtCell(row, prop, '', 'my_source_empty_percentage');
               }
             } else if(/^[-+]?(\s*\d+(,\d+)?)\s*$/.test(oldvalue.toString().trim())){
@@ -317,7 +358,13 @@ import{
                   //////console.log('may cause problem')
                   //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').toString().trim().replace(',', '.') + " est correct (point à la place de la virgule)");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'val_try_to_fix_dot_instead_comma','fr-FR',userLocale,decimalSeparator))
-
+                  setNotification({
+                    message: comments_messages(oldvalue,'val_try_to_fix_dot_instead_comma','fr-FR',userLocale,decimalSeparator),
+                    status: 'error',
+                    autoDismissTimeout: 4500, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
                   hot.setDataAtCell(row, prop, '', 'my_source_empty_percentage');
               } else if (decimalSeparator==','){
                 //////console.log('condition percentage 2.2.2')
@@ -348,10 +395,24 @@ import{
                   } else {
                   if(Number(oldvalue.toString().replace('%','').toString().trim())<0 && is_negativenb_accepted_percperc==false){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator))
+                    setNotification({
+                      message: comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator),
+                      status: 'error',
+                      autoDismissTimeout: 3000, // Set your desired timeout
+                      lengthscreen:4,
+                      triggerNotification: Math.random()// Trigger when message is present
+                    });
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                 } else {
                   if(Number.isInteger(Number(oldvalue.toString().replace('%','').toString().trim()))==false && is_float_accepted_percperc==false ){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
+                    setNotification({
+                      message: comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator),
+                      status: 'error',
+                      autoDismissTimeout: 3000, // Set your desired timeout
+                      lengthscreen:4,
+                      triggerNotification: Math.random()// Trigger when message is present
+                    });
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
                     if(/^([+-]?)0+(?=\d)/.test(oldvalue.toString().trim().replace('%','')) ){
@@ -383,7 +444,13 @@ import{
                   //////console.log('condition percentage 2.3.2')
                   //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').toString().trim().replace('.', ',') + " est correct (virgule à la place du point)");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'val_try_to_fix_comma_instead_dot','fr-FR',userLocale,decimalSeparator))
-
+                  setNotification({
+                    message: comments_messages(oldvalue,'val_try_to_fix_comma_instead_dot','fr-FR',userLocale,decimalSeparator),
+                    status: 'error',
+                    autoDismissTimeout: 4500, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
                   hot.setDataAtCell(row, prop, '', 'my_source_empty_percentage');
                 }
               } else if (/^[-+]?(\s*\d+(,\d+)?)\s*%$/.test(oldvalue.toString().trim())){
@@ -393,7 +460,13 @@ import{
                   //////console.log('condition percentage 2.4.1')
                   //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + oldvalue.toString().replace(/\s+/g, '').toString().trim().replace(',', '.') + " est correct (point à la place de la virgule)");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'val_try_to_fix_dot_instead_comma','fr-FR',userLocale,decimalSeparator))
-
+                  setNotification({
+                    message: comments_messages(oldvalue,'val_try_to_fix_dot_instead_comma','fr-FR',userLocale,decimalSeparator),
+                    status: 'error',
+                    autoDismissTimeout: 4500, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
                   hot.setDataAtCell(row, prop, '', 'my_source_empty_percentage');
                 } else if (decimalSeparator==','){
                   //////console.log('condition percentage 2.4.2')
@@ -424,10 +497,24 @@ import{
                        } else {
                         if(Number(oldvalue.toString().replace('%','').toString().replace(',','.').toString().trim())<0 && is_negativenb_accepted_percperc==false){
                           commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator))
+                          setNotification({
+                            message: comments_messages(oldvalue,'refuse_negative','fr-FR',userLocale,decimalSeparator),
+                            status: 'error',
+                            autoDismissTimeout: 3000, // Set your desired timeout
+                            lengthscreen:4,
+                            triggerNotification: Math.random()// Trigger when message is present
+                          });
                           hot.setDataAtCell(row, prop, '', 'my_source_empty');
                             } else {
                               if(Number.isInteger(Number(oldvalue.toString().replace('%','').toString().replace(',','.').toString().trim()))==false && is_float_accepted_percperc==false ){
                     commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator))
+                    setNotification({
+                      message: comments_messages(oldvalue,'refuse_float','fr-FR',userLocale,decimalSeparator),
+                      status: 'error',
+                      autoDismissTimeout: 3000, // Set your desired timeout
+                      lengthscreen:4,
+                      triggerNotification: Math.random()// Trigger when message is present
+                    });
                     hot.setDataAtCell(row, prop, '', 'my_source_empty');
                   } else {
                     if(/^([+-]?)0+(?=\d)/.test(oldvalue.toString().trim().replace('%','')) ){
@@ -470,6 +557,13 @@ import{
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
             if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'percentage_no_valid_isvalidfalse_end','fr-FR',userLocale,decimalSeparator))
+              setNotification({
+                message: comments_messages(oldvalue,'percentage_no_valid_isvalidfalse_end','fr-FR',userLocale,decimalSeparator),
+                status: 'error',
+                autoDismissTimeout: 3000, // Set your desired timeout
+                lengthscreen:4,
+                triggerNotification: Math.random()// Trigger when message is present
+              });
             }
             hot.setDataAtCell(row, prop,'','my_source_empty_percentage')
 

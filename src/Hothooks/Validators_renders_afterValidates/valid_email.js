@@ -27,6 +27,8 @@ import{
 
   import { comments_messages } from '../../Tools/comments_messages.js'
   import {isValidDate} from '../../Tools/isValidDate.js'
+  import { addToast } from 'react-toast-notifications';
+
 
   
   export function renderer_email(instance, td, row, col, prop, oldvalue, cellProperties,data22){
@@ -55,7 +57,7 @@ import{
         }
 
 
-  export function afterValidatefct_email(isValid, oldvalue, row, prop, source,hot,commentsPlugin,emails_length_em){        
+  export function afterValidatefct_email(isValid, oldvalue, row, prop, source,hot,commentsPlugin,emails_length_em,setNotification){        
     ////console.log('prop==6')
     ////console.log(isValid)
 
@@ -78,6 +80,13 @@ import{
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>emails_length_em){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'email_invalid','fr-FR'))
+           setNotification({
+            message: comments_messages(oldvalue,'email_invalid','fr-FR'),
+            status: 'error',
+            autoDismissTimeout: 3000, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
            hot.setDataAtCell(row, prop,'','my_source_empty_email');
          } else {
            ////console.log('COULD END HERE')
@@ -93,6 +102,13 @@ import{
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
        if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'email_invalid','fr-FR'))
+        setNotification({
+          message: comments_messages(oldvalue,'email_invalid','fr-FR'),
+          status: 'error',
+          autoDismissTimeout: 3000, // Set your desired timeout
+          lengthscreen:4,
+          triggerNotification: Math.random()// Trigger when message is present
+        });
        }
        hot.setDataAtCell(row, prop,'','my_source_empty_email')
 

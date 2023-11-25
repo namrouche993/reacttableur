@@ -90,7 +90,7 @@ else if( i == 1 ) {
         }
 
 
-  export function afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin,isLoading){        
+  export function afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin,isLoading,setNotification){        
     ////console.log('prop==5')
     console.log('afterValidate_dropdown')
     console.log(isValid)
@@ -110,6 +110,13 @@ else if( i == 1 ) {
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
         if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
+          setNotification({
+            message: comments_messages(oldvalue,'dropdown_included','fr-FR'),
+            status: 'error',
+            autoDismissTimeout: 3000, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
         }
         hot.setDataAtCell(row, prop,' ','my_source_empty_dropdown');
         
@@ -124,6 +131,13 @@ else if( i == 1 ) {
         //commentsPlugin.removeCommentAtCell(row,prop);
         if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
+          setNotification({
+            message: comments_messages(oldvalue,'dropdown_included','fr-FR'),
+            status: 'error',
+            autoDismissTimeout: 3000, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
         }
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
         

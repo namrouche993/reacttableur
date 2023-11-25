@@ -95,7 +95,7 @@ import{
         }
 
 
-  export function afterValidatefct_text(isValid, oldvalue, row, prop, source,hot,commentsPlugin,text_length_txt){        
+  export function afterValidatefct_text(isValid, oldvalue, row, prop, source,hot,commentsPlugin,text_length_txt,setNotification){        
         if (isValid && oldvalue == null ) {
           ////console.log('condition text 1')
           ////console.log('we are inside afterValidate date oldvalue==null')
@@ -114,6 +114,13 @@ import{
           ////console.log(oldvalue)
           ////console.log(oldvalue.toString().length)
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'text_depass_limit','fr-FR'))
+            setNotification({
+              message: comments_messages(oldvalue,'text_depass_limit','fr-FR'),
+              status: 'error',
+              autoDismissTimeout: 3000, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
         }
   }

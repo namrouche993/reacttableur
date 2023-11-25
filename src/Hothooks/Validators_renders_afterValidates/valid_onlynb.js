@@ -62,7 +62,7 @@ import{
         }
 
 
-  export function afterValidatefct_onlynb(isValid, oldvalue, row, prop, source,hot,commentsPlugin,onlynumbers_length_on){        
+  export function afterValidatefct_onlynb(isValid, oldvalue, row, prop, source,hot,commentsPlugin,onlynumbers_length_on,setNotification){        
     ////console.log('prop==8')
     ////console.log(isValid)
     //console.log('source in aftervalidate onlynb :')
@@ -90,6 +90,13 @@ import{
            commentsPlugin.removeCommentAtCell(row,prop);
          } else if(oldvalue.length>onlynumbers_length_on){
            commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'onlynumbers_depass_length','fr-FR'))
+           setNotification({
+            message: comments_messages(oldvalue,'onlynumbers_depass_length','fr-FR'),
+            status: 'error',
+            autoDismissTimeout: 3000, // Set your desired timeout
+            lengthscreen:4,
+            triggerNotification: Math.random()// Trigger when message is present
+          });
            hot.setDataAtCell(row, prop,'','my_source_empty_onlynumbers');
          } else {
            ////console.log('COULD END HERE')
@@ -107,6 +114,13 @@ import{
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
        if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'onlynumbers_invalid','fr-FR'))
+        setNotification({
+          message: comments_messages(oldvalue,'onlynumbers_invalid','fr-FR'),
+          status: 'error',
+          autoDismissTimeout: 3000, // Set your desired timeout
+          lengthscreen:4,
+          triggerNotification: Math.random()// Trigger when message is present
+        });
        }
        //console.log('three space instead of empty ')
        hot.setDataAtCell(row, prop,'','my_source_empty_onlynumbers')

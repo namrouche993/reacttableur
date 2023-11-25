@@ -34,6 +34,7 @@ import{
   import {isValidDate} from '../../Tools/isValidDate.js'
   import {startsWithElement} from '../../Tools/startsWithElement.js'
 
+
 // REMEMBER , NOTE : dont forget to add beforekeydown_dates  beforeKeyDown_Dates_fct
 
  //      if(currentColIndex==14 && currentRowIndex>5) {  // editable (about dates) edit it later changeable , modify it later , change it later
@@ -112,7 +113,7 @@ import{
 
   export function afterValidatefct_date(isValid, oldvalue, row, prop, source,hot,commentsPlugin,
     decimalSeparator,userLocale,navigator_language,userTimeZone,usTimeZones,use_en_time,
-    use_english_date_by_user_himeself_in_modal
+    use_english_date_by_user_himeself_in_modal,setNotification
     ){
       //console.log(oldvalue)
       //console.log(isValid)
@@ -261,6 +262,14 @@ import{
   //////console.log(prop)
   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_try_to_fix','fr-FR'))
+  setNotification({
+    message: comments_messages(oldvalue,'date_try_to_fix','fr-FR'),
+    status: 'error',
+    autoDismissTimeout: 3000, // Set your desired timeout
+    lengthscreen:4,
+    triggerNotification: Math.random()// Trigger when message is present
+  });
+  //enqueueSnackbar(comments_messages(oldvalue,'date_try_to_fix','fr-FR'),{ variant: 'error' })
   hot.setDataAtCell(row, prop,'','my_source_empty_date')
 }
               }
@@ -331,6 +340,15 @@ import{
 } else {
   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_try_to_fix','fr-FR'))
+  setNotification({
+    message: comments_messages(oldvalue,'date_try_to_fix','fr-FR'),
+    status: 'error',
+    autoDismissTimeout: 3000, // Set your desired timeout
+    lengthscreen:4,
+    triggerNotification: Math.random()// Trigger when message is present
+  });
+  //enqueueSnackbar(comments_messages(oldvalue,'date_try_to_fix','fr-FR'),{ variant: 'error' })
+
   hot.setDataAtCell(row, prop,'','my_source_empty_date')
 }
 
@@ -419,6 +437,14 @@ import{
                 } else {                
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_try_to_fix','fr-FR'))
+                  setNotification({
+                    message: comments_messages(oldvalue,'date_try_to_fix','fr-FR'),
+                    status: 'error',
+                    autoDismissTimeout: 3000, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_try_to_fix','fr-FR'),{ variant: 'error' })
 
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                }   
@@ -515,6 +541,14 @@ import{
                 } else {                
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_try_to_fix','fr-FR'))
+                  setNotification({
+                    message: comments_messages(oldvalue,'date_try_to_fix','fr-FR'),
+                    status: 'error',
+                    autoDismissTimeout: 3000, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_try_to_fix','fr-FR'),{ variant: 'error' })
 
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                }
@@ -608,6 +642,15 @@ import{
                 } else {                
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_try_to_fix','fr-FR'))
+                  setNotification({
+                    message: comments_messages(oldvalue,'date_try_to_fix','fr-FR'),
+                    status: 'error',
+                    autoDismissTimeout: 3000, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_try_to_fix','fr-FR'),{ variant: 'error' })
+
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                }
 // **********************************************************************************
@@ -701,6 +744,14 @@ import{
                 } else {                
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_try_to_fix','fr-FR'))
+                    setNotification({
+    message: comments_messages(oldvalue,'date_try_to_fix','fr-FR'),
+    status: 'error',
+    autoDismissTimeout: 3000, // Set your desired timeout
+    lengthscreen:4,
+    triggerNotification: Math.random()// Trigger when message is present
+  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_try_to_fix','fr-FR'),{ variant: 'error' })
 
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                }
@@ -941,6 +992,17 @@ import{
                         //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                         //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                        setNotification({
+                          message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                          status: 'error',
+                          autoDismissTimeout: 3000, // Set your desired timeout
+                          lengthscreen:4,
+                          triggerNotification: Math.random()// Trigger when message is present
+                        });
+                        //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+                        
+
+
 
                         hot.setDataAtCell(row, prop,'','my_source_empty_date')
                       } else {
@@ -962,6 +1024,15 @@ import{
                   //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                  setNotification({
+                    message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                    status: 'error',
+                    autoDismissTimeout: 3000, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
 
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                 } else {
@@ -996,6 +1067,15 @@ import{
                         //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                         //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                        setNotification({
+                          message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                          status: 'error',
+                          autoDismissTimeout: 3000, // Set your desired timeout
+                          lengthscreen:4,
+                          triggerNotification: Math.random()// Trigger when message is present
+                        });
+                        //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
 
                         hot.setDataAtCell(row, prop,'','my_source_empty_date')
                       } else {
@@ -1017,6 +1097,15 @@ import{
                   //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                  // commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                  commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                 setNotification({
+                  message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                  status: 'error',
+                  autoDismissTimeout: 3000, // Set your desired timeout
+                  lengthscreen:4,
+                  triggerNotification: Math.random()// Trigger when message is present
+                });
+                 //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
 
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                 } else {
@@ -1051,6 +1140,15 @@ import{
                         //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                         //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                        setNotification({
+                          message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                          status: 'error',
+                          autoDismissTimeout: 3000, // Set your desired timeout
+                          lengthscreen:4,
+                          triggerNotification: Math.random()// Trigger when message is present
+                        });
+                        //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
 
                         hot.setDataAtCell(row, prop,'','my_source_empty_date')
                       } else {
@@ -1072,6 +1170,15 @@ import{
                   //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                  setNotification({
+                    message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                    status: 'error',
+                    autoDismissTimeout: 3000, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
 
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                 } else {
@@ -1106,6 +1213,13 @@ import{
                         //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                         //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                        setNotification({
+                          message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                          status: 'error',
+                          autoDismissTimeout: 3000, // Set your desired timeout
+                          lengthscreen:4,
+                          triggerNotification: Math.random()// Trigger when message is present
+                        });
 
                         hot.setDataAtCell(row, prop,'','my_source_empty_date')
                       } else {
@@ -1127,6 +1241,15 @@ import{
                   //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                  setNotification({
+                    message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                    status: 'error',
+                    autoDismissTimeout: 3000, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
 
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                 } else {
@@ -1161,6 +1284,13 @@ import{
                         //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                         //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                        setNotification({
+                          message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                          status: 'error',
+                          autoDismissTimeout: 3000, // Set your desired timeout
+                          lengthscreen:4,
+                          triggerNotification: Math.random()// Trigger when message is present
+                        });
 
                         hot.setDataAtCell(row, prop,'','my_source_empty_date')
                       } else {
@@ -1182,6 +1312,15 @@ import{
                   //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                  setNotification({
+                    message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                    status: 'error',
+                    autoDismissTimeout: 3000, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
 
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                 } else {
@@ -1216,6 +1355,13 @@ import{
                         //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                         //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                        setNotification({
+                          message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                          status: 'error',
+                          autoDismissTimeout: 3000, // Set your desired timeout
+                          lengthscreen:4,
+                          triggerNotification: Math.random()// Trigger when message is present
+                        });
                         hot.setDataAtCell(row, prop,'','my_source_empty_date')
                       } else {
                           if(datepart2.toString().length==1){
@@ -1236,6 +1382,15 @@ import{
                   //var [daydate,monthdate,yeardate]=["01",datepart1,datepart2]
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
                   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+                  setNotification({
+                    message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+                    status: 'error',
+                    autoDismissTimeout: 3000, // Set your desired timeout
+                    lengthscreen:4,
+                    triggerNotification: Math.random()// Trigger when message is present
+                  });
+                  //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
                   hot.setDataAtCell(row, prop,'','my_source_empty_date')
                 } else {
                   if(datepart2.toString().length==1){
@@ -1307,6 +1462,15 @@ import{
           //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
           if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
+            setNotification({
+              message: comments_messages(oldvalue,'date_no_valid','fr-FR'),
+              status: 'error',
+              autoDismissTimeout: 3000, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
+            //enqueueSnackbar(comments_messages(oldvalue,'date_no_valid','fr-FR'),{ variant: 'error' })
+
           }
           hot.setDataAtCell(row, prop,'','my_source_empty_date')
           ////////console.log('do nothing could end here')

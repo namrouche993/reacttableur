@@ -41,11 +41,17 @@ import { generateRandomString } from './Tools/Randst.js';
 // import { saveDataToServer } from './Tools/DataToFromServer.js';
 
 import { fetchDataUsEffect1 } from './Tools/fetchDataUsEffect1.js';
+import Notif from './Notif.js';
+
+
 
 //alert('we are in Hottable ')  
 
+
+
 function Hottable() {
-  
+
+
   const userLocale2_redux  = useSelector(state => state.userLocale2);
   const userLocale2_ref = useRef(userLocale2_redux);
  
@@ -121,6 +127,8 @@ function Hottable() {
   const [idusername00,setIdusername00]=useState(secureLocalStorage.getItem('ussd74kasd75_2'));
 
   const [readonlyhot,setReadonlyhot]=useState('nifanitr');
+
+  const [notification, setNotification] = useState(null);
 
   React.useEffect(() => {
   //alert('read_only would be : ' + props.read_only)
@@ -238,11 +246,16 @@ function Hottable() {
         if(role_user_redux){
           return
         }
-          afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin,isLoading);
+          afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin,isLoading,setNotification);
         },
         beforeKeyDown: (event) => {
+ 
+          if(role_user_redux){
+            return 
+          }
+          console.log('-------------------------------')
           if (event.key === 'Enter' && event.shiftKey) {
-            alert('To break the line please, click Ctrl+Enter or Alt+Enter')    
+            alert('To break the line please, click Ctrl+Enter or Alt+Enter')    // editable
             event.stopImmediatePropagation();
             event.preventDefault();
             console.log('Shift+Enter pressed');
@@ -306,8 +319,6 @@ function Hottable() {
   
       hot.addHook('afterChange', (changes, source) => {
         console.log('afterChange : ')
-        console.log('---------------------------------------------')
-
 
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
@@ -320,7 +331,7 @@ function Hottable() {
         changeTimer = setTimeout(function () {
           // Perform the action you want to trigger here
           try {
-            
+       
           var my_actual_getdata = JSON.stringify(hot.getData());
 //          dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
           
@@ -505,16 +516,22 @@ function Hottable() {
 
 
 
+
   return (
+    
     <>
-    {/* <Essaitest/>  WITH REDUX : */}
+
     <div>
-      {/* <button onClick={showSpinner}>Show Spinner</button>
-      <button onClick={hideSpinner}>Hide Spinner</button> */}
+      {/* <button onClick={}>claa</button> */}
+       {/* <Notif message={"Welcome"} status={"error"} lengthscreen={4} autoDismissTimeout={2700} triggerNotification={triggerNotification} />  */}
+       <Notif {...notification} />
       <LoadingSpinner open={isLoading} />
       <div ref={hotTableComponent} />
+
+
     </div>
     </>
+
   );
 }
 
