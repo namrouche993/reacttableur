@@ -199,6 +199,7 @@ const handleCloseModaladd = () => {
 
 
   useEffect( async () => {
+
     try {
       var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
       const response = await fetch('http://localhost:5000/users_roles_navbar', {
@@ -214,7 +215,12 @@ const handleCloseModaladd = () => {
       });
       //var responsejson = await responseem.json();
       //console.log(responsejson)
-      if (response.ok) {
+      //alert(response.status)
+      if(response.status==402){
+        setRole_of_user_component('Owner')
+        dispatch({ type: 'SET_ROLE_USER_REDUX', payload: false })
+        //alert('response is 402 ')
+      } else if (response.ok) {
         console.log('we are in response.ok')
         const data_response = await response.json();
         console.log('data_response  :')
@@ -263,6 +269,8 @@ const handleCloseModaladd = () => {
         console.error('Error ,Authorization is not verified.');
       }
     } catch (error) {
+      alert('catch error  ')
+
       setRole_of_user_component('Viewer')
           // props.readonlycells_in_hottable('Viewer');
           dispatch({ type: 'SET_ROLE_USER_REDUX', payload: true })
