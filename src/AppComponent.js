@@ -35,7 +35,6 @@ export default function AppComponent() {
          });
          console.log('response of fetchAppenter in frontend :')
          console.log(response)
-         
          if (response.ok) {
           console.log('try to knwo how many times it renders !!! ');
            //props.onClose();

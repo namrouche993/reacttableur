@@ -32,6 +32,8 @@ export default function AppNotFoundComponent400() {
     secureLocalStorage.removeItem("region_storage");
     secureLocalStorage.removeItem("data_localstorage_storage_2");
     secureLocalStorage.removeItem("hisownroute");
+    secureLocalStorage.removeItem("role_storage");
+
 
     try {
       // Make a request to the server to clear the cookie
@@ -55,6 +57,8 @@ export default function AppNotFoundComponent400() {
         secureLocalStorage.removeItem("region_storage");
         secureLocalStorage.removeItem("data_localstorage_storage_2");
         secureLocalStorage.removeItem("hisownroute");
+        secureLocalStorage.removeItem("role_storage");
+
         navigate('/');
         window.location.reload()
         setOpen_confirmmodal(false);
