@@ -19,6 +19,7 @@ export const socket = io(`http://localhost:5000`,{
 query: {
     username: secureLocalStorage.getItem('ussd74kasd75_2'),
     email:secureLocalStorage.getItem('email_chosen'),
+    email_to_display:secureLocalStorage.getItem('email_chosen_to_display'),
     namespace0:mynamespace
   }
 }

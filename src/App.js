@@ -16,7 +16,7 @@ const App = () => {
   useEffect(() => {
     
 
-    const fetchData = async () => {
+    const fetchData = async () => { // editable maybe to remove
       try {
         const response = await fetch('http://localhost:5000/getdata',{
           method: 'POST',

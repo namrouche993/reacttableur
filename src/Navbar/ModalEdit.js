@@ -241,6 +241,9 @@ function ModalEdit(props) {
          secureLocalStorage.setItem('phone_chosen', phoneNumber);
          secureLocalStorage.setItem('hisownroute', 'tab/'+data_response.hisownroute);
          secureLocalStorage.setItem('role_storage', "Owner");
+         secureLocalStorage.setItem('email_chosen_to_display', email);
+         //alert('data_response emailtodisplay : ' + data_response.emailtodisplay)
+
 
 
          // Successful registration, redir ect to the main page
@@ -328,6 +331,7 @@ function ModalEdit(props) {
     if(
       secureLocalStorage.getItem("ussd74kasd75_2") &&
       secureLocalStorage.getItem("email_chosen") &&
+      secureLocalStorage.getItem("email_chosen_to_display") &&
       secureLocalStorage.getItem("phone_chosen") &&
       secureLocalStorage.getItem("organismechosen") &&
       secureLocalStorage.getItem("region_storage") &&
@@ -353,6 +357,7 @@ function ModalEdit(props) {
   const handleConfirm_confirmmodal = async () =>{
     secureLocalStorage.removeItem("ussd74kasd75_2");
     secureLocalStorage.removeItem("email_chosen");
+    secureLocalStorage.removeItem("email_chosen_to_display");
     secureLocalStorage.removeItem("phone_chosen");
     secureLocalStorage.removeItem("organismechosen");
     secureLocalStorage.removeItem("region_storage");
@@ -375,6 +380,7 @@ function ModalEdit(props) {
         console.log('Cookie cleared successfully');
         secureLocalStorage.removeItem("ussd74kasd75_2");
         secureLocalStorage.removeItem("email_chosen");
+        secureLocalStorage.removeItem("email_chosen_to_display");
         secureLocalStorage.removeItem("phone_chosen");
         secureLocalStorage.removeItem("organismechosen");
         secureLocalStorage.removeItem("region_storage");

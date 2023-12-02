@@ -88,6 +88,8 @@ function ModalAdd(props) {
   const [requestor_role,setRequestor_role]=useState('Viewer');
 
   const [emails_added_list,setEmails_added_list]=useState([])
+  const [emails_added_length,setEmails_added_length]=useState(2);
+  const [message_remove_email,setMessage_remove_email]=useState('Are you sure you want to remove')
   //const [emailsadded2,setEmailsadded2]=useState('')
   //const [emailsadded3,setEmailsadded3]=useState('')
 
@@ -97,7 +99,12 @@ function ModalAdd(props) {
   const [open_confirmmodal,setOpen_confirmmodal]=useState(false);
   const [emailtosend_in_modalconfirm_toremovec,setEmailtosend_in_modalconfirm_toremovec]=useState('');
 
-  const handleOpen_confirmmodal = (BttnRmv)=>{
+  const handleOpen_confirmmodal = (BttnRmv,Role)=>{
+    if(Role=='Owner'){
+      setMessage_remove_email('Are you sure you want to remove')
+    } else {
+      setMessage_remove_email('Are you sure you want to remove')
+    }
     setSelectedEmailRemovedButton(BttnRmv)
     setOpen_confirmmodal(true);
     setEmailtosend_in_modalconfirm_toremovec(BttnRmv)
@@ -106,7 +113,7 @@ function ModalAdd(props) {
 
   const [selectedPassdButton, setSelectedPassdButton] = useState(null);
 
-  const [test_display_codepin_user1,setTest_display_codepin_user1]=useState([false,false]);
+  const [test_display_codepin_user1,setTest_display_codepin_user1]=useState([true,true,true,true]);
 
   const handleVpnKeyClick = (Bttncodepin,index) =>{
     setSelectedPassdButton(Bttncodepin)
@@ -121,6 +128,7 @@ function ModalAdd(props) {
 
   const handleConfirm_confirmmodal = async () =>{
     try {
+      var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
       const response = await fetch('http://localhost:5000/removedemail', {
           method: 'POST',
           credentials: 'include',
@@ -130,7 +138,8 @@ function ModalAdd(props) {
           //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
           body: JSON.stringify({
            "emailremoved":emailtosend_in_modalconfirm_toremovec,
-           "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
+           "idusername":secureLocalStorage.getItem('ussd74kasd75_2'),
+           "currentrouteofurl":currentrouteofurl
           })
   
         });
@@ -139,9 +148,10 @@ function ModalAdd(props) {
           //const data_response = await response.json();
           //setEmails_added_list(prevList => prevList.filter(email => email !== emailtosend_in_modalconfirm_toremovec));
           setEmails_added_list(prevState => prevState.filter(row => row[0] !== emailtosend_in_modalconfirm_toremovec));
-
+          setEmails_added_length(response.emailslength)
           setInputEmail('');
           setOpen_confirmmodal(false);
+          window.location.reload();
     
         } else {
           console.error('Error sending data to the server.');
@@ -182,18 +192,21 @@ function ModalAdd(props) {
         console.log('try to knwo how many times it renders !!!!!!!!!!!!!!!!!!!! ');
 
         const value_allowedemails_with_requestor = await response_allowedemails.json();
-        const value_allowedemails = {"user2":value_allowedemails_with_requestor.user2 , "user3":value_allowedemails_with_requestor.user3}
-        const role_of_the_requestor = value_allowedemails_with_requestor.role_of_the_requestor
+        const value_allowedemails = {"user12":value_allowedemails_with_requestor.user12,"user2":value_allowedemails_with_requestor.user2 , "user3":value_allowedemails_with_requestor.user3}
+        const role_of_the_requestor = value_allowedemails_with_requestor.role_of_the_requestor;
+        const emailslength = value_allowedemails_with_requestor.emailslength
         console.log(value_allowedemails)
 
         //var emails_in_list = Object.values(value_allowedemails);
         var emails_in_list = Object.entries(value_allowedemails).map(([key, value]) => [value.useremail,value.role, value.code])
+        console.log('emails_in_list ::::::::::::::::::::::::::::::::::::')
         console.log(emails_in_list)
         // Filtering out null elements from the array
         //let emails_in_list_withoutNull = emails_in_list.filter(element => element !== null);
         let emails_in_list_withoutNull = emails_in_list.filter(arr => !arr.every(el => el === null));
         console.log(emails_in_list_withoutNull)
         setEmails_added_list(emails_in_list_withoutNull)
+        setEmails_added_length(emailslength)
         setRequestor_role(role_of_the_requestor)
 
         //setEmailsadded2(value_allowedemails.user2email)
@@ -256,6 +269,7 @@ function ModalAdd(props) {
         console.log('data_response.role')
         console.log(data_response.role)
         setEmails_added_list(prevList => [...prevList, [inputEmail,data_response.role,data_response.codepass]]);
+        setEmails_added_length(emails_added_length+1)
         setInputEmail('');
         setCodepass(data_response.codepass);
         setEmailtosend_in_modalsuccess(inputEmail);
@@ -301,11 +315,11 @@ function ModalAdd(props) {
     // Add logic to determine helper text based on the selected role
     switch (role) {
       case 'Admin':
-        return 'Admins have full access. ( he can fill the table - add new users - Submit the finished table ';
+        return 'Admins have multiple access privileges. ( He can fill the table - Add new users - Submit the finished table ';
       case 'Writer':
-        return 'Writers can edit content. ( He cannot add users and he cannot submit )';
+        return 'Writers can edit contents. ( He cannot add new users, and He cannot submit )';
       case 'Viewer':
-        return 'Viewers can only view content.';
+        return 'Viewers can only view contents.';
       default:
         return '';
     }
@@ -315,7 +329,7 @@ function ModalAdd(props) {
     <Dialog open={props.open} onClose={onClosing}
     maxWidth="sm" // Adjust the maxWidth as needed
     fullWidth
-    sx={{ '& .MuiDialog-paper': { minWidth: 350,borderRadius: 2 }  }} // Adjust the minWidth and maxWidth
+    sx={{ '& .MuiDialog-paper': { minWidth: 750,borderRadius: 2 }  }} // Adjust the minWidth and maxWidth
 >
       {/* <DialogTitle sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',fontSize:'1.8rem'}}>Add Users</DialogTitle> */}
       <IconButton
@@ -339,7 +353,7 @@ function ModalAdd(props) {
 
 
         <div style={{textAlign:'-webkit-center'}}>
-        {emails_added_list.length<2 ? 
+        {emails_added_length<4 ? 
         <div>
                 <Typography variant="body1" fontWeight='bold' sx={{ margin: '20px 0' }}>
           {/* You are not authorized to visit or modify this table. */}
@@ -413,18 +427,17 @@ function ModalAdd(props) {
 
 <br></br>
 <br></br>
-<div style={{textAlign:'-webkit-center'}}>
-<StyledTableContainer component={Paper}>
-      <Table sx={{boxShadow:'none'}}>
-        <TableBody>
+<div style={{width:700, textAlign:'-webkit-center'}}>
+<StyledTableContainer sx={{maxWidth:700,borderTop:'1px solid lightgrey'}} component={Paper}>
+      <Table  sx={{boxShadow:'none'}}>
+        <TableBody >
           {emails_added_list.map((rowofemail, index) => (
             <StyledTableRow key={index}>
-              <TableCell>{rowofemail[0]}</TableCell>
-              <TableCell>Role : {rowofemail[1]}</TableCell>
-
-              <TableCell align="right">
+              <TableCell style={{ width: '300px' }}>{rowofemail[0]}</TableCell>
+              <TableCell style={{ width: '150px' }}>Role : {rowofemail[1]}</TableCell>               {/* editable language */}
+              <TableCell style={{ width: '350px' }} align="right">
                 {test_display_codepin_user1[index] ? (
-                  <p style={{ display: 'inline' }}>{rowofemail[2]}</p>
+                  <p style={{ display: 'inline' }}>Code d'accés : {rowofemail[2]}</p>             
                 ) : (
                   <span></span>
                 )}
@@ -436,15 +449,28 @@ function ModalAdd(props) {
                     <VpnKeyIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Remove">
+                {rowofemail[1]!=='Owner' ? (
+                      <Tooltip title="Remove">
+                      <IconButton
+                        aria-label="remove"
+                        sx={{ color: 'brown' }}
+                        onClick={() => handleOpen_confirmmodal(rowofemail[0],rowofemail[1])}
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                    </Tooltip>
+                ) : (
+                  <Tooltip title="Remove">
                   <IconButton
+                    disabled
                     aria-label="remove"
                     sx={{ color: 'brown' }}
-                    onClick={() => handleOpen_confirmmodal(rowofemail[0])}
                   >
                     <RemoveIcon />
                   </IconButton>
                 </Tooltip>
+              )}
+
               </TableCell>
             </StyledTableRow>
           ))}
@@ -458,6 +484,7 @@ function ModalAdd(props) {
                   setOpen_confirmmodal={setOpen_confirmmodal}
                   handleConfirm_confirmmodal={handleConfirm_confirmmodal}
                   emailreceived_in_modalconfirm_toremove={emailtosend_in_modalconfirm_toremovec}
+                  messageremoveemail={message_remove_email}
                   />
     </div>
       </Box>

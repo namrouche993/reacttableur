@@ -26,6 +26,7 @@ export default function AppNotFoundComponent400() {
   const handleConfirm_confirmmodal = async () =>{
     secureLocalStorage.removeItem("ussd74kasd75_2");
     secureLocalStorage.removeItem("email_chosen");
+    secureLocalStorage.removeItem("email_chosen_to_display");
     secureLocalStorage.removeItem("phone_chosen");
     secureLocalStorage.removeItem("organismechosen");
     secureLocalStorage.removeItem("region_storage");
@@ -48,6 +49,7 @@ export default function AppNotFoundComponent400() {
         console.log('Cookie cleared successfully');
         secureLocalStorage.removeItem("ussd74kasd75_2");
         secureLocalStorage.removeItem("email_chosen");
+        secureLocalStorage.removeItem("email_chosen_to_display");
         secureLocalStorage.removeItem("phone_chosen");
         secureLocalStorage.removeItem("organismechosen");
         secureLocalStorage.removeItem("region_storage");

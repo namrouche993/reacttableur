@@ -28,7 +28,7 @@ export default function ModalConfirm(props) {
         <DialogTitle id="alert-dialog-title">Confirm Action</DialogTitle> {/* editable language */}
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove <b>{props.emailreceived_in_modalconfirm_toremove}</b> {/* editable language */}
+            {props.messageremoveemail} <b>{props.emailreceived_in_modalconfirm_toremove}</b> {/* editable language */}
             
           </DialogContentText>
         </DialogContent>

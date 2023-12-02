@@ -169,11 +169,14 @@ const handleCloseModaladd = () => {
     //alert('listinguers')
     console.log('we are in listingusers :')
     console.log(users)
+    console.log(secureLocalStorage.getItem('email_chosen'))
+    console.log('****')
+    console.log(secureLocalStorage.getItem('email_chosen_to_display'))
     //alert('listingusers :  ' + users)
     var uniqueSet = new Set(users);
     // Convert the Set back to an array
     var uniqueArray = Array.from(uniqueSet);
-    const uniqueArraywithoutnull = uniqueArray.filter(user => user !== 'null').filter(user => user !== secureLocalStorage.getItem('email_chosen'));
+    const uniqueArraywithoutnull = uniqueArray.filter(user => user !== 'null').filter(user => user !== secureLocalStorage.getItem('email_chosen_to_display'));
     //console.log('**************ssssssssssssssssssssssOOOOOOOOOOOOOOOOOOOOOOOsss*')
     //console.log(uniqueArray)
     console.log(uniqueArraywithoutnull)
@@ -269,7 +272,7 @@ const handleCloseModaladd = () => {
         console.error('Error ,Authorization is not verified.');
       }
     } catch (error) {
-      alert('catch error  ')
+      //alert('catch error  ')
 
       setRole_of_user_component('Viewer')
           // props.readonlycells_in_hottable('Viewer');

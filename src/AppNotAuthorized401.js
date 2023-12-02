@@ -144,9 +144,11 @@ function AppNotAuthorized401(props) {
         console.log(data_response)
         //secureLocalStorage.setItem('ussd74kasd75_2', data_response.idusername_to_client_side);
         secureLocalStorage.setItem('email_chosen', data_response.email);
+        secureLocalStorage.setItem('email_chosen_to_display', data_response.email_to_display);
+
         //secureLocalStorage.setItem('hisownroute', 'tab/' + data_response.hisownroute);
         setShowPinCodeFields(true);
-        setEmailentered(data_response.email)
+        setEmailentered(data_response.emailtodisplay)
         setNextted(true)
 
         //props.onClose();
@@ -208,12 +210,15 @@ function AppNotAuthorized401(props) {
 
           secureLocalStorage.setItem('ussd74kasd75_2', data_responsecp.idusername_to_client_side);
           secureLocalStorage.setItem('email_chosen', data_responsecp.email);
+          secureLocalStorage.setItem('email_chosen_to_display', data_responsecp.email_to_display);
           secureLocalStorage.setItem('phone_chosen', data_responsecp.phoneNumber_owner);
           secureLocalStorage.setItem('organismechosen', data_responsecp.organisme);
           secureLocalStorage.setItem('region_storage', data_responsecp.region);
           secureLocalStorage.setItem('data_localstorage_storage_2', JSON.stringify(data_responsecp.dataa));
           secureLocalStorage.setItem('hisownroute', 'tab/' + data_responsecp.hisownroute);
           secureLocalStorage.setItem('role_storage', data_responsecp.role);
+          //alert('email : ' + email)
+          //alert('email_todisplay:' + data_responsecp.email_to_display)
 
           //props.onClose();
           console.log('Data sent successfully to the server.');
@@ -245,6 +250,7 @@ function AppNotAuthorized401(props) {
   const handleConfirm_confirmmodal = async () =>{
     secureLocalStorage.removeItem("ussd74kasd75_2");
     secureLocalStorage.removeItem("email_chosen");
+    secureLocalStorage.removeItem("email_chosen_to_display");
     secureLocalStorage.removeItem("phone_chosen");
     secureLocalStorage.removeItem("organismechosen");
     secureLocalStorage.removeItem("region_storage");
@@ -267,6 +273,7 @@ function AppNotAuthorized401(props) {
         console.log('Cookie cleared successfully');
         secureLocalStorage.removeItem("ussd74kasd75_2");
         secureLocalStorage.removeItem("email_chosen");
+        secureLocalStorage.removeItem("email_chosen_to_display");
         secureLocalStorage.removeItem("phone_chosen");
         secureLocalStorage.removeItem("organismechosen");
         secureLocalStorage.removeItem("region_storage");
