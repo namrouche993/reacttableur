@@ -113,7 +113,7 @@ function ModalAdd(props) {
 
   const [selectedPassdButton, setSelectedPassdButton] = useState(null);
 
-  const [test_display_codepin_user1,setTest_display_codepin_user1]=useState([true,true,true,true]);
+  const [test_display_codepin_user1,setTest_display_codepin_user1]=useState([true,true,true,true,true]); // editable nb users if we want to remove user4 or user5
 
   const handleVpnKeyClick = (Bttncodepin,index) =>{
     setSelectedPassdButton(Bttncodepin)
@@ -190,9 +190,18 @@ function ModalAdd(props) {
 
        if (response_allowedemails.ok) {
         console.log('try to knwo how many times it renders !!!!!!!!!!!!!!!!!!!! ');
-
         const value_allowedemails_with_requestor = await response_allowedemails.json();
-        const value_allowedemails = {"user12":value_allowedemails_with_requestor.user12,"user2":value_allowedemails_with_requestor.user2 , "user3":value_allowedemails_with_requestor.user3}
+        console.log(value_allowedemails_with_requestor.user5)
+
+        const value_allowedemails = {
+        "user12":value_allowedemails_with_requestor.user12,
+        "user2":value_allowedemails_with_requestor.user2 ,
+        "user3":value_allowedemails_with_requestor.user3,
+
+        "user4":value_allowedemails_with_requestor.user4, // editable nb users if we want to remove user4 or user5
+        "user5":value_allowedemails_with_requestor.user5  // editable nb users if we want to remove user4 or user5
+
+      }
         const role_of_the_requestor = value_allowedemails_with_requestor.role_of_the_requestor;
         const emailslength = value_allowedemails_with_requestor.emailslength
         console.log(value_allowedemails)
@@ -315,11 +324,11 @@ function ModalAdd(props) {
     // Add logic to determine helper text based on the selected role
     switch (role) {
       case 'Admin':
-        return 'Admins have multiple access privileges. ( He can fill the table - Add new users - Submit the finished table ';
+        return 'Admins have multiple access privileges. ( He can fill the table - Add new users - Submit the finished table '; {/* editable language */}
       case 'Writer':
-        return 'Writers can edit contents. ( He cannot add new users, and He cannot submit )';
+        return 'Writers can edit contents. ( He cannot add new users, and He cannot submit )'; {/* editable language */}
       case 'Viewer':
-        return 'Viewers can only view contents.';
+        return 'Viewers can only view contents.'; {/* editable language */}
       default:
         return '';
     }
@@ -329,7 +338,7 @@ function ModalAdd(props) {
     <Dialog open={props.open} onClose={onClosing}
     maxWidth="sm" // Adjust the maxWidth as needed
     fullWidth
-    sx={{ '& .MuiDialog-paper': { minWidth: 750,borderRadius: 2 }  }} // Adjust the minWidth and maxWidth
+    sx={{ '& .MuiDialog-paper': { minWidth: 790,borderRadius: 2 }  }} // Adjust the minWidth and maxWidth
 >
       {/* <DialogTitle sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',fontSize:'1.8rem'}}>Add Users</DialogTitle> */}
       <IconButton
@@ -342,7 +351,7 @@ function ModalAdd(props) {
           <CloseIcon />
         </IconButton>
 
-      <DialogContent sx={{marginTop:0,alignSelf:'center',textAlign:'center'}}>
+      <DialogContent sx={{marginTop:0,alignSelf:'center',textAlign:'center',width:'740px'}}>
       <div style={{ display: 'fcontents', alignItems: 'flex-start' }}>
       <Box sx={{ display: 'contents', flexDirection: 'column', alignItems: 'center' }}>
       <Typography variant="h5" sx={{ margin: '20px 0' }}>
@@ -353,7 +362,7 @@ function ModalAdd(props) {
 
 
         <div style={{textAlign:'-webkit-center'}}>
-        {emails_added_length<4 ? 
+        {emails_added_length<6 ? // editable nb users if we want to remove user4 or user5
         <div>
                 <Typography variant="body1" fontWeight='bold' sx={{ margin: '20px 0' }}>
           {/* You are not authorized to visit or modify this table. */}
@@ -372,7 +381,7 @@ function ModalAdd(props) {
         //fullWidth
       />
       <FormControl>
-  <InputLabel id="demo-simple-select-label">Role</InputLabel>
+  <InputLabel id="demo-simple-select-label">Role</InputLabel> {/* editable language */}
   <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
@@ -381,9 +390,9 @@ function ModalAdd(props) {
     label="Role"
     onChange={handleChangeRole}
   >
-    <MenuItem value={"Admin"}>Admin</MenuItem>
-    <MenuItem value={"Writer"}>Writer</MenuItem>
-    <MenuItem value={"Viewer"}>Viewer</MenuItem>
+    <MenuItem value={"Admin"}>Admin</MenuItem> {/* editable language */}
+    <MenuItem value={"Writer"}>Writer</MenuItem> {/* editable language */}
+    <MenuItem value={"Viewer"}>Viewer</MenuItem> {/* editable language */}
   </Select>
 </FormControl>
 </div>
@@ -394,7 +403,6 @@ function ModalAdd(props) {
         </div>
       )}
 </div>
-      <br></br>
       <br></br>
 
       <ReCAPTCHA 
@@ -407,11 +415,11 @@ function ModalAdd(props) {
       <div>
       <Typography variant="body1" fontWeight='bold' sx={{ margin: '20px 0' }}>
       {/* You are not authorized to visit or modify this table. */}
-      Deux Adresses Email ont déjà été ajoutées, vous avez atteint la limite autorisée.  {/* editable language */}
+      05 Adresses Email ont déjà été ajoutées, vous avez atteint la limite autorisée.  {/* editable language */}
       <br></br>
   </Typography>
       <TextField
-      label="Limite de 02 Emails.." // editable language
+      label="Limite de 05 Emails.." // editable language
       value={inputEmail}
       //onChange={(e) => setInputEmail(e.target.value)}
       onChange={handleEmailChange}
@@ -427,6 +435,7 @@ function ModalAdd(props) {
 
 <br></br>
 <br></br>
+<br></br>
 <div style={{width:700, textAlign:'-webkit-center'}}>
 <StyledTableContainer sx={{maxWidth:700,borderTop:'1px solid lightgrey'}} component={Paper}>
       <Table  sx={{boxShadow:'none'}}>
@@ -435,9 +444,10 @@ function ModalAdd(props) {
             <StyledTableRow key={index}>
               <TableCell style={{ width: '300px' }}>{rowofemail[0]}</TableCell>
               <TableCell style={{ width: '150px' }}>Role : {rowofemail[1]}</TableCell>               {/* editable language */}
+              
               <TableCell style={{ width: '350px' }} align="right">
                 {test_display_codepin_user1[index] ? (
-                  <p style={{ display: 'inline' }}>Code d'accés : {rowofemail[2]}</p>             
+                  <p style={{ display: 'inline' }}>Code d'accés : {rowofemail[2]}</p>              
                 ) : (
                   <span></span>
                 )}
