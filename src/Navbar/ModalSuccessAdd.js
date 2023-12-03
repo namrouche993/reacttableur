@@ -37,21 +37,23 @@ export default function ModalSuccessAdd(props) {
     >
       <DialogTitle id="alert-dialog-slide-title">
         <Box display="flex" justifyContent="center" alignItems="center">
-          <CheckCircleOutlineIcon style={{ color: '#4CAF50', fontSize: 40, marginRight: '10px' }} />
+          <CheckCircleOutlineIcon style={{ color: 'cadetblue', fontSize: 40, marginRight: '10px' }} />
           <Typography variant="h6">Email Added Successfully!</Typography> {/* editable language */}
         </Box>
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description" align="center" color="black">
-          <Typography variant="body1">
-             Veuillez informer votre collégue '{props.emailreceived_in_modalsuccess}' que son code d'accès (code PIN) est : <b>{props.codepin_in_modalsuccess}</b> <br></br>
+          <Typography variant="body1">          {/* editable language */}
+             Veuillez partager le lien et informer votre collégue '{props.emailreceived_in_modalsuccess}' que son code d'accès (code PIN) 
+             est : <b style={{fontSize:'120%'}}>{props.codepin_in_modalsuccess}</b> pour la table sur le lien :  <br></br>
+             <span style={{textDecoration:'underline'}}>{document.location.href}</span> <br></br> <br></br>
             comme il peut étre informé aussi par un message sur son email.<br></br><br></br>
             le code de pin est à un usage unique (il peut étre utiliser sur un seul appareil)
           </Typography>
         </DialogContentText>
       </DialogContent>
       <DialogActions style={{ justifyContent: 'center' }}>
-        <Button onClick={handleClose} variant="contained" color="success">
+        <Button onClick={handleClose} variant="contained" color="success" sx={{background:'cadetblue'}}>
           Ok!
         </Button>
       </DialogActions>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   Dialog,
@@ -62,6 +62,9 @@ function ModalAdd(props) {
   const [inputEmail, setInputEmail] = useState('');
   const [emails, setEmails] = useState('');
   const [errorEmail, setErrorEmail] = useState(false);
+  const [emailalreadyused,setEmailalreadyused]=useState(false)
+  const recaptchaRef = useRef(null);
+
 
   const isValidEmail = (value) => {
     // Simple email validation using a regular expression
@@ -74,6 +77,7 @@ function ModalAdd(props) {
     if (newEmail.length <= 254) {
       setInputEmail(newEmail);
       setErrorEmail(false)
+      setEmailalreadyused(false)
      }
   };
 
@@ -284,7 +288,15 @@ function ModalAdd(props) {
         setEmailtosend_in_modalsuccess(inputEmail);
         setOpen_successmodal(true);
         //props.onClose();
+        
   
+      } else if (response.status==500) {
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+        }
+        setErrorEmail(true)
+        setEmailalreadyused(true)
+        alert('email already added')
       } else {
         console.error('Error sending data to the server.');
         props.onClose();
@@ -338,7 +350,7 @@ function ModalAdd(props) {
     <Dialog open={props.open} onClose={onClosing}
     maxWidth="sm" // Adjust the maxWidth as needed
     fullWidth
-    sx={{ '& .MuiDialog-paper': { minWidth: 790,borderRadius: 2 }  }} // Adjust the minWidth and maxWidth
+    sx={{ '& .MuiDialog-paper': { minWidth: 850,borderRadius: 2 }  }} // Adjust the minWidth and maxWidth
 >
       {/* <DialogTitle sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',fontSize:'1.8rem'}}>Add Users</DialogTitle> */}
       <IconButton
@@ -351,7 +363,7 @@ function ModalAdd(props) {
           <CloseIcon />
         </IconButton>
 
-      <DialogContent sx={{marginTop:0,alignSelf:'center',textAlign:'center',width:'740px'}}>
+      <DialogContent sx={{marginTop:0,alignSelf:'center',textAlign:'center',width:'825px',padding:'20px 11px'}}>
       <div style={{ display: 'fcontents', alignItems: 'flex-start' }}>
       <Box sx={{ display: 'contents', flexDirection: 'column', alignItems: 'center' }}>
       <Typography variant="h5" sx={{ margin: '20px 0' }}>
@@ -364,9 +376,11 @@ function ModalAdd(props) {
         <div style={{textAlign:'-webkit-center'}}>
         {emails_added_length<6 ? // editable nb users if we want to remove user4 or user5
         <div>
-                <Typography variant="body1" fontWeight='bold' sx={{ margin: '20px 0' }}>
+                <Typography variant="body1" fontWeight='normal' sx={{ margin: '20px 0' }}>
           {/* You are not authorized to visit or modify this table. */}
-          If you want to give a user editing access to this table.<br></br>Please provide his email address.  {/* editable language */}
+          <span style={{fontSize:'0.9rem'}}>Please provide the Email addresses of the users you want to grant editing access to this table and share the link with them</span><br></br>
+          <span style={{fontWeight:'bold',textDecoration:'underline'}}>{document.location.href}</span> <br></br>
+         {/* editable language */}
           <br></br>
       </Typography>
       <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
@@ -376,7 +390,7 @@ function ModalAdd(props) {
         //onChange={(e) => setInputEmail(e.target.value)}
         onChange={handleEmailChange}
         error={errorEmail}
-        helperText={errorEmail ? 'Invalid email format' : ''}
+        helperText={errorEmail ? (emailalreadyused ? 'Email Already used' : 'Invalid email format') : ''}
 
         //fullWidth
       />
@@ -408,6 +422,7 @@ function ModalAdd(props) {
       <ReCAPTCHA 
      sitekey='6LfZqc0oAAAAALYohDB07_qhlAjTh9boGWa7HDw4'
      onChange={handleRecaptchaaddVerify}
+     ref={recaptchaRef}
      //size="compact"  // Change the size to compact
   />
   </div>

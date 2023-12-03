@@ -19,7 +19,9 @@ import {
   Select,
   MenuItem,
   TextField,
-  FormHelperText
+  FormHelperText,
+  Tooltip,
+
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
@@ -538,14 +540,22 @@ function ModalEdit(props) {
       <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',display: 'flex', justifyContent: 'space-between' }}>
       {display_CreateNewTable_button ? 
       <div>
+      {props.role_of_user_component=='Owner' ? 
+      <Tooltip>
       <Button size="small" variant="outlined" sx={{ height: '100%',textTransform: 'none' }} onClick={() => handleOpen_confirmmodal()}>
       {/* editable language Suivant */}
-      {props.role_of_user_component=='Owner' ? 
-           <span>Create New Table</span> 
-           :
-           <span>Create Your Own Table</span> 
-      }
+           <span>Create New Table</span>       
         </Button>
+      </Tooltip>
+       :
+       <Tooltip title='Create your Own Table' placement="top">
+       <Button size="small" variant="outlined" sx={{ height: '100%',textTransform: 'none' }} onClick={() => handleOpen_confirmmodal()}>
+       {/* editable language Suivant */}
+            <span>Create New Table</span>       
+         </Button>
+       </Tooltip>
+ }
+
       </div> :
       <p>.</p>
      }

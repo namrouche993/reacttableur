@@ -249,8 +249,19 @@ function Hottable() {
           afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin,isLoading,setNotification);
         },
         beforeKeyDown: (event) => {
- 
+          console.log('********************')
+          console.log(event)
+          console.log(event.key.length)
           if(role_user_redux){
+            if(event.key.length==1){
+            setNotification({
+              message: "As you are a Viewer user , You cannot edit contents , Otherwise Please Contant Admins",
+              status: 'warning',
+              autoDismissTimeout: 8000, // Set your desired timeout
+              lengthscreen:4,
+              triggerNotification: Math.random()// Trigger when message is present
+            });
+          }
             return 
           }
           console.log('-------------------------------')
@@ -319,7 +330,6 @@ function Hottable() {
   
       hot.addHook('afterChange', (changes, source) => {
         console.log('afterChange : ')
-
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
 

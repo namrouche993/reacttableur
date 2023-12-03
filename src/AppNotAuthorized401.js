@@ -349,7 +349,7 @@ function AppNotAuthorized401(props) {
         <DialogActions sx={{ fontFamily: 'system-ui',justifyContent: 'space-between' }}>
         {/* <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}> */}
         <Button size="small" variant="outlined" sx={{ height: '100%',textTransform: 'none' }} onClick={() => handleOpen_confirmmodal()}>
-           Create New Table' {/* editable language Suivant */}
+           Create New Table {/* editable language Suivant */}
         </Button>
 
         <Button size="medium" variant="contained" sx={{ height: '100%',marginLeft:'20px !important' }} onClick={handleNext}>
