@@ -18,6 +18,8 @@ export default function AppComponent() {
     const value_to_use_in_error = useRef(true);
     const [errorComponent,setErrorComponent]=useState(false);
   
+    const [errorOccurred, setErrorOccurred] = useState(false);
+
   
     useEffect(() => {
   
@@ -51,6 +53,8 @@ export default function AppComponent() {
          }
        } catch (error) {
          console.error('Error:', error);
+         setErrorOccurred(true); // Set the error state to true
+
          //alert('we are in error')
          value_to_use_in_error.current=false;
        }
@@ -59,10 +63,8 @@ export default function AppComponent() {
       const delay = 3000; // 2 seconds delay!!
       const timeoutId = setTimeout(() => {
         //alert('value_to_use_in_error is ' + value_to_use_in_error.current)
-        if(value_to_use_in_error.current){
+        if (!errorOccurred) {
           setDisplayed(true);
-        } else {
-          setErrorComponent(true);
         }
       }, delay);
   
@@ -74,13 +76,13 @@ export default function AppComponent() {
       } else {
         FetchAppEnter();
       }
+      //alert('alreadylogin ! ' + alreadylogin)
       
       return () => clearTimeout(timeoutId);
 
-    }, [])
+    }, [errorOccurred])
     
-    
-  
+
     return (
     <>
          {errorComponent ? <p>.</p> : 
