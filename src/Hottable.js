@@ -9,7 +9,12 @@ import {
   setInputValue_hot_undone2,
 
   getInputValue_spinnerf,
-  setInputValue_spinnerf
+  setInputValue_spinnerf,
+
+  convertDateFormat,
+  all_european_formal_are_test,
+  all_european_formal_are,
+
 
 } from './initials_inputs.js';
 
@@ -42,6 +47,7 @@ import { generateRandomString } from './Tools/Randst.js';
 
 import { fetchDataUsEffect1 } from './Tools/fetchDataUsEffect1.js';
 import Notif from './Notif.js';
+import { socket } from './socket';
 
 
 
@@ -361,7 +367,11 @@ function Hottable() {
                 },
                 body: JSON.stringify({
                   "jsonData_whenclosed":data,
-                  "idusername00":idusername00
+                  "idusername00":idusername00,
+
+                  // "navigator_laguage_updated":navigator_language2_redux,
+                  // "userlocale_updated":userLocale2_redux,
+                  // "decimalseparator_updated":decimalSeparator2_redux
                 })
               });
               console.log('response ')
@@ -385,10 +395,70 @@ function Hottable() {
 
           //saveDataToServer(JSON.parse(my_actual_getdata)); // editable when we want to synchronise the data for each change
 
+          const handle_converting_when_receving_notif_from_socketio = (new_selectedNumericFormat) => {
+            // Handle form submission here if needed
+        
+            dispatch({ type: 'SET_decimalSeparator2', payload: new_selectedNumericFormat });  // WITH REDUX
+            localStorage.setItem('decimalSeparator2_storage', new_selectedNumericFormat);
+        
+        if(decimalSeparator2_redux!=new_selectedNumericFormat){
+          if(new_selectedNumericFormat==','){
+            if(all_european_formal_are_test==true && all_european_formal_are=='fr'){ // editable 'fr the change it if the previous is true'
+              // when we set the numeric format always be in fr 1 234 567.89  and modal language is in fr
+        
+              dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
+              localStorage.setItem('userLocale2_storage', 'fr');
+        
+              //setTitlemodalformat('fr'); // editable LATEEEEEEEEEEEEEEEERR if it's necessary
+        
+            } else if( (1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString()==','){
+              dispatch({ type: 'SET_userLocale2', payload: Intl.DateTimeFormat().resolvedOptions().locale });  // // editable if it's necessary
+              localStorage.setItem('userLocale2_storage', Intl.DateTimeFormat().resolvedOptions().locale );
+        
+              //setTitlemodalformat(Intl.DateTimeFormat().resolvedOptions().locale);
+        
+              } else {
+                //alert('i think we will be here ')
+                dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
+                localStorage.setItem('userLocale2_storage', 'fr');
+        
+                //setTitlemodalformat('en')  editabler LATEEEEEEEEEEEEEEEEEEEEER
+              }
+              dispatch({ type: 'SET_decimalSeparator2', payload: ',' });  // WITH REDUX
+              localStorage.setItem('decimalSeparator2_storage', ',');
+        
+                  dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
+                  localStorage.setItem('ds_haschanged_storage', true);
+          } else {
+            dispatch({ type: 'SET_userLocale2', payload: 'en' });  // WITH REDUX
+            localStorage.setItem('userLocale2_storage', 'en');
+        
+            dispatch({ type: 'SET_decimalSeparator2', payload: '.' });  // WITH REDUX
+            localStorage.setItem('decimalSeparator2_storage', '.');
+        
+        
+        dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
+        localStorage.setItem('ds_haschanged_storage', true);
+          }
+        }
+        
+        
+          };
+        
+          socket.on('change_numericformat', (data) => {
+            //alert('we are in change_numericformat inside afterChange  : ' + data)
+            handle_converting_when_receving_notif_from_socketio(data)
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+            //setInputValue(data);
+          })
+
           if(!isLoading){
             hideSpinner()
           }
-          
+          //alert('aftercnange end')          
+
         } catch (error) {
          console.log('error in afterchange changetimer : ' + error)   
         }

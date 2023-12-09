@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import  secureLocalStorage  from  "react-secure-storage";
 import HotEmpty from './Tools/HotEmpty';
 import AppErrorRequestComponent from './AppErrorRequestComponent';
+import App404server from './App404server';
 
 export default function AppComponent() {
     const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
@@ -18,7 +19,7 @@ export default function AppComponent() {
     const value_to_use_in_error = useRef(true);
     const [errorComponent,setErrorComponent]=useState(false);
   
-    const [errorOccurred, setErrorOccurred] = useState(false);
+    const [errorOccurred, setErrorOccurred] = useState(true);
 
   
     useEffect(() => {
@@ -40,6 +41,7 @@ export default function AppComponent() {
          if (response.ok) {
           console.log('try to knwo how many times it renders !!! ');
            //props.onClose();
+           setErrorOccurred(false);
            setAlreadylogin(false);
            const value_ownroute = await response.json();
   
@@ -48,11 +50,13 @@ export default function AppComponent() {
            console.log('Data sent successfully to the server.');
     
          } else {
+            setErrorOccurred(false);
             setAlreadylogin(true);
             console.error('Error sending data to the server.');
          }
        } catch (error) {
          console.error('Error:', error);
+         //alert('we will set error occured to true')
          setErrorOccurred(true); // Set the error state to true
 
          //alert('we are in error')
@@ -85,7 +89,7 @@ export default function AppComponent() {
 
     return (
     <>
-         {errorComponent ? <p>.</p> : 
+         {errorOccurred || errorComponent ? <p>.</p> : 
          <div>
                <Navbar display_modaledit={alreadylogin} displayed_pr={displayed} />
             <br></br>
@@ -93,7 +97,7 @@ export default function AppComponent() {
          }
 
          <div style={{marginTop:43}}>
-            {errorComponent? <AppErrorRequestComponent/> : alreadylogin ? <HotEmpty/> : displayed ? <Hottable/> : <HotEmpty/> }
+            {errorOccurred ? <App404server/> : errorComponent? <AppErrorRequestComponent/> : alreadylogin ? <HotEmpty/> : displayed ? <Hottable/> : <HotEmpty/> }
          </div>
   
       </>

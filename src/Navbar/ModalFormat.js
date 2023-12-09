@@ -302,8 +302,12 @@ setInputValue_hot_undone2(_.cloneDeep(hotInstance_redux.undoRedo.undoneActions))
   }
 }
 
+props.sendnewformatparameters(new_selectedNumericFormat)
 
     props.onClose();
+    setTimeout(() => {
+        //window.location.reload();
+    }, 2000);
   };
 
   

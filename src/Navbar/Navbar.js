@@ -27,6 +27,19 @@ import IconButton from '@mui/material/IconButton';
 import PersonIcon from '@mui/icons-material/Person';
 import  secureLocalStorage  from  "react-secure-storage";
 
+import { userlocale2_bydefault_ifnotexist,
+  decimalseparator2_bydefault_ifnotexist,
+  navigator_language2_bydefault_ifnotexist,
+
+  convertDateFormat,
+  all_european_formal_are_test,
+  all_european_formal_are,
+
+  getInputValue_hot_undone2,
+  setInputValue_hot_undone2
+ } from '../initials_inputs.js'
+ import _ from 'lodash';
+
 
 const appTheme = createTheme({
     components: {
@@ -89,6 +102,7 @@ function Navbar(props) {
   }
 
 
+
   const [modalOpenedit, setModalOpenedit] = useState(false);
   const handleOpenModaledit = () => {
     setModalOpenedit(true);
@@ -141,8 +155,6 @@ const handleCloseModaladd = () => {
   const [showinUser1connecting,setShowinUser1connecting]=useState(false);
   const [list_users_conncting,setList_users_connecting]=useState([]);
   
-
-
   const mynamespace0 = secureLocalStorage.getItem('hisownroute')
   if(!mynamespace0){
     var mynamespace = mynamespace0;
@@ -150,7 +162,76 @@ const handleCloseModaladd = () => {
     var mynamespace = mynamespace0.toString().replace('tab/','');
   }  
 
+
+  const decimalSeparator2_redux  = useSelector(state => state.decimalSeparator2);
+  const [new_selectedNumericFormat_from_modalformat,setNew_selectedNumericFormat_from_modalformat]=useState(decimalSeparator2_redux);
+  
+  console.log('hotInstance_redux before handle converting : ')
+  console.log(hotInstance_redux)
+
+  const handle_converting_when_receving_notif_from_socketio = (new_selectedNumericFormat) => {
+    // Handle form submission here if needed
+
+    dispatch({ type: 'SET_decimalSeparator2', payload: new_selectedNumericFormat });  // WITH REDUX
+    localStorage.setItem('decimalSeparator2_storage', new_selectedNumericFormat);
+
+if(decimalSeparator2_redux!=new_selectedNumericFormat){
+  if(new_selectedNumericFormat==','){
+    if(all_european_formal_are_test==true && all_european_formal_are=='fr'){ // editable 'fr the change it if the previous is true'
+      // when we set the numeric format always be in fr 1 234 567.89  and modal language is in fr
+
+      dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
+      localStorage.setItem('userLocale2_storage', 'fr');
+
+      //setTitlemodalformat('fr'); // editable LATEEEEEEEEEEEEEEEERR if it's necessary
+
+    } else if( (1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString()==','){
+      dispatch({ type: 'SET_userLocale2', payload: Intl.DateTimeFormat().resolvedOptions().locale });  // // editable if it's necessary
+      localStorage.setItem('userLocale2_storage', Intl.DateTimeFormat().resolvedOptions().locale );
+
+      //setTitlemodalformat(Intl.DateTimeFormat().resolvedOptions().locale);
+
+      } else {
+        //alert('i think we will be here ')
+        dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
+        localStorage.setItem('userLocale2_storage', 'fr');
+
+        //setTitlemodalformat('en')  editabler LATEEEEEEEEEEEEEEEEEEEEER
+      }
+      dispatch({ type: 'SET_decimalSeparator2', payload: ',' });  // WITH REDUX
+      localStorage.setItem('decimalSeparator2_storage', ',');
+
+          dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
+          localStorage.setItem('ds_haschanged_storage', true);
+  } else {
+    dispatch({ type: 'SET_userLocale2', payload: 'en' });  // WITH REDUX
+    localStorage.setItem('userLocale2_storage', 'en');
+
+    dispatch({ type: 'SET_decimalSeparator2', payload: '.' });  // WITH REDUX
+    localStorage.setItem('decimalSeparator2_storage', '.');
+
+
+dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
+localStorage.setItem('ds_haschanged_storage', true);
+  }
+}
+
+
+  };
+
+
+
+
+
+
+ 
   socket.emit('join', mynamespace);
+
+  const handle_recevingnewformatparamertrs = (input)=>{
+    //alert('input from modalformat in navbar is : ' + input)
+    setNew_selectedNumericFormat_from_modalformat(input)
+    socket.emit('change_numericformat',input)
+  }
 
 
   socket.on('reconnect', () => {
@@ -160,6 +241,7 @@ const handleCloseModaladd = () => {
     
     socket.emit('join', mynamespace);
     socket.emit('subscribeToListingUsers');
+    socket.emit('change_numericformat',new_selectedNumericFormat_from_modalformat)
   
     // Perform any other necessary setup after reconnection
   });
@@ -190,9 +272,25 @@ const handleCloseModaladd = () => {
     //socket.emit('join', mynamespace);
     socket.emit('subscribeToListingUsers');
 
+    socket.on('change_numericformat', (data) => {
+      //setInputValue(data);
+      //alert('numeric is changed : ' + data)
+      //alert('before reloading')
+      //window.location.reload();
+      //alert('after reloading')
+
+      //handle_converting_when_receving_notif_from_socketio(data)
+      
+      //setTimeout(() => {
+        //window.location.reload();
+      //}, 3500);
+
+    });
+
     return () => {
       socket.off('reconnect');
       socket.off('listingusers');
+
     };
     
   }, [])
@@ -380,7 +478,7 @@ const handleCloseModaladd = () => {
            : <a></a> }
 
          </AppBar>
-         <ModalFormat open={modalOpenformat} onClose={handleCloseModalformat} senddata={handlesending}/>
+         <ModalFormat open={modalOpenformat} onClose={handleCloseModalformat} senddata={handlesending} sendnewformatparameters={handle_recevingnewformatparamertrs}/>
          <ModalEdit open={modalOpenedit} onClose={handleCloseModaledit} role_of_user_component={role_of_user_component}/>
          <ModalAdd open={modalOpenadd} onClose={handleCloseModaladd}/>
 

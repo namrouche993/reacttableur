@@ -228,8 +228,12 @@ function ModalEdit(props) {
           "region":region,
           "phoneNumber":phoneNumber,
         
-          "recaptchaToken":recaptchaToken
-        })//data_localstorage})
+          "recaptchaToken":recaptchaToken,
+          "navigator_laguage_of_browser":navigator.language, //navigator_language2 in initials_inputs
+          "userlocale_of_browser":Intl.DateTimeFormat().resolvedOptions().locale, //userLocale2 in initials_inputs
+          "decimalseparator_of_browser":(1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString(), //decimalSeparator2 in initials_inputs
+          
+           })//data_localstorage})
        });
  
        if (response.ok) {

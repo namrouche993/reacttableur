@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 //import PinInput from 'react-pin-input';
 import { PinInput } from 'react-input-pin-code' // ES Module
 
@@ -29,7 +29,8 @@ import {
   Box,
   InputAdornment,
   Input,
-  Stack
+  Stack,
+  Tooltip
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
@@ -85,6 +86,9 @@ function AppNotAuthorized401(props) {
   );
   const [errorEmail, setErrorEmail] = useState(false);
 
+  const [emailalreadyused,setEmailalreadyused] = useState(false);
+  const recaptchaRef401 = useRef(null);
+
   const isValidEmail = (value) => {
     // Simple email validation using a regular expression
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -96,6 +100,7 @@ function AppNotAuthorized401(props) {
     if (newEmail.length <= 254) {
       setEmail(newEmail);
       setErrorEmail(false);
+      setEmailalreadyused(false);
     }
   };
 
@@ -137,7 +142,15 @@ function AppNotAuthorized401(props) {
       console.log(responseem.status)
       //var responsejson = await responseem.json();
       //console.log(responsejson)
-      if (responseem.ok) {
+      //alert(responseem.status)
+      if (responseem.status==402){
+        console.log('ussa')
+        setNextted(true)
+        setErrorEmail(true)
+        setEmailalreadyused(true)
+      } else if (responseem.ok) {
+        //alert('we are in ok')
+
         console.log('we are in response.ok')
         const data_response = await responseem.json();
         console.log('data_response  :')
@@ -155,6 +168,7 @@ function AppNotAuthorized401(props) {
         console.log('Data sent successfully to the server.');
         //window.location.reload();
       } else {
+        //alert('setnexted why it is true')
         setNextted(true)
         setErrorEmail(true)
         console.error('Error ,Email is not verified.');
@@ -181,7 +195,7 @@ function AppNotAuthorized401(props) {
     }
   
     try {
-      var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
+      var currentrouteofurl = window.location.pathname.toString().replace('/tab/',''); // editable later , in the finished webpage , maybe the webpage url would be www.thewebsiteclient.com/theapplication/tab/ownroute
 
       const responsecp = await fetch('http://localhost:5000/acc/accessfromurlcp', {
         method: 'POST',
@@ -194,6 +208,7 @@ function AppNotAuthorized401(props) {
           pinCode: pinCode,
           recaptchaTokenAccess: recaptchaTokenAccess,
           currentrouteofurl:currentrouteofurl
+
         }),
       });
   
@@ -232,7 +247,11 @@ function AppNotAuthorized401(props) {
         */
         
       } else {
+        if (recaptchaRef401.current) {
+          recaptchaRef401.current.reset();
+        }
         setCodemessageincorrect('the code you entered is incorrect !') // editable language
+ 
         console.error('Error sending data to the server.');
       }
     } catch (error) {
@@ -336,7 +355,7 @@ function AppNotAuthorized401(props) {
             value={email}
             onChange={handleEmailChange}
             error={nextted && errorEmail}
-            helperText={nextted && errorEmail ? isValidEmail(email) ? 'Invalid Email' : 'Invalid email format' : ''}
+            helperText={nextted && errorEmail && emailalreadyused ? 'Email already used, Please call the admins if you want to re-join' : nextted && errorEmail ? (isValidEmail(email) ? 'Invalid Email' : 'Invalid email format') : ''}
           />
         </FormControl>
         <Typography variant="body2" sx={{ margin: '20px 0' }}>
@@ -348,9 +367,12 @@ function AppNotAuthorized401(props) {
 
         <DialogActions sx={{ fontFamily: 'system-ui',justifyContent: 'space-between' }}>
         {/* <Stack spacing={2} direction="row" sx={{ justifyContent: 'flex-end' }}> */}
+        
+        <Tooltip title='Create your Own Table' placement="top">
         <Button size="small" variant="outlined" sx={{ height: '100%',textTransform: 'none' }} onClick={() => handleOpen_confirmmodal()}>
            Create New Table {/* editable language Suivant */}
         </Button>
+        </Tooltip>
 
         <Button size="medium" variant="contained" sx={{ height: '100%',marginLeft:'20px !important' }} onClick={handleNext}>
            Next' {/* editable language Suivant */}
@@ -433,6 +455,8 @@ disabled
             <ReCAPTCHA
               sitekey="6LcPEtIoAAAAAFT_7t4pjHElX8YeiPrFDLEI9WKU"
               onChange={handleRecaptchaVerifyAccess}
+              ref={recaptchaRef401}
+
             />
       </Box>
       <DialogActions sx={{ fontFamily: 'system-ui' }}>
