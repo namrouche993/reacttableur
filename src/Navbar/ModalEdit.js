@@ -215,6 +215,10 @@ function ModalEdit(props) {
       return console.log("Error Filling");
     }
     try {
+      var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : navigator.language; // editable if we set always navigator.language
+      var sec_ls_useloc_sto = secureLocalStorage.getItem("userLocale2_storage") ? secureLocalStorage.getItem("userLocale2_storage") : Intl.DateTimeFormat().resolvedOptions().locale  // editable if we set always userlocale
+      var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
+       
       const response = await fetch('http://localhost:5000/tab/login', {
          method: 'POST',
          credentials: 'include',
@@ -229,9 +233,10 @@ function ModalEdit(props) {
           "phoneNumber":phoneNumber,
         
           "recaptchaToken":recaptchaToken,
-          "navigator_laguage_of_browser":navigator.language, //navigator_language2 in initials_inputs
-          "userlocale_of_browser":Intl.DateTimeFormat().resolvedOptions().locale, //userLocale2 in initials_inputs
-          "decimalseparator_of_browser":(1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString(), //decimalSeparator2 in initials_inputs
+
+          "navigator_laguage_of_browser":sec_ls_nav_lang2_sto, //navigator_language2 in initials_inputs
+          "userlocale_of_browser":sec_ls_useloc_sto, //userLocale2 in initials_inputs
+          "decimalseparator_of_browser":sec_ls_decim_sep_sto, //decimalSeparator2 in initials_inputs
           
            })//data_localstorage})
        });
@@ -248,6 +253,12 @@ function ModalEdit(props) {
          secureLocalStorage.setItem('hisownroute', 'tab/'+data_response.hisownroute);
          secureLocalStorage.setItem('role_storage', "Owner");
          secureLocalStorage.setItem('email_chosen_to_display', email);
+
+         secureLocalStorage.setItem('navigator_language2_storage', sec_ls_nav_lang2_sto);
+         secureLocalStorage.setItem('userLocale2_storage', sec_ls_useloc_sto);
+         secureLocalStorage.setItem('decimalSeparator2_storage', sec_ls_decim_sep_sto);
+
+
          //alert('data_response emailtodisplay : ' + data_response.emailtodisplay)
 
 

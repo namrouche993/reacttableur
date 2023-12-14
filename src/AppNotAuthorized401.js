@@ -232,6 +232,12 @@ function AppNotAuthorized401(props) {
           secureLocalStorage.setItem('data_localstorage_storage_2', JSON.stringify(data_responsecp.dataa));
           secureLocalStorage.setItem('hisownroute', 'tab/' + data_responsecp.hisownroute);
           secureLocalStorage.setItem('role_storage', data_responsecp.role);
+
+          secureLocalStorage.setItem('navigator_laguage_of_owner', data_responsecp.navigator_laguage_of_owner);
+          secureLocalStorage.setItem('userLocale2_storage', data_responsecp.userlocale_of_owner);
+          secureLocalStorage.setItem('decimalSeparator2_storage', data_responsecp.decimalseparator_of_owner);
+
+
           //alert('email : ' + email)
           //alert('email_todisplay:' + data_responsecp.email_to_display)
 

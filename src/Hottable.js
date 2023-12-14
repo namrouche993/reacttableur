@@ -533,6 +533,7 @@ function Hottable() {
     return () => {
       //alert('unmout return() ')   
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      socket.off('change_numericformat')
       hot.destroy();
       //window.removeEventListener('beforeunload', handlebeforeunloadfct(hot));
 

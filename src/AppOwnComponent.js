@@ -36,7 +36,11 @@ export default function AppOwnComponent() {
     async function FetchAppOwnEnter(){
       try {
         console.log(ownRoute.ownroute)
-       const response = await fetch('http://localhost:5000/tab/ownenter', {
+      var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : navigator.language; // editable if we set always navigator.language
+      var sec_ls_useloc_sto = secureLocalStorage.getItem("userLocale2_storage") ? secureLocalStorage.getItem("userLocale2_storage") : Intl.DateTimeFormat().resolvedOptions().locale  // editable if we set always userlocale
+      var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
+       
+      const response = await fetch('http://localhost:5000/tab/ownenter', {
           method: 'POST',
           credentials: 'include',
           headers: {
@@ -47,10 +51,10 @@ export default function AppOwnComponent() {
            //"act_data":hotInstance_existed,
            "ownroute":ownRoute.ownroute,
            
-           "navigator_laguage_of_browser":navigator.language, //navigator_language2 in initials_inputs
-           "userlocale_of_browser":Intl.DateTimeFormat().resolvedOptions().locale, //userLocale2 in initials_inputs
-           "decimalseparator_of_browser":(1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString(), //decimalSeparator2 in initials_inputs
-           
+           "navigator_laguage_of_browser":sec_ls_nav_lang2_sto, //navigator_language2 in initials_inputs
+           "userlocale_of_browser":sec_ls_useloc_sto, //userLocale2 in initials_inputs
+           "decimalseparator_of_browser":sec_ls_decim_sep_sto, //decimalSeparator2 in initials_inputs
+
            "navigator_laguage_updated":navigator_language2_redux,
            "userlocale_updated":userLocale2_redux,
            "decimalseparator_updated":decimalSeparator2_redux

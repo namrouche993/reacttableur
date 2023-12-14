@@ -66,7 +66,7 @@ function ModalFormat(props) {
     setSelectedDateFormat(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Handle form submission here if needed
     var new_selectedNumericFormat = selectedNumericFormat;
     var new_selectedDateFormat = selectedDateFormat;
@@ -297,8 +297,29 @@ localStorage.setItem('ds_haschanged_storage', true);
 //dispatch({ type: 'SET_hot_undone2', payload: _.cloneDeep(hotInstance_redux.undoRedo.undoneActions) });  // WITH REDUX
 setInputValue_hot_undone2(_.cloneDeep(hotInstance_redux.undoRedo.undoneActions))
 //localStorage.setItem('hot_undone2_storage', _.cloneDeep(hotInstance_redux.undoRedo.undoneActions)); // editable if we save the undoredo
+try {
+  var currentrouteofurl = window.location.pathname.toString().replace('/tab/',''); // editable later , in the finished webpage , maybe the webpage url would be www.thewebsiteclient.com/theapplication/tab/ownroute
+  const response_chfo = await fetch('http://localhost:5000/changeformat', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      currentrouteofurl: currentrouteofurl,
+      username:secureLocalStorage.getItem("ussd74kasd75_2")
+    })
+  })
+  if (response_chfo.ok) {
+    console.log('response.ok true in ownenter request')
+  } else {
 
-          hotInstance_redux.setDataAtRowProp(changesdata_numeric,'dataatrowprop_convert_to_en');
+  }
+} catch (error) {
+  
+}
+
+hotInstance_redux.setDataAtRowProp(changesdata_numeric,'dataatrowprop_convert_to_en');
   }
 }
 
