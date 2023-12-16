@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css';
 import { useState,useEffect,useRef } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'; 
 import Handsontable from 'handsontable';
 
 import LoadingComponent from './Tools/LoadingComponent';
@@ -17,6 +17,7 @@ import AppErrorRequestComponent from './AppErrorRequestComponent';
 
 
 export default function AppOwnComponent() {
+    const dispatch = useDispatch();
 
     const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
 
@@ -36,9 +37,9 @@ export default function AppOwnComponent() {
     async function FetchAppOwnEnter(){
       try {
         console.log(ownRoute.ownroute)
-      var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : navigator.language; // editable if we set always navigator.language
-      var sec_ls_useloc_sto = secureLocalStorage.getItem("userLocale2_storage") ? secureLocalStorage.getItem("userLocale2_storage") : Intl.DateTimeFormat().resolvedOptions().locale  // editable if we set always userlocale
-      var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
+      //var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : navigator.language; // editable if we set always navigator.language
+      //var sec_ls_useloc_sto = secureLocalStorage.getItem("userLocale2_storage") ? secureLocalStorage.getItem("userLocale2_storage") : Intl.DateTimeFormat().resolvedOptions().locale  // editable if we set always userlocale
+      //var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
        
       const response = await fetch('http://localhost:5000/tab/ownenter', {
           method: 'POST',
@@ -51,14 +52,14 @@ export default function AppOwnComponent() {
            //"act_data":hotInstance_existed,
            "ownroute":ownRoute.ownroute,
            
-           "navigator_laguage_of_browser":sec_ls_nav_lang2_sto, //navigator_language2 in initials_inputs
+        /*   "navigator_laguage_of_browser":sec_ls_nav_lang2_sto, //navigator_language2 in initials_inputs
            "userlocale_of_browser":sec_ls_useloc_sto, //userLocale2 in initials_inputs
            "decimalseparator_of_browser":sec_ls_decim_sep_sto, //decimalSeparator2 in initials_inputs
 
            "navigator_laguage_updated":navigator_language2_redux,
            "userlocale_updated":userLocale2_redux,
            "decimalseparator_updated":decimalSeparator2_redux
-
+           */
 
         }) //data_localstorage})
         });
@@ -71,7 +72,23 @@ export default function AppOwnComponent() {
           const values_ownroute = await response.json();
           console.log('values_ownroute :')
           console.log(values_ownroute.dataa[6])
+
+          secureLocalStorage.setItem('navigator_language2_storage', values_ownroute.navigator_laguage_from_db);
+          dispatch({ type: 'SET_navigator_language2', payload: values_ownroute.navigator_laguage_from_db});  // WITH REDUX
+
+          secureLocalStorage.setItem('userLocale2_storage', values_ownroute.userlocale_from_db);
+          dispatch({ type: 'SET_userLocale2', payload: values_ownroute.userlocale_from_db});  // WITH REDUX
+
+          secureLocalStorage.setItem('decimalSeparator2_storage', values_ownroute.decimalseparator_from_db);
+          dispatch({ type: 'SET_decimalSeparator2', payload: values_ownroute.decimalseparator_from_db});  // WITH REDUX
+
+
+          secureLocalStorage.setItem('use_english_date_by_user_himeself_in_modal_storage', JSON.parse(values_ownroute.use_english_from_db));
+          dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: JSON.parse(values_ownroute.use_english_from_db) });  // WITH REDUX
+
+
           secureLocalStorage.setItem('data_localstorage_storage_2', JSON.stringify(values_ownroute.dataa));
+
           setDisplayHot(true);
           
           
@@ -95,7 +112,7 @@ export default function AppOwnComponent() {
           console.log('Data sent successfully to the server.!!!!!!!!!!!! ownenter !!!!!!!!!');
           
           //const datajj = await response.json();
-          //localStorage.setItem('token', datajj.token);
+          //secureLocalStorage.setItem('token', datajj.token);
           //return datajj.token; // Return the JWT token///
    
         } else if(response.status==401) {

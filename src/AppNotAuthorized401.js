@@ -236,7 +236,7 @@ function AppNotAuthorized401(props) {
           secureLocalStorage.setItem('navigator_laguage_of_owner', data_responsecp.navigator_laguage_of_owner);
           secureLocalStorage.setItem('userLocale2_storage', data_responsecp.userlocale_of_owner);
           secureLocalStorage.setItem('decimalSeparator2_storage', data_responsecp.decimalseparator_of_owner);
-
+          secureLocalStorage.setItem('use_english_date_by_user_himeself_in_modal_storage',data_responsecp.use_english_date_by_user_himeself_in_modal_of_owner);
 
           //alert('email : ' + email)
           //alert('email_todisplay:' + data_responsecp.email_to_display)
@@ -284,6 +284,16 @@ function AppNotAuthorized401(props) {
     secureLocalStorage.removeItem("hisownroute");
     secureLocalStorage.removeItem("role_storage");
 
+    secureLocalStorage.removeItem("navigator_language2_storage");
+    secureLocalStorage.removeItem("userLocale2_storage");
+    secureLocalStorage.removeItem("decimalSeparator2_storage");
+    secureLocalStorage.removeItem("navigator_laguage_of_owner");
+    secureLocalStorage.removeItem("ds_haschanged_storage");
+    secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
+    secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
+
+
+
 
     try {
       // Make a request to the server to clear the cookie
@@ -308,6 +318,17 @@ function AppNotAuthorized401(props) {
         secureLocalStorage.removeItem("data_localstorage_storage_2");
         secureLocalStorage.removeItem("hisownroute");
         secureLocalStorage.removeItem("role_storage");
+
+        secureLocalStorage.removeItem("navigator_language2_storage");
+        secureLocalStorage.removeItem("userLocale2_storage");
+        secureLocalStorage.removeItem("decimalSeparator2_storage");
+        secureLocalStorage.removeItem("navigator_laguage_of_owner");
+        secureLocalStorage.removeItem("ds_haschanged_storage");
+        secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
+        secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
+    
+
+    
 
         navigate('/');
         window.location.reload()

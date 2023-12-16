@@ -1,4 +1,6 @@
 import { startsWithElement } from './Tools/startsWithElement.js'
+import secureLocalStorage from 'react-secure-storage';
+
 // import { ddatafct,data22fct } from './data.js';
   //#region initials inputs nb
   export const last_row_after_header = 15;
@@ -122,27 +124,27 @@ import { startsWithElement } from './Tools/startsWithElement.js'
 
       //////////////////// REDUX ////////////////////////////
       
-      export var navigator_language2 = localStorage.getItem('navigator_language2_storage')==null ? navigator.language : localStorage.getItem('navigator_language2_storage') // 'fr-FR' 'en-CA'  // editable
+      export var navigator_language2 = secureLocalStorage.getItem('navigator_language2_storage')==null ? navigator.language : secureLocalStorage.getItem('navigator_language2_storage') // 'fr-FR' 'en-CA'  // editable
       //export var navigator_language2 = navigator.language // 'fr-FR' 'en-CA'  // editable
       
       
       export var navigator_language2_avant_modify=navigator_language2;
       
 
-      export var userLocale2 = localStorage.getItem('userLocale2_storage')==null ? Intl.DateTimeFormat().resolvedOptions().locale : localStorage.getItem('userLocale2_storage'); //'fr'// editable maybe Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || navigator.userLanguage;
+      export var userLocale2 = secureLocalStorage.getItem('userLocale2_storage')==null ? Intl.DateTimeFormat().resolvedOptions().locale : secureLocalStorage.getItem('userLocale2_storage'); //'fr'// editable maybe Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || navigator.userLanguage;
       //export var userLocale2 = Intl.DateTimeFormat().resolvedOptions().locale //'fr'// editable maybe Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || navigator.userLanguage;
       
       
-      export var decimalSeparator2 = localStorage.getItem('decimalSeparator2_storage')==null ? (1234567.73).toLocaleString(userLocale2, { style: 'decimal' }).substring(9, 10).toString() : localStorage.getItem('decimalSeparator2_storage');
+      export var decimalSeparator2 = secureLocalStorage.getItem('decimalSeparator2_storage')==null ? (1234567.73).toLocaleString(userLocale2, { style: 'decimal' }).substring(9, 10).toString() : secureLocalStorage.getItem('decimalSeparator2_storage');
       //export var decimalSeparator2 = (1234567.73).toLocaleString(userLocale2, { style: 'decimal' }).substring(9, 10).toString();
 
 
       //export var condition_split2=true;
 
-      //export var ds_haschanged= localStorage.getItem('ds_haschanged_storage')==null ? false : localStorage.getItem('ds_haschanged_storage');
+      //export var ds_haschanged= secureLocalStorage.getItem('ds_haschanged_storage')==null ? false : secureLocalStorage.getItem('ds_haschanged_storage');
       export var ds_haschanged=false; // editable and may deleted
-
-      export var use_english_date_by_user_himeself_in_modal = localStorage.getItem('use_english_date_by_user_himeself_in_modal_storage')==null ? false : localStorage.getItem('use_english_date_by_user_himeself_in_modal_storage');
+      export var date_format_if_english_is_not_accepted = 'fr-FR';
+      export var use_english_date_by_user_himeself_in_modal = secureLocalStorage.getItem('use_english_date_by_user_himeself_in_modal_storage')==null ? false : secureLocalStorage.getItem('use_english_date_by_user_himeself_in_modal_storage');
       //export var use_english_date_by_user_himeself_in_modal = false;
       
       

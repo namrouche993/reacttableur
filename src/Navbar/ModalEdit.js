@@ -28,11 +28,18 @@ import { useSelector } from 'react-redux';
 import  secureLocalStorage  from  "react-secure-storage";
 import { generateRandomString } from '../Tools/Randst';
 import { fetchDataUsEffect1 } from '../Tools/fetchDataUsEffect1';
-import { last_row_after_header } from '../initials_inputs';
+import {
+  last_row_after_header,
+  date_format_if_english_is_not_accepted,
+  use_en_time,
+  usTimeZones,
+  userTimeZone
+} from '../initials_inputs';
 import { ddatafct } from '../data';
 import ReCAPTCHA from 'react-google-recaptcha';
 import ModalConfirmNewTable from './ModalConfirmNewTable';
 import { useNavigate } from 'react-router-dom';
+import { startsWithElement } from '../Tools/startsWithElement.js';
 
 
 /*
@@ -124,6 +131,8 @@ export const region_data = region_data0.map(item => ({
 
 function ModalEdit(props) {
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
+  const use_english_date_by_user_himeself_in_modal = useSelector(state => state.use_english_date_by_user_himeself_in_modal);
+  const navigator_language2_redux  = useSelector(state => state.navigator_language2);
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -215,7 +224,18 @@ function ModalEdit(props) {
       return console.log("Error Filling");
     }
     try {
-      var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : navigator.language; // editable if we set always navigator.language
+      var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : (navigator.language); // editable if we set always navigator.language
+      
+      if(secureLocalStorage.getItem("navigator_language2_storage")){
+        var sec_ls_nav_lang2_sto =secureLocalStorage.getItem("navigator_language2_storage");
+      } else {
+        if((navigator_language2_redux=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==false) {
+          var sec_ls_nav_lang2_sto = 'en-US'
+        } else {
+          var sec_ls_nav_lang2_sto = date_format_if_english_is_not_accepted
+        }
+      }
+      
       var sec_ls_useloc_sto = secureLocalStorage.getItem("userLocale2_storage") ? secureLocalStorage.getItem("userLocale2_storage") : Intl.DateTimeFormat().resolvedOptions().locale  // editable if we set always userlocale
       var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
        
@@ -237,7 +257,7 @@ function ModalEdit(props) {
           "navigator_laguage_of_browser":sec_ls_nav_lang2_sto, //navigator_language2 in initials_inputs
           "userlocale_of_browser":sec_ls_useloc_sto, //userLocale2 in initials_inputs
           "decimalseparator_of_browser":sec_ls_decim_sep_sto, //decimalSeparator2 in initials_inputs
-          
+          "use_english_date_by_user_himeself_of_browser":use_english_date_by_user_himeself_in_modal
            })//data_localstorage})
        });
  
@@ -274,7 +294,7 @@ function ModalEdit(props) {
          //window.location.reload();
          
          //const datajj = await response.json();
-         //localStorage.setItem('token', datajj.token);
+         //secureLocalStorage.setItem('token', datajj.token);
          //return datajj.token; // Return the JWT token
 
        } else {
@@ -382,6 +402,17 @@ function ModalEdit(props) {
     secureLocalStorage.removeItem("hisownroute");
     secureLocalStorage.removeItem("role_storage");
 
+    secureLocalStorage.removeItem("navigator_language2_storage");
+    secureLocalStorage.removeItem("userLocale2_storage");
+    secureLocalStorage.removeItem("decimalSeparator2_storage");
+    secureLocalStorage.removeItem("navigator_laguage_of_owner");
+    secureLocalStorage.removeItem("ds_haschanged_storage");
+    secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
+    secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
+
+
+
+
 
     try {
       // Make a request to the server to clear the cookie
@@ -406,6 +437,15 @@ function ModalEdit(props) {
         secureLocalStorage.removeItem("data_localstorage_storage_2");
         secureLocalStorage.removeItem("hisownroute");
         secureLocalStorage.removeItem("role_storage");
+
+        secureLocalStorage.removeItem("navigator_language2_storage");
+        secureLocalStorage.removeItem("userLocale2_storage");
+        secureLocalStorage.removeItem("decimalSeparator2_storage");
+        secureLocalStorage.removeItem("navigator_laguage_of_owner");
+        secureLocalStorage.removeItem("ds_haschanged_storage");
+        secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
+        secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
+
 
         navigate('/');
         window.location.reload()

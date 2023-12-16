@@ -36,7 +36,8 @@ import { userlocale2_bydefault_ifnotexist,
   all_european_formal_are,
 
   getInputValue_hot_undone2,
-  setInputValue_hot_undone2
+  setInputValue_hot_undone2,
+  navigator_language2
  } from '../initials_inputs.js'
  import _ from 'lodash';
 
@@ -164,8 +165,11 @@ const handleCloseModaladd = () => {
 
 
   const decimalSeparator2_redux  = useSelector(state => state.decimalSeparator2);
+  const navigator_language2_redux  = useSelector(state => state.navigator_language2_redux);
+
   const [new_selectedNumericFormat_from_modalformat,setNew_selectedNumericFormat_from_modalformat]=useState(decimalSeparator2_redux);
-  
+  const [new_selectedDateFormat_from_modalformat,setNew_selectedDateFormat_from_modalformat]=useState(navigator_language2_redux);
+
   console.log('hotInstance_redux before handle converting : ')
   console.log(hotInstance_redux)
 
@@ -173,7 +177,7 @@ const handleCloseModaladd = () => {
     // Handle form submission here if needed
 
     dispatch({ type: 'SET_decimalSeparator2', payload: new_selectedNumericFormat });  // WITH REDUX
-    localStorage.setItem('decimalSeparator2_storage', new_selectedNumericFormat);
+    secureLocalStorage.setItem('decimalSeparator2_storage', new_selectedNumericFormat);
 
 if(decimalSeparator2_redux!=new_selectedNumericFormat){
   if(new_selectedNumericFormat==','){
@@ -181,38 +185,38 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
       // when we set the numeric format always be in fr 1 234 567.89  and modal language is in fr
 
       dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
-      localStorage.setItem('userLocale2_storage', 'fr');
+      secureLocalStorage.setItem('userLocale2_storage', 'fr');
 
       //setTitlemodalformat('fr'); // editable LATEEEEEEEEEEEEEEEERR if it's necessary
 
     } else if( (1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString()==','){
       dispatch({ type: 'SET_userLocale2', payload: Intl.DateTimeFormat().resolvedOptions().locale });  // // editable if it's necessary
-      localStorage.setItem('userLocale2_storage', Intl.DateTimeFormat().resolvedOptions().locale );
+      secureLocalStorage.setItem('userLocale2_storage', Intl.DateTimeFormat().resolvedOptions().locale );
 
       //setTitlemodalformat(Intl.DateTimeFormat().resolvedOptions().locale);
 
       } else {
         //alert('i think we will be here ')
         dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
-        localStorage.setItem('userLocale2_storage', 'fr');
+        secureLocalStorage.setItem('userLocale2_storage', 'fr');
 
         //setTitlemodalformat('en')  editabler LATEEEEEEEEEEEEEEEEEEEEER
       }
       dispatch({ type: 'SET_decimalSeparator2', payload: ',' });  // WITH REDUX
-      localStorage.setItem('decimalSeparator2_storage', ',');
+      secureLocalStorage.setItem('decimalSeparator2_storage', ',');
 
           dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
-          localStorage.setItem('ds_haschanged_storage', true);
+          secureLocalStorage.setItem('ds_haschanged_storage', true);
   } else {
     dispatch({ type: 'SET_userLocale2', payload: 'en' });  // WITH REDUX
-    localStorage.setItem('userLocale2_storage', 'en');
+    secureLocalStorage.setItem('userLocale2_storage', 'en');
 
     dispatch({ type: 'SET_decimalSeparator2', payload: '.' });  // WITH REDUX
-    localStorage.setItem('decimalSeparator2_storage', '.');
+    secureLocalStorage.setItem('decimalSeparator2_storage', '.');
 
 
 dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
-localStorage.setItem('ds_haschanged_storage', true);
+secureLocalStorage.setItem('ds_haschanged_storage', true);
   }
 }
 
@@ -227,10 +231,12 @@ localStorage.setItem('ds_haschanged_storage', true);
  
   socket.emit('join', mynamespace);
 
-  const handle_recevingnewformatparamertrs = (input)=>{
+  const handle_recevingnewformatparamertrs = ([input1,input2])=>{
     //alert('input from modalformat in navbar is : ' + input)
-    setNew_selectedNumericFormat_from_modalformat(input)
-    socket.emit('change_numericformat',input)
+    setNew_selectedNumericFormat_from_modalformat(input1)
+    setNew_selectedDateFormat_from_modalformat(input2)
+
+    socket.emit('change_numericformat',[input1,input2])
   }
 
 
@@ -241,7 +247,7 @@ localStorage.setItem('ds_haschanged_storage', true);
     
     socket.emit('join', mynamespace);
     socket.emit('subscribeToListingUsers');
-    socket.emit('change_numericformat',new_selectedNumericFormat_from_modalformat)
+    socket.emit('change_numericformat',[new_selectedNumericFormat_from_modalformat,new_selectedDateFormat_from_modalformat])
   
     // Perform any other necessary setup after reconnection
   });
@@ -271,21 +277,6 @@ localStorage.setItem('ds_haschanged_storage', true);
     
     //socket.emit('join', mynamespace);
     socket.emit('subscribeToListingUsers');
-
-    socket.on('change_numericformat', (data) => {
-      //setInputValue(data);
-      //alert('numeric is changed : ' + data)
-      //alert('before reloading')
-      //window.location.reload();
-      //alert('after reloading')
-
-      //handle_converting_when_receving_notif_from_socketio(data)
-      
-      //setTimeout(() => {
-        //window.location.reload();
-      //}, 3500);
-
-    });
 
     return () => {
       socket.off('reconnect');

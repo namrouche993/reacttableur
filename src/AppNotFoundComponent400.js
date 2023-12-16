@@ -34,6 +34,17 @@ export default function AppNotFoundComponent400() {
     secureLocalStorage.removeItem("hisownroute");
     secureLocalStorage.removeItem("role_storage");
 
+    secureLocalStorage.removeItem("navigator_language2_storage");
+    secureLocalStorage.removeItem("userLocale2_storage");
+    secureLocalStorage.removeItem("decimalSeparator2_storage");
+    secureLocalStorage.removeItem("navigator_laguage_of_owner");
+    secureLocalStorage.removeItem("ds_haschanged_storage");
+    secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
+    secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
+
+
+
+
 
     try {
       // Make a request to the server to clear the cookie
@@ -58,6 +69,17 @@ export default function AppNotFoundComponent400() {
         secureLocalStorage.removeItem("data_localstorage_storage_2");
         secureLocalStorage.removeItem("hisownroute");
         secureLocalStorage.removeItem("role_storage");
+
+        secureLocalStorage.removeItem("navigator_language2_storage");
+        secureLocalStorage.removeItem("userLocale2_storage");
+        secureLocalStorage.removeItem("decimalSeparator2_storage");
+        secureLocalStorage.removeItem("navigator_laguage_of_owner");
+        secureLocalStorage.removeItem("ds_haschanged_storage");
+        secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
+        secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
+    
+
+    
 
         navigate('/');
         window.location.reload()

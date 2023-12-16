@@ -395,11 +395,30 @@ function Hottable() {
 
           //saveDataToServer(JSON.parse(my_actual_getdata)); // editable when we want to synchronise the data for each change
 
-          const handle_converting_when_receving_notif_from_socketio = (new_selectedNumericFormat) => {
+          const handle_converting_when_receving_notif_from_socketio = (new_selectedNumericFormat,new_selectedDateFormat) => {
             // Handle form submission here if needed
         
             dispatch({ type: 'SET_decimalSeparator2', payload: new_selectedNumericFormat });  // WITH REDUX
-            localStorage.setItem('decimalSeparator2_storage', new_selectedNumericFormat);
+            dispatch({ type: 'SET_navigator_language2', payload: new_selectedDateFormat });  // WITH REDUX
+
+            secureLocalStorage.setItem('decimalSeparator2_storage', new_selectedNumericFormat);
+            secureLocalStorage.setItem('navigator_language2_storage', new_selectedDateFormat);
+            
+            
+         if(new_selectedDateFormat!==navigator_language2_redux){ //is_date_exist==false
+          if(new_selectedDateFormat=='en-US'){
+            dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: true });  // WITH REDUX
+            secureLocalStorage.setItem('use_english_date_by_user_himeself_in_modal_storage', true);
+  
+            //setInputValue_use_english_date_by_user_himeself_in_modal(true)
+          } else {
+            dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: false });  // WITH REDUX
+            secureLocalStorage.setItem('use_english_date_by_user_himeself_in_modal_storage', false);
+            //setInputValue_use_english_date_by_user_himeself_in_modal(false)
+          }
+  
+         }
+
         
         if(decimalSeparator2_redux!=new_selectedNumericFormat){
           if(new_selectedNumericFormat==','){
@@ -407,47 +426,47 @@ function Hottable() {
               // when we set the numeric format always be in fr 1 234 567.89  and modal language is in fr
         
               dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
-              localStorage.setItem('userLocale2_storage', 'fr');
+              secureLocalStorage.setItem('userLocale2_storage', 'fr');
         
               //setTitlemodalformat('fr'); // editable LATEEEEEEEEEEEEEEEERR if it's necessary
         
             } else if( (1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString()==','){
               dispatch({ type: 'SET_userLocale2', payload: Intl.DateTimeFormat().resolvedOptions().locale });  // // editable if it's necessary
-              localStorage.setItem('userLocale2_storage', Intl.DateTimeFormat().resolvedOptions().locale );
+              secureLocalStorage.setItem('userLocale2_storage', Intl.DateTimeFormat().resolvedOptions().locale );
         
               //setTitlemodalformat(Intl.DateTimeFormat().resolvedOptions().locale);
         
               } else {
                 //alert('i think we will be here ')
                 dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
-                localStorage.setItem('userLocale2_storage', 'fr');
+                secureLocalStorage.setItem('userLocale2_storage', 'fr');
         
                 //setTitlemodalformat('en')  editabler LATEEEEEEEEEEEEEEEEEEEEER
               }
               dispatch({ type: 'SET_decimalSeparator2', payload: ',' });  // WITH REDUX
-              localStorage.setItem('decimalSeparator2_storage', ',');
+              secureLocalStorage.setItem('decimalSeparator2_storage', ',');
         
                   dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
-                  localStorage.setItem('ds_haschanged_storage', true);
+                  secureLocalStorage.setItem('ds_haschanged_storage', true);
           } else {
             dispatch({ type: 'SET_userLocale2', payload: 'en' });  // WITH REDUX
-            localStorage.setItem('userLocale2_storage', 'en');
+            secureLocalStorage.setItem('userLocale2_storage', 'en');
         
             dispatch({ type: 'SET_decimalSeparator2', payload: '.' });  // WITH REDUX
-            localStorage.setItem('decimalSeparator2_storage', '.');
+            secureLocalStorage.setItem('decimalSeparator2_storage', '.');
         
         
         dispatch({ type: 'SET_ds_haschanged', payload: true });  // WITH REDUX
-        localStorage.setItem('ds_haschanged_storage', true);
+        secureLocalStorage.setItem('ds_haschanged_storage', true);
           }
         }
         
         
           };
         
-          socket.on('change_numericformat', (data) => {
+          socket.on('change_numericformat', ([data1,data2]) => {
             //alert('we are in change_numericformat inside afterChange  : ' + data)
-            handle_converting_when_receving_notif_from_socketio(data)
+            handle_converting_when_receving_notif_from_socketio([data1,data2])
             setTimeout(() => {
               window.location.reload();
             }, 2000);
@@ -480,7 +499,7 @@ function Hottable() {
         secureLocalStorage.getItem('region_storage') !== null &&
         secureLocalStorage.getItem('email_chosen') !== null &&
         secureLocalStorage.getItem('phone_chosen') !== null
-        //localStorage.length>0
+        //secureLocalStorage.length>0
         ){
             const stored_organisme = secureLocalStorage.getItem('organismechosen');
             const stored_region = secureLocalStorage.getItem('region_storage');

@@ -12,7 +12,7 @@ export async function fetchDataUsEffect1(randstr,dataaf) {
        if (response.ok) {
          console.log('Data sent successfully to the server.');
          //const datajj = await response.json();
-         //localStorage.setItem('token', datajj.token);
+         //secureLocalStorage.setItem('token', datajj.token);
          //return datajj.token; // Return the JWT token
 
        } else {
