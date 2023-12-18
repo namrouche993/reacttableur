@@ -82,6 +82,7 @@ function ModalFormat(props) {
     if( (navigator_language2_redux=='en-US' && !startsWithElement(usTimeZones,userTimeZone)) || (navigator_language2_redux=='en-US' && !use_en_time==true)) {
       
       dispatch({ type: 'SET_navigator_language2', payload: date_format_if_english_is_not_accepted });  // WITH REDUX
+      //secureLocalStorage.setItem('aaaaaa', 55555555);
       secureLocalStorage.setItem('navigator_language2_storage', date_format_if_english_is_not_accepted);
       setSelectedDateFormat(date_format_if_english_is_not_accepted);
 
@@ -354,9 +355,16 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat || new_selectedDateFormat!
     var sec_ls_nav_lang2_sto =secureLocalStorage.getItem("navigator_language2_storage");
   } else {
     if((navigator_language2_redux=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==false) {
-      var sec_ls_nav_lang2_sto = 'en-US'
+      var sec_ls_nav_lang2_sto = 'en-US';
+      dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: true });  // WITH REDUX
+      secureLocalStorage.setItem("use_english_date_by_user_himeself_in_modal_storage",true)
+
     } else {
-      var sec_ls_nav_lang2_sto = date_format_if_english_is_not_accepted
+      var sec_ls_nav_lang2_sto = date_format_if_english_is_not_accepted;
+      dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: false });  // WITH REDUX
+      secureLocalStorage.setItem("use_english_date_by_user_himeself_in_modal_storage",false)
+
+
     }
   }
 

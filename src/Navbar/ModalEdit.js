@@ -24,7 +24,7 @@ import {
 
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'; 
 import  secureLocalStorage  from  "react-secure-storage";
 import { generateRandomString } from '../Tools/Randst';
 import { fetchDataUsEffect1 } from '../Tools/fetchDataUsEffect1';
@@ -134,6 +134,8 @@ function ModalEdit(props) {
   const use_english_date_by_user_himeself_in_modal = useSelector(state => state.use_english_date_by_user_himeself_in_modal);
   const navigator_language2_redux  = useSelector(state => state.navigator_language2);
 
+  const dispatch = useDispatch();
+
   const [submitted, setSubmitted] = useState(false);
 
   const [organisme, setOrganisme] = useState(secureLocalStorage.getItem('organismechosen')==null ? '' : secureLocalStorage.getItem('organismechosen'));
@@ -228,17 +230,32 @@ function ModalEdit(props) {
       
       if(secureLocalStorage.getItem("navigator_language2_storage")){
         var sec_ls_nav_lang2_sto =secureLocalStorage.getItem("navigator_language2_storage");
+        secureLocalStorage.setItem("use_english_date_by_user_himeself_in_modal_storage",false);
+        dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: false });  // WITH REDUX
+
+
       } else {
         if((navigator_language2_redux=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true) {
-          var sec_ls_nav_lang2_sto = 'en-US'
+          var sec_ls_nav_lang2_sto = 'en-US';
+          dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: true });  // WITH REDUX
+          secureLocalStorage.setItem("use_english_date_by_user_himeself_in_modal_storage",true)
+
+
         } else {
           var sec_ls_nav_lang2_sto = date_format_if_english_is_not_accepted
+          dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: false });  // WITH REDUX
+          secureLocalStorage.setItem("use_english_date_by_user_himeself_in_modal_storage",false)
+
         }
       }
       
       var sec_ls_useloc_sto = secureLocalStorage.getItem("userLocale2_storage") ? secureLocalStorage.getItem("userLocale2_storage") : Intl.DateTimeFormat().resolvedOptions().locale  // editable if we set always userlocale
       var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
        
+
+      console.log('use_english_date_by_user_himeself_in_modal_storage ************** : ')
+      console.log(secureLocalStorage.getItem("use_english_date_by_user_himeself_in_modal_storage"))
+
       const response = await fetch('http://localhost:5000/tab/login', {
          method: 'POST',
          credentials: 'include',
@@ -257,9 +274,9 @@ function ModalEdit(props) {
           "navigator_laguage_of_browser":sec_ls_nav_lang2_sto, //navigator_language2 in initials_inputs
           "userlocale_of_browser":sec_ls_useloc_sto, //userLocale2 in initials_inputs
           "decimalseparator_of_browser":sec_ls_decim_sep_sto, //decimalSeparator2 in initials_inputs
-          "use_english_date_by_user_himeself_of_browser":use_english_date_by_user_himeself_in_modal,
+          "use_english_date_by_user_himeself_of_browser": secureLocalStorage.getItem("use_english_date_by_user_himeself_in_modal_storage"),//use_english_date_by_user_himeself_in_modal,
 
-          "userTimeZone": Intl.DateTimeFormat().resolvedOptions().timeZone
+          "userTimeZone": Intl.DateTimeFormat().resolvedOptions().timeZone // 'America/New_York' //
            })//data_localstorage})
        });
  
@@ -279,7 +296,7 @@ function ModalEdit(props) {
          secureLocalStorage.setItem('navigator_language2_storage', sec_ls_nav_lang2_sto);
          secureLocalStorage.setItem('userLocale2_storage', sec_ls_useloc_sto);
          secureLocalStorage.setItem('decimalSeparator2_storage', sec_ls_decim_sep_sto);
-         secureLocalStorage.setItem('userTimeZone_storage', Intl.DateTimeFormat().resolvedOptions().timeZone);
+         secureLocalStorage.setItem('userTimeZone_storage', Intl.DateTimeFormat().resolvedOptions().timeZone); // 'America/New_York');
 
 
          //alert('data_response emailtodisplay : ' + data_response.emailtodisplay)
@@ -412,6 +429,7 @@ function ModalEdit(props) {
     secureLocalStorage.removeItem("ds_haschanged_storage");
     secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
     secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
+    secureLocalStorage.removeItem("userTimeZone_storage"); 
 
 
 
@@ -447,7 +465,8 @@ function ModalEdit(props) {
         secureLocalStorage.removeItem("navigator_laguage_of_owner");
         secureLocalStorage.removeItem("ds_haschanged_storage");
         secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
-        secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
+        secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");   
+        secureLocalStorage.removeItem("userTimeZone_storage");  
 
 
         navigate('/');
