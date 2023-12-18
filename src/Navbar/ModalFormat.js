@@ -179,7 +179,7 @@ for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index
   })
 }
         if(new_selectedDateFormat=='en-US'){
-          alert('we will change to en-US')
+          //alert('we will change to en-US')
           dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: true });  // WITH REDUX
           
           secureLocalStorage.setItem('use_english_date_by_user_himeself_in_modal_storage', true);
@@ -365,7 +365,7 @@ var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage
 
 console.log('we will cal changeformat request to en')
 console.log(sec_ls_decim_sep_sto)
-alert('we will change use_english_date_by_user_himeself_in_mo dal_storage to : '  + secureLocalStorage.getItem("use_english_date_by_user_himeself_in_modal_storage"))
+//alert('we will change use_english_date_by_user_himeself_in_mo dal_storage to : '  + secureLocalStorage.getItem("use_english_date_by_user_himeself_in_modal_storage"))
 var response_chfo = await fetch('http://localhost:5000/changeformat', {
   method: 'POST',
   credentials: 'include',

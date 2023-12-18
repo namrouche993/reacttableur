@@ -296,7 +296,7 @@ function ModalAdd(props) {
         }
         setErrorEmail(true)
         setEmailalreadyused(true)
-        alert('email already added')
+        alert('email already added') // editable
       } else {
         console.error('Error sending data to the server.');
         props.onClose();

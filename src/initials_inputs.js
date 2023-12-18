@@ -58,7 +58,7 @@ import secureLocalStorage from 'react-secure-storage';
       //#region date time zone (navigator.language)
       //export const userLocale = 'fr'//Intl.DateTimeFormat().resolvedOptions().locale //'fr'// editable maybe Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || navigator.userLanguage;
       //export const navigator_language='fr-FR' //navigator.language // 'fr-FR' 'en-CA'  // editable
-      export var userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      export var userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; //'America/New_York'
       export var usTimeZones = [  'America/New_York',  'America/Chicago',  'America/Denver',  'America/Los_Angeles',  'America/Anchorage',  'America/Adak',  'Pacific/Honolulu',  'America/Phoenix',  'America/Indiana/Indianapolis',  'America/Indiana/Knox',  'America/Indiana/Marengo',  'America/Indiana/Petersburg',  'America/Indiana/Tell_City',  'America/Indiana/Vevay',  'America/Indiana/Vincennes',  'America/Indiana/Winamac',  'America/Kentucky/Louisville',  'America/Kentucky/Monticello',  'America/Detroit',  'America/Menominee',  'America/St_Johns',  'America/Puerto_Rico',  'America/Montserrat',  'America/New_York',  'America/North_Dakota/Beulah',  'America/North_Dakota/Center',  'America/North_Dakota/New_Salem'];
       //#endregion date time zone
 

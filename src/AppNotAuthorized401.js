@@ -237,6 +237,7 @@ function AppNotAuthorized401(props) {
           secureLocalStorage.setItem('userLocale2_storage', data_responsecp.userlocale_of_owner);
           secureLocalStorage.setItem('decimalSeparator2_storage', data_responsecp.decimalseparator_of_owner);
           secureLocalStorage.setItem('use_english_date_by_user_himeself_in_modal_storage',data_responsecp.use_english_date_by_user_himeself_in_modal_of_owner);
+          secureLocalStorage.setItem('userTimeZone_storage',data_responsecp.userTimeZone_of_owner);
 
           //alert('email : ' + email)
           //alert('email_todisplay:' + data_responsecp.email_to_display)

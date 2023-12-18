@@ -224,12 +224,12 @@ function ModalEdit(props) {
       return console.log("Error Filling");
     }
     try {
-      var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : (navigator.language); // editable if we set always navigator.language
+      //var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : (navigator.language); // editable if we set always navigator.language
       
       if(secureLocalStorage.getItem("navigator_language2_storage")){
         var sec_ls_nav_lang2_sto =secureLocalStorage.getItem("navigator_language2_storage");
       } else {
-        if((navigator_language2_redux=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==false) {
+        if((navigator_language2_redux=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true) {
           var sec_ls_nav_lang2_sto = 'en-US'
         } else {
           var sec_ls_nav_lang2_sto = date_format_if_english_is_not_accepted
@@ -257,7 +257,9 @@ function ModalEdit(props) {
           "navigator_laguage_of_browser":sec_ls_nav_lang2_sto, //navigator_language2 in initials_inputs
           "userlocale_of_browser":sec_ls_useloc_sto, //userLocale2 in initials_inputs
           "decimalseparator_of_browser":sec_ls_decim_sep_sto, //decimalSeparator2 in initials_inputs
-          "use_english_date_by_user_himeself_of_browser":use_english_date_by_user_himeself_in_modal
+          "use_english_date_by_user_himeself_of_browser":use_english_date_by_user_himeself_in_modal,
+
+          "userTimeZone": Intl.DateTimeFormat().resolvedOptions().timeZone
            })//data_localstorage})
        });
  
@@ -277,6 +279,7 @@ function ModalEdit(props) {
          secureLocalStorage.setItem('navigator_language2_storage', sec_ls_nav_lang2_sto);
          secureLocalStorage.setItem('userLocale2_storage', sec_ls_useloc_sto);
          secureLocalStorage.setItem('decimalSeparator2_storage', sec_ls_decim_sep_sto);
+         secureLocalStorage.setItem('userTimeZone_storage', Intl.DateTimeFormat().resolvedOptions().timeZone);
 
 
          //alert('data_response emailtodisplay : ' + data_response.emailtodisplay)
