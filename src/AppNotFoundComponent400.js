@@ -42,6 +42,7 @@ export default function AppNotFoundComponent400() {
     secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
     secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");   
     secureLocalStorage.removeItem("userTimeZone_storage");  
+    //dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: false })
 
 
 
@@ -79,6 +80,7 @@ export default function AppNotFoundComponent400() {
         secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
         secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");  
         secureLocalStorage.removeItem("userTimeZone_storage");   
+        //dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: false })
     
 
     

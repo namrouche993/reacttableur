@@ -124,6 +124,7 @@ function AppNotAuthorized401(props) {
 
     try {
       var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
+
       const responseem = await fetch('http://localhost:5000/acc/accessfromurlem', {
         method: 'POST',
         credentials: 'include',
@@ -147,7 +148,8 @@ function AppNotAuthorized401(props) {
         console.log('ussa')
         setNextted(true)
         setErrorEmail(true)
-        setEmailalreadyused(true)
+        setEmailalreadyused(true);
+        
       } else if (responseem.ok) {
         //alert('we are in ok')
 
@@ -175,6 +177,8 @@ function AppNotAuthorized401(props) {
       }
     } catch (error) {
       console.error('Error:', error);
+      //dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: true });
+
     }
   };
 
@@ -245,6 +249,7 @@ function AppNotAuthorized401(props) {
           //props.onClose();
           console.log('Data sent successfully to the server.');
           //alert('sss')
+          
           window.location.reload();
        
         /*} else {
@@ -293,6 +298,7 @@ function AppNotAuthorized401(props) {
     secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
     secureLocalStorage.removeItem("navigator_language2_avant_modify_storage"); 
     secureLocalStorage.removeItem("userTimeZone_storage");    
+    //dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: false })
 
 
 
@@ -329,6 +335,7 @@ function AppNotAuthorized401(props) {
         secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
         secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");
         secureLocalStorage.removeItem("userTimeZone_storage");     
+        //dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: false })
     
 
     

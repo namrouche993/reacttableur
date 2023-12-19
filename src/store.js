@@ -33,7 +33,8 @@ const initialState = {
 
   unmerged_cells_to_unmerge: [],
   data22:data22fct(last_row_after_header),
-  role_user_redux:'Writer'
+  role_user_redux:'Writer',
+  display_create_new_table:false
   
 };
 
@@ -114,8 +115,12 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     role_user_redux: action.payload
                   };
-                
-                
+                  case 'SET_DISPLAY_CREATE_NEW_TABLE':
+                    return {
+                      ...state,
+                      display_create_new_table: action.payload
+                    };
+                                
               
     default:
       return state;

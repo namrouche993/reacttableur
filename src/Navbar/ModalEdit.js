@@ -133,6 +133,7 @@ function ModalEdit(props) {
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
   const use_english_date_by_user_himeself_in_modal = useSelector(state => state.use_english_date_by_user_himeself_in_modal);
   const navigator_language2_redux  = useSelector(state => state.navigator_language2);
+  const display_create_new_table_redux = useSelector(state => state.display_create_new_table);
 
   const dispatch = useDispatch();
 
@@ -430,6 +431,7 @@ function ModalEdit(props) {
     secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
     secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");    
     secureLocalStorage.removeItem("userTimeZone_storage"); 
+    //dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: false })
 
 
 
@@ -467,6 +469,7 @@ function ModalEdit(props) {
         secureLocalStorage.removeItem("use_english_date_by_user_himeself_in_modal_storage");
         secureLocalStorage.removeItem("navigator_language2_avant_modify_storage");   
         secureLocalStorage.removeItem("userTimeZone_storage");  
+        //dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: false })
 
 
         navigate('/');
@@ -615,7 +618,7 @@ function ModalEdit(props) {
       </DialogContent>
 
       <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',display: 'flex', justifyContent: 'space-between' }}>
-      {display_CreateNewTable_button ? 
+      {display_CreateNewTable_button ? //display_create_new_table_redux ? 
       <div>
       {props.role_of_user_component=='Owner' ? 
       <Tooltip>

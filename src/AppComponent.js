@@ -44,7 +44,7 @@ export default function AppComponent() {
            setErrorOccurred(false);
            setAlreadylogin(false);
            const value_ownroute = await response.json();
-  
+
            window.location.href = value_ownroute.hisownroute;
   
            console.log('Data sent successfully to the server.');
@@ -52,6 +52,7 @@ export default function AppComponent() {
          } else {
             setErrorOccurred(false);
             setAlreadylogin(true);
+
             console.error('Error sending data to the server.');
          }
        } catch (error) {
