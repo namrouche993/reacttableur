@@ -40,7 +40,9 @@
       //  } else {
 
       
-      
+      try {
+        
+    
       
       //const hot = otherArgs[otherArgs.length - 1];
         ////console.log('AFTER CHANGE ::::::::::::::::::')
@@ -265,6 +267,9 @@
     // place of else datepart
     
        // }
+      } catch (error) {
+       alert('an error detected') 
+      }
     }
       //)
     

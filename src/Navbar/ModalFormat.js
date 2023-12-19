@@ -538,7 +538,10 @@ props.sendnewformatparameters([new_selectedNumericFormat,new_selectedDateFormat]
               }
               //label="European Date Format (31/12/1990)"
             />
-            <FormControlLabel
+
+           {/* editable to remove english date en-US */}
+           {use_en_time ? 
+             <FormControlLabel
               value="en-US"
               control={<Radio />}
               label={
@@ -546,7 +549,11 @@ props.sendnewformatparameters([new_selectedNumericFormat,new_selectedDateFormat]
                   American Date Format (<span style={{ fontWeight: 'bold' }}>12/31/1990</span>)
                 </Typography>
               }
-            />
+            />:
+            <span></span>
+          }
+             
+            
             <FormControlLabel
               value="de-DE"
               control={<Radio />}

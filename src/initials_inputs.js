@@ -46,7 +46,7 @@ import secureLocalStorage from 'react-secure-storage';
   export const phonenumbers_length_pn=50;
   export const onlynumbers_length_on = 50;
   export const text_length_txt = 600;
-  export const use_en_time = true; // using english date 12/31/1993 ??
+  export const use_en_time = true; // false //using english date 12/31/1993 ?? editable to remove english date en-US
   export const use_all_language_modal_depend_langbrowser=true;
   export const which_lanaguage_touse_if_langbrowserisflse='fr';
 

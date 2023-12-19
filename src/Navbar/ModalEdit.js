@@ -235,7 +235,7 @@ function ModalEdit(props) {
 
 
       } else {
-        if((navigator_language2_redux=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true) {
+        if((navigator_language2_redux=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true) {
           var sec_ls_nav_lang2_sto = 'en-US';
           dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: true });  // WITH REDUX
           secureLocalStorage.setItem("use_english_date_by_user_himeself_in_modal_storage",true)
