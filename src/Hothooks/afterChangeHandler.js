@@ -5,15 +5,21 @@
       setInputValue_srcautofillactivated,
 
       setInputValue_copypastelength,
-      getInputValue_copypastelength
+      getInputValue_copypastelength,
+
+      userTimeZone
 
 
     } from '../initials_inputs';
+    import  secureLocalStorage  from  "react-secure-storage";
+
 
     let lastelement_supthan1=0;    
     export function afterChangeHandler(changes,src,hot,data22,array_of_notmerged_cells_2,commentsPlugin){
 
       console.log('afterChange Handler')
+      alert('usetimezone : ' + secureLocalStorage.getItem("userTimeZone_storage"))
+      alert('usetimezone : ' + userTimeZone)
       ////console.log(src)
       ////console.log(changes)
       ////console.log(hot.undoRedo.doneActions)

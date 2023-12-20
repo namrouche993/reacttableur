@@ -34,7 +34,7 @@ const initialState = {
   unmerged_cells_to_unmerge: [],
   data22:data22fct(last_row_after_header),
   role_user_redux:'Writer',
-  display_create_new_table:false
+  display_create_new_table:true
   
 };
 

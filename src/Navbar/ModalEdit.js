@@ -398,8 +398,10 @@ function ModalEdit(props) {
     ) {
       //alert('securelocalstorage items are existing')
       setDisplay_CreateNewTable_button(true);
+      dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: true });
     } else {
       //alert('securelocalstorage items are not existing')
+      dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: false });
       setDisplay_CreateNewTable_button(false);
     }
   }, [])
@@ -618,7 +620,7 @@ function ModalEdit(props) {
       </DialogContent>
 
       <DialogActions sx={{fontFamily:'system-ui',backgroundColor:'#f1f1f1',display: 'flex', justifyContent: 'space-between' }}>
-      {display_CreateNewTable_button ? //display_create_new_table_redux ? 
+      { display_create_new_table_redux ? //display_CreateNewTable_button ? //display_create_new_table_redux ? 
       <div>
       {props.role_of_user_component=='Owner' ? 
       <Tooltip>

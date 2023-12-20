@@ -50,7 +50,8 @@ export default function AppOwnComponent() {
           //body: JSON.stringify({"idusername":email,"dataa": [5,8,4,6] })//data_localstorage})
           body: JSON.stringify({
            //"act_data":hotInstance_existed,
-           "ownroute":ownRoute.ownroute,
+           "ownroute":ownRoute.ownroute, // maybe editable when the url change www.myexample.com/application/tab/ownroute
+           "username":secureLocalStorage.getItem("ussd74kasd75_2")
            
         /*   "navigator_laguage_of_browser":sec_ls_nav_lang2_sto, //navigator_language2 in initials_inputs
            "userlocale_of_browser":sec_ls_useloc_sto, //userLocale2 in initials_inputs
@@ -86,6 +87,9 @@ export default function AppOwnComponent() {
           secureLocalStorage.setItem('use_english_date_by_user_himeself_in_modal_storage', JSON.parse(values_ownroute.use_english_from_db));
           dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: JSON.parse(values_ownroute.use_english_from_db) });  // WITH REDUX
 
+          secureLocalStorage.setItem('userTimeZone_storage', values_ownroute.use_english_from_db);
+
+          secureLocalStorage.setItem('phone_chosen', values_ownroute.phoneNumber);
 
           secureLocalStorage.setItem('data_localstorage_storage_2', JSON.stringify(values_ownroute.dataa));
 
@@ -120,7 +124,7 @@ export default function AppOwnComponent() {
           setDisplayHot401(true);
 
         } else {
-  
+          //setDisplay404server(true) // maybe editable wakil an error , i have to check
           console.error('Error sending data to the server.');
         }
       } catch (error) {
