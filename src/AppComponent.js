@@ -65,6 +65,8 @@ export default function AppComponent() {
        }
       }
 
+      try {
+        
       const delay = 3000; // 2 seconds delay!!
       const timeoutId = setTimeout(() => {
         //alert('value_to_use_in_error is ' + value_to_use_in_error.current)
@@ -85,6 +87,9 @@ export default function AppComponent() {
       
       return () => clearTimeout(timeoutId);
 
+    } catch (error) {
+      console.log('catch error of Appcomponent  : ' + error)   
+     }
     }, [errorOccurred])
     
 

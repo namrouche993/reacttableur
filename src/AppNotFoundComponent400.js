@@ -85,8 +85,11 @@ export default function AppNotFoundComponent400() {
 
     
 
-        navigate('/');
-        window.location.reload()
+        setTimeout(() => {
+          //navigate('/')
+          window.location.href = '/';
+
+        }, 1000);
         setOpen_confirmmodal(false);
         // history.push('/');
         //window.location.reload()

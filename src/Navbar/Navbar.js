@@ -83,7 +83,8 @@ const appTheme = createTheme({
 
 
 function Navbar(props) {
-  
+ 
+    
   const hotInstance_redux  = useSelector(state => state.hotInstance_redux);
   const data22_redux = useSelector(state => state.data22)
   
@@ -128,7 +129,7 @@ const handleCloseModaladd = () => {
     setModalOpenadd(false);
   };
   
-
+  
   useEffect(() => {
     console.log('we are in useeffect because props.dispaly_modaledit changed')
     setModalOpenedit(props.display_modaledit);
@@ -287,7 +288,6 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
   }, [])
 
   const [role_of_user_component,setRole_of_user_component]=useState('Viewer');
-
 
 
   useEffect( async () => {

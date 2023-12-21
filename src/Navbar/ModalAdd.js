@@ -452,7 +452,7 @@ function ModalAdd(props) {
 <br></br>
 <br></br>
 <div style={{width:700, textAlign:'-webkit-center'}}>
-<StyledTableContainer sx={{maxWidth:700,borderTop:'1px solid lightgrey'}} component={Paper}>
+<StyledTableContainer sx={{maxWidth:800,borderTop:'1px solid lightgrey'}} component={Paper}>
       <Table  sx={{boxShadow:'none'}}>
         <TableBody >
           {emails_added_list.map((rowofemail, index) => (
@@ -460,7 +460,7 @@ function ModalAdd(props) {
               <TableCell style={{ width: '300px' }}>{rowofemail[0]}</TableCell>
               <TableCell style={{ width: '150px' }}>Role : {rowofemail[1]}</TableCell>               {/* editable language */}
               
-              <TableCell style={{ width: '350px' }} align="right">
+              <TableCell style={{ width: '380px' }} align="right">
                 {test_display_codepin_user1[index] ? (
                   <p style={{ display: 'inline' }}>Code d'accés : {rowofemail[2]}</p>              
                 ) : (

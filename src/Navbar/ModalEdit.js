@@ -474,8 +474,14 @@ function ModalEdit(props) {
         //dispatch({ type: 'SET_DISPLAY_CREATE_NEW_TABLE', payload: false })
 
 
-        navigate('/');
-        window.location.reload()
+        //navigate('/');
+        setTimeout(() => {
+          //navigate('/')
+          window.location.href = '/';
+
+        }, 1000);
+        //window.location.reload()
+        
         setOpen_confirmmodal(false);
         // history.push('/');
         //window.location.reload()

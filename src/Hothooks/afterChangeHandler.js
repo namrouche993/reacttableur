@@ -18,8 +18,8 @@
     export function afterChangeHandler(changes,src,hot,data22,array_of_notmerged_cells_2,commentsPlugin){
 
       console.log('afterChange Handler')
-      alert('usetimezone : ' + secureLocalStorage.getItem("userTimeZone_storage"))
-      alert('usetimezone : ' + userTimeZone)
+      //alert('usetimezone : ' + secureLocalStorage.getItem("userTimeZone_storage"))
+      //alert('usetimezone : ' + userTimeZone)
       ////console.log(src)
       ////console.log(changes)
       ////console.log(hot.undoRedo.doneActions)

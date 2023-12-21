@@ -87,10 +87,22 @@ export default function AppOwnComponent() {
           secureLocalStorage.setItem('use_english_date_by_user_himeself_in_modal_storage', JSON.parse(values_ownroute.use_english_from_db));
           dispatch({ type: 'SET_use_english_date_by_user_himeself_in_modal', payload: JSON.parse(values_ownroute.use_english_from_db) });  // WITH REDUX
 
-          secureLocalStorage.setItem('userTimeZone_storage', values_ownroute.use_english_from_db);
+          secureLocalStorage.setItem('userTimeZone_storage', values_ownroute.userTimeZone_form_server);
 
           secureLocalStorage.setItem('phone_chosen', values_ownroute.phoneNumber);
+          secureLocalStorage.setItem('hisownroute', 'tab/'+values_ownroute.hisownroute_from_server);
 
+          secureLocalStorage.setItem('email_chosen_to_display', values_ownroute.email_to_display_from_server);
+          localStorage.setItem('email_chosen_to_display2', values_ownroute.email_to_display_from_server);
+
+          secureLocalStorage.setItem('role_storage', values_ownroute.role_user_from_server);
+          localStorage.setItem('role_storage2', values_ownroute.role_user_from_server);
+
+
+
+          
+
+          
           secureLocalStorage.setItem('data_localstorage_storage_2', JSON.stringify(values_ownroute.dataa));
 
 
@@ -143,6 +155,8 @@ export default function AppOwnComponent() {
   
   
     useEffect(() => {
+      try {
+        
       const delay = 100; // 2 seconds delay
       const timeoutId = setTimeout(() => {
         setDisplayeddelay(false);
@@ -150,6 +164,10 @@ export default function AppOwnComponent() {
   
       // Clear the timeout if the component is unmounted or if the delay changes
       return () => clearTimeout(timeoutId);
+      
+    } catch (error) {
+        console.log('catch error of appowncomponent in useeffect : ' + error)
+    }
     }, []);
    
     return (  
