@@ -136,6 +136,15 @@ function Hottable() {
 
   const [notification, setNotification] = useState(null);
 
+  const mynamespace0 = secureLocalStorage.getItem('hisownroute')
+  if(!mynamespace0){
+    var mynamespace = mynamespace0; // editable to check
+  } else {
+    var mynamespace = mynamespace0.toString().replace('tab/',''); // editable to check and editable url www.myexample.com/app/tab/hisownroute
+  }  
+  socket.emit('join', mynamespace);
+  
+
   React.useEffect(() => {
   //alert('read_only would be : ' + props.read_only)
   console.log('ussd74kasd75_2 is ::::::::::::')
@@ -328,7 +337,11 @@ function Hottable() {
         //setInputValue_spinnerf(true);
       }
       console.log('we wil lcall beforechangefcr')
+      console.log('changes and source :')
+      console.log(changes)
+      console.log(source)
       beforeChangeFct(changes,source,hot,commentsPlugin)
+      console.log('end before change in hotttable')
 
     });
 
@@ -463,6 +476,53 @@ function Hottable() {
         
         
           };
+
+          setTimeout(() => {
+            //alert('afterchange settimeout 2000 triggered ')
+            console.log('source in setitemout to make socket.emit :')
+            console.log(source)
+            if (source !== 'loadData' && source !=='changeorganismesrc') {
+              //socket.emit('dataChanged', handsontableInstance.getData());
+              //socket.emit('afterchange_data_socket_event',my_actual_getdata)
+              socket.emit('afterchange_data_socket_event',my_actual_getdata)
+
+            }
+          
+          }, 2000);
+          
+          socket.on('updateData_socket_event',(receving_data_from_socket_server) => {
+
+            if (hotTableComponent.current) {
+              console.log(hotTableComponent)
+              console.log(hotTableComponent.current)
+              console.log(hotTableComponent.current.hotInstance)
+              //console.log(hotTableComponent.current.hotInstance)
+              console.log(hotTableComponent.current.loadData)
+              console.log('//hot :')
+              console.log(hot)
+              console.log(hot.loadData)
+              //console.log(hot.hotInstance.loadData(JSON.parse(receving_data_from_socket_server)))
+              hot.updateSettings({
+                data: JSON.parse(receving_data_from_socket_server)
+              });
+            
+              // You might need to call hot.render() if the changes don't reflect immediately
+              hot.render();
+            
+//              hot.loadData(JSON.parse(receving_data_from_socket_server))
+
+              //hot.hotInstance.loadData(JSON.parse(receving_data_from_socket_server))
+
+
+              //hotTableComponent.current.hotInstance.loadData(receving_data_from_socket_server);
+            }
+
+            console.log('socket.on updateData_socket_event : ')
+            console.log(JSON.parse(receving_data_from_socket_server))
+            //alert('received socket')
+            //setSavedData(JSON.parse(my_actual_getdata))
+            //hot.setDataAtRowProp(JSON.parse(receving_data_from_socket_server),'dataatrowprop_received_from_socket_server_event');
+          })
         
           socket.on('change_numericformat', ([data1,data2]) => {
             //alert('we are in change_numericformat inside afterChange  : ' + data)
@@ -472,6 +532,8 @@ function Hottable() {
             }, 2000);
             //setInputValue(data);
           })
+          
+     
 
           if(!isLoading){
             hideSpinner()
@@ -553,6 +615,8 @@ function Hottable() {
       //alert('unmout return() ')   
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       socket.off('change_numericformat')
+      socket.off('updateData_socket_event');
+
       hot.destroy();
       //window.removeEventListener('beforeunload', handlebeforeunloadfct(hot));
 

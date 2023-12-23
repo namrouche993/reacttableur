@@ -159,9 +159,9 @@ const handleCloseModaladd = () => {
   
   const mynamespace0 = secureLocalStorage.getItem('hisownroute')
   if(!mynamespace0){
-    var mynamespace = mynamespace0;
+    var mynamespace = mynamespace0; // editable to check
   } else {
-    var mynamespace = mynamespace0.toString().replace('tab/','');
+    var mynamespace = mynamespace0.toString().replace('tab/',''); // editable to check and editable url www.myexample.com/app/tab/hisownroute
   }  
 
 

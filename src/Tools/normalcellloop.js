@@ -61,7 +61,7 @@ export function normalcellloop(){ // editable of course
 
   export function cellscells(row,column){
       var cellProperties = {};
-      if(row<6){ // editable
+      if(row<6){ // editable index
         cellProperties.readOnly = true;
         cellProperties.renderer = function(instance, td, row, col, prop, value, cellProperties) {
           Handsontable.renderers.TextRenderer.apply(this, arguments); // Use the TextRenderer for those cells

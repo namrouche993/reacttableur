@@ -14,6 +14,7 @@ export function beforeChangeFct(changes,source,hot,commentsPlugin){
     if(source=='CopyPaste.paste' && changes.length>30){
       setInputValue_copypastelength(true);
     }
+    console.log('beforechange after if souce copypaste ')
     //alert('beforechange')
     changes.forEach(([row, prop, oldValue, newValue]) => {
       //console.log('changes foreach in beforechange')
@@ -37,6 +38,6 @@ export function beforeChangeFct(changes,source,hot,commentsPlugin){
         //////console.log('comments removed')
       }
       //////console.log(`Change in row ${row} property ${prop}: ${oldValue} -> ${newValue}`);
-    });
-  //console.log('end before change')
+    });  
+  console.log('end before change')
 }
