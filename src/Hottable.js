@@ -264,9 +264,9 @@ function Hottable() {
           afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin,isLoading,setNotification);
         },
         beforeKeyDown: (event) => {
-          console.log('********************')
-          console.log(event)
-          console.log(event.key.length)
+          //console.log('********************')
+          //console.log(event)
+          //console.log(event.key.length)
           if(role_user_redux){
             if(event.key.length==1){
             setNotification({
@@ -336,7 +336,7 @@ function Hottable() {
         showSpinner();
         //setInputValue_spinnerf(true);
       }
-      console.log('we wil lcall beforechangefcr')
+      console.log('we will call beforechangefcr')
       console.log('changes and source :')
       console.log(changes)
       console.log(source)
@@ -348,9 +348,23 @@ function Hottable() {
 
   
       hot.addHook('afterChange', (changes, source) => {
-        console.log('afterChange : ')
+        console.log('------------------------------ afterChange :  ------------------------------' )
+        console.log(source)
+        console.log(changes)
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
+
+               console.log('source in setitemout to make socket.emit :')
+               console.log(source)
+               if (source !== 'loadData' && source !=='changeorganismesrc' && source !== 'dataatrowprop_received_from_socket_server_event') {
+                 //socket.emit('dataChanged', handsontableInstance.getData());
+                 //socket.emit('afterchange_data_socket_event',my_actual_getdata)
+                 console.log('source and changes : ')
+                 var hotaundoredo = hot.undoRedo.doneActions[hot.undoRedo.doneActions.length-1].changes;
+                 
+                 let selectedColumns3_hotaundoredo = hotaundoredo.map(item => [item[0], item[1], item[3]]);
+                 socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
+               }
 
         if (changeTimer) {
           clearTimeout(changeTimer);
@@ -477,53 +491,8 @@ function Hottable() {
         
           };
 
-          setTimeout(() => {
-            //alert('afterchange settimeout 2000 triggered ')
-            console.log('source in setitemout to make socket.emit :')
-            console.log(source)
-            if (source !== 'loadData' && source !=='changeorganismesrc') {
-              //socket.emit('dataChanged', handsontableInstance.getData());
-              //socket.emit('afterchange_data_socket_event',my_actual_getdata)
-              socket.emit('afterchange_data_socket_event',my_actual_getdata)
-
-            }
-          
-          }, 2000);
-          
-          socket.on('updateData_socket_event',(receving_data_from_socket_server) => {
-
-            if (hotTableComponent.current) {
-              console.log(hotTableComponent)
-              console.log(hotTableComponent.current)
-              console.log(hotTableComponent.current.hotInstance)
-              //console.log(hotTableComponent.current.hotInstance)
-              console.log(hotTableComponent.current.loadData)
-              console.log('//hot :')
-              console.log(hot)
-              console.log(hot.loadData)
-              //console.log(hot.hotInstance.loadData(JSON.parse(receving_data_from_socket_server)))
-              hot.updateSettings({
-                data: JSON.parse(receving_data_from_socket_server)
-              });
-            
-              // You might need to call hot.render() if the changes don't reflect immediately
-              hot.render();
-            
-//              hot.loadData(JSON.parse(receving_data_from_socket_server))
-
-              //hot.hotInstance.loadData(JSON.parse(receving_data_from_socket_server))
-
-
-              //hotTableComponent.current.hotInstance.loadData(receving_data_from_socket_server);
-            }
-
-            console.log('socket.on updateData_socket_event : ')
-            console.log(JSON.parse(receving_data_from_socket_server))
-            //alert('received socket')
-            //setSavedData(JSON.parse(my_actual_getdata))
-            //hot.setDataAtRowProp(JSON.parse(receving_data_from_socket_server),'dataatrowprop_received_from_socket_server_event');
-          })
-        
+     
+                    
           socket.on('change_numericformat', ([data1,data2]) => {
             //alert('we are in change_numericformat inside afterChange  : ' + data)
             handle_converting_when_receving_notif_from_socketio([data1,data2])
@@ -553,6 +522,21 @@ function Hottable() {
       //setHotInstance(hot);  WITHOUT REDUX
       dispatch({ type: 'SET_HOT', payload: hot });  // WITH REDUX
       
+      socket.on('updateData_socket_event',(receving_data_from_socket_server) => {
+        
+        console.log('socket.on updateData_socket_event ')
+        if (hotTableComponent.current) {
+          console.log('receving_data_from_socket_server in socket.on')
+          console.log(receving_data_from_socket_server)
+          //mynewarray.push(receving_data_from_socket_server[index])
+          
+          hot.setDataAtRowProp(receving_data_from_socket_server,'dataatrowprop_received_from_socket_server_event');
+     }
+
+        console.log('socket.on updateData_socket_event : ')
+      })
+    
+
       const commentsPlugin = hot.getPlugin('comments');
 
 
