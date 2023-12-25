@@ -105,6 +105,9 @@ function Hottable() {
   const [savedData,setSavedData]=useState(data_localstorage);
   const [csrftoken,setCSRFToken]=useState('');
 
+  const [lastchanges,setLastchanges]=useState([]);
+
+
   const dispatch = useDispatch();
   let changeTimer;
 
@@ -367,8 +370,14 @@ function Hottable() {
                    console.log('hotaundoredo')   
                    console.log(hot.undoRedo.doneActions)       
                    console.log(hot.undoRedo.doneActions.length)
-                   console.log(hotaundoredo)      
+                   console.log(hotaundoredo)
+                   //setLastchanges(prev=>)  
                    var selectedColumns3_hotaundoredo = hotaundoredo.map(item => [item[0], item[1], item[3]]);
+                   console.log('lastchanges before : ')
+                   console.log(selectedColumns3_hotaundoredo)
+                   console.log(lastchanges)
+                   setLastchanges(prevList => [...prevList, [selectedColumns3_hotaundoredo] ]);
+
                    //socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
                 }
                }
@@ -502,7 +511,10 @@ function Hottable() {
             if(hot.undoRedo.doneActions.length>0){
               console.log('in try selectedColumns3_hotaundoredo')
               console.log(selectedColumns3_hotaundoredo)
-              socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
+              console.log('lastchanges')
+              console.log(lastchanges)
+              socket.emit('afterchange_data_socket_event',lastchanges)
+              setLastchanges([])
             }
           }
 
