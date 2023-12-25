@@ -359,11 +359,18 @@ function Hottable() {
                if (source !== 'loadData' && source !=='changeorganismesrc' && source !== 'dataatrowprop_received_from_socket_server_event') {
                  //socket.emit('dataChanged', handsontableInstance.getData());
                  //socket.emit('afterchange_data_socket_event',my_actual_getdata)
-                 console.log('source and changes : ')
-                 var hotaundoredo = hot.undoRedo.doneActions[hot.undoRedo.doneActions.length-1].changes;
-                 
-                 let selectedColumns3_hotaundoredo = hotaundoredo.map(item => [item[0], item[1], item[3]]);
-                 socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
+                 console.log('*****************source and changes  in afterchangehandle to handle hotundoredo with socket: ')
+                 console.log(hot.undoRedo.doneActions)
+                 console.log(hot.undoRedo.doneActions.length)
+                 if(hot.undoRedo.doneActions.length>0){
+                   var hotaundoredo = hot.undoRedo.doneActions[hot.undoRedo.doneActions.length-1].changes; 
+                   console.log('hotaundoredo')   
+                   console.log(hot.undoRedo.doneActions)       
+                   console.log(hot.undoRedo.doneActions.length)
+                   console.log(hotaundoredo)      
+                   var selectedColumns3_hotaundoredo = hotaundoredo.map(item => [item[0], item[1], item[3]]);
+                   //socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
+                }
                }
 
         if (changeTimer) {
@@ -490,6 +497,15 @@ function Hottable() {
         
         
           };
+
+          if (source !== 'loadData' && source !=='changeorganismesrc' && source !== 'dataatrowprop_received_from_socket_server_event') {
+            if(hot.undoRedo.doneActions.length>0){
+              console.log('in try selectedColumns3_hotaundoredo')
+              console.log(selectedColumns3_hotaundoredo)
+              socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
+            }
+          }
+
 
      
                     

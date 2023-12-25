@@ -146,11 +146,13 @@ const handleCloseModaladd = () => {
 
   const undoclickfct = () =>{
     hotInstance_redux.undo(true)
+    socket.emit("undo_click_triggering",true);
   }
 
   
   const redoclickfct = () =>{
     hotInstance_redux.redo(true)
+    socket.emit("redo_click_triggering",true);
   }
 
   const isSmallScreen = useMediaQuery(appTheme.breakpoints.down('sm')); // Adjust the breakpoint as needed
@@ -232,6 +234,25 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
  
   socket.emit('join', mynamespace);
 
+  const handleUndoClick = (click_undo_click) => {
+    console.log('undo from another user')
+    console.log(click_undo_click)
+    console.log(hotInstance_redux)
+    if (hotInstance_redux) {
+      hotInstance_redux.undo(true);
+    }
+  };
+
+  const handleRedoClick = (click_redo_click) => {
+    console.log('Redo from another user')
+    console.log(click_redo_click)
+    console.log(hotInstance_redux)
+    if (hotInstance_redux) {
+      hotInstance_redux.redo(true);
+    }
+  };
+
+
   const handle_recevingnewformatparamertrs = ([input1,input2])=>{
     //alert('input from modalformat in navbar is : ' + input)
     setNew_selectedNumericFormat_from_modalformat(input1)
@@ -249,7 +270,8 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
     socket.emit('join', mynamespace);
     socket.emit('subscribeToListingUsers');
     socket.emit('change_numericformat',[new_selectedNumericFormat_from_modalformat,new_selectedDateFormat_from_modalformat])
-  
+    // socket.emit('getting_undo_click',true)
+    // socket.emit('getting_redo_click',true)
     // Perform any other necessary setup after reconnection
   });
 
@@ -276,16 +298,28 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
   useEffect(() => {
 
     
+  socket.on("getting_undo_click",handleUndoClick);
+  socket.on("getting_redo_click",handleRedoClick);
+
     //socket.emit('join', mynamespace);
     socket.emit('subscribeToListingUsers');
+    // socket.emit('getting_undo_click')
+    // socket.emit('getting_redo_click')
+
 
     return () => {
       socket.off('reconnect');
       socket.off('listingusers');
+      socket.off("getting_undo_click",handleUndoClick);
+      socket.off("getting_redo_click",handleRedoClick);
+    
+      // socket.off('getting_undo_click')
+      // socket.off('getting_redo_click')
+  
 
     };
     
-  }, [])
+  }, [hotInstance_redux])
 
   const [role_of_user_component,setRole_of_user_component]=useState('Viewer');
 
