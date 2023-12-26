@@ -25,8 +25,8 @@ export default function AppOwnComponent() {
     const decimalSeparator2_redux  = useSelector(state => state.decimalSeparator2);
     const navigator_language2_redux  = useSelector(state => state.navigator_language2);
   
-    console.log('hotInstance_redux')
-    console.log(hotInstance_redux);
+    //console.log('hotInstance_redux')
+    //console.log(hotInstance_redux);
     let ownRoute = useParams();
 
     const [displayHot,setDisplayHot]=useState(false);
@@ -36,7 +36,7 @@ export default function AppOwnComponent() {
     
     async function FetchAppOwnEnter(){
       try {
-        console.log(ownRoute.ownroute)
+        //console.log(ownRoute.ownroute)
       //var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : navigator.language; // editable if we set always navigator.language
       //var sec_ls_useloc_sto = secureLocalStorage.getItem("userLocale2_storage") ? secureLocalStorage.getItem("userLocale2_storage") : Intl.DateTimeFormat().resolvedOptions().locale  // editable if we set always userlocale
       //var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
@@ -64,15 +64,15 @@ export default function AppOwnComponent() {
 
         }) //data_localstorage})
         });
-        console.log('response : ');
-        console.log(response);
+        //console.log('response : ');
+        //console.log(response);
         
         if (response.ok) {
-          console.log('response.ok true in ownenter request')
+          //console.log('response.ok true in ownenter request')
           //props.onClose();
           const values_ownroute = await response.json();
-          console.log('values_ownroute :')
-          console.log(values_ownroute.dataa[6])
+          //console.log('values_ownroute :')
+          //console.log(values_ownroute.dataa[6])
 
           secureLocalStorage.setItem('navigator_language2_storage', values_ownroute.navigator_laguage_from_db);
           dispatch({ type: 'SET_navigator_language2', payload: values_ownroute.navigator_laguage_from_db});  // WITH REDUX
@@ -126,7 +126,7 @@ export default function AppOwnComponent() {
           //window.location.href = value_ownroute.hisownroute;
           //alert('already entered')
           
-          console.log('Data sent successfully to the server.!!!!!!!!!!!! ownenter !!!!!!!!!');
+          //console.log('Data sent successfully to the server.!!!!!!!!!!!! ownenter !!!!!!!!!');
           
           //const datajj = await response.json();
           //secureLocalStorage.setItem('token', datajj.token);
@@ -166,7 +166,7 @@ export default function AppOwnComponent() {
       return () => clearTimeout(timeoutId);
       
     } catch (error) {
-        console.log('catch error of appowncomponent in useeffect : ' + error)
+        //console.log('catch error of appowncomponent in useeffect : ' + error)
     }
     }, []);
    

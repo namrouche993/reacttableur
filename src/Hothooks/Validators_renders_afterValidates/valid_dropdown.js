@@ -63,7 +63,7 @@ else if( i == 1 ) {
 
 
   export function renderer_dropdown(instance, td, row, col, prop, oldvalue, cellProperties,data22){
-    console.log('renderer_dropdown')
+    //console.log('renderer_dropdown')
 
     //const data22 = otherArgs[otherArgs.length - 1];
     //td.innerHTML=oldvalue;
@@ -77,7 +77,7 @@ else if( i == 1 ) {
                   }
   
   export function validator_dropdown(value, callback,my_source){
-    console.log('validator_dropdown')
+    //console.log('validator_dropdown')
     if(value==null){
         callback(true)
       }else if(my_source.includes(value)){
@@ -91,22 +91,22 @@ else if( i == 1 ) {
 
 
   export function afterValidatefct_dropdown(isValid, oldvalue, row, prop, source,hot,commentsPlugin,isLoading,setNotification){        
-    ////console.log('prop==5')
-    console.log('afterValidate_dropdown')
-    console.log(isValid)
-    console.log(oldvalue)
-    console.log(row)
-    console.log(prop)
-    console.log(source)
+    //////console.log('prop==5')
+    //console.log('afterValidate_dropdown')
+    //console.log(isValid)
+    //console.log(oldvalue)
+    //console.log(row)
+    //console.log(prop)
+    //console.log(source)
 
     if(oldvalue==null){
         //data22[row][prop] = '';
-        //////console.log('data22 in oldvalue==null')
-        //////console.log(data22)
+        ////////console.log('data22 in oldvalue==null')
+        ////////console.log(data22)
 
       }else if(!isValid){
         ////alert('invalid dropdown')
-        ////console.log('first cond')
+        //////console.log('first cond')
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
         if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
@@ -121,13 +121,13 @@ else if( i == 1 ) {
         hot.setDataAtCell(row, prop,' ','my_source_empty_dropdown');
         
         //data22[row][prop] = '';
-        //////console.log('data22 in !isvalid')
-        //////console.log(data22)
+        ////////console.log('data22 in !isvalid')
+        ////////console.log(data22)
 
 
         //hot.setDataAtCell(row, prop,'');
       } else if (oldvalue===' ') {
-        ////console.log('2 cond')
+        //////console.log('2 cond')
         //commentsPlugin.removeCommentAtCell(row,prop);
         if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
@@ -142,17 +142,17 @@ else if( i == 1 ) {
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
         
         //data22[row][prop] = '';
-        //////console.log('data22 in oldvalue==" "')
-        //////console.log(data22)
+        ////////console.log('data22 in oldvalue==" "')
+        ////////console.log(data22)
 
         //hot.setDataAtCell(row, prop,'');
       } else {
-        ////console.log('3 cond')
+        //////console.log('3 cond')
         commentsPlugin.removeCommentAtCell(row,prop);
         
         //data22[row][prop] = oldvalue;
-        //////console.log('data22 in else')
-        //////console.log(data22)
+        ////////console.log('data22 in else')
+        ////////console.log(data22)
 
 
       }

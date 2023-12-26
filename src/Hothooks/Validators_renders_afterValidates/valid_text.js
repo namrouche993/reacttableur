@@ -56,10 +56,10 @@ import{
 
   export function renderer_text(instance, td, row, col, prop, oldvalue, cellProperties,text_length_txt,data22){
     //const data22 = otherArgs[otherArgs.length - 1];
-    //////console.log('data22 in renderer_text : ')
-    //////console.log(data22)
-    //////console.log('text_length_txt :::')
-    //////console.log(text_length_txt)
+    ////////console.log('data22 in renderer_text : ')
+    ////////console.log(data22)
+    ////////console.log('text_length_txt :::')
+    ////////console.log(text_length_txt)
     
     //td.innerHTML=oldvalue;
     //data22[row][col] = td.innerHTML;      // it was be with // i dont know why  
@@ -79,17 +79,17 @@ import{
                   }
   
   export function validator_text(value, callback,text_length_txt){
-    ////console.log('validator_text')
-    ////console.log(text_length_txt)
+    //////console.log('validator_text')
+    //////console.log(text_length_txt)
     ////alert('value in validator_text is : '  + value)
     if( value==null || 
         value.toString().length<text_length_txt    
     ) {
-      ////console.log('calback trueeeeeeeeeeeeee in text')
+      //////console.log('calback trueeeeeeeeeeeeee in text')
       callback(true)
     } else {
-     ////console.log('calback falseeeeeeeeeeeeeee in text')
-     ////console.log(text_length_txt)
+     //////console.log('calback falseeeeeeeeeeeeeee in text')
+     //////console.log(text_length_txt)
       callback(false)
     }
         }
@@ -97,9 +97,9 @@ import{
 
   export function afterValidatefct_text(isValid, oldvalue, row, prop, source,hot,commentsPlugin,text_length_txt,setNotification){        
         if (isValid && oldvalue == null ) {
-          ////console.log('condition text 1')
-          ////console.log('we are inside afterValidate date oldvalue==null')
-          ////console.log('COULD END HERE')
+          //////console.log('condition text 1')
+          //////console.log('we are inside afterValidate date oldvalue==null')
+          //////console.log('COULD END HERE')
           
           /*
           setTimeout(() => {
@@ -108,11 +108,11 @@ import{
           */
 
         } else if (isValid && oldvalue !== undefined && typeof oldvalue === 'string'){
-          ////console.log('condition text 2')
+          //////console.log('condition text 2')
         } else if (!isValid) {
-          ////console.log('oldvalue :')
-          ////console.log(oldvalue)
-          ////console.log(oldvalue.toString().length)
+          //////console.log('oldvalue :')
+          //////console.log(oldvalue)
+          //////console.log(oldvalue.toString().length)
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'text_depass_limit','fr-FR'))
             setNotification({
               message: comments_messages(oldvalue,'text_depass_limit','fr-FR'),

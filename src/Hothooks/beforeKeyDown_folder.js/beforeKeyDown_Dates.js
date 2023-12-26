@@ -19,8 +19,8 @@ export function beforeKeyDown_Dates_fct(event,hot,
   navigator_language,
   //condition_split
   ) {  // editable the 2 indexx later inside 
-////console.log('condition_split : ')
-////console.log(getInputValue_condition_split2())
+//////console.log('condition_split : ')
+//////console.log(getInputValue_condition_split2())
 try {
   
   let condition_split=getInputValue_condition_split2();
@@ -33,7 +33,7 @@ try {
           var betweensplit_slash = hot.getActiveEditor().getValue().split("/")
           var betweensplit_hyphen = hot.getActiveEditor().getValue().split("-")
       
-         // ////console.log(event.key)
+         // //////console.log(event.key)
           if( !isNaN(Number(event.key)) && (typeof condition_split=='undefined' || condition_split==true)){
             var betweensplit_dot = hot.getActiveEditor().getValue().split(".");
             betweensplit_dot[1]=betweensplit_dot[1]+event.key;
@@ -63,7 +63,7 @@ try {
       }
       }
        else if(navigator_language=='ko-KR' || navigator_language=='hu-HU'){ // ######################################################################
-        //////console.log('we are in korean')
+        ////////console.log('we are in korean')
         var dateformatlanguage = 'yyyy.mm.dd' // 1990.12.31
         var splitdate='.';
         //var [yeardate,monthdate,daydate] = dateformatlanguage.split(splitdate);
@@ -73,7 +73,7 @@ try {
           var betweensplit_slash = hot.getActiveEditor().getValue().split("/")
           var betweensplit_hyphen = hot.getActiveEditor().getValue().split("-")
       
-          //////console.log(event.key)
+          ////////console.log(event.key)
           if( !isNaN(Number(event.key)) && (typeof condition_split=='undefined' || condition_split==true)){
             var betweensplit_dot = hot.getActiveEditor().getValue().split(".");
             betweensplit_dot[1]=betweensplit_dot[1]+event.key;
@@ -113,7 +113,7 @@ try {
           var betweensplit_slash = hot.getActiveEditor().getValue().split("/")
           var betweensplit_hyphen = hot.getActiveEditor().getValue().split("-")
       
-          //////console.log(event.key)
+          ////////console.log(event.key)
           if( !isNaN(Number(event.key)) && (typeof condition_split=='undefined' || condition_split==true)){
             var betweensplit_dot = hot.getActiveEditor().getValue().split(".");
             betweensplit_dot[1]=betweensplit_dot[1]+event.key;
@@ -152,7 +152,7 @@ try {
           var betweensplit_slash = hot.getActiveEditor().getValue().split("/")
           var betweensplit_hyphen = hot.getActiveEditor().getValue().split("-")
       
-          //////console.log(event.key)
+          ////////console.log(event.key)
           if( !isNaN(Number(event.key)) && (typeof condition_split=='undefined' || condition_split==true)){
             var betweensplit_dot = hot.getActiveEditor().getValue().split(".");
             betweensplit_dot[1]=betweensplit_dot[1]+event.key;
@@ -192,7 +192,7 @@ try {
           var betweensplit_slash = hot.getActiveEditor().getValue().split("/")
           var betweensplit_hyphen = hot.getActiveEditor().getValue().split("-")
       
-        //  ////console.log(event.key)
+        //  //////console.log(event.key)
           if( !isNaN(Number(event.key))){
             var betweensplit_dot = hot.getActiveEditor().getValue().split(".");
             betweensplit_dot[1]=betweensplit_dot[1]+event.key;
@@ -223,17 +223,17 @@ try {
         // european and other formats
         var dateformatlanguage = 'dd/mm/yyyy' // 31/12/1990
         var splitdate='/';
-        //////console.log('condition_split in beforekey start : ')
-        // ////console.log(condition_split)
+        ////////console.log('condition_split in beforekey start : ')
+        // //////console.log(condition_split)
       
         //var [daydate,monthdate,yeardate] = dateformatlanguage.split(splitdate);
-          //console.log('hot.getActiveEditor')
-          //console.log(hot.getActiveEditor())
+          ////console.log('hot.getActiveEditor')
+          ////console.log(hot.getActiveEditor())
           var betweensplit_dot = hot.getActiveEditor().getValue().split(".")
           var betweensplit_slash = hot.getActiveEditor().getValue().split("/")
           var betweensplit_hyphen = hot.getActiveEditor().getValue().split("-")
       
-          //////console.log(event.key)
+          ////////console.log(event.key)
           if( !isNaN(Number(event.key)) && (typeof condition_split=='undefined' || condition_split==true)){
             var betweensplit_dot = hot.getActiveEditor().getValue().split(".");
             betweensplit_dot[1]=betweensplit_dot[1]+event.key;
@@ -261,10 +261,10 @@ try {
           event.preventDefault();
         }
       }
-         //////console.log(condition_split)
+         ////////console.log(condition_split)
       
       }
     } catch (error) {
-      console.log('Error : ' + 'Maybe viewer with editing dates' + error)
+      //console.log('Error : ' + 'Maybe viewer with editing dates' + error)
     }      
 }

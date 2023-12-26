@@ -45,9 +45,9 @@ import{
   export function renderer_date(instance, td, row, col, prop, oldvalue, cellProperties,
     decimalSeparator,userLocale,navigator_language,userTimeZone,usTimeZones,use_en_time
     ,data22){
-    //////console.log('data22 in renderer_date : ')
+    ////////console.log('data22 in renderer_date : ')
     //const data22 = otherArgs[otherArgs.length - 1];
-    //////console.log(data22)
+    ////////console.log(data22)
    
     if(oldvalue==null){
       td.innerHTML=''
@@ -101,10 +101,10 @@ import{
         /^\d{4}[.]?\s*$/.test(value.toString().trim().replace(/\s*\.\s*/g,"."))                 // 2023  2022.
 
     ){
-      //////console.log('calback trueeeeeeeeeeeeee')
+      ////////console.log('calback trueeeeeeeeeeeeee')
       callback(true)
     } else {
-     //////console.log('calback falseeeeeeeeeeeeeee')
+     ////////console.log('calback falseeeeeeeeeeeeeee')
       callback(false)
     }
 
@@ -115,15 +115,15 @@ import{
     decimalSeparator,userLocale,navigator_language,userTimeZone,usTimeZones,use_en_time,
     use_english_date_by_user_himeself_in_modal,setNotification
     ){
-      //console.log(oldvalue)
-      //console.log(isValid)
+      ////console.log(oldvalue)
+      ////console.log(isValid)
       var use_english_date_by_user_himeself_in_modal = JSON.parse(use_english_date_by_user_himeself_in_modal);
       //alert('navigator_language now  in valid_data is : ' + navigator_language)
       setInputValue_condition_split2(true)        
         if (isValid && oldvalue == null ) {
-          //////console.log('condition date 1')
-          //////console.log('we are inside afterValidate date oldvalue==null')
-          //////console.log('COULD END HERE')
+          ////////console.log('condition date 1')
+          ////////console.log('we are inside afterValidate date oldvalue==null')
+          ////////console.log('COULD END HERE')
 
           /*
           setTimeout(() => {
@@ -132,28 +132,28 @@ import{
           */ 
 
           } else if (isValid && oldvalue !== undefined && typeof oldvalue === 'string'){
-          //////console.log('condition date 2 !! ')
-          //////console.log(oldvalue)
-          //////console.log(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/")))
+          ////////console.log('condition date 2 !! ')
+          ////////console.log(oldvalue)
+          ////////console.log(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/")))
               
              if(/\s+/.test(oldvalue)){
-               //////console.log('condition date 2.1 removes whitespaces')
+               ////////console.log('condition date 2.1 removes whitespaces')
               hot.setDataAtCell(row, prop, oldvalue.toString().trim().replace(/\s*\/\s*/g,"/").toString().replace(/\s*-\s*/g,"-").toString().replace(/\s*\.\s*/g,"."),'my_source_removewhitespacesign_date')
               commentsPlugin.removeCommentAtCell(row, prop);
              }else{
-              //////console.log('condition date 2.2')
+              ////////console.log('condition date 2.2')
               
               if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/"))){
-                //////console.log('condition date 2.2.1  31/12/1995 like fr-FR and european an (en-US but with switching month and days) ')                  
+                ////////console.log('condition date 2.2.1  31/12/1995 like fr-FR and european an (en-US but with switching month and days) ')                  
                 var splitdate01='/';
 
-                //////console.log(navigator_language)
-                //////console.log(startsWithElement(usTimeZones,userTimeZone))
-                //////console.log(use_en_time)
+                ////////console.log(navigator_language)
+                ////////console.log(startsWithElement(usTimeZones,userTimeZone))
+                ////////console.log(use_en_time)
                 if( (navigator_language=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true){
                   //alert('i thnik we will pass here 2')
 
-                  ////////console.log('english 3 correct : ')
+                  //////////console.log('english 3 correct : ')
                   var [monthdate,daydate, yeardate] = oldvalue.split(splitdate01); // edit it modify it change it , when US date format occurs                  
                   // isValidDate('35/02/2002','/',1,2,3)
                   var is_validate_date=isValidDate(oldvalue,'/',2,1,3)
@@ -162,13 +162,13 @@ import{
                   var [daydate,monthdate, yeardate] = oldvalue.split(splitdate01); // edit it modify it change it , when US date format occurs                  
                   isValidDate(oldvalue,'/',1,2,3);
                   var is_validate_date=isValidDate(oldvalue,'/',1,2,3)
-                  ////////console.log(is_validate_date)
+                  //////////console.log(is_validate_date)
                 }
                 if(is_validate_date){
-                  ////////console.log('daydate check : ')
-                  ////////console.log(daydate)                    
-                  ////////console.log('monthdate check : ')
-                  ////////console.log(monthdate)
+                  //////////console.log('daydate check : ')
+                  //////////console.log(daydate)                    
+                  //////////console.log('monthdate check : ')
+                  //////////console.log(monthdate)
 
 
                  if(navigator_language=='en-US'){
@@ -189,7 +189,7 @@ import{
                          monthdate='0'+monthdate;  
             hot.setDataAtCell(row, prop, monthdate+splitdate001+daydate+splitdate001+yeardate,'my_source_date')
             } else {
-                         ////////console.log('COULD END HERE')
+                         //////////console.log('COULD END HERE')
                          commentsPlugin.removeCommentAtCell(row, prop);
                      }
 
@@ -206,7 +206,7 @@ import{
                          monthdate='0'+monthdate;  
                          hot.setDataAtCell(row, prop, daydate+splitdate001+monthdate+splitdate001+yeardate,'my_source_date')
             } else {
-                         ////////console.log('COULD END HERE')
+                         //////////console.log('COULD END HERE')
                          commentsPlugin.removeCommentAtCell(row, prop);
                      }
                        }
@@ -215,25 +215,25 @@ import{
                   // 'aaaa.mm.jj'
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
                 } else if(navigator_language=='ja-JP' || navigator_language=='ZH-CN'){
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
   } else if(navigator_language=='en-CA'){
                   // 'aaaa-mm-jj' //'yyyy-mm-dd' // 1990-12-31
                   var splitdate1='-';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
 
   } else if(navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR'){
                   //'jj.mm.aaaa' //'dd.mm.yyyy' // 12.31.1990
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
 
   } else {
     // european and other formats
@@ -242,7 +242,7 @@ import{
     if(daydate.toString().length==1 && monthdate.toString().length==1){
                          daydate='0'+daydate;
                          monthdate='0'+monthdate;
-                         //////console.log(daydate+splitdate001+monthdate+splitdate001+yeardate)
+                         ////////console.log(daydate+splitdate001+monthdate+splitdate001+yeardate)
             hot.setDataAtCell(row, prop, daydate+splitdate001+monthdate+splitdate001+yeardate,'my_source_date')
 
             } else if(daydate.toString().length==1 && monthdate.toString().length==2){
@@ -252,14 +252,14 @@ import{
                          monthdate='0'+monthdate;  
                          hot.setDataAtCell(row, prop, daydate+splitdate001+monthdate+splitdate001+yeardate,'my_source_date')
             } else {
-                         //////console.log('COULD END HERE')
+                         ////////console.log('COULD END HERE')
                          commentsPlugin.removeCommentAtCell(row, prop);
                      }
   }
 } else {
-  //////console.log('is_validate_date is false')
-  //////console.log(row)
-  //////console.log(prop)
+  ////////console.log('is_validate_date is false')
+  ////////console.log(row)
+  ////////console.log(prop)
   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
   commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_try_to_fix','fr-FR'))
   setNotification({
@@ -280,7 +280,7 @@ import{
 // **********************************************************************************
               
               else if (/^\d{1,2}\-\d{1,2}\-\d{4}$/.test(oldvalue.toString().trim().replace(/\s*-\s*/g,"-"))){
-                //////console.log('condition date 2.2.2  31-12-1995 like no one')                  
+                ////////console.log('condition date 2.2.2  31-12-1995 like no one')                  
                 var splitdate02='-';
                 //var [daydate,monthdate, yeardate] = oldvalue.split(splitdate02); // edit it modify it change it , when US date format occurs                  
                 if( (navigator_language=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true && use_en_time==true){
@@ -291,7 +291,7 @@ import{
                   var [daydate,monthdate, yeardate] = oldvalue.split(splitdate02); // edit it modify it change it , when US date format occurs                  
                   isValidDate(oldvalue,'/',1,2,3);
                   var is_validate_date=isValidDate(oldvalue,'-',1,2,3)
-                  //////console.log(is_validate_date)
+                  ////////console.log(is_validate_date)
 
                 }
                 if(is_validate_date){
@@ -301,41 +301,41 @@ import{
                  if( (startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true){
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, monthdate+splitdate1+daydate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)   
+                  ////////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)   
                 
                  } else {
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
                 }
                 } else if(navigator_language=='ko-KR' || navigator_language=='hu-HU'){
                   // 'aaaa.mm.jj'
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
                 } else if(navigator_language=='ja-JP' || navigator_language=='ZH-CN'){
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
   } else if(navigator_language=='en-CA'){
                   // 'aaaa-mm-jj' //'yyyy-mm-dd' // 1990-12-31
                   var splitdate1='-';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
 
   } else if(navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR'){
                   //'jj.mm.aaaa' //'dd.mm.yyyy' // 12.31.1990
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
 
   } else {
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
   } 
 } else {
   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
@@ -359,7 +359,7 @@ import{
 // **********************************************************************************
 
 } else if (/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(oldvalue.toString().trim().replace(/\s*\.\s*/g,".")) ){
-                //////console.log('condition date 2.2.3  31.12.1995 like  de-DE date format ')                  
+                ////////console.log('condition date 2.2.3  31.12.1995 like  de-DE date format ')                  
                 var splitdate03='.';
                 if( (navigator_language=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true ){
                   var [monthdate,daydate, yeardate] = oldvalue.split(splitdate03); // edit it modify it change it , when US date format occurs                  
@@ -367,7 +367,7 @@ import{
                 } else {
                   var [daydate,monthdate, yeardate] = oldvalue.split(splitdate03); // edit it modify it change it , when US date format occurs                  
                   var is_validate_date=isValidDate(oldvalue,'.',1,2,3)
-                  ////////console.log(is_validate_date)
+                  //////////console.log(is_validate_date)
 
                 }
                 if(is_validate_date){
@@ -377,43 +377,43 @@ import{
                   if( (startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true ){
                     var splitdate1='/';
                     hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                    //////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)
+                    ////////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)
                   } else {
                     var splitdate1='/';
                     hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                    //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                    ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
                   }
                   
                 } else if(navigator_language=='ko-KR' || navigator_language=='hu-HU'){
                   // 'aaaa.mm.jj'
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
                 } else if(navigator_language=='ja-JP' || navigator_language=='ZH-CN'){
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
   } else if(navigator_language=='en-CA'){
                   // 'aaaa-mm-jj' //'yyyy-mm-dd' // 1990-12-31
                   var splitdate1='-';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
 
   } else if(navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR'){
                   //'jj.mm.aaaa' //'dd.mm.yyyy' // 12.31.1990
                   //var splitdate1='.';
                   //hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate)
-                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                  //////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
                   
                   
                   var splitdate003 = '.';
     if(daydate.toString().length==1 && monthdate.toString().length==1){
                          daydate='0'+daydate;
                          monthdate='0'+monthdate;
-                         //////console.log(daydate+splitdate003+monthdate+splitdate003+yeardate)
+                         ////////console.log(daydate+splitdate003+monthdate+splitdate003+yeardate)
             hot.setDataAtCell(row, prop, daydate+splitdate003+monthdate+splitdate003+yeardate,'my_source_date')
 
             } else if(daydate.toString().length==1 && monthdate.toString().length==2){
@@ -423,7 +423,7 @@ import{
                          monthdate='0'+monthdate;  
                          hot.setDataAtCell(row, prop, daydate+splitdate003+monthdate+splitdate003+yeardate,'my_source_date')
             } else {
-                         //////console.log('COULD END HERE')
+                         ////////console.log('COULD END HERE')
                          commentsPlugin.removeCommentAtCell(row, prop);
                      }
 
@@ -432,7 +432,7 @@ import{
     //'jj/mm/aaaa' // 'dd/mm/yyyy' // 31/12/1990
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
                    }
                 } else {                
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
@@ -457,7 +457,7 @@ import{
 
 } else if (/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/")) ) {
   // 1995/12/31
-  //////console.log('condition date 2.2.4  1995/12/31 like ja-JP')
+  ////////console.log('condition date 2.2.4  1995/12/31 like ja-JP')
                   
                 var splitdate04='/';
                 if( (navigator_language=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true){
@@ -466,7 +466,7 @@ import{
                 } else {
                   var [yeardate,monthdate,daydate] = oldvalue.split(splitdate04); // edit it modify it change it , when US date format occurs                  
                   var is_validate_date=isValidDate(oldvalue,'/',3,2,1)
-                  ////////console.log(is_validate_date)
+                  //////////console.log(is_validate_date)
 
                 }
                 if(is_validate_date){
@@ -476,24 +476,24 @@ import{
                   if( (startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true){
                     var splitdate1='/';
                     hot.setDataAtCell(row, prop, monthdate+splitdate1+daydate+splitdate1+yeardate,'my_source_date')
-                    //////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)
+                    ////////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)
                   } else {
                     var splitdate1='/';
                     hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                    //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                    ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
                   }
                   
                 } else if(navigator_language=='ko-KR' || navigator_language=='hu-HU'){
                   // 'aaaa.mm.jj'
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
                 } else if(navigator_language=='ja-JP' || navigator_language=='ZH-CN'){
                       // 1990/12/31
                   //var splitdate1='/';
                   //hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate)
-                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  //////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
                   var splitdate004 = '/';
     if(daydate.toString().length==1 && monthdate.toString().length==1){
@@ -508,7 +508,7 @@ import{
                          monthdate='0'+monthdate;  
                          hot.setDataAtCell(row, prop, yeardate+splitdate004+monthdate+splitdate004+daydate,'my_source_date')
             } else {
-                         //////console.log('COULD END HERE')
+                         ////////console.log('COULD END HERE')
                          commentsPlugin.removeCommentAtCell(row, prop);
                      }
 
@@ -517,9 +517,9 @@ import{
                   // 'aaaa-mm-jj' //'yyyy-mm-dd' // 1990-12-31
                   var splitdate1='-';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
-                  ////////console.log('COULD END HERE')
+                  //////////console.log('COULD END HERE')
                   //commentsPlugin.removeCommentAtCell(row, prop);
 
 
@@ -527,8 +527,8 @@ import{
                   //'jj.mm.aaaa' //'dd.mm.yyyy' // 12.31.1990
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
-                  ////////console.log('COULD END HERE')
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                  //////////console.log('COULD END HERE')
                   //commentsPlugin.removeCommentAtCell(row, prop);
 
   } else {
@@ -536,7 +536,7 @@ import{
     //'jj/mm/aaaa' // 'dd/mm/yyyy' // 31/12/1990
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
                    }
                 } else {                
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
@@ -559,7 +559,7 @@ import{
 // **********************************************************************************
   } else if (/^\d{4}\-\d{1,2}\-\d{1,2}$/.test(oldvalue.toString().trim().replace(/\s*-\s*/g,"-")) ) {
   // 1995-12-31 5rd condition
-  //////console.log('condition date 2.2.5  1995-12-31 like en-CA')
+  ////////console.log('condition date 2.2.5  1995-12-31 like en-CA')
 
                 var splitdate05='-';
                 if( (navigator_language=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true ){
@@ -568,7 +568,7 @@ import{
                 } else {
                   var [yeardate,monthdate,daydate] = oldvalue.split(splitdate05); // edit it modify it change it , when US date format occurs                  
                   var is_validate_date=isValidDate(oldvalue,'-',3,2,1)
-                  ////////console.log(is_validate_date)
+                  //////////console.log(is_validate_date)
 
                 }
                 if(is_validate_date){
@@ -578,24 +578,24 @@ import{
                   if( (startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true ){
                     var splitdate1='/';
                     hot.setDataAtCell(row, prop, monthdate+splitdate1+daydate+splitdate1+yeardate,'my_source_date')
-                    //////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)
+                    ////////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)
                   } else {
                     var splitdate1='/';
                     hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                    //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                    ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
                   }
                   
                 } else if(navigator_language=='ko-KR' || navigator_language=='hu-HU'){
                   // 'aaaa.mm.jj'
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
                 } else if(navigator_language=='ja-JP' || navigator_language=='ZH-CN'){
                       // 1990/12/31
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
                   
 
@@ -616,20 +616,20 @@ import{
                          monthdate='0'+monthdate;  
                          hot.setDataAtCell(row, prop, yeardate+splitdate005+monthdate+splitdate005+daydate,'my_source_date')
             } else {
-                         //////console.log('COULD END HERE')
+                         ////////console.log('COULD END HERE')
                          commentsPlugin.removeCommentAtCell(row, prop);
                      }
                   //var splitdate1='-';
                   //hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate)
-                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  //////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
 
   } else if(navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR'){
                   //'jj.mm.aaaa' //'dd.mm.yyyy' // 12.31.1990
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
-                  ////////console.log('COULD END HERE')
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                  //////////console.log('COULD END HERE')
                   //commentsPlugin.removeCommentAtCell(row, prop);
 
   } else {
@@ -637,7 +637,7 @@ import{
     //'jj/mm/aaaa' // 'dd/mm/yyyy' // 31/12/1990
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
                    }
                 } else {                
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
@@ -660,7 +660,7 @@ import{
 // **********************************************************************************
 } else if (/^\d{4}\.\d{1,2}\.\d{1,2}$/.test(oldvalue.toString().trim().replace(/\s*\.\s*/g,".")) ) {
   // 1995.12.31 6rd condition
-  //////console.log('condition date 2.2.6  1995.12.31 like ko-KR')
+  ////////console.log('condition date 2.2.6  1995.12.31 like ko-KR')
 
                 var splitdate06='.';
                 if( (navigator_language=='en-US' && startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true ){
@@ -669,7 +669,7 @@ import{
                 } else {
                   var [yeardate,monthdate,daydate] = oldvalue.split(splitdate06); // edit it modify it change it , when US date format occurs                  
                   var is_validate_date=isValidDate(oldvalue,'.',3,2,1)
-                  ////////console.log(is_validate_date)
+                  //////////console.log(is_validate_date)
 
                 }
                 if(is_validate_date){
@@ -679,18 +679,18 @@ import{
                   if( (startsWithElement(usTimeZones,userTimeZone) && use_en_time==true) || use_english_date_by_user_himeself_in_modal==true && use_en_time==true ){
                     var splitdate1='/';
                     hot.setDataAtCell(row, prop, monthdate+splitdate1+daydate+splitdate1+yeardate,'my_source_date')
-                    //////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)
+                    ////////console.log('new date format : ' + monthdate+splitdate1+daydate+splitdate1+yeardate)
                   } else {
                     var splitdate1='/';
                     hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                    //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                    ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
                   }
                   
                 } else if(navigator_language=='ko-KR' || navigator_language=='hu-HU'){
                   // 'aaaa.mm.jj'
                   //var splitdate1='.';
                   //hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate)
-                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  //////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
 
                   var splitdate006 = '.';
@@ -706,14 +706,14 @@ import{
                          monthdate='0'+monthdate;  
                          hot.setDataAtCell(row, prop, yeardate+splitdate006+monthdate+splitdate006+daydate,'my_source_date')
             } else {
-                         //////console.log('COULD END HERE')
+                         ////////console.log('COULD END HERE')
                          commentsPlugin.removeCommentAtCell(row, prop);
                      }
                 } else if(navigator_language=='ja-JP' || navigator_language=='ZH-CN'){
                       // 1990/12/31
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
 
                   
 
@@ -721,17 +721,17 @@ import{
                   // 'aaaa-mm-jj' //'yyyy-mm-dd' // 1990-12-31
                   var splitdate1='-';
                   hot.setDataAtCell(row, prop, yeardate+splitdate1+monthdate+splitdate1+daydate,'my_source_date')
-                  //////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
+                  ////////console.log('new date format : ' + yeardate+splitdate1+monthdate+splitdate1+daydate)
                   
-                  ////////console.log('COULD END HERE')
+                  //////////console.log('COULD END HERE')
                   //commentsPlugin.removeCommentAtCell(row, prop);
 
   } else if(navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR'){
                   //'jj.mm.aaaa' //'dd.mm.yyyy' // 12.31.1990
                   var splitdate1='.';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
-                  ////////console.log('COULD END HERE')
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)
+                  //////////console.log('COULD END HERE')
                   //commentsPlugin.removeCommentAtCell(row, prop);
 
   } else {
@@ -739,7 +739,7 @@ import{
     //'jj/mm/aaaa' // 'dd/mm/yyyy' // 31/12/1990
                   var splitdate1='/';
                   hot.setDataAtCell(row, prop, daydate+splitdate1+monthdate+splitdate1+yeardate,'my_source_date')
-                  //////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
+                  ////////console.log('new date format : ' + daydate+splitdate1+monthdate+splitdate1+yeardate)   
                    }
                 } else {                
                   //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  ");
@@ -761,7 +761,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
               } else if(/^\d{1,2}\/\d{1,2}\/\d{2}$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/")) ){
-                //////console.log('condition date 2.2.7  31/12/95 like fr-FR and european an (en-US but with switching month and days) ')                  
+                ////////console.log('condition date 2.2.7  31/12/95 like fr-FR and european an (en-US but with switching month and days) ')                  
                 var splitdate01='/';
                 if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){
                   var [yeardate,monthdate,daydate] = oldvalue.split(splitdate01); // edit it modify it change it , when US date format occurs                  
@@ -790,7 +790,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 } else if(/^\d{1,2}\-\d{1,2}\-\d{2}$/.test(oldvalue.toString().trim().replace(/\s*-\s*/g,"-")) ){
-                //////console.log('condition date 2.2.8  31-12-95  ')                  
+                ////////console.log('condition date 2.2.8  31-12-95  ')                  
                 var splitdate01='-';
                 if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                   var [yeardate,monthdate,daydate] = oldvalue.split(splitdate01); // edit it modify it change it , when US date format occurs                  
@@ -819,7 +819,7 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 } else if(/^\d{1,2}\.\d{1,2}\.\d{2}$/.test(oldvalue.toString().trim().replace(/\s*\.\s*/g,".")) ){
-                //////console.log('condition date 2.2.9  31.12.95  ')                  
+                ////////console.log('condition date 2.2.9  31.12.95  ')                  
                 var splitdate01='.';
                 if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                   var [yeardate,monthdate,daydate] = oldvalue.split(splitdate01); // edit it modify it change it , when US date format occurs                  
@@ -846,12 +846,12 @@ import{
 // **********************************************************************************
 // **********************************************************************************
                 } else if (/^\d{1,2}\/\d{1,2}(\/)?$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/"))){
-                  //////console.log('condition date 2.2.10   like  31/12 12/06/  13/23 1/3 ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.10   like  31/12 12/06/  13/23 1/3 ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='/';
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                   //var [yeardate,monthdate,daydate] = oldvalue.split(splitdate01); // edit it modify it change it , when US date format occurs                  
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -867,7 +867,7 @@ import{
                   }
                   hot.setDataAtCell(row, prop,yeardate+splitdate01+monthdate+splitdate01+daydate,'my_source_date')
                 } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                     var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -880,8 +880,8 @@ import{
                    var [daydate,monthdate,yeardate]=[datepart1,datepart2,currentYear.toString()]
                  //yeardate='20'+yeardate;
                 }
-                //////console.log('before setdata')
-                //////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                ////////console.log('before setdata')
+                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                   hot.setDataAtCell(row, prop,daydate+splitdate01+monthdate+splitdate01+yeardate,'my_source_date')
                 }
 // **********************************************************************************
@@ -890,12 +890,12 @@ import{
 // **********************************************************************************
 // **********************************************************************************
             } else if (/^\d{1,2}\-\d{1,2}(\-)?$/.test(oldvalue.toString().trim().replace(/\s*-\s*/g,"-"))){
-              //////console.log('condition date 2.2.11   like  31-12 12-06  13-23 1-3 ')     
-                  //////console.log(oldvalue)             
+              ////////console.log('condition date 2.2.11   like  31-12 12-06  13-23 1-3 ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='-';
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                   //var [yeardate,monthdate,daydate] = oldvalue.split(splitdate01); // edit it modify it change it , when US date format occurs                  
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -911,7 +911,7 @@ import{
                   }
                   hot.setDataAtCell(row, prop,yeardate+splitdate01+monthdate+splitdate01+daydate,'my_source_date')
                 } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                     var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -924,8 +924,8 @@ import{
                    var [daydate,monthdate,yeardate]=[datepart1,datepart2,currentYear.toString()]
                  //yeardate='20'+yeardate;
                 }
-                //////console.log('before setdata')
-                //////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                ////////console.log('before setdata')
+                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                   hot.setDataAtCell(row, prop,daydate+splitdate01+monthdate+splitdate01+yeardate,'my_source_date')
                 }
 
@@ -936,12 +936,12 @@ import{
 // **********************************************************************************
 // **********************************************************************************
                 } else if (/^\d{1,2}\.\d{1,2}(\.)?$/.test(oldvalue.toString().trim().replace(/\s*\.\s*/g,"."))){
-                  //////console.log('condition date 2.2.12   like  31.12. 12.06.  13.23 1.3 ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.12   like  31.12. 12.06.  13.23 1.3 ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='.';
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                   //var [yeardate,monthdate,daydate] = oldvalue.split(splitdate01); // edit it modify it change it , when US date format occurs                  
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -957,7 +957,7 @@ import{
                   }
                   hot.setDataAtCell(row, prop,yeardate+splitdate01+monthdate+splitdate01+daydate,'my_source_date')
                 } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                     var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -970,8 +970,8 @@ import{
                    var [daydate,monthdate,yeardate]=[datepart1,datepart2,currentYear.toString()]
                  //yeardate='20'+yeardate;
                 }
-                //////console.log('before setdata')
-                //////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                ////////console.log('before setdata')
+                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                   hot.setDataAtCell(row, prop,daydate+splitdate01+monthdate+splitdate01+yeardate,'my_source_date')
                 }
 // **********************************************************************************
@@ -980,12 +980,12 @@ import{
 // **********************************************************************************
 // **********************************************************************************
                 } else if (/^\d{4}\/\d{1,2}(\/)?$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/"))){
-                  //////console.log('condition date 2.2.13   like  2031/12. 2012/06/  2013/2 ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.13   like  2031/12. 2012/06/  2013/2 ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='/';
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                     var [datepart1,datepart2] =  oldvalue.split(splitdate01)
                     if(Number(datepart2)>12){
@@ -1015,7 +1015,7 @@ import{
                                     //yeardate='20'+yeardate;
                         }
                     } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                 var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -1045,8 +1045,8 @@ import{
 
                  //yeardate='20'+yeardate;
                 }
-                ////////console.log('before setdata')
-                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                //////////console.log('before setdata')
+                //////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                 }
                 
                   // **********************************************************************************
@@ -1055,12 +1055,12 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 } else if (/^\d{4}\-\d{1,2}(\-)?$/.test(oldvalue.toString().trim().replace(/\s*-\s*/g,"-"))){
-                  //////console.log('condition date 2.2.14   like  2031-12. 2012-06-  2013-2 ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.14   like  2031-12. 2012-06-  2013-2 ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='-';
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                     var [datepart1,datepart2] =  oldvalue.split(splitdate01)
                     if(Number(datepart2)>12){
@@ -1088,7 +1088,7 @@ import{
                                     //yeardate='20'+yeardate;
                         }
                     } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                 var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -1118,8 +1118,8 @@ import{
 
                  //yeardate='20'+yeardate;
                 }
-                ////////console.log('before setdata')
-                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                //////////console.log('before setdata')
+                //////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                 }
                 
                   // **********************************************************************************
@@ -1128,12 +1128,12 @@ import{
 // **********************************************************************************
 // **********************************************************************************
 } else if (/^\d{4}\.\d{1,2}(\.)?$/.test(oldvalue.toString().trim().replace(/\s*\.\s*/g,"."))){
-                  //////console.log('condition date 2.2.15   like  2031.12. 2012.06.  2013.2 ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.15   like  2031.12. 2012.06.  2013.2 ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='.';
                   var [datepart1,datepart2] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                     var [datepart1,datepart2] =  oldvalue.split(splitdate01)
                     if(Number(datepart2)>12){
@@ -1161,7 +1161,7 @@ import{
                                     //yeardate='20'+yeardate;
                         }
                     } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                 var [datepart1,datepart2] =  oldvalue.split(splitdate01)
@@ -1191,8 +1191,8 @@ import{
 
                  //yeardate='20'+yeardate;
                 }
-                ////////console.log('before setdata')
-                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                //////////console.log('before setdata')
+                //////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                 }
 // **********************************************************************************
 // **********************************************************************************
@@ -1201,12 +1201,12 @@ import{
 // **********************************************************************************
 
                 } else if (/^\d{1,2}\/\d{4}(\/)?$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/"))){
-                  //////console.log('condition date 2.2.16   like  12/2023 06/2012/  2/2013/ ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.16   like  12/2023 06/2012/  2/2013/ ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='/';
                   var [datepart2,datepart1] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                     var [datepart2,datepart1] =  oldvalue.split(splitdate01)
                     if(Number(datepart2)>12){
@@ -1232,7 +1232,7 @@ import{
                                     //yeardate='20'+yeardate;
                         }
                     } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                 var [datepart2,datepart1] =  oldvalue.split(splitdate01)
@@ -1262,8 +1262,8 @@ import{
 
                  //yeardate='20'+yeardate;
                 }
-                ////////console.log('before setdata')
-                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                //////////console.log('before setdata')
+                //////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                 }
                   // **********************************************************************************
 // **********************************************************************************
@@ -1272,12 +1272,12 @@ import{
 // **********************************************************************************
 
                 } else if (/^\d{1,2}\-\d{4}(\-)?$/.test(oldvalue.toString().trim().replace(/\s*-\s*/g,"-"))){
-                  //////console.log('condition date 2.2.17   like  12-2023 06-2012-  2-2013- ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.17   like  12-2023 06-2012-  2-2013- ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='-';
                   var [datepart2,datepart1] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                     var [datepart2,datepart1] =  oldvalue.split(splitdate01)
                     if(Number(datepart2)>12){
@@ -1303,7 +1303,7 @@ import{
                                     //yeardate='20'+yeardate;
                         }
                     } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                 var [datepart2,datepart1] =  oldvalue.split(splitdate01)
@@ -1333,8 +1333,8 @@ import{
 
                  //yeardate='20'+yeardate;
                 }
-                ////////console.log('before setdata')
-                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                //////////console.log('before setdata')
+                //////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                 } 
                   // **********************************************************************************
 // **********************************************************************************
@@ -1343,12 +1343,12 @@ import{
 // **********************************************************************************
 
                 } else if (/^\d{1,2}\.\d{4}(\.)?$/.test(oldvalue.toString().trim().replace(/\s*\.\s*/g,"."))){
-                  //////console.log('condition date 2.2.18   like  12.2023 06.2012.  2.2013. ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.18   like  12.2023 06.2012.  2.2013. ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='.';
                   var [datepart2,datepart1] =  oldvalue.split(splitdate01)
-                  //////console.log(datepart1)
-                  //////console.log(datepart2)
+                  ////////console.log(datepart1)
+                  ////////console.log(datepart2)
                   if(navigator_language=='en-CA' || navigator_language=='ko-KR' || navigator_language=='hu-HU' || navigator_language=='ja-JP' || navigator_language=='ZH-CN' ){   // maybe edit later change it later modify it later
                     var [datepart2,datepart1] =  oldvalue.split(splitdate01)
                     if(Number(datepart2)>12){
@@ -1373,7 +1373,7 @@ import{
                                     //yeardate='20'+yeardate;
                         }
                     } else {
-                  //////console.log('else navigator language')
+                  ////////console.log('else navigator language')
 
                   //if(navigator_language=='en-US' || navigator_language=='de-DE' || navigator_language=='ru-RU' || navigator_language=='tr-TR' ){
                 var [datepart2,datepart1] =  oldvalue.split(splitdate01)
@@ -1402,8 +1402,8 @@ import{
 
                  //yeardate='20'+yeardate;
                 }
-                ////////console.log('before setdata')
-                ////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
+                //////////console.log('before setdata')
+                //////////console.log(daydate+splitdate01+monthdate+splitdate01+yeardate)
                 } 
 
 
@@ -1414,8 +1414,8 @@ import{
 // **********************************************************************************
 
                 } else if (/^\d{4}\/?$/.test(oldvalue.toString().trim().replace(/\s*\/\s*/g,"/"))){
-                  //////console.log('condition date 2.2.19   like  2023 2022/ ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.19   like  2023 2022/ ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='/';
                   var [yearpart0,yearpart00] =  oldvalue.split(splitdate01)
                   hot.setDataAtCell(row, prop,"01"+splitdate01+"01"+splitdate01+yearpart0,'my_source_date')
@@ -1426,8 +1426,8 @@ import{
 // **********************************************************************************
 // **********************************************************************************
                 } else if (/^\d{4}[-]?\s*$/.test(oldvalue.toString().trim().replace(/\s*-\s*/g,"-")) ){
-                  //////console.log('condition date 2.2.20   like  2023 2022- ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.20   like  2023 2022- ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='-';
                   var [yearpart0,yearpart00] =  oldvalue.split(splitdate01)
                   hot.setDataAtCell(row, prop,"01"+splitdate01+"01"+splitdate01+yearpart0,'my_source_date')
@@ -1439,8 +1439,8 @@ import{
 // **********************************************************************************
         
               } else if (/^\d{4}[.]?\s*$/.test(oldvalue.toString().trim().replace(/\s*\.\s*/g,"."))){
-                  //////console.log('condition date 2.2.21   like  2023 2022. ')     
-                  //////console.log(oldvalue)             
+                  ////////console.log('condition date 2.2.21   like  2023 2022. ')     
+                  ////////console.log(oldvalue)             
                   var splitdate01='.';
                   var [yearpart0,yearpart00] =  oldvalue.split(splitdate01)
                   hot.setDataAtCell(row, prop,"01"+splitdate01+"01"+splitdate01+yearpart0,'my_source_date')
@@ -1455,10 +1455,10 @@ import{
               }            
 
         }  else if ( oldvalue =='') {
-          //////console.log('condition date 3')
-          //////console.log('do nothing could end here')
+          ////////console.log('condition date 3')
+          ////////console.log('do nothing could end here')
           } else {
-            //////console.log('condition date 4')
+            ////////console.log('condition date 4')
           //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
           if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
@@ -1473,8 +1473,8 @@ import{
 
           }
           hot.setDataAtCell(row, prop,'','my_source_empty_date')
-          ////////console.log('do nothing could end here')
-          //////console.log('removes')
+          //////////console.log('do nothing could end here')
+          ////////console.log('removes')
         }
       
   }

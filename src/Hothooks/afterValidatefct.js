@@ -46,13 +46,13 @@ import{
   
 export function afterValidatefct(isValid, oldvalue, row, prop, source,hot,userLocale,decimalSeparator,navigator_language,use_english_date_by_user_himeself_in_modal,commentsPlugin,isLoading,setNotification){
   
-  console.log('aftervalidate Function triggered')
+  //console.log('aftervalidate Function triggered')
  
     // const hot = otherArgs[otherArgs.length - 1];
     //alert('we are in afterValidatefct , and userLocale.current is : ' + userLocale.current + ' and decimalSeparator.current : ' + decimalSeparator.current)
     
   /* if(isValid && oldvalue==null){
-    //console.log('do nothing')
+    ////console.log('do nothing')
 //    commentsPlugin.removeCommentAtCell(row, prop);
   } else {
     */

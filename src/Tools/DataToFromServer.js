@@ -13,7 +13,7 @@ export const saveDataToServer = (data) => {
       return response.json();
     })
     .then(data => {
-      console.log('Data saved successfully:', data);
+      //console.log('Data saved successfully:', data);
     })
     .catch(error => {
       console.error('Error saving data:', error);

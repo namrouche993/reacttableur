@@ -147,7 +147,7 @@ function ModalAdd(props) {
           })
   
         });
-        console.log(response)
+        //console.log(response)
         if (response.ok) {
           //const data_response = await response.json();
           //setEmails_added_list(prevList => prevList.filter(email => email !== emailtosend_in_modalconfirm_toremovec));
@@ -193,9 +193,9 @@ function ModalAdd(props) {
        });
 
        if (response_allowedemails.ok) {
-        console.log('try to knwo how many times it renders !!!!!!!!!!!!!!!!!!!! ');
+        //console.log('try to knwo how many times it renders !!!!!!!!!!!!!!!!!!!! ');
         const value_allowedemails_with_requestor = await response_allowedemails.json();
-        console.log(value_allowedemails_with_requestor.user5)
+        //console.log(value_allowedemails_with_requestor.user5)
 
         const value_allowedemails = {
         "user12":value_allowedemails_with_requestor.user12,
@@ -208,16 +208,16 @@ function ModalAdd(props) {
       }
         const role_of_the_requestor = value_allowedemails_with_requestor.role_of_the_requestor;
         const emailslength = value_allowedemails_with_requestor.emailslength
-        console.log(value_allowedemails)
+        //console.log(value_allowedemails)
 
         //var emails_in_list = Object.values(value_allowedemails);
         var emails_in_list = Object.entries(value_allowedemails).map(([key, value]) => [value.useremail,value.role, value.code])
-        console.log('emails_in_list ::::::::::::::::::::::::::::::::::::')
-        console.log(emails_in_list)
+        //console.log('emails_in_list ::::::::::::::::::::::::::::::::::::')
+        //console.log(emails_in_list)
         // Filtering out null elements from the array
         //let emails_in_list_withoutNull = emails_in_list.filter(element => element !== null);
         let emails_in_list_withoutNull = emails_in_list.filter(arr => !arr.every(el => el === null));
-        console.log(emails_in_list_withoutNull)
+        //console.log(emails_in_list_withoutNull)
         setEmails_added_list(emails_in_list_withoutNull)
         setEmails_added_length(emailslength)
         setRequestor_role(role_of_the_requestor)
@@ -225,7 +225,7 @@ function ModalAdd(props) {
         //setEmailsadded2(value_allowedemails.user2email)
         //setEmailsadded3(value_allowedemails.user3email)
         
-        console.log('Data sent successfully to the server.');
+        //console.log('Data sent successfully to the server.');
        } else {
           console.error('Error sending data to the server.');
        }
@@ -253,7 +253,7 @@ function ModalAdd(props) {
     setErrorEmail(!isValidEmail(inputEmail));
 
     if( !isValidEmail(inputEmail)){
-      return console.log("Error Filling");
+      return //console.log("Error Filling");
     }
     try {
       var currentrouteofurl = window.location.pathname.toString().replace('/tab/','');
@@ -274,13 +274,13 @@ function ModalAdd(props) {
        })
 
       });
-      console.log('response in add post :')
-      console.log(recaptchaToken_add)
-      console.log(response)
+      //console.log('response in add post :')
+      //console.log(recaptchaToken_add)
+      //console.log(response)
       if (response.ok) {
         const data_response = await response.json();
-        console.log('data_response.role')
-        console.log(data_response.role)
+        //console.log('data_response.role')
+        //console.log(data_response.role)
         setEmails_added_list(prevList => [...prevList, [inputEmail,data_response.role,data_response.codepass]]);
         setEmails_added_length(emails_added_length+1)
         setInputEmail('');
@@ -318,8 +318,8 @@ function ModalAdd(props) {
 
   
   const onClosing = () =>{
-    console.log('emails_added_list');
-    console.log(emails_added_list);
+    //console.log('emails_added_list');
+    //console.log(emails_added_list);
 
     props.onClose()
    //props.senddata(props.onClose())
@@ -329,7 +329,7 @@ function ModalAdd(props) {
 
   const handleChangeRole = (event) => {
     setRole(event.target.value)
-    console.log('rolle')
+    //console.log('rolle')
   }
 
   const getHelperText = () => {

@@ -212,9 +212,9 @@ function ModalEdit(props) {
       alert('Please complete the reCAPTCHA verification.');
       return;
     }
-    console.log('isVerified')
-    console.log(!isVerified)
-    console.log(recaptchaToken);
+    //console.log('isVerified')
+    //console.log(!isVerified)
+    //console.log(recaptchaToken);
     
     setSubmitted(true);
     setErrorPN(!isValidPhoneNumber(phoneNumber));
@@ -224,7 +224,7 @@ function ModalEdit(props) {
     setErrorRegion(region==='');
 
     if( !(!errorOrganisme && !errorRegion && isValidEmail(email) && isValidPhoneNumber(phoneNumber)) ){
-      return console.log("Error Filling");
+      return //console.log("Error Filling");
     }
     try {
       //var sec_ls_nav_lang2_sto = secureLocalStorage.getItem("navigator_language2_storage") ? secureLocalStorage.getItem("navigator_language2_storage") : (navigator.language); // editable if we set always navigator.language
@@ -254,8 +254,8 @@ function ModalEdit(props) {
       var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
        
 
-      console.log('use_english_date_by_user_himeself_in_modal_storage ************** : ')
-      console.log(secureLocalStorage.getItem("use_english_date_by_user_himeself_in_modal_storage"))
+      //console.log('use_english_date_by_user_himeself_in_modal_storage ************** : ')
+      //console.log(secureLocalStorage.getItem("use_english_date_by_user_himeself_in_modal_storage"))
 
       const response = await fetch('http://localhost:5000/tab/login', {
          method: 'POST',
@@ -308,9 +308,9 @@ function ModalEdit(props) {
          //window.location.href = '/main-page';
 
          props.onClose();
-         console.log('Data sent successfully to the server.');
-         console.log('before doing window.location.href :')
-         console.log(secureLocalStorage.getItem('hisownroute'))
+         //console.log('Data sent successfully to the server.');
+         //console.log('before doing window.location.href :')
+         //console.log(secureLocalStorage.getItem('hisownroute'))
          window.location.href = '/tab/'+data_response.hisownroute; //secureLocalStorage.getItem('hisownroute')
          //window.location.reload();
          
@@ -374,7 +374,7 @@ function ModalEdit(props) {
       
       } else {
         // Handle registration error
-        console.log('registration failed')
+        //console.log('registration failed')
       }
 
     } catch (error) {
@@ -448,11 +448,11 @@ function ModalEdit(props) {
           'Content-Type': 'application/json',
         }
       });
-      console.log('response in clearCookie :')
-      console.log(response)
+      //console.log('response in clearCookie :')
+      //console.log(response)
 
       if (response.ok) {
-        console.log('Cookie cleared successfully');
+        //console.log('Cookie cleared successfully');
         secureLocalStorage.removeItem("ussd74kasd75_2");
         secureLocalStorage.removeItem("email_chosen");
         secureLocalStorage.removeItem("email_chosen_to_display");

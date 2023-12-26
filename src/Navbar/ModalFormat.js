@@ -93,7 +93,7 @@ function ModalFormat(props) {
   
 
   const handleSubmit = async () => {
-    console.log('we are in handleSubmit of modalFormat !!!!!!!!!!!!!!!')
+    //console.log('we are in handleSubmit of modalFormat !!!!!!!!!!!!!!!')
     try {
       
     // Handle form submission here if needed
@@ -127,10 +127,10 @@ function ModalFormat(props) {
                outerLoop: for (const lang of dateValues) {
                   for (const lang2 of dateValues) {
                     if(navigator_language2_redux==lang && new_selectedDateFormat==lang2){
-                      ////console.log('before convertdateformat :')
-                      ////console.log(cellValueDate)
-                      ////console.log(lang)
-                      ////console.log(lang2)
+                      //////console.log('before convertdateformat :')
+                      //////console.log(cellValueDate)
+                      //////console.log(lang)
+                      //////console.log(lang2)
                       var convertedDate = convertDateFormat(cellValueDate, lang, lang2);
                          if(convertedDate!=cellValueDate){
                              var changeonedata = [rowIndex, columnIndex, convertedDate];
@@ -147,11 +147,11 @@ function ModalFormat(props) {
        })
 
   for (let index = 0; index<hotInstance_redux.undoRedo.doneActions.length; index++) {
-        //console.log('index : ')
-        //console.log(index) 
+        ////console.log('index : ')
+        ////console.log(index) 
         hotInstance_redux.undoRedo.doneActions[index].changes.forEach((x,y)=>{
-          //console.log('x of foreach : ')
-          //console.log(x)
+          ////console.log('x of foreach : ')
+          ////console.log(x)
           if(x[1]==6) {  // editable index
             if(x[2]!==null && x[2]!=='' && x[2]!==' '){
               x[2]=convertDateFormat(x[2], navigator_language2_redux, new_selectedDateFormat) 
@@ -164,11 +164,11 @@ function ModalFormat(props) {
       }
 
 for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index++) {
-  //console.log('index : ')
-  //console.log(index) 
+  ////console.log('index : ')
+  ////console.log(index) 
   hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
-    //console.log('x of foreach : ')
-    //console.log(x)
+    ////console.log('x of foreach : ')
+    ////console.log(x)
     if(x[1]==6) {  // editable index
       if(x[2]!==null && x[2]!=='' && x[2]!==' '){
         x[2]=convertDateFormat(x[2], navigator_language2_redux, new_selectedDateFormat) 
@@ -210,22 +210,22 @@ for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index
 
   }
 
-console.log('we will use modalformat with numbers now :')
-console.log(decimalSeparator2_redux)
-console.log(new_selectedNumericFormat)
+//console.log('we will use modalformat with numbers now :')
+//console.log(decimalSeparator2_redux)
+//console.log(new_selectedNumericFormat)
 
 if(decimalSeparator2_redux!=new_selectedNumericFormat){
   if(new_selectedNumericFormat==','){
     if(all_european_formal_are_test==true && all_european_formal_are=='fr'){ // editable 'fr the change it if the previous is true'
       // when we set the numeric format always be in fr 1 234 567.89  and modal language is in fr
-      console.log('test 1 to ,')
+      //console.log('test 1 to ,')
       dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
       secureLocalStorage.setItem('userLocale2_storage', 'fr');
 
       //setTitlemodalformat('fr'); // editable LATEEEEEEEEEEEEEEEERR if it's necessary
 
     } else if( (1234567.73).toLocaleString(Intl.DateTimeFormat().resolvedOptions().locale, { style: 'decimal' }).substring(9, 10).toString()==','){
-      console.log('test 2 to ,')
+      //console.log('test 2 to ,')
 
       dispatch({ type: 'SET_userLocale2', payload: Intl.DateTimeFormat().resolvedOptions().locale });  // // editable if it's necessary
       secureLocalStorage.setItem('userLocale2_storage', Intl.DateTimeFormat().resolvedOptions().locale );
@@ -233,18 +233,18 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
       //setTitlemodalformat(Intl.DateTimeFormat().resolvedOptions().locale);
 
       } else {
-        console.log('test 3 to ,')
+        //console.log('test 3 to ,')
         //alert('i think we will be here ')
         dispatch({ type: 'SET_userLocale2', payload: 'fr' });  // // editable if it's necessary
         secureLocalStorage.setItem('userLocale2_storage', 'fr');
 
         //setTitlemodalformat('en')  editabler LATEEEEEEEEEEEEEEEEEEEEER
       }
-      console.log('whatever 4 to decimalstorage_storage ,')
+      //console.log('whatever 4 to decimalstorage_storage ,')
       dispatch({ type: 'SET_decimalSeparator2', payload: ',' });  // WITH REDUX
       secureLocalStorage.setItem('decimalSeparator2_storage', ',');
 
-      console.log('we will cal data_to_convert for each to change the values')
+      //console.log('we will cal data_to_convert for each to change the values')
       data_to_convert.forEach((row, rowIndex) => {
             if (rowIndex > startRowIndex) {
                 NumColumnsToConvert.forEach(columnIndex => {
@@ -252,9 +252,9 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
                      if(cellValue!==null & cellValue!==undefined){
                        const convertedNumber = cellValue.toString().replace(/\./g, ',');
                        if(convertedNumber!=cellValue){
-                         //////console.log('convert dontequal to cellvalue : ')
-                         //////console.log(convertedNumber)
-                         //////console.log(cellValue)
+                         ////////console.log('convert dontequal to cellvalue : ')
+                         ////////console.log(convertedNumber)
+                         ////////console.log(cellValue)
                          var changeonedata = [rowIndex, columnIndex, convertedNumber];
                          changesdata_numeric.push(changeonedata);
                     }
@@ -263,11 +263,11 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat){
               }
           });
 
-          console.log('we will change previous by undoredo for each to change the values')
+          //console.log('we will change previous by undoredo for each to change the values')
 
 for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index++) {
 hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
-  //////console.log('x in foreach :')
+  ////////console.log('x in foreach :')
   if( // editable index
     x[1] == 7 || x[1] == 8
     ){
@@ -288,8 +288,8 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
 
                      
           hotInstance_redux.setDataAtRowProp(changesdata_numeric,'dataatrowprop_convert_to_fr');
-          //console.log('changesdata_numeric : ')
-          //console.log(changesdata_numeric)
+          ////console.log('changesdata_numeric : ')
+          ////console.log(changesdata_numeric)
           //alert('we made setDataatrowprop of changesdata_numeric')
   } else {
     dispatch({ type: 'SET_userLocale2', payload: 'en' });  // WITH REDUX
@@ -300,15 +300,15 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
 
       data_to_convert.forEach((row, rowIndex) => {
             if (rowIndex > startRowIndex) {
-              //console.log('----------------')
+              ////console.log('----------------')
                 NumColumnsToConvert.forEach(columnIndex => {
                      const cellValue = row[columnIndex];
                    if(cellValue!==null & cellValue!==undefined){
                      const convertedNumber = cellValue.toString().replace(/,/g, '.');
                      if(convertedNumber!=cellValue){
-                       ////console.log('convert dontequal to cellvalue : ')
-                       ////console.log(convertedNumber)
-                       ////console.log(cellValue)
+                       //////console.log('convert dontequal to cellvalue : ')
+                       //////console.log(convertedNumber)
+                       //////console.log(cellValue)
                        var changeonedata = [rowIndex, columnIndex, convertedNumber];
                        changesdata_numeric.push(changeonedata);
                     }
@@ -319,7 +319,7 @@ hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
 
           for (let index = 0; index<hotInstance_redux.undoRedo.undoneActions.length; index++) {
 hotInstance_redux.undoRedo.undoneActions[index].changes.forEach((x,y)=>{
-  ////console.log('x in foreach :')
+  //////console.log('x in foreach :')
   if( // editable
     x[1] == 7 || x[1] == 8    ){
       if(x[2]!==null && x[2]!=='' && x[2]!==' '){
@@ -371,8 +371,8 @@ if(decimalSeparator2_redux!=new_selectedNumericFormat || new_selectedDateFormat!
 var sec_ls_useloc_sto = secureLocalStorage.getItem("userLocale2_storage") ? secureLocalStorage.getItem("userLocale2_storage") : Intl.DateTimeFormat().resolvedOptions().locale  // editable if we set always userlocale
 var sec_ls_decim_sep_sto = secureLocalStorage.getItem("decimalSeparator2_storage") ? secureLocalStorage.getItem("decimalSeparator2_storage") : (1234567.73).toLocaleString(sec_ls_useloc_sto, { style: 'decimal' }).substring(9, 10).toString();  // editable if we set always separtor
 
-console.log('we will cal changeformat request to en')
-console.log(sec_ls_decim_sep_sto)
+//console.log('we will cal changeformat request to en')
+//console.log(sec_ls_decim_sep_sto)
 //alert('we will change use_english_date_by_user_himeself_in_mo dal_storage to : '  + secureLocalStorage.getItem("use_english_date_by_user_himeself_in_modal_storage"))
 var response_chfo = await fetch('http://localhost:5000/changeformat', {
   method: 'POST',
@@ -389,13 +389,13 @@ var response_chfo = await fetch('http://localhost:5000/changeformat', {
     "use_english_date_by_user_himeself_in_modal_of_browser":secureLocalStorage.getItem("use_english_date_by_user_himeself_in_modal_storage")
   })
 })
-console.log('response_chfo')
-console.log(response_chfo)
+//console.log('response_chfo')
+//console.log(response_chfo)
 
 if (response_chfo.ok) {
-  console.log('response.ok true in modalformat changeformat request')
+  //console.log('response.ok true in modalformat changeformat request')
 } else {
-  console.log('response. not ok')
+  //console.log('response. not ok')
 }
 
 props.sendnewformatparameters([new_selectedNumericFormat,new_selectedDateFormat])
@@ -405,7 +405,7 @@ props.sendnewformatparameters([new_selectedNumericFormat,new_selectedDateFormat]
         //window.location.reload();
     }, 2000);
 } catch (error) {
-   console.log('Error in handleSubmit of ModalFormat !!!!!!!!!!!!!! : ' + error)   
+   //console.log('Error in handleSubmit of ModalFormat !!!!!!!!!!!!!! : ' + error)   
 }
   }
 

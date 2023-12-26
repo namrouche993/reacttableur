@@ -250,8 +250,8 @@ export function getInputValue_navigator_language2_avant_modify() {
 
   // start -------- decimalseparator2
     let decimalSeparator2 = (1234567.73).toLocaleString(getInputValue_userLocale2(), { style: 'decimal' }).substring(9, 10).toString();
-    ////console.log('decimalsep2 when let first : ')
-    ////console.log(decimalSeparator2)
+    //////console.log('decimalsep2 when let first : ')
+    //////console.log(decimalSeparator2)
     export function setInputValue_decimalSeparator2(value) {     
       decimalSeparator2 = value;
      }

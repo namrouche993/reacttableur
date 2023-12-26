@@ -119,7 +119,7 @@ function AppNotAuthorized401(props) {
 
     if (!(isValidEmail(email))) {
       setErrorEmail(!isValidEmail(email));
-      return console.log('Error Filling');
+      return //console.log('Error Filling');
     }
 
     try {
@@ -137,15 +137,15 @@ function AppNotAuthorized401(props) {
           //recaptchaTokenAccess: recaptchaTokenAccess,
         }),
       });
-      console.log('responseem')
-      console.log(responseem);
-      console.log(responseem.ok)
-      console.log(responseem.status)
+      //console.log('responseem')
+      //console.log(responseem);
+      //console.log(responseem.ok)
+      //console.log(responseem.status)
       //var responsejson = await responseem.json();
-      //console.log(responsejson)
+      ////console.log(responsejson)
       //alert(responseem.status)
       if (responseem.status==402){
-        console.log('ussa')
+        //console.log('ussa')
         setNextted(true)
         setErrorEmail(true)
         setEmailalreadyused(true);
@@ -153,10 +153,10 @@ function AppNotAuthorized401(props) {
       } else if (responseem.ok) {
         //alert('we are in ok')
 
-        console.log('we are in response.ok')
+        //console.log('we are in response.ok')
         const data_response = await responseem.json();
-        console.log('data_response  :')
-        console.log(data_response)
+        //console.log('data_response  :')
+        //console.log(data_response)
         //secureLocalStorage.setItem('ussd74kasd75_2', data_response.idusername_to_client_side);
         secureLocalStorage.setItem('email_chosen', data_response.email);
         secureLocalStorage.setItem('email_chosen_to_display', data_response.email_to_display);
@@ -167,7 +167,7 @@ function AppNotAuthorized401(props) {
         setNextted(true)
 
         //props.onClose();
-        console.log('Data sent successfully to the server.');
+        //console.log('Data sent successfully to the server.');
         //window.location.reload();
       } else {
         //alert('setnexted why it is true')
@@ -191,11 +191,11 @@ function AppNotAuthorized401(props) {
     }
   
     setErrorEmail(!isValidEmail(email))
-    console.log(pinCode)
-    console.log(email)
+    //console.log(pinCode)
+    //console.log(email)
 
     if (!isValidEmail(email) || isEmptyArrayfct(pinCode) ) {
-      return console.log('Error Filling!!!!!!!!!!!!!!');
+      return //console.log('Error Filling!!!!!!!!!!!!!!');
     }
   
     try {
@@ -218,9 +218,9 @@ function AppNotAuthorized401(props) {
   
       if (responsecp.ok) {
         const data_responsecp = await responsecp.json();
-        console.log('data_responsecp')
-        console.log(data_responsecp);
-        console.log(data_responsecp.dataa)
+        //console.log('data_responsecp')
+        //console.log(data_responsecp);
+        //console.log(data_responsecp.dataa)
         //alert('dataaa')
        // if (data_responsecp.ok) {
           // Email and pin code are verified, perform the next actions
@@ -247,7 +247,7 @@ function AppNotAuthorized401(props) {
           //alert('email_todisplay:' + data_responsecp.email_to_display)
 
           //props.onClose();
-          console.log('Data sent successfully to the server.');
+          //console.log('Data sent successfully to the server.');
           //alert('sss')
           
           window.location.reload();
@@ -312,11 +312,11 @@ function AppNotAuthorized401(props) {
           'Content-Type': 'application/json',
         }
       });
-      console.log('response in clearCookie :')
-      console.log(response)
+      //console.log('response in clearCookie :')
+      //console.log(response)
 
       if (response.ok) {
-        console.log('Cookie cleared successfully');
+        //console.log('Cookie cleared successfully');
         secureLocalStorage.removeItem("ussd74kasd75_2");
         secureLocalStorage.removeItem("email_chosen");
         secureLocalStorage.removeItem("email_chosen_to_display");

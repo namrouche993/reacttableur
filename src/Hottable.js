@@ -106,6 +106,12 @@ function Hottable() {
   const [csrftoken,setCSRFToken]=useState('');
 
   const [lastchanges,setLastchanges]=useState([]);
+  const lastchanges_ref = useRef([]);
+
+  // Function to update the array in useRef
+  const update_lastchanges_ref = (newValue) => {
+     lastchanges_ref.current = [...lastchanges_ref.current, newValue];
+   };
 
 
   const dispatch = useDispatch();
@@ -150,8 +156,8 @@ function Hottable() {
 
   React.useEffect(() => {
   //alert('read_only would be : ' + props.read_only)
-  console.log('ussd74kasd75_2 is ::::::::::::')
-  console.log(secureLocalStorage.getItem('ussd74kasd75_2'))
+  //console.log('ussd74kasd75_2 is ::::::::::::')
+  //console.log(secureLocalStorage.getItem('ussd74kasd75_2'))
 
   //alert('readonlyhot :' + readonlyhot ? 'trueee ' : 'falseee')
 
@@ -230,10 +236,10 @@ function Hottable() {
         beforeAutofill: (selectionData, sourceRange, targetRange, direction) => {
           var cellsToAutofill = getCellsBetweenRanges(sourceRange.from, targetRange.to);
           var myoldmergedcells = myoldmergedcells_fct();
-          //console.log('hot in beforeautofill : ')
-          //console.log(hot)
+          ////console.log('hot in beforeautofill : ')
+          ////console.log(hot)
           var cells_with_readonly0 = cells_with_readonly(hot)
-          //console.log(cells_with_readonly0)
+          ////console.log(cells_with_readonly0)
 
           //const commonPairExists = hasCommonPair(cellsToAutofill, myoldmergedcells);
           const commonPairExists = hasCommonPair(cellsToAutofill, cells_with_readonly0);
@@ -267,9 +273,9 @@ function Hottable() {
           afterValidatefct(isValid, value, row, prop, source, hot,userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,use_english_date_by_user_himeself_in_modal_ref,commentsPlugin,isLoading,setNotification);
         },
         beforeKeyDown: (event) => {
-          //console.log('********************')
-          //console.log(event)
-          //console.log(event.key.length)
+          ////console.log('********************')
+          ////console.log(event)
+          ////console.log(event.key.length)
           if(role_user_redux){
             if(event.key.length==1){
             setNotification({
@@ -282,12 +288,12 @@ function Hottable() {
           }
             return 
           }
-          console.log('-------------------------------')
+          //console.log('-------------------------------')
           if (event.key === 'Enter' && event.shiftKey) {
             alert('To break the line please, click Ctrl+Enter or Alt+Enter')    // editable
             event.stopImmediatePropagation();
             event.preventDefault();
-            console.log('Shift+Enter pressed');
+            //console.log('Shift+Enter pressed');
           } else {              
           beforeKeyDownfct(event,hot,
             userLocale2_ref,decimalSeparator2_ref,navigator_language2_ref,commentsPlugin
@@ -296,12 +302,12 @@ function Hottable() {
           }
         },
         beforeCreateRow: function(index,amout,source) {
-          //console.log('beforeCreateRow HOOOK')
+          ////console.log('beforeCreateRow HOOOK')
 
           data22[data22.length]= ['','','','','','','','','','','','','','','','','',   ''] // editable the nb 
           dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
-          console.log(' data 22 beforeCreateRow')
-          console.log(data22)
+          //console.log(' data 22 beforeCreateRow')
+          //console.log(data22)
         },
 
       
@@ -327,24 +333,24 @@ function Hottable() {
     hot.addHook('beforeChange', function(changes, source) {
       //const hotInstance = hot; // Store the hot instance
       //beforeChangeFct(changes,source, ...otherArgs, hotInstance)
-      //console.log('beforeChange triggered')
+      ////console.log('beforeChange triggered')
       if(role_user_redux){
         return
       }
       //if( (source=='CopyPaste.paste' && changes.length>30) || (source=='edit' && changes.length>30) || (source=='Autofill.fill' && changes.length>30) || (source=='UndoRedo.redo' && changes.length>30) ){
      if (changes.length>30){
-        //console.log('show showspinner : ')
-        //console.log(source)
-        //console.log(changes)
+        ////console.log('show showspinner : ')
+        ////console.log(source)
+        ////console.log(changes)
         showSpinner();
         //setInputValue_spinnerf(true);
       }
-      console.log('we will call beforechangefcr')
-      console.log('changes and source :')
-      console.log(changes)
-      console.log(source)
+      //console.log('we will call beforechangefcr')
+      //console.log('changes and source :')
+      //console.log(changes)
+      //console.log(source)
       beforeChangeFct(changes,source,hot,commentsPlugin)
-      console.log('end before change in hotttable')
+      //console.log('end before change in hotttable')
 
     });
 
@@ -354,29 +360,37 @@ function Hottable() {
         console.log('------------------------------ afterChange :  ------------------------------' )
         console.log(source)
         console.log(changes)
+        
         var array_of_notmerged_cells_2 = [].concat(...array_of_notmerged_cells)
         afterChangeHandler(changes, source, hot,data22,array_of_notmerged_cells_2,commentsPlugin); // Now hotInstance is available
 
-               console.log('source in setitemout to make socket.emit :')
-               console.log(source)
+               //console.log('source in setitemout to make socket.emit :')
+               //console.log(source)
                if (source !== 'loadData' && source !=='changeorganismesrc' && source !== 'dataatrowprop_received_from_socket_server_event') {
                  //socket.emit('dataChanged', handsontableInstance.getData());
                  //socket.emit('afterchange_data_socket_event',my_actual_getdata)
-                 console.log('*****************source and changes  in afterchangehandle to handle hotundoredo with socket: ')
-                 console.log(hot.undoRedo.doneActions)
-                 console.log(hot.undoRedo.doneActions.length)
+                 //console.log('*****************source and changes  in afterchangehandle to handle hotundoredo with socket: ')
+                 //console.log(hot.undoRedo.doneActions)
+                 //console.log(hot.undoRedo.doneActions.length)
                  if(hot.undoRedo.doneActions.length>0){
                    var hotaundoredo = hot.undoRedo.doneActions[hot.undoRedo.doneActions.length-1].changes; 
                    console.log('hotaundoredo')   
                    console.log(hot.undoRedo.doneActions)       
-                   console.log(hot.undoRedo.doneActions.length)
+                   //console.log(hot.undoRedo.doneActions.length)
                    console.log(hotaundoredo)
                    //setLastchanges(prev=>)  
                    var selectedColumns3_hotaundoredo = hotaundoredo.map(item => [item[0], item[1], item[3]]);
                    console.log('lastchanges before : ')
                    console.log(selectedColumns3_hotaundoredo)
                    console.log(lastchanges)
+                   console.log('lastchanges_ref before : ')
+                   console.log(lastchanges_ref.current)
                    setLastchanges(prevList => [...prevList, [selectedColumns3_hotaundoredo] ]);
+                   update_lastchanges_ref(selectedColumns3_hotaundoredo)
+
+                   console.log('lastchanges_ref after : ')
+                   console.log(lastchanges_ref.current)
+                   //lastchanges.current = 
 
                    //socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
                 }
@@ -395,7 +409,7 @@ function Hottable() {
 //          dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
           
           dispatch({ type: 'SET_DATA22', payload: data22 });  // WITH REDUX
-          console.log('*****************************************')
+          //console.log('*****************************************')
 
 
           secureLocalStorage.setItem("data_localstorage_storage_2", my_actual_getdata);
@@ -417,15 +431,15 @@ function Hottable() {
                   // "decimalseparator_updated":decimalSeparator2_redux
                 })
               });
-              console.log('response ')
-              console.log(response)
+              //console.log('response ')
+              //console.log(response)
               if (response.ok) {
                 const responseafterchange = response; // If expecting JSON response
-                console.log('responseafterchange')
-                console.log(responseafterchange)
+                //console.log('responseafterchange')
+                //console.log(responseafterchange)
                 //alert('successs')
               } else {
-                console.log('error ')
+                //console.log('error ')
                 //throw new Error('Network response was not ok.');
               }
           
@@ -509,12 +523,18 @@ function Hottable() {
 
           if (source !== 'loadData' && source !=='changeorganismesrc' && source !== 'dataatrowprop_received_from_socket_server_event') {
             if(hot.undoRedo.doneActions.length>0){
-              console.log('in try selectedColumns3_hotaundoredo')
+              console.log(' ******* in try selectedColumns3_hotaundoredo, to call socket.emit  ******')
               console.log(selectedColumns3_hotaundoredo)
               console.log('lastchanges')
               console.log(lastchanges)
-              socket.emit('afterchange_data_socket_event',lastchanges)
+
+              console.log('lastchanges_ref in try : ')
+              console.log(lastchanges_ref.current)
+              lastchanges_ref.current = [];
+
+              //socket.emit('afterchange_data_socket_event',lastchanges)
               setLastchanges([])
+              
             }
           }
 
@@ -538,7 +558,7 @@ function Hottable() {
           //alert('aftercnange end')          
 
         } catch (error) {
-         console.log('error in afterchange changetimer : ' + error)   
+         //console.log('error in afterchange changetimer : ' + error)   
         }
           //alert('Triggered after the last afterChange event within 1 second.');
         }, 1000);
@@ -552,16 +572,16 @@ function Hottable() {
       
       socket.on('updateData_socket_event',(receving_data_from_socket_server) => {
         
-        console.log('socket.on updateData_socket_event ')
+        //console.log('socket.on updateData_socket_event ')
         if (hotTableComponent.current) {
-          console.log('receving_data_from_socket_server in socket.on')
-          console.log(receving_data_from_socket_server)
+          //console.log('receving_data_from_socket_server in socket.on')
+          //console.log(receving_data_from_socket_server)
           //mynewarray.push(receving_data_from_socket_server[index])
           
           hot.setDataAtRowProp(receving_data_from_socket_server,'dataatrowprop_received_from_socket_server_event');
      }
 
-        console.log('socket.on updateData_socket_event : ')
+        //console.log('socket.on updateData_socket_event : ')
       })
     
 
@@ -595,17 +615,17 @@ function Hottable() {
 
 
           const handleVisibilityChange = () => {
-            console.log('we call handleVisibilityChange')
-            console.log(document.visibilityState);
+            //console.log('we call handleVisibilityChange')
+            //console.log(document.visibilityState);
             //alert('we are in beacon handlevisivilitychange fct ')
             if (document.visibilityState === 'hidden') {
               //alert('document visibiliystate hidden ')
-              console.log('handleVisibilityChange and document.vibisiltystate == hidden ')
+              //console.log('handleVisibilityChange and document.vibisiltystate == hidden ')
               // Page is being hidden, send the data to the server
               //const mydata_whenclosed = hot.getData(); // Obtain the data from Handsontable
               const jsonData_whenclosed = JSON.stringify(hot.getData());
               //const jsonData_whenclosed = mydata_whenclosed;
-              //console.log(jsonData_whenclosed)
+              ////console.log(jsonData_whenclosed)
               //const serverUrl = 'http://localhost:5000/beacondata';;
               //const idusername = secureLocalStorage.getItem('ussd74kasd75_2');
               // Send the data to the server using sendBeacon
@@ -686,7 +706,7 @@ function Hottable() {
   }, [role_user_redux]);
   
   useEffect(() => {
-    console.log('we are inside if useEffect getInputValue_spinnerf ')
+    //console.log('we are inside if useEffect getInputValue_spinnerf ')
     setIsLoading(getInputValue_spinnerf()); // Update the ref whenever value11 changes
   }, [getInputValue_spinnerf()]);
 

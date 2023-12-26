@@ -111,9 +111,9 @@ function Navbar(props) {
   };
   
   const handleCloseModaledit = () => {
-    console.log('handleCloseModaledit :')
-    console.log(props.display_modaledit)
-    console.log(props.displayed_pr);
+    //console.log('handleCloseModaledit :')
+    //console.log(props.display_modaledit)
+    //console.log(props.displayed_pr);
     
     props.display_modaledit ? setModalOpenedit(true) : props.displayed_pr ? setModalOpenedit(false) : setModalOpenedit(true)
     //setModalOpenedit(true)
@@ -125,22 +125,22 @@ function Navbar(props) {
     setModalOpenadd(true);
   }
 const handleCloseModaladd = () => {
-    console.log('handleCloseModaladd :')
+    //console.log('handleCloseModaladd :')
     setModalOpenadd(false);
   };
   
   
   useEffect(() => {
-    console.log('we are in useeffect because props.dispaly_modaledit changed')
+    //console.log('we are in useeffect because props.dispaly_modaledit changed')
     setModalOpenedit(props.display_modaledit);
     //window.location.reload();
   }, [props.display_modaledit])
   
   const submitdata = () => {
-    //console.log('data22_redux : ')
-    //console.log(data22_redux)
+    ////console.log('data22_redux : ')
+    ////console.log(data22_redux)
     alert('submitdata triggered')
-    ////console.log('submitting data ')
+    //////console.log('submitting data ')
     downloadfile(hotInstance_redux,data22_redux)
   }
 
@@ -173,8 +173,8 @@ const handleCloseModaladd = () => {
   const [new_selectedNumericFormat_from_modalformat,setNew_selectedNumericFormat_from_modalformat]=useState(decimalSeparator2_redux);
   const [new_selectedDateFormat_from_modalformat,setNew_selectedDateFormat_from_modalformat]=useState(navigator_language2_redux);
 
-  console.log('hotInstance_redux before handle converting : ')
-  console.log(hotInstance_redux)
+  //console.log('hotInstance_redux before handle converting : ')
+  //console.log(hotInstance_redux)
 
   const handle_converting_when_receving_notif_from_socketio = (new_selectedNumericFormat) => {
     // Handle form submission here if needed
@@ -235,18 +235,18 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
   socket.emit('join', mynamespace);
 
   const handleUndoClick = (click_undo_click) => {
-    console.log('undo from another user')
-    console.log(click_undo_click)
-    console.log(hotInstance_redux)
+    //console.log('undo from another user')
+    //console.log(click_undo_click)
+    //console.log(hotInstance_redux)
     if (hotInstance_redux) {
       hotInstance_redux.undo(true);
     }
   };
 
   const handleRedoClick = (click_redo_click) => {
-    console.log('Redo from another user')
-    console.log(click_redo_click)
-    console.log(hotInstance_redux)
+    //console.log('Redo from another user')
+    //console.log(click_redo_click)
+    //console.log(hotInstance_redux)
     if (hotInstance_redux) {
       hotInstance_redux.redo(true);
     }
@@ -263,7 +263,7 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
 
 
   socket.on('reconnect', () => {
-    console.log('Reconnected to the server');
+    //console.log('Reconnected to the server');
 //    alert('reconnect')
     // Re-subscribe to the 'listingusers' event after reconnection
     
@@ -278,19 +278,19 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
   //alert('useeffect ')
   socket.on('listingusers',(users)=>{
     //alert('listinguers')
-    console.log('we are in listingusers :')
-    console.log(users)
-    console.log(secureLocalStorage.getItem('email_chosen'))
-    console.log('****')
-    console.log(secureLocalStorage.getItem('email_chosen_to_display'))
+    //console.log('we are in listingusers :')
+    //console.log(users)
+    //console.log(secureLocalStorage.getItem('email_chosen'))
+    //console.log('****')
+    //console.log(secureLocalStorage.getItem('email_chosen_to_display'))
     //alert('listingusers :  ' + users)
     var uniqueSet = new Set(users);
     // Convert the Set back to an array
     var uniqueArray = Array.from(uniqueSet);
     const uniqueArraywithoutnull = uniqueArray.filter(user => user !== 'null').filter(user => user !== secureLocalStorage.getItem('email_chosen_to_display'));
-    //console.log('**************ssssssssssssssssssssssOOOOOOOOOOOOOOOOOOOOOOOsss*')
-    //console.log(uniqueArray)
-    console.log(uniqueArraywithoutnull)
+    ////console.log('**************ssssssssssssssssssssssOOOOOOOOOOOOOOOOOOOOOOOsss*')
+    ////console.log(uniqueArray)
+    //console.log(uniqueArraywithoutnull)
 
     setList_users_connecting(uniqueArraywithoutnull);
   })
@@ -340,17 +340,17 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
         })
       });
       //var responsejson = await responseem.json();
-      //console.log(responsejson)
+      ////console.log(responsejson)
       //alert(response.status)
       if(response.status==402){
         setRole_of_user_component('Owner')
         dispatch({ type: 'SET_ROLE_USER_REDUX', payload: false })
         //alert('response is 402 ')
       } else if (response.ok) {
-        console.log('we are in response.ok')
+        //console.log('we are in response.ok')
         const data_response = await response.json();
-        console.log('data_response  :')
-        console.log(data_response)
+        //console.log('data_response  :')
+        //console.log(data_response)
         var role_of_user = data_response.role;
         if(role_of_user=='Owner'){
           setRole_of_user_component('Owner')
@@ -386,7 +386,7 @@ secureLocalStorage.setItem('ds_haschanged_storage', true);
 
         }
         //props.onClose();
-        console.log('Data sent successfully to the server.');
+        //console.log('Data sent successfully to the server.');
         //window.location.reload();
       } else {
         setRole_of_user_component('Viewer')

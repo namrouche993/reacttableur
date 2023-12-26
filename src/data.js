@@ -30,9 +30,9 @@ export function ddatafct(last_row_after_header){
 
     var connecting_multiple_users = true;
 
-    console.log('dataaa 31 ')
-    console.log(secureLocalStorage.getItem('ussd74kasd75_2aaa')==null)
-    console.log(secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined')
+    //console.log('dataaa 31 ')
+    //console.log(secureLocalStorage.getItem('ussd74kasd75_2aaa')==null)
+    //console.log(secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined')
     //alert('we are in data.js')    
 
     if(secureLocalStorage.getItem('ussd74kasd75_2')!==null && secureLocalStorage.getItem('hisownroute')!==null){
@@ -70,8 +70,8 @@ export function ddatafct(last_row_after_header){
       const processFetchedData = async () => {
         try {
           const resultdatafromfct = await fetchDatadata();
-          console.log('Result from fetchData:');
-          console.log(resultdatafromfct);
+          //console.log('Result from fetchData:');
+          //console.log(resultdatafromfct);
           return resultdatafromfct
       
           // Here you can perform any further operations with the data
@@ -82,16 +82,16 @@ export function ddatafct(last_row_after_header){
 
     
     var result_from_fetch_data = await processFetchedData();
-    console.log('result_from_fetch_data ----------------------------------- ')
-    console.log(result_from_fetch_data)
+    //console.log('result_from_fetch_data ----------------------------------- ')
+    //console.log(result_from_fetch_data)
   } else {
     var result_from_fetch_data = null ;
   }
-console.log('result_from_fetch_data')
-console.log(result_from_fetch_data)
+//console.log('result_from_fetch_data')
+//console.log(result_from_fetch_data)
     export var data_localstorage =  result_from_fetch_data ? result_from_fetch_data : secureLocalStorage.getItem('data_localstorage_storage_2')==null || secureLocalStorage.getItem('data_localstorage_storage_2')==undefined || secureLocalStorage.getItem('data_localstorage_storage_2')=='undefined' ? ddatafct(last_row_after_header) : JSON.parse(secureLocalStorage.getItem('data_localstorage_storage_2'));
-    console.log('data_localstorage')
-    console.log(data_localstorage)
+    //console.log('data_localstorage')
+    //console.log(data_localstorage)
 
     
     export function data22fct(last_row_after_header){

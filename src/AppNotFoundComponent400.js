@@ -57,11 +57,11 @@ export default function AppNotFoundComponent400() {
           'Content-Type': 'application/json',
         }
       });
-      console.log('response in clearCookie :')
-      console.log(response)
+      //console.log('response in clearCookie :')
+      //console.log(response)
 
       if (response.ok) {
-        console.log('Cookie cleared successfully');
+        //console.log('Cookie cleared successfully');
         secureLocalStorage.removeItem("ussd74kasd75_2");
         secureLocalStorage.removeItem("email_chosen");
         secureLocalStorage.removeItem("email_chosen_to_display");

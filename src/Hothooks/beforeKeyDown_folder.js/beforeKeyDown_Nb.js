@@ -29,13 +29,13 @@
       } else if (decimalSeparator == ',') {
           if (event.key === '.') {
     
-            //////console.log(event)
+            ////////console.log(event)
 
 
             //if(selectedCol==3 ||  selectedCol==4        || selectedCol==5 ||        selectedCol==10 ){   // editable index modify editable , it's about percentage and make comma instead of dot in european format
             if(selectedCol==7 ){   // editable index modify editable , it's about percentage and make comma instead of dot in european format
 
-              ////console.log('we are inside selectedCol == 3')
+              //////console.log('we are inside selectedCol == 3')
               var cellpercent = hot.getActiveEditor().TEXTAREA; // Get the DOM element representing the cell editor
               hot.getActiveEditor().setValue(hot.getActiveEditor().getValue() + ',');
               cellpercent.setSelectionRange(cellpercent.value.length-1, cellpercent.value.length-1); // Set the new cursor position
@@ -49,7 +49,7 @@
           }
           }
           if (event.key === '.' && event.keyCode == 190) {
-            ////console.log('eventkey is . and eventkeycode is 190 : ')
+            //////console.log('eventkey is . and eventkeycode is 190 : ')
             hot.getActiveEditor().setValue(hot.getActiveEditor().getValue().substring(0, hot.getActiveEditor().getValue().length - 1) + '.');
             event.stopImmediatePropagation();
             event.preventDefault();

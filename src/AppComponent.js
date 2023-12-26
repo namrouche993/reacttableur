@@ -36,10 +36,10 @@ export default function AppComponent() {
             "idusername":secureLocalStorage.getItem('ussd74kasd75_2')
           })
          });
-         console.log('response of fetchAppenter in frontend :')
-         console.log(response)
+         //console.log('response of fetchAppenter in frontend :')
+         //console.log(response)
          if (response.ok) {
-          console.log('try to knwo how many times it renders !!! ');
+          //console.log('try to knwo how many times it renders !!! ');
            //props.onClose();
            setErrorOccurred(false);
            setAlreadylogin(false);
@@ -47,7 +47,7 @@ export default function AppComponent() {
 
            window.location.href = value_ownroute.hisownroute;
   
-           console.log('Data sent successfully to the server.');
+           //console.log('Data sent successfully to the server.');
     
          } else {
             setErrorOccurred(false);
@@ -77,7 +77,7 @@ export default function AppComponent() {
   
   
       if(secureLocalStorage.getItem('hisownroute')!==undefined && secureLocalStorage.getItem('hisownroute')!==null ){
-        console.log(secureLocalStorage.getItem('hisownroute'));
+        //console.log(secureLocalStorage.getItem('hisownroute'));
 
         window.location.href = secureLocalStorage.getItem('hisownroute');
       } else {
@@ -88,7 +88,7 @@ export default function AppComponent() {
       return () => clearTimeout(timeoutId);
 
     } catch (error) {
-      console.log('catch error of Appcomponent  : ' + error)   
+      //console.log('catch error of Appcomponent  : ' + error)   
      }
     }, [errorOccurred])
     

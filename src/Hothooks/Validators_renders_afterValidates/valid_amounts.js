@@ -55,8 +55,8 @@ import{
       //data22[row][col] = td.innerHTML;
       
     } else if (decimalSeparator == "." && /^\s*[-+]?(\s*\d+)\s*$/.test(value)) {
-      //////console.log('we are inside renderer . whole number')
-      //////console.log(value)
+      ////////console.log('we are inside renderer . whole number')
+      ////////console.log(value)
       const formatter = new Intl.NumberFormat(userLocale, {
         useGrouping: usegrouping_nbnb_if_true,
         style: 'decimal',
@@ -83,8 +83,8 @@ import{
       //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == "," && /^\s*[-+]?(\s*\d+)\s*$/.test(value)) {
-      //////console.log('we are inside renderer , whole number')
-      //////console.log(value)
+      ////////console.log('we are inside renderer , whole number')
+      ////////console.log(value)
       const formatter = new Intl.NumberFormat(userLocale, {
         useGrouping: usegrouping_nbnb_if_true,
         style: 'decimal',
@@ -116,9 +116,9 @@ import{
 
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?(\s*\d+(\.\d*)?|\.\d+)\s*$/.test(value)) {
-      //////console.log('we are inside rendere 1')
-      //////console.log('//1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR')
-      //////console.log(value)
+      ////////console.log('we are inside rendere 1')
+      ////////console.log('//1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR')
+      ////////console.log(value)
       const value_without_whitespace2 = value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2');
 
       //const userLocale = Intl.NumberFormat().resolvedOptions().locale || 'fr' || 'en'
@@ -150,11 +150,11 @@ import{
             td.innerHTML = formattedNumber22 + currencyht_toshow_nbnb;
           }
         }
-        //////console.log('we are inside td.innerhtml < 0.01')
+        ////////console.log('we are inside td.innerhtml < 0.01')
         //data22[row][col] = td.innerHTML;
 
       } else {
-        //////console.log('we are inside . and default and else (number value>0.01)')
+        ////////console.log('we are inside . and default and else (number value>0.01)')
         const formattedNumber = formatter.format(Number(value_without_whitespace2));
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
         if(Number(value_without_whitespace2.toString().trim())>0 && display_plus_sign_in_the_start==true){
@@ -175,11 +175,11 @@ import{
 
       }
 
-      //////console.log(td.innerHTML)
+      ////////console.log(td.innerHTML)
     } else if (decimalSeparator == ',' && /^\s*[-+]?(\s*\d+(,\d*)?|,\d+)\s*$/.test(value)) {
-      //////console.log('we are inside rendere 2')
-      //////console.log('we are inside decimalseparator == , and ezaoeza ')
-      //////console.log('//1234567,89 EUROPEAN FORMAT NUMERIC FORMAT WITHOUT THOUSAND')
+      ////////console.log('we are inside rendere 2')
+      ////////console.log('we are inside decimalseparator == , and ezaoeza ')
+      ////////console.log('//1234567,89 EUROPEAN FORMAT NUMERIC FORMAT WITHOUT THOUSAND')
       //const userLocale = Intl.NumberFormat().resolvedOptions().locale || 'fr' || 'en'
       //alert('maybe we are here')
       const formatter = new Intl.NumberFormat(userLocale, {
@@ -190,16 +190,16 @@ import{
       });
       const value_without_whitespace3 = value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2');
 
-      //////console.log('value in second :')
-      //////console.log(value_without_whitespace3)
+      ////////console.log('value in second :')
+      ////////console.log(value_without_whitespace3)
       const value_without_whitespace32 = value_without_whitespace3.toString().replace(',', '.')
-      ////////console.log('value2 :')
-      ////////console.log(value2)
-      //////console.log(Number(value_without_whitespace32))
+      //////////console.log('value2 :')
+      //////////console.log(value2)
+      ////////console.log(Number(value_without_whitespace32))
 
       if (Math.abs(Number(value_without_whitespace32)) < smallafterdigit_nbnb) {
-        //////console.log('ifnumbervalue2222<0.01 comma')
-        //////console.log(Number(value_without_whitespace32))
+        ////////console.log('ifnumbervalue2222<0.01 comma')
+        ////////console.log(Number(value_without_whitespace32))
         const formatter33 = new Intl.NumberFormat(userLocale, {
           useGrouping: usegrouping_nbnb_if_true,
           style: 'decimal',
@@ -232,7 +232,7 @@ import{
 
       } else {
         const formattedNumber = formatter.format(value_without_whitespace32);
-        //////console.log(formattedNumber)
+        ////////console.log(formattedNumber)
 
         //Handsontable.renderers.TextRenderer.apply(this, arguments);
         if(Number(value_without_whitespace32.toString().trim())>0 && display_plus_sign_in_the_start==true){
@@ -259,9 +259,9 @@ import{
       }
 
     } else if (decimalSeparator == ',' && /^\s*[-+]?(\s*\d{1,3}( \d{3})*(,\d*)?|,\d+)\s*$/.test(value.toString().replace(/[\s\u00A0]/g, ' ')) ) {
-      //////console.log('we are inside rendere 3')
-      //////console.log('we are inside else if 300 000,00')
-      //////console.log('// 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR')
+      ////////console.log('we are inside rendere 3')
+      ////////console.log('we are inside else if 300 000,00')
+      ////////console.log('// 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR')
       //alert('we are here')
       const formatter = new Intl.NumberFormat(userLocale, {
         style: 'decimal',
@@ -291,22 +291,22 @@ import{
 
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?(\s*\d{1,3}(,\d{3})*(\.\d+)?|\.\d+)\s*$/.test(value)) {
-      //////console.log('we are inside rendere 4')
-      //////console.log('5,455,653.35 ')
-      //////console.log('// 1,234,567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
+      ////////console.log('we are inside rendere 4')
+      ////////console.log('5,455,653.35 ')
+      ////////console.log('// 1,234,567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
       const formatter = new Intl.NumberFormat(userLocale, {
         style: 'decimal',
         useGrouping: usegrouping_nbnb_if_true,
         minimumFractionDigits: afterdigit_nbnb,
         maximumFractionDigits: afterdigit_nbnb,
       });
-      //////console.log('value in rendere 4 ')
-      //////console.log(value)
+      ////////console.log('value in rendere 4 ')
+      ////////console.log(value)
       const value4 = value.toString().replace(/,/g, '')
-     //////console.log(hot.undoRedo.doneActions)
+     ////////console.log(hot.undoRedo.doneActions)
  
-     //////console.log('value4:') 
-     //////console.log(value4)
+     ////////console.log('value4:') 
+     ////////console.log(value4)
       const formattedNumber = formatter.format(Number(value4).toFixed(2));
       //Handsontable.renderers.TextRenderer.apply(this, arguments);
 
@@ -328,9 +328,9 @@ import{
 
     } else if (decimalSeparator == ',' && /^\s*[-+]?(\s*\d{1,3}(?:\.\d{3})+(?:,\d+)?)\s*(?=\s|$)/.test(value)) {
       // 1.234.567,89 EUROPEAN NUMERIC FORMAT WITH THOUSAND SEPARATOR as dot
-      //////console.log('we are inside rendere 5')
-      //////console.log('5.300.000,00')
-      //////console.log('// 1.234.567,89 EUROPEAN NUMERIC FORMAT WITH THOUSAND SEPARATOR as dot')
+      ////////console.log('we are inside rendere 5')
+      ////////console.log('5.300.000,00')
+      ////////console.log('// 1.234.567,89 EUROPEAN NUMERIC FORMAT WITH THOUSAND SEPARATOR as dot')
       const formatter = new Intl.NumberFormat(userLocale, {
         style: 'decimal',
         useGrouping: usegrouping_nbnb_if_true,
@@ -359,9 +359,9 @@ import{
             //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?(\s*\d{1,3}( \d{3})*(\.\d*)?|\.\d+)\s*$/.test(value.toString().replace(/[\s\u00A0]/g, ' ')) ) {
-      //////console.log('we are inside rendere 6')
-      //////console.log('we are inside else if 300 000.00')
-      //////console.log('// 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
+      ////////console.log('we are inside rendere 6')
+      ////////console.log('we are inside else if 300 000.00')
+      ////////console.log('// 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
 
       const formatter = new Intl.NumberFormat(userLocale, {
         useGrouping: usegrouping_nbnb_if_true,
@@ -388,9 +388,9 @@ import{
             //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == '.' && /^\s*[-+]?[\s]*[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
-      //////console.log('we are inside rendere 7')
-      //////console.log('we are inside scientific notation :');
-      //////console.log('// 1.6e6 1.60E+04  -13.65E4  - 12.3E+03  scientific notation with E sign');
+      ////////console.log('we are inside rendere 7')
+      ////////console.log('we are inside scientific notation :');
+      ////////console.log('// 1.6e6 1.60E+04  -13.65E4  - 12.3E+03  scientific notation with E sign');
       const formatter = new Intl.NumberFormat(userLocale, {
         useGrouping: usegrouping_nbnb_if_true,
         style: 'decimal',
@@ -416,18 +416,18 @@ import{
             //data22[row][col] = td.innerHTML;
 
     } else if (decimalSeparator == ',' && /^\s*[-+]?[\s]*[0-9]*,?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
-      ////////console.log('----------------------------------------rendere 8 ---------------------------------------- rendere 8 ------------------------')
-      //////console.log('we are inside rendere 8')
-      //////console.log('we are inside scientific notation with comma :');
-      //////console.log('// 1,6e6 1,60E+04  -13,65E4  - 12,3E+03  scientific notation with E sign');
-      //////console.log('value inside scientific notation with comma else if : ')
+      //////////console.log('----------------------------------------rendere 8 ---------------------------------------- rendere 8 ------------------------')
+      ////////console.log('we are inside rendere 8')
+      ////////console.log('we are inside scientific notation with comma :');
+      ////////console.log('// 1,6e6 1,60E+04  -13,65E4  - 12,3E+03  scientific notation with E sign');
+      ////////console.log('value inside scientific notation with comma else if : ')
       const value8 = parseFloat(value.toString().replace(',', '.').toString().replace(/\s/g, ''));
-      //////console.log('value8 : ')
-      //////console.log(value8)
+      ////////console.log('value8 : ')
+      ////////console.log(value8)
 
       if (Math.abs(Number(value8)) < smallafterdigit_nbnb) {
-        //////console.log('ifnumbervalue2222<0.01 comma sceintific number')
-        //////console.log(Number(value8))
+        ////////console.log('ifnumbervalue2222<0.01 comma sceintific number')
+        ////////console.log(Number(value8))
         const formatter88 = new Intl.NumberFormat(userLocale, {
           useGrouping: usegrouping_nbnb_if_true,
           style: 'decimal',
@@ -472,12 +472,12 @@ import{
             td.innerHTML = formattedNumber + currencyht_toshow_nbnb;
           }
         }
-                //////console.log(td.innerHTML)
+                ////////console.log(td.innerHTML)
         //data22[row][col] = td.innerHTML;
 
       }
     } else {
-      //////console.log('WE ARE INSIDE LAST ELSE RENDERER')
+      ////////console.log('WE ARE INSIDE LAST ELSE RENDERER')
     }
   
   td.className = 'htRight htMiddle custom-normalcell';
@@ -485,7 +485,7 @@ import{
   td.style.fontSize = '11px';
   td.style.textAlign = 'right';
 
-  //////////console.log('renderer percentage end')
+  ////////////console.log('renderer percentage end')
                   
   }
 
@@ -502,13 +502,13 @@ import{
     ){
     if (oldvalue != null) {//|| oldvalue.toString()!==null){
       var value = oldvalue.toString().replace(currencyht_nbnb, '');
-      ////////console.log('new VALuE in afterValidator is : ' + value)
+      //////////console.log('new VALuE in afterValidator is : ' + value)
     } else {
-      ////////console.log('we are inside validator oldvalue==null')
+      //////////console.log('we are inside validator oldvalue==null')
       var value = null;
     }
     //   const value = oldvalue.toString().replace(currencyht_nbnb,'') ;
-    // //////console.log('new VALuE in validator is : ' +  value);
+    // ////////console.log('new VALuE in validator is : ' +  value);
 
     if (value == null ||
       /^\s*[-+]?(\s*\d+)\s*$/.test(value) || // /^\s*[-+]?(\d+)\s*$/.test(value) || // when the value is whole number like 45 1987 2 36 ... // /^\s*[-+]?(\d+)\s*\$?\s*$/.test("  1235$  ")
@@ -523,9 +523,9 @@ import{
 
 
     ) {
-      //////console.log('it returns true in validator')
+      ////////console.log('it returns true in validator')
       if (value !== oldvalue) {
-        //////console.log('it returns true inside validator and value != oldvalud')
+        ////////console.log('it returns true inside validator and value != oldvalud')
         //callback(true,
         //  hot.setDataAtCell(thisrow, thiscol, value)
         //)
@@ -535,7 +535,7 @@ import{
         callback(true)
       }
     } else {
-      //////console.log('we are in callback false')
+      ////////console.log('we are in callback false')
       callback(false);
     }
         }
@@ -556,17 +556,17 @@ import{
     ){      
 
       //alert('aftervalidate amount and the value is : ' + oldvalue )
-    //////console.log('value : aftervalidate')
-    //////console.log(oldvalue)
-    //////console.log(typeof oldvalue)
+    ////////console.log('value : aftervalidate')
+    ////////console.log(oldvalue)
+    ////////console.log(typeof oldvalue)
 
     if (oldvalue !== null && oldvalue !== undefined) {
       if (oldvalue.toString().includes(currencyht_nbnb) && currencyht_nbnb!=''   ) {
-        //////console.log('new VALuE in afterValidator will be : ' + oldvalue.toString().replace(currencyht_nbnb, ''))
+        ////////console.log('new VALuE in afterValidator will be : ' + oldvalue.toString().replace(currencyht_nbnb, ''))
         hot.setDataAtCell(row, prop, oldvalue.toString().replace(currencyht_nbnb, ''), 'my_source');
       } else {
         var value = oldvalue //.toString() ;
-        //////console.log('new VALuE in afterValidator still be : ' + value)
+        ////////console.log('new VALuE in afterValidator still be : ' + value)
       }
 
     } else {
@@ -574,15 +574,15 @@ import{
     }
     //const value = oldvalue.toString().replace(regexcurrenciesht, '');
 
-    //////console.log('source in afterValidate is : ')
-    //////console.log(source)
-    //////console.log(value)
-    //////console.log(typeof value)
-    //////console.log(/^\s*[-+]?(\s*\d+)\s*$/.test(value))
+    ////////console.log('source in afterValidate is : ')
+    ////////console.log(source)
+    ////////console.log(value)
+    ////////console.log(typeof value)
+    ////////console.log(/^\s*[-+]?(\s*\d+)\s*$/.test(value))
 
     if (isValid && value == null) {
-      //console.log('we are inside afterValidate valid_amounts value==null')
-      //////console.log('COULD END HERE')
+      ////console.log('we are inside afterValidate valid_amounts value==null')
+      ////////console.log('COULD END HERE')
       
       /*
       setTimeout(() => {
@@ -592,15 +592,15 @@ import{
 
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d+)\s*$/.test(value)) {
       //alert('aftervalidate amounts 1 elseif')
-      //////console.log('integer number')
+      ////////console.log('integer number')
       if (/^[-+](?=\s)\s*\d+\s*$/.test(value.toString().trim())) {
-        //////console.log('if there is a whitespace between sign +/- and the value so remove this whitespace')
-        //////console.log('we will call my_source_removewhitespacesign')
+        ////////console.log('if there is a whitespace between sign +/- and the value so remove this whitespace')
+        ////////console.log('we will call my_source_removewhitespacesign')
         hot.setDataAtCell(row, prop, value.toString().replace(/^\s*([-+])?\s*(\d+)\s*$/, '$1$2'), 'my_source_removewhitespacesign');
       } else {
         if (Math.abs(Number(value.toString().trim())) < bignb_nbnb) {
           if (decimalSeparator == '.') {
-            //////console.log('condition afterValidate whole number .')
+            ////////console.log('condition afterValidate whole number .')
             if(Number(value.toString().trim())<0 && is_negativenb_accepted_nbnb==false){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'refuse_negative','fr-FR',userLocale,decimalSeparator))
               setNotification({
@@ -617,7 +617,7 @@ import{
               } else {
                 if(Number(value.toString().trim())>0 && display_plus_sign_in_the_start==true){
                   if(value.toString().trim().includes("+")){
-                     //////console.log('COULD END HERE')
+                     ////////console.log('COULD END HERE')
                      commentsPlugin.removeCommentAtCell(row,prop);
                   } else {
                     hot.setDataAtCell(row, prop, '+' + value.toString().trim(), 'my_source_removewhitespacesign');
@@ -627,8 +627,8 @@ import{
                   if(value.toString().trim().includes("+") && display_plus_sign_in_the_start==false){
                     hot.setDataAtCell(row, prop, value.toString().trim().replace("+",''), 'my_source_removewhitespacesign');
                   } else {
-                //////console.log('do nothing')
-                //////console.log('COULD END HERE')
+                ////////console.log('do nothing')
+                ////////console.log('COULD END HERE')
                 commentsPlugin.removeCommentAtCell(row,prop);
               }
             }
@@ -653,7 +653,7 @@ import{
               } else {
                 if(Number(value.toString().trim().replace(',','.'))>0 && display_plus_sign_in_the_start==true){
                   if(value.toString().trim().includes("+")){
-                     //////console.log('COULD END HERE')
+                     ////////console.log('COULD END HERE')
                      commentsPlugin.removeCommentAtCell(row,prop);
                   } else {
                     hot.setDataAtCell(row, prop, '+' + value.toString().trim(), 'my_source_removewhitespacesign');
@@ -663,8 +663,8 @@ import{
                   if(value.toString().trim().includes("+") && display_plus_sign_in_the_start==false){
                     hot.setDataAtCell(row, prop, value.toString().trim().replace("+",''), 'my_source_removewhitespacesign');
                   } else {
-                //////console.log('do nothing')
-                //////console.log('COULD END HERE')
+                ////////console.log('do nothing')
+                ////////console.log('COULD END HERE')
                 commentsPlugin.removeCommentAtCell(row,prop);
               }
             }
@@ -690,13 +690,13 @@ import{
       //alert('aftervalidate amounts 2 elseif')
 
       if (/^\s*[-+]\s+\d/.test(value.toString().trim())) {
-        //////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 123456.89  ')
-        //////console.log('we will call my_source_removewhitespacesign')
+        ////////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 123456.89  ')
+        ////////console.log('we will call my_source_removewhitespacesign')
         hot.setDataAtCell(row, prop, value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
       } else {
         if (decimalSeparator == '.') {
-          //////console.log('condition 3 ta3 do nothing')
-          //////console.log('//1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR')
+          ////////console.log('condition 3 ta3 do nothing')
+          ////////console.log('//1234567.89 (BY DEFAULT VALUE) AMERICAN NUMERIC FORMAT WITHOUT THOUSAND SEPARATOR')
           if (Math.abs(Number(value.toString().trim())) < bignb_nbnb) {
             
             if((value.toString().trim().split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_innumbers_nbnb) {
@@ -721,7 +721,7 @@ import{
               } else {
                 if(Number(value.toString().trim())>0 && display_plus_sign_in_the_start==true){
                   if(value.toString().trim().includes("+")){
-                     //////console.log('COULD END HERE')
+                     ////////console.log('COULD END HERE')
                      commentsPlugin.removeCommentAtCell(row,prop);
                   } else {
                     hot.setDataAtCell(row, prop, '+' + value.toString().trim(), 'my_source_removewhitespacesign');
@@ -731,8 +731,8 @@ import{
                   if(value.toString().trim().includes("+") && display_plus_sign_in_the_start==false){
                     hot.setDataAtCell(row, prop, value.toString().trim().replace("+",''), 'my_source_removewhitespacesign');
                   } else {
-                //////console.log('do nothing')
-                //////console.log('COULD END HERE')
+                ////////console.log('do nothing')
+                ////////console.log('COULD END HERE')
                 commentsPlugin.removeCommentAtCell(row,prop);
               }
             }
@@ -756,20 +756,20 @@ import{
 
           // do nothing
         } else if (decimalSeparator == ',') {
-          //////console.log('condition 4')
+          ////////console.log('condition 4')
           //hot.setDataAtCell(row, prop, value.toString().trim().replace('.', ','));
           //commentsPlugin.removeCommentAtCell(row,prop);
 
           if (/^\s*[-+]?(\s*\d{1,3}(\.\d{3})*|\d+)(,\d+)?\s*$/.test(value)) {
-            //////console.log('condition 4.1')
-            //////console.log('when 12.151')
+            ////////console.log('condition 4.1')
+            ////////console.log('when 12.151')
             hot.setDataAtCell(row, prop, value.toString().replace('.', ''), 'my_source');
             
               commentsPlugin.removeCommentAtCell(row,prop);
              
             
             } else {
-            //////console.log('condition 4.2')
+            ////////console.log('condition 4.2')
             ////alert('voulez vous dire que 3.16 egale a 3,14 ? si oui changer svp ')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value).toLocaleString(userLocale) + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_4','fr-FR',userLocale,decimalSeparator))
@@ -791,8 +791,8 @@ import{
       //alert('aftervalidate amounts 3 elseif')
 
       if (/^\s*[-+]\s+\d/.test(value.toString().trim())) {
-        //////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 123456.89  ')
-        //////console.log('we will call my_source_removewhitespacesign')
+        ////////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 123456.89  ')
+        ////////console.log('we will call my_source_removewhitespacesign')
         hot.setDataAtCell(row, prop, value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
       } else {
         if (decimalSeparator == '.') {
@@ -800,20 +800,20 @@ import{
           // WINDOWS ANGLAIS w NUMBER FRNACAIS
           // MAY CAUSE PROBLEM WITH NUMBERS
           // we have to do something
-          //////console.log('may cause problem 1')
+          ////////console.log('may cause problem 1')
           ////alert('may cause problem')
-          //////console.log('condition 1 ')
+          ////////console.log('condition 1 ')
           if (/^\s*[-+]?(\s*\d{1,3}(,\d{3})*(\.\d+)?|\.\d+)\s*$/.test(value)) {
-            //////console.log('condition 1.1')
-            //////console.log('like whole number with , as thousand separator 1,234')
+            ////////console.log('condition 1.1')
+            ////////console.log('like whole number with , as thousand separator 1,234')
             hot.setDataAtCell(row, prop, value.toString().replace(/,/g, ''), 'my_source');
             
               commentsPlugin.removeCommentAtCell(row,prop);
              
              
           } else {
-            //////console.log('condition 1.2')
-            //////console.log('may cause problem')
+            ////////console.log('condition 1.2')
+            ////////console.log('may cause problem')
             ////alert('do you want to mean that ' + value + ' = ' + value.toString().trim().replace(',', '.') + ' ?' )
             //hot.setDataAtCell(row, prop, value.toString().trim().replace(',', '.'));
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.toString().trim().replace(',', '.') + " est correct");
@@ -833,18 +833,18 @@ import{
         } else if (decimalSeparator == ',') {
           //alert('aftervalidate amounts 3 elseif and decimalseparator == , ')
           // do nothing
-          //////console.log('condition 2 ta3 do nothing')
+          ////////console.log('condition 2 ta3 do nothing')
           //hot.setDataAtCell(row, prop, value.toString().trim());
-          ////////console.log('COULD END HERE')
+          //////////console.log('COULD END HERE')
 
           if (Math.abs(Number(value.toString().trim().replace(',', '.'))) < bignb_nbnb) {
-            //////console.log('less than bignb_nbnb')
-            //////console.log(value)
-            //////console.log((Number(value.toString().trim().replace(',', '.')).toString().split('.')[1] || '').length)
+            ////////console.log('less than bignb_nbnb')
+            ////////console.log(value)
+            ////////console.log((Number(value.toString().trim().replace(',', '.')).toString().split('.')[1] || '').length)
             //commentsPlugin.removeCommentAtCell(row, prop);
             if((value.toString().trim().replace(',', '.').toString().split('.')[1] || '').length>decimalnumbers_toshow_withoutrenderer_innumbers_nbnb) {
-              //////console.log('inside first condition')
-              //////console.log(Number(value.toString().trim().replace(',', '.')).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).toString().replace(/\.?0+$/, "").toString().replace('.', ','))
+              ////////console.log('inside first condition')
+              ////////console.log(Number(value.toString().trim().replace(',', '.')).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).toString().replace(/\.?0+$/, "").toString().replace('.', ','))
               hot.setDataAtCell(row, prop,Number(value.toString().trim().replace(',', '.')).toFixed(decimalnumbers_toshow_withoutrenderer_innumbers_nbnb).toString().replace(/\.?0+$/, "").toString().replace('.', ',') , 'my_source');
 
               
@@ -867,7 +867,7 @@ import{
               } else {
                 if(Number(value.toString().trim().replace(',','.'))>0 && display_plus_sign_in_the_start==true){
                   if(value.toString().trim().includes("+")){
-                     //////console.log('COULD END HERE')
+                     ////////console.log('COULD END HERE')
                      commentsPlugin.removeCommentAtCell(row,prop);
                   } else {
                     hot.setDataAtCell(row, prop, '+' + value.toString().trim(), 'my_source_removewhitespacesign');
@@ -877,8 +877,8 @@ import{
                   if(value.toString().trim().includes("+") && display_plus_sign_in_the_start==false){
                     hot.setDataAtCell(row, prop, value.toString().trim().replace("+",''), 'my_source_removewhitespacesign');
                   } else {
-                //////console.log('do nothing')
-                //////console.log('COULD END HERE')
+                ////////console.log('do nothing')
+                ////////console.log('COULD END HERE')
                 commentsPlugin.removeCommentAtCell(row,prop);
               }
             }
@@ -906,11 +906,11 @@ import{
       //alert('aftervalidate amounts 4 elseif')
 
       // 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR
-      //////console.log('condition out 5')
-      //////console.log('// 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR')
+      ////////console.log('condition out 5')
+      ////////console.log('// 1 234 567,89 FRENCH NUMERIC FORMAT WITH THOUSAND SEPARATOR')
       //hot.setDataAtCell(row, prop, value.toString().replace(/\s/g, '').toString().replace(',', '.') );
-      ////////console.log(value.toString().replace(/\s/g, '').toString().replace(',', '.'))
-      //////console.log(value.toString().replace(/\s/g, ''))
+      //////////console.log(value.toString().replace(/\s/g, '').toString().replace(',', '.'))
+      ////////console.log(value.toString().replace(/\s/g, ''))
       hot.setDataAtCell(row, prop, value.toString().replace(/\s/g, ''), 'my_source');
 
 
@@ -918,11 +918,11 @@ import{
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?(\s*\d{1,3}(,\d{3})*(\.\d+)?|\.\d+)\s*$/.test(value)) {
       //alert('aftervalidate amounts 5 elseif')
 
-      //////console.log('// 1,234,567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
-      //////console.log('condition out 6 ')
+      ////////console.log('// 1,234,567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
+      ////////console.log('condition out 6 ')
       if (decimalSeparator == ',') {
         // may cause problem
-        //////console.log('condition out 6.1')
+        ////////console.log('condition out 6.1')
         ////alert('veuillez corriger l'ecriture selon la format de vos parametres)
         //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + Number(value.toString().replace(/,/g, '')).toLocaleString(userLocale) + " est correct");
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_6','fr-FR',userLocale,decimalSeparator))
@@ -937,7 +937,7 @@ import{
 
       } else {
         //
-        //////console.log('condition out 6.2')
+        ////////console.log('condition out 6.2')
       
         hot.setDataAtCell(row, prop, value.toString().replace(/,/g, ''), 'my_source');
         
@@ -953,13 +953,13 @@ import{
 
       // 1.234.567,89 EUROPEAN NUMERIC FORMAT WITH THOUSAND SEPARATOR as dot
       if (/^\s*[-+]\s+\d/.test(value.toString().trim())) {
-        //////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 1.234.567,89  ')
-        //////console.log('we will call my_source_removewhitespacesign')
+        ////////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 1.234.567,89  ')
+        ////////console.log('we will call my_source_removewhitespacesign')
         hot.setDataAtCell(row, prop, value.toString().replace(/^\s*([-+])\s*(\d+)/, '$1$2'), 'my_source_removewhitespacesign');
       } else {
         if (/^\s*[-+]?(?=\d)(?:(?:\d{1,3}(?:[.,\s]\d{3}){0,2})|(?:\d+))(?:,\d+)?(?<=,[\d,]*),(?!\d*,)\d+(?:\.\d+)?\s*$/.test(value)) {
-          //////console.log('condition out 7.1')
-          //////console.log('like 1,234,56 or 1.234.567,8956,78')
+          ////////console.log('condition out 7.1')
+          ////////console.log('like 1,234,56 or 1.234.567,8956,78')
           //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
           setNotification({
@@ -971,15 +971,15 @@ import{
           });
           hot.setDataAtCell(row, prop, '', 'my_source_empty');
         } else {
-          //////console.log('condition out 7')
-          //////console.log('// 1.234.567,89 EUROPEAN NUMERIC FORMAT WITH THOUSAND SEPARATOR as dot')
+          ////////console.log('condition out 7')
+          ////////console.log('// 1.234.567,89 EUROPEAN NUMERIC FORMAT WITH THOUSAND SEPARATOR as dot')
           //hot.setDataAtCell(row, prop, value.toString().trim().replace(/\./g, '').toString().replace(',', '.') );
           if (decimalSeparator == ',') {
             hot.setDataAtCell(row, prop, value.toString().trim().replace(/\./g, ''), 'my_source');
             commentsPlugin.removeCommentAtCell(row,prop);           
           } else {
-            //////console.log('condition out 7.3')
-            //////console.log('1.234.567 whole number')
+            ////////console.log('condition out 7.3')
+            ////////console.log('1.234.567 whole number')
             //hot.setDataAtCell(row, prop, value.toString().trim().replace(/\./g, '') );
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres  |  " + value.toString().trim().replace(/\./g, '').toString().replace(',', '.') + " est correct");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_8','fr-FR',userLocale,decimalSeparator))
@@ -998,21 +998,21 @@ import{
       //alert('aftervalidate amounts 7 elseif')
 
       // 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR
-      //////console.log('condition out 8')
-      //////console.log('// 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
+      ////////console.log('condition out 8')
+      ////////console.log('// 1 234 567.89 AMERICAN NUMERIC FORMAT WITH THOUSAND SEPARATOR')
       hot.setDataAtCell(row, prop, value.toString().replace(/\s/g, ''), 'my_source');
-      //////console.log(value.toString().replace(/\s/g, ''))
+      ////////console.log(value.toString().replace(/\s/g, ''))
       
         commentsPlugin.removeCommentAtCell(row,prop);
        
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?[\s]*[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
       //alert('aftervalidate amounts 8 elseif')
 
-      //////console.log('condition out 12 ')
+      ////////console.log('condition out 12 ')
       // we a re inside scientific notation when mantissa is integer
       if (/^[+-]?[\s]+\d+(\.\d+)?([eE][+-]?\d+)?$/.test(value.toString().trim())) {
-        //////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 5e6  ')
-        //////console.log('we will call my_source_removewhitespacesign')
+        ////////console.log('if there is whitespaces between sign +/- and the value so remove this whitespace like + 5e6  ')
+        ////////console.log('we will call my_source_removewhitespacesign')
         hot.setDataAtCell(row, prop, value.toString().trim().replace(/\s/g, ''), 'my_source_removewhitespacesign');
         
           commentsPlugin.removeCommentAtCell(row,prop);
@@ -1034,7 +1034,7 @@ import{
           hot.setDataAtCell(row, prop, '', 'my_source_empty');
         } else {
           if (Math.abs(Number(value)) < smallafterdigit_nbnb) {
-            //////console.log('we are in the case when integer scientific notation less than smallafterdigit_nbnb')
+            ////////console.log('we are in the case when integer scientific notation less than smallafterdigit_nbnb')
             if (decimalSeparator == '.') {
               hot.setDataAtCell(row, prop, Number(value).toFixed(Math.abs(BigNumber(value).e)).toString(), 'my_source');
 
@@ -1050,17 +1050,17 @@ import{
             }
           } else {
             if (decimalSeparator == '.') {
-              //////console.log('integer scinetific notation and english dot')
+              ////////console.log('integer scinetific notation and english dot')
               hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString(), 'my_source');
-              //////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString())
+              ////////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString())
 
             commentsPlugin.removeCommentAtCell(row,prop);
            
 
             } else if (decimalSeparator == ',') {
-              //////console.log('integer scinetific notation and european comma')
+              ////////console.log('integer scinetific notation and european comma')
               hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.', ','), 'my_source');
-              //////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.', ','))
+              ////////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.', ','))
 
             commentsPlugin.removeCommentAtCell(row,prop);
            
@@ -1072,8 +1072,8 @@ import{
       //alert('aftervalidate amounts 9 elseif')
       // we are inside scientific notation :
       // 1.6e6 1.60E+04  -13.65E4  - 12.3E+03  scientific notation with E sign
-      //////console.log('condition out 9')
-      //////console.log(value)
+      ////////console.log('condition out 9')
+      ////////console.log(value)
       
       // if(Number(value)==0){
       //  hot.setDataAtCell(row, prop, 0, 'my_source');
@@ -1097,14 +1097,14 @@ import{
       } else {
         if (Math.abs(Number(value)) < smallafterdigit_nbnb) {
           if (decimalSeparator == '.') {
-            //////console.log('scientific format float mantissa and decimal separator is dot/dot and less than 0.01')
+            ////////console.log('scientific format float mantissa and decimal separator is dot/dot and less than 0.01')
             hot.setDataAtCell(row, prop, Number(value).toFixed(Math.abs(BigNumber(value).e)).toString(), 'my_source');
             
               commentsPlugin.removeCommentAtCell(row,prop);
              
 
           } else if (decimalSeparator == ',') {
-            //////console.log('scientific format float mantissa and decimal separator is dot/comma and less than 0.01')
+            ////////console.log('scientific format float mantissa and decimal separator is dot/comma and less than 0.01')
            // commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres ");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix','fr-FR',userLocale,decimalSeparator))
             setNotification({
@@ -1118,17 +1118,17 @@ import{
           }
         } else {
           if (decimalSeparator == '.') {
-            //////console.log('scinetific notation and english dot')
-            //////console.log('scientific format float mantissa and decimal separator is dot/dot and greater than 0.01')
-            //////console.log(parseFloat(value.toString().replace(/\s/g, '')))
+            ////////console.log('scinetific notation and english dot')
+            ////////console.log('scientific format float mantissa and decimal separator is dot/dot and greater than 0.01')
+            ////////console.log(parseFloat(value.toString().replace(/\s/g, '')))
             hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString(), 'my_source');
 
             commentsPlugin.removeCommentAtCell(row,prop);
            
 
           } else if (decimalSeparator == ',') {
-            //////console.log('scientific format float mantissa and decimal separator is dot/comma and greater than 0.01')
-            //////console.log('scinetific notation and european comma')
+            ////////console.log('scientific format float mantissa and decimal separator is dot/comma and greater than 0.01')
+            ////////console.log('scinetific notation and european comma')
            // commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres ");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix','fr-FR',userLocale,decimalSeparator))
             setNotification({
@@ -1140,11 +1140,11 @@ import{
             });
             hot.setDataAtCell(row, prop, '', 'my_source_empty');
             // hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.',',') );
-            // //////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.',',') )
+            // ////////console.log(parseFloat(value.toString().replace(/\s/g, '')).toString().replace('.',',') )
           }
           //commentsPlugin.removeCommentAtCell(row,prop);
 
-          //////console.log('end conditon 9')
+          ////////console.log('end conditon 9')
         }
       }
     } else if (isValid && value !== undefined && typeof value === 'string' && /^\s*[-+]?[\s]*[0-9]*,?[0-9]+([eE][-+]?[0-9]+)?\s*$/.test(value)) {
@@ -1152,12 +1152,12 @@ import{
 
       // we are inside scientific notation with comma :
       // 1,6e6 1,60E+04  -13,65E4  - 12,3E+03  scientific notation with E sign
-      //////console.log('condition out 10')
-      //////console.log(value)
+      ////////console.log('condition out 10')
+      ////////console.log(value)
       const value1010 = value.toString().replace(',', '.').toString().replace(/\s/g, '')
       //alert('value1010 is : ' + value1010 + ' and value is : ' + value)
-      //////console.log('value1010 : ')
-      //////console.log(value1010)
+      ////////console.log('value1010 : ')
+      ////////console.log(value1010)
 
       // if(Number(value)==0){
       //  hot.setDataAtCell(row, prop, 0, 'my_source');
@@ -1181,7 +1181,7 @@ import{
       } else {
         if (Math.abs(Number(value1010)) < smallafterdigit_nbnb) {
           if (decimalSeparator == '.') {
-            //////console.log('scientific format float mantissa and decimal separator is comma/dot and less than 0.01')
+            ////////console.log('scientific format float mantissa and decimal separator is comma/dot and less than 0.01')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide , Essayer de corriger l'ecriture selon le format de vos paramétres ");
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix','fr-FR',userLocale,decimalSeparator))
             setNotification({
@@ -1196,8 +1196,8 @@ import{
             //bg=BigNumber(val)
             //expo=Math.abs(BigNumber(value1010).e)
             //Number(value1010).toFixed(Math.abs(BigNumber(value1010).e))
-            ////////console.log('******************************************* we are inside condition out 10 less than 0.01 *******************************************')
-            //////console.log('scientific format float mantissa and decimal separator is comma/comma and less than 0.01')
+            //////////console.log('******************************************* we are inside condition out 10 less than 0.01 *******************************************')
+            ////////console.log('scientific format float mantissa and decimal separator is comma/comma and less than 0.01')
             hot.setDataAtCell(row, prop, Number(value1010).toFixed(Math.abs(BigNumber(value1010).e)).toString().replace('.', ','), 'my_source');
 
             commentsPlugin.removeCommentAtCell(row,prop);
@@ -1207,7 +1207,7 @@ import{
         } else {
           if (decimalSeparator == '.') {
             //maybe it will be a problem here : to fix after
-            //////console.log('scientific format float mantissa and decimal separator is comma/dot and greather than 0.01')
+            ////////console.log('scientific format float mantissa and decimal separator is comma/dot and greather than 0.01')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
             if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
@@ -1221,29 +1221,29 @@ import{
             }
             hot.setDataAtCell(row, prop, '', 'my_source_empty')
           } else if (decimalSeparator == ',') {
-            ////////console.log(' ////////////////////////////// we are inside condition out 10 decimal separator , /////////////////////////////////////////////')
-            //////console.log('scientific format float mantissa and decimal separator is comma/comma and greather than 0.01')
-            //////console.log(parseFloat(value.toString().replace(',', '.').toString().replace(/\s/g, '')))
+            //////////console.log(' ////////////////////////////// we are inside condition out 10 decimal separator , /////////////////////////////////////////////')
+            ////////console.log('scientific format float mantissa and decimal separator is comma/comma and greather than 0.01')
+            ////////console.log(parseFloat(value.toString().replace(',', '.').toString().replace(/\s/g, '')))
             hot.setDataAtCell(row, prop, parseFloat(value.toString().replace(',', '.').toString().replace(/\s/g, '')).toString().replace('.', ','), 'my_source');
             
               commentsPlugin.removeCommentAtCell(row,prop);
              
 
           }
-          //////console.log('end conditon 10')
+          ////////console.log('end conditon 10')
         }
       }
     } else if (value == '') {
-      //////console.log('do nothing , we are in last invalid')
-      //////console.log('COULD END HERE')
-      //////console.log(isValid)
-      //////console.log(source)
+      ////////console.log('do nothing , we are in last invalid')
+      ////////console.log('COULD END HERE')
+      ////////console.log(isValid)
+      ////////console.log(source)
 
       //commentsPlugin.removeCommentAtCell(row,prop); //aa
 
     } else if (isValid == false) {
-      //////console.log('we are before COMMENT CONTENTS !!!!!!!!!!!!!!!!!!!!!!!!!!')
-      //////console.log(value)
+      ////////console.log('we are before COMMENT CONTENTS !!!!!!!!!!!!!!!!!!!!!!!!!!')
+      ////////console.log(value)
       //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
     
       if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
@@ -1259,19 +1259,19 @@ import{
     }
       //commentsPlugin.setCommentAtCell(row, prop, 'Please enter only numbers.<br><br><p style="color:red;">Veuillez entrer uniquement des nombres.</p>');
 
-      //////console.log('isvalid==false')
+      ////////console.log('isvalid==false')
       //hot.setDataAtCell(row,prop,hot.getData()[row][prop])
       hot.setDataAtCell(row, prop, '', 'my_source_empty')
     } else {
-      //////console.log('WE ARE IN THE END OF AFTERVALIDATE , THE ELSE PART : ')
+      ////////console.log('WE ARE IN THE END OF AFTERVALIDATE , THE ELSE PART : ')
       hot.setDataAtCell(row, prop, '', 'my_source_empty')
       //hot.setDataAtCell(row, prop, null, 'my_source_else_empty')
-      //////console.log('condition out 11 ')
-      //////console.log(isValid)
-      //////console.log(value !== undefined)
-      //////console.log(typeof value)
-      //////console.log(/^\s*[-+]?(\s*\d+(\.\d*)?|\.\d+)\s*$/.test(value))
-      //////console.log(/^\s*[-+]?(\s*\d+(,\d*)?|,\d+)\s*$/.test(value))
+      ////////console.log('condition out 11 ')
+      ////////console.log(isValid)
+      ////////console.log(value !== undefined)
+      ////////console.log(typeof value)
+      ////////console.log(/^\s*[-+]?(\s*\d+(\.\d*)?|\.\d+)\s*$/.test(value))
+      ////////console.log(/^\s*[-+]?(\s*\d+(,\d*)?|,\d+)\s*$/.test(value))
 
     }
   }

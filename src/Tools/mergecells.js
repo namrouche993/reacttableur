@@ -55,16 +55,16 @@ export const myoldmergedcells_fct = () => {
     var part1 = x.row;
     var part2 = x.col;
     var firstpair = {row:part1,col:part2}
-    //////console.log(firstpair)
+    ////////console.log(firstpair)
 
     var part3 = x.row+x.rowspan-1;
     var part4 = x.col+x.colspan-1;
     var secondpair = {row:part3,col:part4}
-   // ////console.log(secondpair)
+   // //////console.log(secondpair)
 
     var cellsToAutofill_old = getCellsBetweenRanges( firstpair, secondpair);
     myoldmergedcells.push(cellsToAutofill_old)
-    //////console.log(cellsToAutofill_old)
+    ////////console.log(cellsToAutofill_old)
   })
   var myoldmergedcells2 = [].concat(...myoldmergedcells)
   return myoldmergedcells2

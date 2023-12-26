@@ -7,8 +7,8 @@ if(!mynamespace0){
 } else {
   var mynamespace = mynamespace0.toString().replace('tab/','');
 }
-console.log('mynamespace')
-console.log(mynamespace)
+//console.log('mynamespace')
+//console.log(mynamespace)
 
 //export const socket = io('http://localhost:5000',{
 export const socket = io(`http://localhost:5000`,{
