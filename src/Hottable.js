@@ -392,7 +392,7 @@ function Hottable() {
                    console.log(lastchanges_ref.current)
                    //lastchanges.current = 
 
-                   //socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
+                   socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
                 }
                }
 
