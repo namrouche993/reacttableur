@@ -112,7 +112,7 @@ import{
        } else {
          //////console.log('condition onlynumbers 4')
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
-       if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+       if(source!=='dataatrowprop_received_from_socket_server_event' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'onlynumbers_invalid','fr-FR'))
         setNotification({
           message: comments_messages(oldvalue,'onlynumbers_invalid','fr-FR'),

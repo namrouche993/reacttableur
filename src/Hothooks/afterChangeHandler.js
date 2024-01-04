@@ -66,7 +66,7 @@
         if(hot.undoRedo.isUndoAvailable()){
            hot.undoRedo.doneActions[hot.undoRedo.doneActions.length-1].src=src;
          }
-     if( (src=='Autofill.fill' && changes.length>1) || (src=='CopyPaste.paste' && changes.length>1) ){
+     if( (src=='Autofill.fill' && changes.length>1) || (src=='CopyPaste.paste' && changes.length>1) || (src=='dataatrowprop_received_from_socket_server_event' && changes.length>1)  ){
       //////console.log('afterchange src autofill && changes.length sup 1 : ')
       console.log(">>>>> >>>>> if condition 1 : src=='Autofill.fill' && changes.length>1) || (src=='CopyPaste.paste' && changes.length>1")
       //console
@@ -81,7 +81,7 @@
 
       setInputValue_srcautofillactivated(true)
       //alert('src==autofil.fill')
-    } else if (src=='edit' && changes.length>1 && changes.every(row => row[3] === null) ){
+    } else if (src=='edit' && changes.length>1 && changes.every(row => row[3] === null)  || src=='dataatrowprop_received_from_socket_server_event' && changes.length>1 && changes.every(row => row[3] === null) ){
       console.log(">>>>> >>>>> if condition 2 : src=='edit' && changes.length>1 && changes.every(row => row[3] === null")
       ////////console.log('we are incase afterchange where src==edit and changes.length>1')
       //alert('edit and changes>1')
@@ -151,7 +151,7 @@
     ////////console.log('shouldbreak is : ' + shouldBreak )
     ////////console.log(shouldBreak==false)
     //////////console.log('index after the end of loop part : ' + typeof index==undefined ? 'a' : index)
-        if ( ( src == 'my_source' || src=='my_source_removewhitespacesign' || src=='my_source_removewhitespacesign_percentage' || src=='my_source_removegreaterdecimalnumbers_percentage' || src=='my_source_convertitto_0' || src=='my_source_removewhitespacesign_date' || src=='my_source_date') && !shouldBreak) {
+        if ( ( src == 'my_source' || src=='my_source_removewhitespacesign' || src=='my_source_removewhitespacesign_percentage' || src=='my_source_removegreaterdecimalnumbers_percentage' || src=='my_source_convertitto_0' || src=='my_source_removewhitespacesign_date' || src=='my_source_date' ) && !shouldBreak) {
           ////////console.log('afterchange mysource62 and we will pop it')
           console.log(">>>>> >>>>> if condition 4 : ( src == 'my_source' || src=='my_source_removewhitespacesign' || src=='my_source_removewhitespacesign_percentage' || src=='my_source_removegreaterdecimalnumbers_percentage' || src=='my_source_convertitto_0' || src=='my_source_removewhitespacesign_date' || src=='my_source_date') && !shouldBreak)")
           
@@ -251,7 +251,7 @@
                //alert('see now')
             }
           })
-        } else if (src!=='Autofill.fill' && src!=='CopyPaste.paste') {
+        } else if (src!=='Autofill.fill' && src!=='CopyPaste.paste' && (src!=='dataatrowprop_received_from_socket_server_event' && changes.length>1 )  ) {
           console.log(">>>>> >>>>> with condition 7 src!=='Autofill.fill' && src!=='CopyPaste.paste' ")
           //alert('we will exit from autoffill ctivated')
           setInputValue_srcautofillactivated(false)

@@ -108,7 +108,7 @@ else if( i == 1 ) {
         ////alert('invalid dropdown')
         //////console.log('first cond')
         //commentsPlugin.setCommentAtCell(row, prop, "Veuillez choisir une valeur incluse dans la liste");
-        if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+        if(source!=='dataatrowprop_received_from_socket_server_event' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
           setNotification({
             message: comments_messages(oldvalue,'dropdown_included','fr-FR'),
@@ -129,7 +129,7 @@ else if( i == 1 ) {
       } else if (oldvalue===' ') {
         //////console.log('2 cond')
         //commentsPlugin.removeCommentAtCell(row,prop);
-        if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+        if(source!=='dataatrowprop_received_from_socket_server_event' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
           commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'dropdown_included','fr-FR'))
           setNotification({
             message: comments_messages(oldvalue,'dropdown_included','fr-FR'),

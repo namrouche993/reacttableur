@@ -1460,7 +1460,7 @@ import{
           } else {
             ////////console.log('condition date 4')
           //commentsPlugin.setCommentAtCell(row, prop, "la date '" + oldvalue + "' n'est pas valide ");
-          if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+          if(source!=='dataatrowprop_received_from_socket_server_event' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
             commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'date_no_valid','fr-FR'))
             setNotification({
               message: comments_messages(oldvalue,'date_no_valid','fr-FR'),

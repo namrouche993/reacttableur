@@ -1209,7 +1209,7 @@ import{
             //maybe it will be a problem here : to fix after
             ////////console.log('scientific format float mantissa and decimal separator is comma/dot and greather than 0.01')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
-            if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+            if(source!=='dataatrowprop_received_from_socket_server_event' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
               setNotification({
                 message: comments_messages(oldvalue,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator),
@@ -1246,7 +1246,7 @@ import{
       ////////console.log(value)
       //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + value + "' n'est pas valide pour cette cellule. Veuillez saisir uniquement des valeurs numériques");
     
-      if(source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+      if(source!=='dataatrowprop_received_from_socket_server_event' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
         commentsPlugin.setCommentAtCell(row, prop,comments_messages(value,'val_try_to_fix_fill_only_numbers','fr-FR',userLocale,decimalSeparator))
       commentsPlugin.showAtCell(row, prop);  // maybe editable ,and maybe remove it , idont know why it s here
       setNotification({
