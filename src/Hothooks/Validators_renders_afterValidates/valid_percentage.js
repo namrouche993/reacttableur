@@ -555,7 +555,7 @@ import{
             } else {
               ////////console.log('condition percentage 4')
             //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
-            if(source!=='dataatrowprop_received_from_socket_server_event' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
+            if(source!=='Autofill.fill_of_socket' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) && (source!=='CopyPaste.paste_of_socket' || getInputValue_copypastelength()==false) ){
               commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'percentage_no_valid_isvalidfalse_end','fr-FR',userLocale,decimalSeparator))
               setNotification({
                 message: comments_messages(oldvalue,'percentage_no_valid_isvalidfalse_end','fr-FR',userLocale,decimalSeparator),

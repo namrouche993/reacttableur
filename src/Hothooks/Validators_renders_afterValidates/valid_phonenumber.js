@@ -115,8 +115,8 @@ import{
          //////console.log('condition phonenumbers 4')
        //commentsPlugin.setCommentAtCell(row, prop, "la valeur '" + oldvalue + "' n'est pas valide ");
        
-       if(source!=='dataatrowprop_received_from_socket_server_event' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) ){
-       commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'))
+       if(source!=='Autofill.fill_of_socket' && source!=='Autofill.fill' && (source!=='CopyPaste.paste' || getInputValue_copypastelength()==false) && (source!=='CopyPaste.paste_of_socket' || getInputValue_copypastelength()==false) ){
+        commentsPlugin.setCommentAtCell(row, prop,comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'))
        setNotification({
         message: comments_messages(oldvalue,'phonenumbers_invalid','fr-FR'),
         status: 'error',

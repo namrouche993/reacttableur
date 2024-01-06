@@ -146,13 +146,13 @@ const handleCloseModaladd = () => {
 
   const undoclickfct = () =>{
     hotInstance_redux.undo(true)
-    socket.emit("undo_click_triggering",true);
+    //socket.emit("undo_click_triggering",true);
   }
 
   
   const redoclickfct = () =>{
     hotInstance_redux.redo(true)
-    socket.emit("redo_click_triggering",true);
+    //socket.emit("redo_click_triggering",true);
   }
 
   const isSmallScreen = useMediaQuery(appTheme.breakpoints.down('sm')); // Adjust the breakpoint as needed

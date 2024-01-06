@@ -11,7 +11,7 @@ export function beforeChangeFct(changes,source,hot,commentsPlugin){
     //console.log('beforeChange triggered')
     //console.log(changes)
     //console.log(source)
-    if( (source=='CopyPaste.paste' && changes.length>30) || (source=='dataatrowprop_received_from_socket_server_event' && changes.length>30) ){
+    if( (source=='CopyPaste.paste' && changes.length>30) || (source=='CopyPaste.paste_of_socket' && changes.length>30) ){
       setInputValue_copypastelength(true);
     }
     //console.log('beforechange after if souce copypaste ')

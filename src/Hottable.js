@@ -366,34 +366,25 @@ function Hottable() {
 
                //console.log('source in setitemout to make socket.emit :')
                //console.log(source)
-               if (source !== 'loadData' && source !=='changeorganismesrc' && source !== 'dataatrowprop_received_from_socket_server_event') {
-                 //socket.emit('dataChanged', handsontableInstance.getData());
-                 //socket.emit('afterchange_data_socket_event',my_actual_getdata)
-                 //console.log('*****************source and changes  in afterchangehandle to handle hotundoredo with socket: ')
-                 //console.log(hot.undoRedo.doneActions)
-                 //console.log(hot.undoRedo.doneActions.length)
-                 if(hot.undoRedo.doneActions.length>0){
-                   var hotaundoredo = hot.undoRedo.doneActions[hot.undoRedo.doneActions.length-1].changes; 
-                   console.log('hotaundoredo')   
-                   console.log(hot.undoRedo.doneActions)       
-                   //console.log(hot.undoRedo.doneActions.length)
-                   console.log(hotaundoredo)
-                   //setLastchanges(prev=>)  
-                   var selectedColumns3_hotaundoredo = hotaundoredo.map(item => [item[0], item[1], item[3]]);
-                   console.log('lastchanges before : ')
+               
+               //if (source !== 'loadData' && source !=='changeorganismesrc' && source !== 'dataatrowprop_received_from_socket_server_event') {
+                if(source == 'edit' || source == 'CopyPaste.paste' || source == 'Autofill.fill' || source == 'UndoRedo.undo' || source =='UndoRedo.redo'){
+                   //  var hotaundoredo = hot.undoRedo.doneActions[hot.undoRedo.doneActions.length-1].changes; 
+                   //  var selectedColumns3_hotaundoredo = hotaundoredo.map(item => [item[0], item[1], item[3]]);
+                   var selectedColumns3_hotaundoredo = changes.map(item => [item[0], item[1], item[3]]);
+                   console.log('selectedColumns3_hotaundoredo new of changes is : ')
                    console.log(selectedColumns3_hotaundoredo)
-                   console.log(lastchanges)
-                   console.log('lastchanges_ref before : ')
-                   console.log(lastchanges_ref.current)
-                   setLastchanges(prevList => [...prevList, [selectedColumns3_hotaundoredo] ]);
-                   update_lastchanges_ref(selectedColumns3_hotaundoredo)
-
-                   console.log('lastchanges_ref after : ')
-                   console.log(lastchanges_ref.current)
-                   //lastchanges.current = 
-
-                   socket.emit('afterchange_data_socket_event',selectedColumns3_hotaundoredo)
-                }
+                   if(source=='edit'){
+                    socket.emit('afterchange_data_socket_event_edit',selectedColumns3_hotaundoredo)
+                   } else if (source=='CopyPaste.paste'){
+                    socket.emit('afterchange_data_socket_event_CopyPaste.paste',selectedColumns3_hotaundoredo)
+                   } else if (source=='Autofill.fill'){
+                    socket.emit('afterchange_data_socket_event_Autofill.fill',selectedColumns3_hotaundoredo)
+                  } else if (source=='UndoRedo.undo'){
+                    socket.emit('afterchange_data_socket_event_UndoRedo.undo',selectedColumns3_hotaundoredo)
+                  } else if (source=='UndoRedo.redo'){
+                    socket.emit('afterchange_data_socket_event_UndoRedo.redo',selectedColumns3_hotaundoredo)
+                   }
                }
 
         if (changeTimer) {
@@ -448,8 +439,9 @@ function Hottable() {
               throw error;
             }
           }
-          postData('http://localhost:5000/beacondata',my_actual_getdata);
-
+          if(source != 'edit_of_socket' && source != 'CopyPaste.paste_of_socket' && source != 'Autofill.fill_of_socket' && source != 'UndoRedo.undo_of_socket' && source !='UndoRedo.redo_of_socket'){
+            postData('http://localhost:5000/beacondata',my_actual_getdata);
+          }
           //saveDataToServer(JSON.parse(my_actual_getdata)); // editable when we want to synchronise the data for each change
 
           const handle_converting_when_receving_notif_from_socketio = (new_selectedNumericFormat,new_selectedDateFormat) => {
@@ -521,23 +513,6 @@ function Hottable() {
         
           };
 
-          if (source !== 'loadData' && source !=='changeorganismesrc' && source !== 'dataatrowprop_received_from_socket_server_event') {
-            if(hot.undoRedo.doneActions.length>0){
-              console.log(' ******* in try selectedColumns3_hotaundoredo, to call socket.emit  ******')
-              console.log(selectedColumns3_hotaundoredo)
-              console.log('lastchanges')
-              console.log(lastchanges)
-
-              console.log('lastchanges_ref in try : ')
-              console.log(lastchanges_ref.current)
-              lastchanges_ref.current = [];
-
-              //socket.emit('afterchange_data_socket_event',lastchanges)
-              setLastchanges([])
-              
-            }
-          }
-
 
      
                     
@@ -570,20 +545,37 @@ function Hottable() {
       //setHotInstance(hot);  WITHOUT REDUX
       dispatch({ type: 'SET_HOT', payload: hot });  // WITH REDUX
       
-      socket.on('updateData_socket_event',(receving_data_from_socket_server) => {
-        
-        //console.log('socket.on updateData_socket_event ')
-        if (hotTableComponent.current) {
-          //console.log('receving_data_from_socket_server in socket.on')
-          //console.log(receving_data_from_socket_server)
-          //mynewarray.push(receving_data_from_socket_server[index])
-          
-          hot.setDataAtRowProp(receving_data_from_socket_server,'dataatrowprop_received_from_socket_server_event');
-     }
+      //'dataatrowprop_received_from_socket_server_event'
 
-        //console.log('socket.on updateData_socket_event : ')
+      socket.on('updateData_socket_event_edit',(receving_data_from_socket_server) => {
+        if (hotTableComponent.current) {          
+          hot.setDataAtRowProp(receving_data_from_socket_server,'edit_of_socket');
+        }
       })
-    
+
+      socket.on('updateData_socket_event_CopyPaste.paste',(receving_data_from_socket_server) => {
+        if (hotTableComponent.current) {          
+          hot.setDataAtRowProp(receving_data_from_socket_server,'CopyPaste.paste_of_socket');
+        }
+      })
+
+      socket.on('updateData_socket_event_Autofill.fill',(receving_data_from_socket_server) => {
+        if (hotTableComponent.current) {          
+          hot.setDataAtRowProp(receving_data_from_socket_server,'Autofill.fill_of_socket');
+        }
+      })
+
+      socket.on('updateData_socket_event_UndoRedo.undo',(receving_data_from_socket_server) => {
+        if (hotTableComponent.current) {          
+          hot.setDataAtRowProp(receving_data_from_socket_server,'UndoRedo.undo_of_socket');
+        }
+      })
+
+      socket.on('updateData_socket_event_UndoRedo.redo',(receving_data_from_socket_server) => {
+        if (hotTableComponent.current) {          
+          hot.setDataAtRowProp(receving_data_from_socket_server,'UndoRedo.redo_of_socket');
+        }
+      })
 
       const commentsPlugin = hot.getPlugin('comments');
 
@@ -647,7 +639,11 @@ function Hottable() {
       //alert('unmout return() ')   
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       socket.off('change_numericformat')
-      socket.off('updateData_socket_event');
+      socket.off('updateData_socket_event_edit');
+      socket.off('updateData_socket_event_CopyPaste.paste');
+      socket.off('updateData_socket_event_Autofill.fill');
+      socket.off('updateData_socket_event_UndoRedo.undo');
+      socket.off('updateData_socket_event_UndoRedo.redo');
 
       hot.destroy();
       //window.removeEventListener('beforeunload', handlebeforeunloadfct(hot));
